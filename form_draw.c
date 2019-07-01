@@ -54,7 +54,7 @@ void				draw_form(SDL_Surface *surface,
 		t_widget *widgets)
 {
 	t_combobox_list		*combobox;
-	t_drawbox			*drawbox;
+	t_image			*drawbox;
 
 	draw_form_inner_func(surface, widgets);
 	combobox = widgets->combobox;

@@ -20,7 +20,6 @@ void	init_widgets(t_widget **widgets)
 	(*widgets)->button = NULL;
 	(*widgets)->drawbox = NULL;
 	(*widgets)->combobox = NULL;
-	(*widgets)->active_button = NULL;
 	(*widgets)->active_toggle = NULL;
 	(*widgets)->active_combobox = NULL;
 	(*widgets)->active_textfield = NULL;
@@ -59,6 +58,8 @@ int		init_sdl(t_sdl_data *data)
 
 	success = TRUE;
 	if (SDL_Init(SDL_INIT_VIDEO) < 0)
+		success = FALSE;
+	if (IMG_Init(IMG_INIT_JPG) < 0)
 		success = FALSE;
 	else
 	{

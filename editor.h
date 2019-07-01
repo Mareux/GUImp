@@ -15,6 +15,7 @@
 
 # include <SDL.h>
 # include <SDL_ttf.h>
+# include <SDL_image.h>
 # include "libft/libft.h"
 
 # define WHITE_SPACES(c) ((c) == ' ' || (c) == '\t')
@@ -26,8 +27,6 @@
 # define TOGGLE_BUTTON 1
 # define WINDOW_W 1920
 # define WINDOW_H 1080
-# define RIGHT 0
-# define LEFT 1
 
 # define TWO_TEXTFIELD_WINDOW 0
 # define COMBOBOX_WINDOW 1
@@ -113,10 +112,17 @@ typedef struct					s_label
 {
 	int							id;
 	SDL_Surface					*text_surface;
+	char 						*text;
+	TTF_Font					*font;
 	SDL_Rect					rect;
 	int							visible;
-	struct s_label				*next;
 }								t_label;
+
+typedef struct 					s_label_list
+{
+	t_label						label;
+	struct s_label_list			*next;
+}								t_label_list;
 
 typedef struct					s_button
 {
@@ -137,18 +143,19 @@ typedef struct					s_buttons_list
 	struct s_buttons_list		*next;
 }								t_buttons_list;
 
-typedef	struct					s_drawbox
+typedef	struct					s_image
 {
 	int							id;
-	SDL_Surface					*menu;
-	SDL_Surface					*full_drawbox;
-	SDL_Rect					surface_rect;
-	SDL_Rect					active_rect;
+	SDL_Surface					*image;
 	SDL_Rect					rect;
 	int							visible;
-	int							active;
-	struct s_drawbox			*next;
-}								t_drawbox;
+}								t_image;
+
+typedef struct					s_image_list
+{
+	t_image						image;
+	struct s_image_list			*next;
+}								t_image_list;
 
 typedef struct					s_widget
 {
@@ -158,9 +165,8 @@ typedef struct					s_widget
 	t_buttons_list				*button;
 	t_combobox_list				*combobox;
 	t_button					*active_toggle;
-	t_button					*active_button;
 	t_combobox					*active_combobox;
-	t_drawbox					*drawbox;
+	t_image						*drawbox;
 }								t_widget;
 
 typedef struct					s_window
@@ -204,9 +210,7 @@ void							draw_filled_rect(
 		t_color color);
 t_textfield						create_textfield(
 		SDL_Surface *text_surface, SDL_Rect rect);
-void							create_label(
-		t_label **begin, SDL_Surface *text_surface,
-		SDL_Rect rect);
+t_label create_label(char *text, SDL_Rect rect, TTF_Font *font);
 t_button						create_button(
 		SDL_Surface *text_surface, SDL_Rect rect, int type,
 		char *name);
@@ -235,7 +239,7 @@ void							render_text_in_textfield(
 		char *text,
 		void (event)(char **, const char *));
 void							draw_drawbox(
-		SDL_Surface *surface, t_drawbox *drawbox);
+		SDL_Surface *surface, t_image *drawbox);
 
 void							init_sdl_data(t_sdl_data **data);
 int								button_clicked(
@@ -281,7 +285,7 @@ void							widgets_get_content_size(
 		t_scrolling_list *point,
 		int *content_size);
 
-void							drawbox_add_text(t_drawbox *drawbox,
+void							drawbox_add_text(t_image *drawbox,
 		SDL_Surface *text);
 void							draw_drawbox_menu(SDL_Surface *menu,
 		SDL_Surface *full_menu, SDL_Rect zone);
@@ -309,7 +313,7 @@ t_window						*one_textfield_form(t_sdl_data *data);
 t_window						*two_textfield_form(t_sdl_data *data);
 
 int								check_if_data_null(void *data,
-	char *return_text, TTF_Font *font, t_drawbox *drawbox);
+	char *return_text, TTF_Font *font, t_image *drawbox);
 
 void							add_to_scrolling_list(t_scrolling_list **begin,
 	SDL_Surface *field_text, void *data);

@@ -12,7 +12,7 @@
 
 #include "editor.h"
 
-void		drawbox_add_text(t_drawbox *drawbox, SDL_Surface *text)
+void		drawbox_add_text(t_image *drawbox, SDL_Surface *text)
 {
 	SDL_Surface	*tmp;
 	int			h;

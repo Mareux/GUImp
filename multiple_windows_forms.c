@@ -37,9 +37,8 @@ t_window	*combobox_form(t_sdl_data *data)
 
 	add_window_to_list(&data->windows, 300, 200, COMBOBOX_WINDOW);
 	curr = &data->windows->window;
-	create_label(&curr->widgets->label,
-	create_text_surface("Select loot type:", data->font),
-	(SDL_Rect){50, 0, 0, 0});
+	create_label(NULL,
+				 (SDL_Rect) {50, 0, 0, 0}, NULL);
 	add_combobox_to_list(&curr->widgets->combobox,
 	create_combobox(NULL, (SDL_Rect) {20, 30, 200, 20},
 	(t_color) {0x00, 0xFF, 0x00, 0xFF}), (void*)combobox_clicked_event);
@@ -56,7 +55,7 @@ t_window	*one_textfield_form(t_sdl_data *data)
 
 	add_window_to_list(&data->windows, 300, 200, TEXTFIELD_WINDOW);
 	curr = &data->windows->window;
-	create_label(&curr->widgets->label, NULL, (SDL_Rect){10, 10, 0, 0});
+	create_label(NULL, (SDL_Rect) {10, 10, 0, 0}, NULL);
 	add_textfield_to_list(&curr->widgets->textfield,
 	create_textfield(NULL,
 	(SDL_Rect) {20, 30, 200, 30}), NULL);

@@ -55,7 +55,7 @@ void	draw_button(SDL_Surface *surface, t_button *button)
 	}
 }
 
-void	draw_drawbox(SDL_Surface *surface, t_drawbox *drawbox)
+void	draw_drawbox(SDL_Surface *surface, t_image *drawbox)
 {
 	SDL_Rect rect;
 

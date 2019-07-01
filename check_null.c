@@ -13,7 +13,7 @@
 #include "editor.h"
 
 int		check_if_data_null(void *data, char *return_text,
-		TTF_Font *font, t_drawbox *drawbox)
+		TTF_Font *font, t_image *drawbox)
 {
 	char			*tmp;
 	char			*tmp1;

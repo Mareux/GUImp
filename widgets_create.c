@@ -54,18 +54,17 @@ t_combobox		create_combobox(void *data,
 	return (combobox);
 }
 
-void			create_label(t_label **begin,
-		SDL_Surface *text_surface, SDL_Rect rect)
+t_label create_label(char *text, SDL_Rect rect, TTF_Font *font)
 {
-	t_label	*label;
+	t_label	label;
 
-	label = malloc(sizeof(t_label));
-	label->id = 0;
-	label->text_surface = text_surface;
-	label->rect = rect;
-	label->visible = TRUE;
-	label->next = *begin;
-	*begin = label;
+	label.id = 0;
+	label.text_surface = create_text_surface(text, font);
+	label.text = text;
+	label.font = font;
+	label.rect = rect;
+	label.visible = TRUE;
+	return (label);
 }
 
 t_button		create_button(SDL_Surface *text_surface,
@@ -87,21 +86,13 @@ t_button		create_button(SDL_Surface *text_surface,
 	return (button);
 }
 
-void			create_drawbox(t_drawbox **begin, SDL_Rect rect)
+t_image create_image(SDL_Rect rect, char *file)
 {
-	t_drawbox	*drawbox;
+	t_image	image;
 
-	drawbox = malloc(sizeof(t_drawbox));
-	drawbox->id = 0;
-	drawbox->rect = rect;
-	drawbox->visible = TRUE;
-	drawbox->active = FALSE;
-	drawbox->surface_rect = (SDL_Rect){0, 0, rect.w, rect.h};
-	drawbox->active_rect = (SDL_Rect){0, 0, rect.w, rect.h};
-	drawbox->menu = SDL_CreateRGBSurface(0, drawbox->surface_rect.w,
-			drawbox->surface_rect.h, 32, 0, 0, 0, 0);
-	drawbox->full_drawbox = SDL_CreateRGBSurface(0,
-			drawbox->surface_rect.w, 0, 32, 0, 0, 0, 0);
-	drawbox->next = *begin;
-	*begin = drawbox;
+	image.id = 0;
+	image.rect = rect;
+	image.visible = TRUE;
+	image.image = IMG_Load(file);
+	return (image);
 }
