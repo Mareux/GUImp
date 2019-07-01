@@ -18,7 +18,7 @@ void	init_widgets(t_widget **widgets)
 	(*widgets)->textfield = NULL;
 	(*widgets)->label = NULL;
 	(*widgets)->button = NULL;
-	(*widgets)->drawbox = NULL;
+	(*widgets)->image = NULL;
 	(*widgets)->combobox = NULL;
 	(*widgets)->active_toggle = NULL;
 	(*widgets)->active_combobox = NULL;

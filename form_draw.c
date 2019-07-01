@@ -12,12 +12,12 @@
 
 #include "editor.h"
 
-t_label				*find_label(t_label *label, int id)
+t_label				*find_label(t_label_list *label, int id)
 {
 	while (label)
 	{
-		if (label->id == id)
-			return (label);
+		if (label->label.id == id)
+			return (&label->label);
 		label = label->next;
 	}
 	return (NULL);
@@ -28,7 +28,7 @@ static void			draw_form_inner_func(SDL_Surface *surface,
 {
 	t_textfield_list	*textfield;
 	t_buttons_list		*button;
-	t_label				*label;
+	t_label_list		*label;
 
 	label = widgets->label;
 	while (label)
@@ -54,7 +54,7 @@ void				draw_form(SDL_Surface *surface,
 		t_widget *widgets)
 {
 	t_combobox_list		*combobox;
-	t_image			*drawbox;
+	t_image_list		*image;
 
 	draw_form_inner_func(surface, widgets);
 	combobox = widgets->combobox;
@@ -63,10 +63,10 @@ void				draw_form(SDL_Surface *surface,
 		draw_combobox(surface, &combobox->combobox);
 		combobox = combobox->next;
 	}
-	drawbox = widgets->drawbox;
-	while (drawbox)
+	image = widgets->image;
+	while (image)
 	{
-		draw_drawbox(surface, drawbox);
-		drawbox = drawbox->next;
+//		draw_drawbox(surface, &image->image);
+		image = image->next;
 	}
 }

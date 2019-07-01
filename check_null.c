@@ -11,24 +11,24 @@
 /* ************************************************************************** */
 
 #include "editor.h"
-
-int		check_if_data_null(void *data, char *return_text,
-		TTF_Font *font, t_image *drawbox)
-{
-	char			*tmp;
-	char			*tmp1;
-	SDL_Surface		*surface;
-
-	if (!data)
-	{
-		tmp = ft_strjoin("There is no ", return_text);
-		tmp1 = ft_strjoin(tmp, "!");
-		free(tmp);
-		drawbox_add_text(drawbox, surface =
-				create_text_surface(tmp1, font));
-		free(tmp1);
-		SDL_FreeSurface(surface);
-		return (TRUE);
-	}
-	return (FALSE);
-}
+//
+//int		check_if_data_null(void *data, char *return_text,
+//		TTF_Font *font, t_image *drawbox)
+//{
+//	char			*tmp;
+//	char			*tmp1;
+//	SDL_Surface		*surface;
+//
+//	if (!data)
+//	{
+//		tmp = ft_strjoin("There is no ", return_text);
+//		tmp1 = ft_strjoin(tmp, "!");
+//		free(tmp);
+////		drawbox_add_text(drawbox, surface =
+////				create_text_surface(tmp1, font));
+//		free(tmp1);
+//		SDL_FreeSurface(surface);
+//		return (TRUE);
+//	}
+//	return (FALSE);
+//}

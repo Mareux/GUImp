@@ -161,12 +161,12 @@ typedef struct					s_widget
 {
 	t_textfield_list			*textfield;
 	t_textfield					*active_textfield;
-	t_label						*label;
+	t_label_list				*label;
 	t_buttons_list				*button;
 	t_combobox_list				*combobox;
 	t_button					*active_toggle;
 	t_combobox					*active_combobox;
-	t_image						*drawbox;
+	t_image_list				*image;
 }								t_widget;
 
 typedef struct					s_window
@@ -217,7 +217,7 @@ t_button						create_button(
 void							draw_textfield(
 		SDL_Surface *surface, t_textfield *textfield);
 void							draw_label(
-		SDL_Surface *surface, t_label *label);
+		SDL_Surface *surface, t_label_list *label);
 void							draw_button(
 		SDL_Surface *surface, t_button *button);
 SDL_Surface						*create_text_surface(

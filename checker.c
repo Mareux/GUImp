@@ -48,8 +48,6 @@ int		button_clicked(SDL_Point point, t_widget *widgets, t_sdl_data *data)
 					return (FALSE);
 				if (tmp->button.type == TOGGLE_BUTTON)
 					widgets->active_toggle = &tmp->button;
-				else
-					widgets->active_button = &tmp->button;
 				tmp->button.click(data);
 				tmp->button.color = (t_color){120, 80, 120, 0};
 			}

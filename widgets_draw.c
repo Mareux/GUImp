@@ -29,13 +29,13 @@ void	draw_textfield(SDL_Surface *surface, t_textfield *textfield)
 	}
 }
 
-void	draw_label(SDL_Surface *surface, t_label *label)
+void	draw_label(SDL_Surface *surface, t_label_list *label)
 {
-	if (label->visible)
+	if (label->label.visible)
 	{
-		if (label->text_surface)
-			SDL_BlitSurface(label->text_surface, NULL,
-				surface, &label->rect);
+		if (label->label.text_surface)
+			SDL_BlitSurface(label->label.text_surface, NULL,
+				surface, &label->label.rect);
 	}
 }
 
@@ -55,24 +55,24 @@ void	draw_button(SDL_Surface *surface, t_button *button)
 	}
 }
 
-void	draw_drawbox(SDL_Surface *surface, t_image *drawbox)
-{
-	SDL_Rect rect;
-
-	if (drawbox->visible)
-	{
-		rect = drawbox->rect;
-		if (drawbox->full_drawbox)
-		{
-			draw_drawbox_menu(drawbox->menu,
-					drawbox->full_drawbox, drawbox->active_rect);
-			SDL_BlitSurface(drawbox->menu,
-					NULL, surface, &drawbox->rect);
-		}
-		drawbox->rect = rect;
-		draw_rect(surface, drawbox->rect, (t_color){60, 70, 90, 0xFF});
-	}
-}
+//void	draw_drawbox(SDL_Surface *surface, t_image *drawbox)
+//{
+//	SDL_Rect rect;
+//
+//	if (drawbox->visible)
+//	{
+//		rect = drawbox->rect;
+//		if (drawbox->full_drawbox)
+//		{
+//			draw_drawbox_menu(drawbox->menu,
+//					drawbox->full_drawbox, drawbox->active_rect);
+//			SDL_BlitSurface(drawbox->menu,
+//					NULL, surface, &drawbox->rect);
+//		}
+//		drawbox->rect = rect;
+//		draw_rect(surface, drawbox->rect, (t_color){60, 70, 90, 0xFF});
+//	}
+//}
 
 void	draw_combobox(SDL_Surface *surface, t_combobox *combobox)
 {

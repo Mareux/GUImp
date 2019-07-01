@@ -50,6 +50,6 @@ void			console(t_sdl_data *data, char *text)
 	SDL_Surface	*surface;
 
 	surface = create_text_surface(text, data->font);
-	drawbox_add_text(data->main_window->widgets->drawbox, surface);
+//	drawbox_add_text(data->main_window->widgets->drawbox, surface);
 	SDL_FreeSurface(surface);
 }

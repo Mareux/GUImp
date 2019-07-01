@@ -29,16 +29,16 @@ void	delete_textfield(t_textfield_list **textfield)
 	}
 }
 
-void	delete_label(t_label **label)
+void	delete_label(t_label_list **label)
 {
-	t_label *tmp;
+	t_label_list *tmp;
 
 	tmp = *label;
 	while (*label)
 	{
 		(*label) = (*label)->next;
-		if (tmp->text_surface)
-			SDL_FreeSurface((tmp->text_surface));
+		if (tmp->label.text_surface)
+			SDL_FreeSurface((tmp->label.text_surface));
 		free(tmp);
 		tmp = *label;
 	}
