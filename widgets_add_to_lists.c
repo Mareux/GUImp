@@ -25,6 +25,28 @@ void	add_button_to_list(t_buttons_list **buttons,
 	*buttons = new;
 }
 
+void add_label_to_list(t_label_list **list, t_label label)
+{
+	t_label_list *new;
+
+	if (!(new = malloc(sizeof(t_label_list))))
+		exit (1);
+	new->label = label;
+	new->next = *list;
+	*list = new;
+}
+
+void add_image_to_list(t_image_list **list, t_image image)
+{
+	t_image_list *new;
+
+	if (!(new = malloc(sizeof(t_image_list))))
+		exit(1);
+	new->image = image;
+	new->next = *list;
+	*list = new;
+}
+
 void	add_textfield_to_list(t_textfield_list **textfield_list,
 		t_textfield textfield, void (*type_check)(char))
 {
