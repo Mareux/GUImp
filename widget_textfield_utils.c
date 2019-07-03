@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "editor.h"
+#include "guimp.h"
 
 char	*get_textfield_data_by_id(int id,
 		t_textfield_list *textfield)

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "editor.h"
+#include "guimp.h"
 
 void	endless_textfield(t_textfield *textfield, TTF_Font *font)
 {

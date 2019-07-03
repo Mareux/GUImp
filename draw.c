@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "editor.h"
+#include "guimp.h"
 
 void	draw_rect(SDL_Surface *surface, SDL_Rect rect, t_color color)
 {

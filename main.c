@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "editor.h"
+#include "guimp.h"
 
 SDL_Surface		*create_text_surface(char *text, TTF_Font *font)
 {

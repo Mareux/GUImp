@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "editor.h"
+#include "guimp.h"
 
 void	delete_textfield(t_textfield_list **textfield)
 {

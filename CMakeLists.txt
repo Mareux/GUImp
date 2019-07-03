@@ -3,12 +3,17 @@ project(GUImp C)
 
 set(CMAKE_C_STANDARD 11)
 
-find_package(SDL2 REQUIRED)
-find_package(SDL_ttf REQUIRED)
-find_package(SDL_image REQUIRED)
-include_directories(${SDL2_INCLUDE_DIRS})
+#find_package(SDL2 REQUIRED)
+#find_package(SDL_ttf REQUIRED)
+#find_package(SDL_image REQUIRED)
+#include_directories(${SDL2_INCLUDE_DIRS})
+#link_directories(${SDL2_LIBRARY})
 
+set(SDL2_INCLUDE_DIR ~/.brew/include/SDL2/)
+set(SDL2_LIBRARY ~/.brew/lib/)
+include_directories(${SDL2_INCLUDE_DIR})
 link_directories(${SDL2_LIBRARY})
+
 
 file(GLOB libft
         "libft/*.c")
@@ -21,7 +26,7 @@ add_executable(GUImp
         checker.c
         draw.c
         draw_in_drawbox.c
-        editor.h
+        guimp.h
         events.c
         events_2.c
         events_combobox.c
@@ -49,6 +54,6 @@ add_executable(GUImp
         widgets_draw.c
         get_pixel.c
         put_pixel.c
-        color.c)
+        color.c libui/libui.h)
 
 target_link_libraries(GUImp -lSDL2 -lm -lSDL2_image -lSDL2_ttf)

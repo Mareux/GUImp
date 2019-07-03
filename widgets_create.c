@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "editor.h"
+#include "guimp.h"
 
 t_textfield		create_textfield(SDL_Surface *text_surface,
 		SDL_Rect rect)

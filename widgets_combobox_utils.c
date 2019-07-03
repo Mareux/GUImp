@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "editor.h"
+#include "guimp.h"
 
 void	widgets_get_content_size(t_scrolling_list *point,
 		int *content_size)

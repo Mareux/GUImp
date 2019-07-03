@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "editor.h"
+#include "guimp.h"
 
 //void		drawbox_add_text(t_image *drawbox, SDL_Surface *text)
 //{

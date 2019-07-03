@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "editor.h"
+#include "guimp.h"
 
 void	add_to_scrolling_list(t_scrolling_list **begin,
 		SDL_Surface *field_text, void *data)

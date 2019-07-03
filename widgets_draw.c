@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "editor.h"
+#include "guimp.h"
 
 void	draw_textfield(SDL_Surface *surface, t_textfield *textfield)
 {

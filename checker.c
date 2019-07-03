@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "editor.h"
+#include "guimp.h"
 
 int		point_in_textfield(SDL_Point point, t_widget *widgets)
 {

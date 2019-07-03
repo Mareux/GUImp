@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "editor.h"
+#include "guimp.h"
 
 void	init_widgets(t_widget **widgets)
 {
@@ -52,7 +52,7 @@ void	init_window(t_sdl_data *data)
 	WINDOW_W, WINDOW_H, SDL_WINDOW_SHOWN);
 }
 
-int		init_sdl(t_sdl_data *data)
+int		init_sdl(t_libui *unicorn)
 {
 	int success;
 
@@ -63,19 +63,19 @@ int		init_sdl(t_sdl_data *data)
 		success = FALSE;
 	else
 	{
-		init_window(data);
-		if (data->main_window->window == NULL)
+		init_window(unicorn);
+		if (unicorn->main_window->window == NULL)
 			success = FALSE;
 		else
 		{
-			data->main_window->surface =
-					SDL_GetWindowSurface(data->windows->window.window);
-			data->main_window->id =
-					SDL_GetWindowID(data->windows->window.window);
-			data->main_window->active = TRUE;
-			data->main_window->type = MAIN_WINDOW;
-			init_widgets(&data->main_window->widgets);
-			data->active_window = data->main_window;
+			unicorn->main_window->surface =
+					SDL_GetWindowSurface(unicorn->windows->window.window);
+			unicorn->main_window->id =
+					SDL_GetWindowID(unicorn->windows->window.window);
+			unicorn->main_window->active = TRUE;
+			unicorn->main_window->type = MAIN_WINDOW;
+			init_widgets(&unicorn->main_window->widgets);
+			unicorn->active_window = unicorn->main_window;
 		}
 	}
 	return (success);

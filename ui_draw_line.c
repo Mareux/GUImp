@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "editor.h"
+#include "guimp.h"
 
 void	draw_y(t_vec2f *start, t_vec2f *end,
 		t_line *line, SDL_Surface *surface)

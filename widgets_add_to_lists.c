@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "editor.h"
+#include "guimp.h"
 
 void	add_button_to_list(t_buttons_list **buttons,
 		t_button button, void (*click)(void *))

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "editor.h"
+#include "guimp.h"
 
 static void		highlight_buttons(SDL_Point point, t_sdl_data *data)
 {
@@ -74,7 +74,7 @@ void			eventloop_mousewheel(t_sdl_data *data)
 	}
 }
 
-void			main_event_loop(t_window *window, t_sdl_data *data)
+void			main_event_loop(t_window *window, t_libui *unicorn)
 {
 	int			quit;
 	SDL_Point	point;
@@ -82,20 +82,20 @@ void			main_event_loop(t_window *window, t_sdl_data *data)
 	quit = FALSE;
 	while (!quit)
 	{
-		clear_surface(data->active_window->surface);
-		draw_map_and_sector(data);
-		draw_form(data->active_window->surface, data->active_window->widgets);
-		SDL_UpdateWindowSurface(data->active_window->window);
-		while (SDL_PollEvent(&data->event))
+		clear_surface(unicorn->active_window->surface);
+//		draw_map_and_sector(data);
+//		draw_form(data->active_window->surface, data->active_window->widgets);
+		SDL_UpdateWindowSurface(unicorn->active_window->window);
+		while (SDL_PollEvent(&unicorn->event))
 		{
-			eventloop_window_events(data, &quit);
-			eventloop_keydown(data, window, &quit);
-			eventloop_mousebuttondown(data, point);
-			eventloop_mousemotion(data, &point);
-			eventloop_mousewheel(data);
+			eventloop_window_events(unicorn, &quit);
+			eventloop_keydown(unicorn, window, &quit);
+			eventloop_mousebuttondown(unicorn, point);
+			eventloop_mousemotion(unicorn, &point);
+			eventloop_mousewheel(unicorn);
 			if (SDL_IsTextInputActive())
-				render_text(data, data->event,
-						data->active_window->widgets);
+				render_text(unicorn, unicorn->event,
+						unicorn->active_window->widgets);
 		}
 	}
 }

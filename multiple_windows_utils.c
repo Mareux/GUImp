@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "editor.h"
+#include "guimp.h"
 
 void	hide_active_window(t_window **active_window,
 		t_window *main_window, t_window_list **window)

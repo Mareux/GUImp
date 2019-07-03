@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "editor.h"
+#include "guimp.h"
 //
 //int		check_if_data_null(void *data, char *return_text,
 //		TTF_Font *font, t_image *drawbox)

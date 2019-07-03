@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "editor.h"
+#include "guimp.h"
 
 void	combobox_update(t_combobox *combobox, t_scrolling_list *list)
 {
