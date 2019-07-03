@@ -54,6 +54,6 @@ add_executable(GUImp
         widgets_draw.c
         get_pixel.c
         put_pixel.c
-        color.c libui/libui.h)
+        color.c libui/libui.h libui/new_window.c)
 
 target_link_libraries(GUImp -lSDL2 -lm -lSDL2_image -lSDL2_ttf)

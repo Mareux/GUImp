@@ -165,4 +165,6 @@ void							main_event_loop(
         t_window *window, t_libui *unicorn);
 int								init_sdl(t_libui *unicorn);
 
+void				new_window(t_window_list **begin, t_vec2 size, int resizable, t_color color);
+
 #endif //GUIMP_LIBUI_H
