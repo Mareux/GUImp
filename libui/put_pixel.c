@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "guimp.h"
+#include "../guimp.h"
 
 void		put_pixel(SDL_Surface *img, int x, int y, t_color color)
 {

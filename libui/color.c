@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "guimp.h"
+#include "../guimp.h"
 
 /*
 **	Ensures that all color values
@@ -46,6 +46,18 @@ t_color	rgba(int r, int g, int b, int a)
 	color.g = g;
 	color.b = b;
 	color.a = a;
+	validate_color(&color);
+	return (color);
+}
+
+t_color	rgb(int r, int g, int b)
+{
+	t_color	color;
+
+	color.r = r;
+	color.g = g;
+	color.b = b;
+	color.a = 0;
 	validate_color(&color);
 	return (color);
 }

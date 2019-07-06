@@ -3,16 +3,35 @@ project(GUImp C)
 
 set(CMAKE_C_STANDARD 11)
 
+# Linux
+
 #find_package(SDL2 REQUIRED)
 #find_package(SDL_ttf REQUIRED)
 #find_package(SDL_image REQUIRED)
 #include_directories(${SDL2_INCLUDE_DIRS})
 #link_directories(${SDL2_LIBRARY})
 
-set(SDL2_INCLUDE_DIR ~/.brew/include/SDL2/)
-set(SDL2_LIBRARY ~/.brew/lib/)
+# Unit Factory
+
+#set(SDL2_INCLUDE_DIR ~/.brew/include/SDL2/)
+#set(SDL2_LIBRARY ~/.brew/lib/)
+#include_directories(${SDL2_INCLUDE_DIR})
+#link_directories(${SDL2_LIBRARY})
+
+# Mac OS VM
+
+set(SDL2_INCLUDE_DIR /usr/local/Cellar/sdl2/2.0.9_1/include/SDL2)
+set(SDL2_LIBRARY /usr/local/Cellar/sdl2/2.0.9_1/lib)
 include_directories(${SDL2_INCLUDE_DIR})
 link_directories(${SDL2_LIBRARY})
+
+include_directories(${SDL2_INCLUDE_DIR}
+        /usr/local/Cellar/sdl2_image/2.0.4/include/SDL2
+        /usr/local/Cellar/sdl2_ttf/2.0.15/include/SDL2)
+link_directories(${SDL2_LIBRARY}
+        /usr/local/Cellar/sdl2_image/2.0.4/lib
+        /usr/local/Cellar/sdl2_ttf/2.0.15/lib)
+
 
 
 file(GLOB libft
@@ -21,39 +40,14 @@ file(GLOB libft
 add_executable(GUImp
         ${libft}
         libft/libft.h
-        button_handler.c
-        check_null.c
-        checker.c
-        draw.c
-        draw_in_drawbox.c
-        guimp.h
+        main.c
+        libui/put_pixel.c
+        libui/color.c
+        libui/libui.h
+        libui/new_window.c
         events.c
         events_2.c
-        events_combobox.c
-        form_draw.c
-        ft_atof.c
-        init.c
-        main.c
-        multiple_window_delete.c
-        multiple_windows_create.c
-        multiple_windows_forms.c
-        multiple_windows_utils.c
-        scrolling_list_combobox_render.c
-        scrolling_list_data.c
-        text_editing_events.c
-        text_render.c
-        ui_bg.c
-        ui_draw_line.c
-        utils.c
-        widget_textfield_utils.c
-        widget_textfield_validator.c
-        widgets_add_to_lists.c
-        widgets_combobox_utils.c
-        widgets_create.c
-        widgets_delete.c
-        widgets_draw.c
-        get_pixel.c
-        put_pixel.c
-        color.c libui/libui.h libui/new_window.c)
+        libui/init.c
+        libui/utils.c libui/vectors.c libui/window_options.c)
 
 target_link_libraries(GUImp -lSDL2 -lm -lSDL2_image -lSDL2_ttf)

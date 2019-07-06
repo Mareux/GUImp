@@ -2,8 +2,13 @@
 // Created by Ilya BARABASH on 2019-07-03.
 //
 
-#ifndef GUIMP_LIBUI_H
-#define GUIMP_LIBUI_H
+#ifndef LIBUI_H
+# define LIBUI_H
+
+# include <SDL.h>
+# include <SDL_ttf.h>
+# include <SDL_image.h>
+# include <math.h>
 
 typedef struct		s_vec2
 {
@@ -163,8 +168,19 @@ typedef struct                  s_libui
 
 void							main_event_loop(
         t_window *window, t_libui *unicorn);
-int								init_sdl(t_libui *unicorn);
 
-void				new_window(t_window_list **begin, t_vec2 size, int resizable, t_color color);
+int					new_window(t_libui *libui, t_vec2 size, const char *title);
+void				set_active_window_resizable(t_libui *libui, int resizable);
 
-#endif //GUIMP_LIBUI_H
+
+void				init_widgets(t_widget **widgets);
+t_color				rgba(int r, int g, int b, int a);
+t_color				rgb(int r, int g, int b);
+void				close_sdl(t_libui *data);
+void				put_pixel(SDL_Surface *img, int x, int y, t_color color);
+void				clear_surface(SDL_Surface *surface);
+int					init_libui(t_libui **data);
+t_vec2				vec2(int x, int y);
+double				vec2len(t_vec2f *vec);
+
+#endif

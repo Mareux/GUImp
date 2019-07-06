@@ -22,50 +22,39 @@ SDL_Surface		*create_text_surface(char *text, TTF_Font *font)
 	return (surface);
 }
 
-void			close_sdl(t_sdl_data *data)
-{
-	while (data->windows)
-	{
-		SDL_DestroyWindow(data->windows->window.window);
-		data->windows->window.window = NULL;
-		data->windows = data->windows->next;
-	}
-	SDL_Quit();
-}
-
-void			render_text(t_sdl_data *data, SDL_Event e, t_widget *widgets)
-{
-	if (e.type == SDL_TEXTINPUT)
-	{
-		render_text_in_textfield(widgets->active_textfield,
-				data, e.text.text, text_input_event);
-	}
-	else if (e.type == SDL_KEYDOWN)
-	{
-		if (e.key.keysym.sym == SDLK_BACKSPACE)
-		{
-			render_text_in_textfield(widgets->active_textfield,
-					data, NULL, backspace_event);
-		}
-		if (e.key.keysym.sym == SDLK_v && SDL_GetModState() & KMOD_CTRL)
-		{
-			render_text_in_textfield(widgets->active_textfield,
-					data, SDL_GetClipboardText(), text_input_event);
-		}
-	}
-}
+//void			render_text(t_sdl_data *data, SDL_Event e, t_widget *widgets)
+//{
+//	if (e.type == SDL_TEXTINPUT)
+//	{
+//		render_text_in_textfield(widgets->active_textfield,
+//				data, e.text.text, text_input_event);
+//	}
+//	else if (e.type == SDL_KEYDOWN)
+//	{
+//		if (e.key.keysym.sym == SDLK_BACKSPACE)
+//		{
+//			render_text_in_textfield(widgets->active_textfield,
+//					data, NULL, backspace_event);
+//		}
+//		if (e.key.keysym.sym == SDLK_v && SDL_GetModState() & KMOD_CTRL)
+//		{
+//			render_text_in_textfield(widgets->active_textfield,
+//					data, SDL_GetClipboardText(), text_input_event);
+//		}
+//	}
+//}
 
 int				main(void)
 {
-	t_sdl_data	*data;
+	t_libui	*libui;
 
-	init_sdl_data(&data);
-	if (!init_sdl(data))
+	if (!init_libui(&libui))
 		ft_putendl_fd("Failed to initialize", 2);
-	else
-	{
-		main_event_loop(data->active_window, data);
-	}
-	close_sdl(data);
+	if (!new_window(libui, vec2(1024, 600), "GUImp"))
+		ft_putendl_fd("Failed to initialize", 2);
+	set_active_window_resizable(libui, 1);
+	new_window(libui, vec2(150, 400), "Tools");
+	loop(libui);
+	close_sdl(libui);
 	return (0);
 }
