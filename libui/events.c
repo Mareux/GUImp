@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "guimp.h"
+#include "../guimp.h"
 
 //static void		highlight_buttons(SDL_Point point, t_sdl_data *data)
 //{
@@ -74,7 +74,7 @@
 //	}
 //}
 
-void			loop(t_libui *unicorn)
+void			libui_loop(t_libui *unicorn)
 {
 	int			quit;
 	SDL_Point	point;

@@ -35,8 +35,6 @@
 # define TEXT 0
 # define DIGITS 1
 
-
-void				loop(t_libui *unicorn);
 void				eventloop_keydown(t_libui *data, int *quit);
 
 

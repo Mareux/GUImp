@@ -44,6 +44,20 @@ SDL_Surface		*create_text_surface(char *text, TTF_Font *font)
 //	}
 //}
 
+void set_tools_window_position(t_libui *libui)
+{
+	SDL_Window	*main_window;
+	SDL_Window	*tools_window;
+	t_vec2		main_window_pos;
+
+	main_window = find_window(libui, "GUImp");
+	tools_window = find_window(libui, "Tools");
+	SDL_GetWindowPosition(main_window,
+			&main_window_pos.x, &main_window_pos.y);
+	SDL_SetWindowPosition(tools_window,
+			main_window_pos.x - 200, main_window_pos.y + 100);
+}
+
 int				main(void)
 {
 	t_libui	*libui;
@@ -52,9 +66,10 @@ int				main(void)
 		ft_putendl_fd("Failed to initialize", 2);
 	if (!new_window(libui, vec2(1024, 600), "GUImp"))
 		ft_putendl_fd("Failed to initialize", 2);
-	set_active_window_resizable(libui, 1);
 	new_window(libui, vec2(150, 400), "Tools");
-	loop(libui);
+	set_tools_window_position(libui);
+	set_window_resizable(libui, "GUImp", 1);
+	libui_loop(libui);
 	close_sdl(libui);
 	return (0);
 }

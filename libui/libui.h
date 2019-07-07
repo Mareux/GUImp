@@ -9,6 +9,7 @@
 # include <SDL_ttf.h>
 # include <SDL_image.h>
 # include <math.h>
+# include "../libft/libft.h"
 
 typedef struct		s_vec2
 {
@@ -170,8 +171,12 @@ void							main_event_loop(
         t_window *window, t_libui *unicorn);
 
 int					new_window(t_libui *libui, t_vec2 size, const char *title);
-void				set_active_window_resizable(t_libui *libui, int resizable);
+void				set_window_resizable(t_libui *libui, const char *title, int resizable);
+void				set_window_position(t_libui *libui, const char *title, t_vec2 position);
 
+SDL_Window			*find_window(t_libui *libui, const char *title);
+
+void				libui_loop(t_libui *unicorn);
 
 void				init_widgets(t_widget **widgets);
 t_color				rgba(int r, int g, int b, int a);
