@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "guimp.h"
+#include "libui.h"
 
 t_textfield		create_textfield(SDL_Surface *text_surface,
 		SDL_Rect rect)
@@ -59,7 +59,7 @@ t_label create_label(char *text, SDL_Rect rect, TTF_Font *font)
 	t_label	label;
 
 	label.id = 0;
-	label.text_surface = create_text_surface(text, font);
+//	label.text_surface = create_text_surface(text, font);
 	label.text = text;
 	label.font = font;
 	label.rect = rect;
@@ -95,4 +95,9 @@ t_image create_image(SDL_Rect rect, char *file)
 	image.visible = TRUE;
 	image.image = IMG_Load(file);
 	return (image);
+}
+
+t_menu	create_menu(enum e_menu_type type)
+{
+
 }

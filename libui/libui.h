@@ -5,31 +5,47 @@
 #ifndef LIBUI_H
 # define LIBUI_H
 
+# define TRUE 1
+# define FALSE 0
+# define CLICK_BUTTON 0
+# define TOGGLE_BUTTON 1
+# define WINDOW_W 1920
+# define WINDOW_H 1080
+
+# define TWO_TEXTFIELD_WINDOW 0
+# define COMBOBOX_WINDOW 1
+# define LABEL_WINDOW 2
+# define TEXTFIELD_WINDOW 3
+# define MAIN_WINDOW 4
+
+# define TEXT 0
+# define DIGITS 1
+
 # include <SDL.h>
 # include <SDL_ttf.h>
 # include <SDL_image.h>
 # include <math.h>
 # include "../libft/libft.h"
 
-typedef struct		s_vec2
+typedef struct					s_vec2
 {
-    int				x;
-    int				y;
-}					t_vec2;
+    int							x;
+    int							y;
+}								t_vec2;
 
-typedef struct		s_vec2f
+typedef struct					s_vec2f
 {
-    double			x;
-    double			y;
-}					t_vec2f;
+    double						x;
+    double						y;
+}								t_vec2f;
 
-typedef struct		s_color
+typedef struct					s_color
 {
-    int				r;
-    int				g;
-    int				b;
-    int				a;
-}					t_color;
+    int							r;
+    int							g;
+    int							b;
+    int							a;
+}								t_color;
 
 typedef struct					s_scrolling_list
 {
@@ -38,6 +54,44 @@ typedef struct					s_scrolling_list
     struct s_scrolling_list		*next;
     struct s_scrolling_list		*prew;
 }								t_scrolling_list;
+
+enum 					e_menu_type
+{
+	CONTEXT,
+	BAR
+};
+
+enum 					e_menu_data_type
+{
+	MENU,
+	ACTION
+};
+
+typedef struct 					s_menu_field
+{
+	enum e_menu_data_type 		type;
+	void						*data;
+	char 						*field_text;
+	struct s_menu_field			*next;
+	struct s_menu_field			*prew;
+}								t_menu_field;
+
+typedef struct 					s_menu
+{
+	int							id;
+	enum e_menu_type 			type;
+	t_menu_field				*fields;
+	int 						field_count;
+	SDL_Surface					menu_surface;
+	int 						colums;
+	SDL_Rect					field_size;
+}								t_menu;
+
+typedef struct 					s_menu_list
+{
+	t_menu						menu;
+	struct t_menu_list			*next;
+}								t_menu_list;
 
 typedef struct					s_textfield
 {
@@ -51,6 +105,7 @@ typedef struct					s_textfield
     t_color						active_color;
     int							active;
     void						(*type_check)(char);
+    t_menu						*menu;
 }								t_textfield;
 
 typedef struct					s_textfield_list
@@ -73,6 +128,7 @@ typedef struct					s_combobox
     int							active;
     void						(*event)(void *);
     t_color						color;
+    t_menu						*menu;
 }								t_combobox;
 
 typedef struct					s_combobox_list
@@ -89,6 +145,7 @@ typedef struct					s_label
     TTF_Font					*font;
     SDL_Rect					rect;
     int							visible;
+    t_menu						*menu;
 }								t_label;
 
 typedef struct 					s_label_list
@@ -108,6 +165,7 @@ typedef struct					s_button
     int							type;
     t_color						color;
     void						(*click)(void *);
+    t_menu						*menu;
 }								t_button;
 
 typedef struct					s_buttons_list
@@ -122,6 +180,7 @@ typedef	struct					s_image
     SDL_Surface					*image;
     SDL_Rect					rect;
     int							visible;
+    t_menu						*menu;
 }								t_image;
 
 typedef struct					s_image_list
@@ -129,16 +188,40 @@ typedef struct					s_image_list
     t_image						image;
     struct s_image_list			*next;
 }								t_image_list;
+
+typedef struct 					s_textarea
+{
+
+}								t_textarea;
+
+typedef struct					s_textarea_list
+{
+	t_textarea					textarea;
+	struct s_textarea_list		*next;
+}								t_textarea_list;
+
+
+typedef struct 					s_checkbox
+{
+
+}								t_checkbox;
+
+typedef struct 					s_checkbox_list
+{
+	t_checkbox					checkbox;
+	struct s_checkbox_list		*next;
+}								t_checkbox_list;
+
 typedef struct					s_widget
 {
     t_textfield_list			*textfield;
-    t_textfield					*active_textfield;
     t_label_list				*label;
     t_buttons_list				*button;
     t_combobox_list				*combobox;
-    t_button					*active_toggle;
-    t_combobox					*active_combobox;
     t_image_list				*image;
+    t_menu_list					*menu;
+    t_textarea_list				*textarea;
+    t_checkbox_list				*checkbox;
 }								t_widget;
 
 typedef struct					s_window
@@ -164,6 +247,7 @@ typedef struct                  s_libui
     t_window					*active_window;
     void						*active_window_return_data;
     t_window_list				*windows;
+    SDL_Cursor					*active_cursor;
     TTF_Font					*font;
 }                               t_libui;
 
@@ -187,5 +271,9 @@ void				clear_surface(SDL_Surface *surface);
 int					init_libui(t_libui **data);
 t_vec2				vec2(int x, int y);
 double				vec2len(t_vec2f *vec);
+
+void 				change_cursor(SDL_SystemCursor id);
+
+
 
 #endif

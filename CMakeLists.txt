@@ -5,11 +5,11 @@ set(CMAKE_C_STANDARD 11)
 
 # Linux
 
-#find_package(SDL2 REQUIRED)
-#find_package(SDL_ttf REQUIRED)
-#find_package(SDL_image REQUIRED)
-#include_directories(${SDL2_INCLUDE_DIRS})
-#link_directories(${SDL2_LIBRARY})
+find_package(SDL2 REQUIRED)
+find_package(SDL_ttf REQUIRED)
+find_package(SDL_image REQUIRED)
+include_directories(${SDL2_INCLUDE_DIRS})
+link_directories(${SDL2_LIBRARY})
 
 # Unit Factory
 
@@ -20,17 +20,17 @@ set(CMAKE_C_STANDARD 11)
 
 # Mac OS VM
 
-set(SDL2_INCLUDE_DIR /usr/local/Cellar/sdl2/2.0.9_1/include/SDL2)
-set(SDL2_LIBRARY /usr/local/Cellar/sdl2/2.0.9_1/lib)
-include_directories(${SDL2_INCLUDE_DIR})
-link_directories(${SDL2_LIBRARY})
-
-include_directories(${SDL2_INCLUDE_DIR}
-        /usr/local/Cellar/sdl2_image/2.0.4/include/SDL2
-        /usr/local/Cellar/sdl2_ttf/2.0.15/include/SDL2)
-link_directories(${SDL2_LIBRARY}
-        /usr/local/Cellar/sdl2_image/2.0.4/lib
-        /usr/local/Cellar/sdl2_ttf/2.0.15/lib)
+#set(SDL2_INCLUDE_DIR /usr/local/Cellar/sdl2/2.0.9_1/include/SDL2)
+#set(SDL2_LIBRARY /usr/local/Cellar/sdl2/2.0.9_1/lib)
+#include_directories(${SDL2_INCLUDE_DIR})
+#link_directories(${SDL2_LIBRARY})
+#
+#include_directories(${SDL2_INCLUDE_DIR}
+#        /usr/local/Cellar/sdl2_image/2.0.4/include/SDL2
+#        /usr/local/Cellar/sdl2_ttf/2.0.15/include/SDL2)
+#link_directories(${SDL2_LIBRARY}
+#        /usr/local/Cellar/sdl2_image/2.0.4/lib
+#        /usr/local/Cellar/sdl2_ttf/2.0.15/lib)
 
 
 
@@ -48,6 +48,8 @@ add_executable(GUImp
         libui/events.c
         events_2.c
         libui/init.c
-        libui/utils.c libui/vectors.c libui/window_options.c)
+        libui/utils.c libui/vectors.c libui/window_options.c
+        libui/widgets_create.c libui/widgets_add_to_lists.c
+        libui/widgets_delete.c libui/cursor.c)
 
 target_link_libraries(GUImp -lSDL2 -lm -lSDL2_image -lSDL2_ttf)

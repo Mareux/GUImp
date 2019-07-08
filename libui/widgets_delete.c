@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "guimp.h"
+#include "libui.h"
 
 void	delete_textfield(t_textfield_list **textfield)
 {
@@ -54,7 +54,7 @@ void	delete_combobox(t_combobox_list **combobox)
 		(*combobox) = (*combobox)->next;
 		if (tmp->combobox.menu_surface)
 			SDL_FreeSurface(tmp->combobox.menu_surface);
-		delete_scrolling_list(&tmp->combobox.content);
+//		delete_scrolling_list(&tmp->combobox.content);
 		free(tmp);
 		tmp = *combobox;
 	}
