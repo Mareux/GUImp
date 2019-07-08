@@ -240,6 +240,30 @@ typedef struct					s_window_list
     struct s_window_list		*next;
 }								t_window_list;
 
+typedef struct					s_keyhooks
+{
+	void 						(*mouse1_down)(struct s_libui *);
+}								t_keyhooks;
+
+typedef struct 					s_mouse_data
+{
+	t_vec2						pos;
+	t_vec2						last_pos;
+	int							m1_pressed;
+	int							m2_pressed;
+}								t_mouse_data;
+
+typedef struct		s_line
+{
+	t_color			color;
+	int				direction_x;
+	int             i;
+	double			dx;
+	double			dy;
+	double			ydiff;
+	double			coeff;
+}					t_line;
+
 typedef struct                  s_libui
 {
     SDL_Event					event;
@@ -249,6 +273,10 @@ typedef struct                  s_libui
     t_window_list				*windows;
     SDL_Cursor					*active_cursor;
     TTF_Font					*font;
+    t_keyhooks					hooks;
+	void						*data;
+	void 						(*custom_loop)(struct s_libui *);
+	t_mouse_data				mouse;
 }                               t_libui;
 
 void							main_event_loop(
@@ -261,16 +289,26 @@ void				set_window_position(t_libui *libui, const char *title, t_vec2 position);
 SDL_Window			*find_window(t_libui *libui, const char *title);
 
 void				libui_loop(t_libui *unicorn);
+void				eventloop_keydown(t_libui *data, int *quit);
+void				eventloop_mousebuttondown(t_libui *data, SDL_Point point);
 
+void				libui_hook_m1_down(t_libui *libui, void (*func)(t_libui *));
+
+int					init_libui(t_libui **data);
 void				init_widgets(t_widget **widgets);
+void 				init_keyhooks(t_libui *libui);
+
 t_color				rgba(int r, int g, int b, int a);
 t_color				rgb(int r, int g, int b);
 void				close_sdl(t_libui *data);
 void				put_pixel(SDL_Surface *img, int x, int y, t_color color);
 void				clear_surface(SDL_Surface *surface);
-int					init_libui(t_libui **data);
 t_vec2				vec2(int x, int y);
+t_vec2f				vec2f(double x, double y);
 double				vec2len(t_vec2f *vec);
+
+void				draw_line(SDL_Surface *surface, t_vec2f start,
+					  t_vec2f end, t_color color);
 
 void 				change_cursor(SDL_SystemCursor id);
 

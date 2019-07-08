@@ -28,8 +28,7 @@ void	draw_bg(t_sdl_data *data)
 
 	rect.x = 0;
 	rect.y = 0;
-	rect.w = 1920;
-	rect.h = 1080;
+
 	SDL_BlitSurface(data->bg, &rect,
 			data->active_window->surface, &rect);
 }

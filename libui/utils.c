@@ -23,7 +23,7 @@ void			clear_surface(SDL_Surface *surface)
 		y = 0;
 		while (y < surface->h)
 		{
-			put_pixel(surface, x, y, (t_color){0, 0, 0, 0});
+			put_pixel(surface, x, y, (t_color){255, 255, 255, 0});
 			y++;
 		}
 		x++;

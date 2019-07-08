@@ -58,18 +58,50 @@ void set_tools_window_position(t_libui *libui)
 			main_window_pos.x - 200, main_window_pos.y + 100);
 }
 
+void	hook_hooks(t_guimp *guimp)
+{
+	libui_hook_m1_down(guimp->libui, guimp_mouse1_down);
+}
+
+void	guimp_loop(t_libui *libui)
+{
+	t_guimp	*guimp;
+	SDL_Rect	src;
+	SDL_Rect	dst;
+
+	src.x = 0;
+	src.y = 0;
+	src.w = 1024;
+	src.h = 600;
+	dst.x = 1;
+	dst.y = 1;
+	guimp = (t_guimp *)libui->data;
+	SDL_BlitSurface(guimp->canvas, &src, libui->main_window->surface, &dst);
+
+	if (libui->active_window == libui->main_window)
+	{
+		if (guimp->libui->mouse.m1_pressed || guimp->libui->mouse.m2_pressed)
+			use_tool(guimp);
+	}
+}
+
 int				main(void)
 {
-	t_libui	*libui;
+	t_guimp	guimp;
 
-	if (!init_libui(&libui))
+	init(&guimp);
+	if (!init_libui(&(guimp.libui)))
 		ft_putendl_fd("Failed to initialize", 2);
-	if (!new_window(libui, vec2(1024, 600), "GUImp"))
-		ft_putendl_fd("Failed to initialize", 2);
-	new_window(libui, vec2(150, 400), "Tools");
-	set_tools_window_position(libui);
-	set_window_resizable(libui, "GUImp", 1);
-	libui_loop(libui);
-	close_sdl(libui);
+	guimp.libui->data = (void *)(&guimp);
+	new_window(guimp.libui, vec2(1024, 600), "GUImp");
+	new_window(guimp.libui, vec2(150, 400), "Tools");
+	guimp.canvas = SDL_CreateRGBSurface(0, 1024, 600, 32, 0, 0, 0, 0);
+	clear_surface(guimp.canvas);
+	set_tools_window_position(guimp.libui);
+	set_window_resizable(guimp.libui, "GUImp", 1);
+	hook_hooks(&guimp);
+	guimp.libui->custom_loop = guimp_loop;
+	libui_loop(guimp.libui);
+	close_sdl(guimp.libui);
 	return (0);
 }

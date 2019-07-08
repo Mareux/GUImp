@@ -13,7 +13,6 @@
 #ifndef DOOM_NUKEM_EDITOR_H
 # define DOOM_NUKEM_EDITOR_H
 
-# include "libft/libft.h"
 # include "libui/libui.h"
 
 # define WHITE_SPACES(c) ((c) == ' ' || (c) == '\t')
@@ -35,7 +34,44 @@
 # define TEXT 0
 # define DIGITS 1
 
-void				eventloop_keydown(t_libui *data, int *quit);
+enum			tools
+{
+	PENCIL,
+	BRUSH,
+	ERASER,
+	LINE,
+	RECT,
+	FILLED_RECT,
+	CIRCLE,
+	FILLED_CIRCLE,
+	SQUARE,
+	FILLED_SQUARE,
+	IMAGE_IMPORT,
+	BUCKET,
+	TEXT_LINE,
+	PIPETTE
+};
 
+typedef struct	s_status
+{
+	int 		m1_pressed;
+}				t_status;
+
+typedef struct	s_guimp
+{
+	int 		current_tool;
+	int			line_thickness;
+	t_color		color1;
+	t_color		color2;
+	t_libui		*libui;
+	SDL_Surface	*canvas;
+	t_status	key_status;
+}				t_guimp;
+
+void				init(t_guimp *guimp);
+
+void 				guimp_mouse1_down(t_libui *libui);
+void				use_tool(t_guimp *guimp);
+void				use_pencil(t_guimp *guimp);
 
 #endif

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "guimp.h"
+#include "../guimp.h"
 
 //void	eventloop_window_events(t_libui *data, int *quit)
 //{
@@ -46,7 +46,7 @@ void	eventloop_keydown(t_libui *data, int *quit)
 		}
 	}
 }
-//
+
 //void	eventloop_mousebuttondown_2(t_libui *data, SDL_Point point)
 //{
 //	if (data->active_window->widgets->active_combobox
@@ -58,15 +58,17 @@ void	eventloop_keydown(t_libui *data, int *quit)
 //	data->active_window->widgets->active_combobox)))
 //		data->active_window->widgets->active_combobox->active = FALSE;
 //}
-//
-//void	eventloop_mousebuttondown(t_libui *data, SDL_Point point)
-//{
-//	if (data->event.type == SDL_MOUSEBUTTONDOWN &&
-//		(int)data->event.window.windowID == data->active_window->id)
-//	{
-//		if (SDL_BUTTON(SDL_BUTTON_LEFT)
-//		&& SDL_GetMouseState(&point.x, &point.y))
-//		{
+
+void	eventloop_mousebuttondown(t_libui *data, SDL_Point point)
+{
+	if (data->event.type == SDL_MOUSEBUTTONDOWN &&
+		(int)data->event.window.windowID == data->active_window->id)
+	{
+		if (data->event.button.button == SDL_BUTTON_LEFT)
+		{
+			data->mouse.m1_pressed = 1;
+			if (data->hooks.mouse1_down)
+				data->hooks.mouse1_down(data);
 //			if (point_in_textfield(point, data->active_window->widgets))
 //				if (!SDL_IsTextInputActive())
 //					SDL_StartTextInput();
@@ -80,6 +82,21 @@ void	eventloop_keydown(t_libui *data, int *quit)
 //					SDL_StopTextInput();
 //			}
 //			eventloop_mousebuttondown_2(data, point);
-//		}
-//	}
-//}
+		}
+		else if (data->event.button.button == SDL_BUTTON_RIGHT)
+		{
+			data->mouse.m2_pressed = 1;
+		}
+	}
+	else if (data->event.type == SDL_MOUSEBUTTONUP)
+	{
+		if (data->event.button.button == SDL_BUTTON_LEFT)
+		{
+			data->mouse.m1_pressed = 0;
+		}
+		if (data->event.button.button == SDL_BUTTON_RIGHT)
+		{
+			data->mouse.m2_pressed = 0;
+		}
+	}
+}

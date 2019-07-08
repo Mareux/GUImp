@@ -20,9 +20,14 @@ void	init_widgets(t_widget **widgets)
 	(*widgets)->button = NULL;
 	(*widgets)->image = NULL;
 	(*widgets)->combobox = NULL;
-	(*widgets)->active_toggle = NULL;
-	(*widgets)->active_combobox = NULL;
-	(*widgets)->active_textfield = NULL;
+}
+
+void 	init_mouse_data(t_libui *libui)
+{
+	libui->mouse.pos = vec2(0, 0);
+	libui->mouse.last_pos = vec2(0, 0);
+	libui->mouse.m1_pressed = 0;
+	libui->mouse.m2_pressed = 0;
 }
 
 int		init_libui(t_libui **data)
@@ -35,8 +40,11 @@ int		init_libui(t_libui **data)
 	if (IMG_Init(IMG_INIT_JPG) < 0)
 		success = 0;
 	*data = malloc(sizeof(t_libui));
+	(*data)->main_window = NULL;
 	(*data)->active_window = NULL;
 	(*data)->active_window_return_data = NULL;
+	(*data)->data = NULL;
+	(*data)->custom_loop = NULL;
 	if (TTF_Init() < 0)
 		exit(124);
 //	(*data)->font = TTF_OpenFont("Roboto-Regular.ttf", 18);
@@ -45,6 +53,8 @@ int		init_libui(t_libui **data)
 //		ft_putendl_fd("Couldn't load font!", 2);
 //		exit(123);
 //	}
+	init_keyhooks(*data);
+	init_mouse_data(*data);
 	return (success);
 }
 
