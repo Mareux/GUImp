@@ -14,5 +14,5 @@
 
 void save_img(SDL_Surface *canvas, char *filename)
 {
-	IMG_SaveJPG(canvas, filename, 1080);
+	IMG_SaveJPG(canvas, filename, 100);
 }
