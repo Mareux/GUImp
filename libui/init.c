@@ -41,6 +41,7 @@ int		init_libui(t_libui **data)
 		success = 0;
 	*data = malloc(sizeof(t_libui));
 	(*data)->main_window = NULL;
+	(*data)->windows = NULL;
 	(*data)->active_window = NULL;
 	(*data)->active_window_return_data = NULL;
 	(*data)->data = NULL;

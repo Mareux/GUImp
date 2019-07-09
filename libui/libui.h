@@ -82,7 +82,7 @@ typedef struct 					s_menu
 	enum e_menu_type 			type;
 	t_menu_field				*fields;
 	int 						field_count;
-	SDL_Surface					menu_surface;
+	SDL_Surface					*menu_surface;
 	int 						colums;
 	SDL_Rect					field_size;
 }								t_menu;

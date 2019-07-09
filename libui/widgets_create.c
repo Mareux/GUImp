@@ -6,7 +6,7 @@
 /*   By: mnosko <mnosko@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/29 19:18:59 by mnosko            #+#    #+#             */
-/*   Updated: 2019/06/29 20:32:24 by mnosko           ###   ########.fr       */
+/*   Updated: 2019/07/08 14:09:05 by mnosko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,19 @@ t_image create_image(SDL_Rect rect, char *file)
 	return (image);
 }
 
-t_menu	create_menu(enum e_menu_type type)
+t_menu	create_menu(enum e_menu_type type,
+					int field_count,
+					int column_count,
+					SDL_Rect field_size)
 {
+	t_menu	menu;
 
+	menu.id = 0;
+	menu.menu_surface = NULL;
+	menu.fields = NULL;
+	menu.type = type;
+	menu.field_count = field_count;
+	menu.colums = column_count;
+	menu.field_size = field_size;
+	return (menu);
 }
