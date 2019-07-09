@@ -74,4 +74,6 @@ void 				guimp_mouse1_down(t_libui *libui);
 void				use_tool(t_guimp *guimp);
 void				use_pencil(t_guimp *guimp);
 
+void				save_img(SDL_Surface *canvas, char *filename);
+
 #endif

@@ -6,7 +6,7 @@
 /*   By: mnosko <mnosko@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/29 17:55:47 by ibarabas          #+#    #+#             */
-/*   Updated: 2019/06/29 19:35:03 by mnosko           ###   ########.fr       */
+/*   Updated: 2019/07/09 17:54:21 by mnosko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	eventloop_keydown(t_libui *data, int *quit)
 	&& (int)data->event.window.windowID == data->main_window->id)
 	{
 		if (data->event.key.keysym.scancode
-		== SDL_SCANCODE_ESCAPE)
+			== SDL_SCANCODE_ESCAPE)
 		{
 //			if (window->id != data->main_window->id)
 //			{
@@ -43,6 +43,14 @@ void	eventloop_keydown(t_libui *data, int *quit)
 //						data->main_window, &data->windows);
 //			}
 			*quit = TRUE;
+		}
+		if (data->event.key.keysym.scancode
+			== SDL_SCANCODE_S && (SDL_GetModState() & KMOD_CTRL))
+		{
+			t_guimp *guimp;
+
+			guimp = data->data;
+			save_img(guimp->canvas, "test.jpg");
 		}
 	}
 }
