@@ -61,17 +61,17 @@ enum 					e_menu_type
 	BAR
 };
 
-enum 					e_menu_data_type
-{
-	MENU,
-	ACTION
-};
-
 typedef struct 					s_menu_field
 {
-	enum e_menu_data_type 		type;
+	int 						id;
 	void						*data;
+	void						(*click)(void *);
+	t_vec2						size;
+	t_color						active_color;
+	t_color						color;
+	SDL_Rect					field_rect;
 	char 						*field_text;
+	int 						active;
 	struct s_menu_field			*next;
 	struct s_menu_field			*prew;
 }								t_menu_field;
@@ -81,10 +81,10 @@ typedef struct 					s_menu
 	int							id;
 	enum e_menu_type 			type;
 	t_menu_field				*fields;
-	int 						field_count;
 	SDL_Surface					*menu_surface;
 	int 						colums;
-	SDL_Rect					field_size;
+	int 						lines;
+	SDL_Rect					coords;
 }								t_menu;
 
 typedef struct 					s_menu_list

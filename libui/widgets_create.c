@@ -108,8 +108,8 @@ t_menu	create_menu(enum e_menu_type type,
 	menu.menu_surface = NULL;
 	menu.fields = NULL;
 	menu.type = type;
-	menu.field_count = field_count;
+	menu.lines = field_count;
 	menu.colums = column_count;
-	menu.field_size = field_size;
+	menu.coords = field_size;
 	return (menu);
 }
