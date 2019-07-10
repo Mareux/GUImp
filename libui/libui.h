@@ -27,6 +27,8 @@
 # include <math.h>
 # include "../libft/libft.h"
 
+typedef SDL_Surface				t_surface;
+
 typedef struct					s_vec2
 {
     int							x;
@@ -298,11 +300,14 @@ int					init_libui(t_libui **data);
 void				init_widgets(t_widget **widgets);
 void 				init_keyhooks(t_libui *libui);
 
+t_surface			*create_scaled_surface(SDL_Surface *surface, double scale);
+t_vec2				find_scaled_surface_size(t_surface *surface, double scale);
+
 t_color				rgba(int r, int g, int b, int a);
 t_color				rgb(int r, int g, int b);
 void				close_sdl(t_libui *data);
 void				put_pixel(SDL_Surface *img, int x, int y, t_color color);
-void				clear_surface(SDL_Surface *surface);
+void				fill_surface(SDL_Surface *surface, t_color color);
 t_vec2				vec2(int x, int y);
 t_vec2f				vec2f(double x, double y);
 double				vec2len(t_vec2f *vec);

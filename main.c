@@ -66,23 +66,15 @@ void	hook_hooks(t_guimp *guimp)
 void	guimp_loop(t_libui *libui)
 {
 	t_guimp	*guimp;
-	SDL_Rect	src;
-	SDL_Rect	dst;
 
-	src.x = 0;
-	src.y = 0;
-	src.w = 1024;
-	src.h = 600;
-	dst.x = 1;
-	dst.y = 1;
 	guimp = (t_guimp *)libui->data;
-	SDL_BlitSurface(guimp->canvas, &src, libui->main_window->surface, &dst);
-
 	if (libui->active_window == libui->main_window)
 	{
 		if (guimp->libui->mouse.m1_pressed || guimp->libui->mouse.m2_pressed)
 			use_tool(guimp);
 	}
+	draw_canvas(guimp);
+
 }
 
 int				main(void)
@@ -96,7 +88,7 @@ int				main(void)
 	new_window(guimp.libui, vec2(1024, 600), "GUImp");
 	new_window(guimp.libui, vec2(150, 400), "Tools");
 	guimp.canvas = SDL_CreateRGBSurface(0, 1024, 600, 32, 0, 0, 0, 0);
-	clear_surface(guimp.canvas);
+	fill_surface(guimp.canvas, rgb(255, 255, 255));
 	set_tools_window_position(guimp.libui);
 	set_window_resizable(guimp.libui, "GUImp", 1);
 	hook_hooks(&guimp);

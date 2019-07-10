@@ -52,6 +52,30 @@ void	eventloop_keydown(t_libui *data, int *quit)
 			guimp = data->data;
 			save_img(guimp->canvas, "test.jpg");
 		}
+		if (data->event.key.keysym.scancode
+			== SDL_SCANCODE_P)
+		{
+			t_guimp *guimp;
+
+			guimp = data->data;
+			guimp->current_tool = PENCIL;
+		}
+		if (data->event.key.keysym.scancode
+			== SDL_SCANCODE_H)
+		{
+			t_guimp *guimp;
+
+			guimp = data->data;
+			guimp->current_tool = HAND;
+		}
+		if (data->event.key.keysym.scancode
+			== SDL_SCANCODE_M)
+		{
+			t_guimp *guimp;
+
+			guimp = data->data;
+			guimp->current_tool = MAGNIFYING_GLASS;
+		}
 	}
 }
 

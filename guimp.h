@@ -34,7 +34,7 @@
 # define TEXT 0
 # define DIGITS 1
 
-enum			tools
+enum				tools
 {
 	PENCIL,
 	BRUSH,
@@ -49,30 +49,39 @@ enum			tools
 	IMAGE_IMPORT,
 	BUCKET,
 	TEXT_LINE,
-	PIPETTE
+	PIPETTE,
+	HAND,
+	MAGNIFYING_GLASS
 };
 
-typedef struct	s_status
+typedef struct		s_canvas_data
 {
-	int 		m1_pressed;
-}				t_status;
+	double 			scale;
+	t_vec2			offset;
+	t_vec2			topleft;
+}					t_canvas_data;
 
-typedef struct	s_guimp
+typedef struct		s_guimp
 {
-	int 		current_tool;
-	int			line_thickness;
-	t_color		color1;
-	t_color		color2;
-	t_libui		*libui;
-	SDL_Surface	*canvas;
-	t_status	key_status;
-}				t_guimp;
+	int 			current_tool;
+	int				line_thickness;
+	t_color			color1;
+	t_color			color2;
+	t_libui			*libui;
+	SDL_Surface		*canvas;
+	t_canvas_data	canvas_data;
+}					t_guimp;
 
 void				init(t_guimp *guimp);
 
 void 				guimp_mouse1_down(t_libui *libui);
 void				use_tool(t_guimp *guimp);
 void				use_pencil(t_guimp *guimp);
+void				use_hand(t_guimp *guimp);
+void				use_magnifying_glass(t_guimp *guimp);
+t_vec2f				find_canvas_coordinates(t_guimp *guimp, t_vec2f screen_coordinates);
+
+void				draw_canvas(t_guimp *guimp);
 
 void				save_img(SDL_Surface *canvas, char *filename);
 
