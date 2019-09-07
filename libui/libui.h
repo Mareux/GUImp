@@ -41,6 +41,18 @@ typedef struct					s_vec2f
     double						y;
 }								t_vec2f;
 
+typedef struct 					s_vec2_pair
+{
+	t_vec2						vec_1;
+	t_vec2						vec_2;
+}								t_vec2_pair;
+
+typedef struct 					s_vec2f_pair
+{
+	t_vec2f						vec_1;
+	t_vec2f						vec_2;
+}								t_vec2f_pair;
+
 typedef struct					s_color
 {
     int							r;
@@ -243,9 +255,27 @@ typedef struct					s_window_list
     struct s_window_list		*next;
 }								t_window_list;
 
+typedef struct					s_keylist
+{
+	SDL_Scancode				scancode;
+	struct s_keylist			*next;
+}								t_keylist;
+
+typedef struct					s_keybind
+{
+	t_keylist					*keys;
+	void						(*func)(struct s_libui *);
+	struct s_keybind			*next;
+}								t_keybind;
+
 typedef struct					s_keyhooks
 {
 	void 						(*mouse1_down)(struct s_libui *);
+	void 						(*mouse2_down)(struct s_libui *);
+	void 						(*mouse3_down)(struct s_libui *);
+	void 						(*mwheel_down)(struct s_libui *);
+	void 						(*mwheel_up)(struct s_libui *);
+	t_keybind					*keybinds;
 }								t_keyhooks;
 
 typedef struct 					s_mouse_data
@@ -253,7 +283,11 @@ typedef struct 					s_mouse_data
 	t_vec2						pos;
 	t_vec2						last_pos;
 	int							m1_pressed;
+	int							m1_released;
 	int							m2_pressed;
+	int 						m2_released;
+	int 						m3_pressed;
+	int 						m3_released;
 }								t_mouse_data;
 
 typedef struct		s_line
@@ -265,6 +299,7 @@ typedef struct		s_line
 	double			dy;
 	double			ydiff;
 	double			coeff;
+	t_surface		*target_surface;
 }					t_line;
 
 typedef struct                  s_libui
@@ -298,6 +333,10 @@ void				eventloop_keydown(t_libui *data, int *quit);
 void				eventloop_mousebuttondown(t_libui *data, SDL_Point point);
 
 void				libui_hook_m1_down(t_libui *libui, void (*func)(t_libui *));
+void				libui_hook_m2_down(t_libui *libui, void (*func)(t_libui *));
+void				libui_hook_m3_down(t_libui *libui, void (*func)(t_libui *));
+void				libui_hook_mwheel_down(t_libui *libui, void (*func)(t_libui *));
+void				libui_hook_mwheel_up(t_libui *libui, void (*func)(t_libui *));
 
 int					init_libui(t_libui **data);
 void				init_widgets(t_widget **widgets);
@@ -306,17 +345,65 @@ void 				init_keyhooks(t_libui *libui);
 t_surface			*create_scaled_surface(SDL_Surface *surface, double scale);
 t_vec2				find_scaled_surface_size(t_surface *surface, double scale);
 
-t_color				rgba(int r, int g, int b, int a);
-t_color				rgb(int r, int g, int b);
+
 void				close_sdl(t_libui *data);
-void				put_pixel(SDL_Surface *img, int x, int y, t_color color);
-void				fill_surface(SDL_Surface *surface, t_color color);
+t_color				get_pixel(SDL_Surface *img, int x, int y);
 t_vec2				vec2(int x, int y);
 t_vec2f				vec2f(double x, double y);
 double				vec2len(t_vec2f *vec);
+t_vec2				vec2f_to_vec2(t_vec2f vec);
+t_vec2f				vec2_to_vec2f(t_vec2 vec);
 
+/*
+** Colors
+*/
+
+t_color				rgba(int r, int g, int b, int a);
+t_color				rgb(int r, int g, int b);
+int					same_color(t_color c1, t_color c2);
+
+/*
+**	Key binding
+*/
+
+void				bind_key(t_libui *libui, const char *name, void (*func)(t_libui *));
+void				bind_key_combination(t_libui *libui, t_keylist *keys, void (*func)(t_libui *));
+int					add_key_to_list(t_keylist **lst, char *name);
+
+/*
+**	Drawing functions
+*/
+
+typedef struct		s_queue
+{
+	t_vec2			pos;
+	t_color			affected_color;
+	t_color			target_color;
+	struct s_queue	*next;
+}					t_queue;
+
+void				put_pixel(SDL_Surface *img, int x, int y, t_color color);
+void				fill_surface(SDL_Surface *surface, t_color color);
+void 				flood_fill(t_surface *surface, t_vec2 pos,
+				   		t_color affected_color, t_color target_color);
 void				draw_line(SDL_Surface *surface, t_vec2f start,
 					  t_vec2f end, t_color color);
+void				draw_thick_line(
+						SDL_Surface *surface,
+						t_vec2f_pair v,
+						t_color color,
+						int thickness);
+void 				draw_circle(t_surface *surface, t_vec2 center, int	radius, t_color color);
+void				draw_filled_circle(t_surface *surface, t_vec2 center, int radius, t_color color);
+void				draw_rect(t_surface *surface, t_vec2 topleft,
+					t_vec2 bottomright, t_color color);
+void				draw_filled_rect(t_surface *surface, t_vec2 topleft,
+					t_vec2 bottomright, t_color color);
+
+void 				put_sticker(t_surface *img, t_surface *canvas, t_vec2 pos);
+void				draw_line_of_stickers(SDL_Surface *surface, t_vec2f start,
+								  t_vec2f end, t_surface *sticker);
+
 
 void 				change_cursor(SDL_SystemCursor id);
 
@@ -328,8 +415,10 @@ void				add_field(t_menu_field **begin, SDL_Rect field_rect, char *field_text,
 
 void			draw_menu(SDL_Surface *surface, t_menu *menu, TTF_Font *font);
 SDL_Surface		*create_text_surface(char *text, TTF_Font *font, SDL_Rect rect);
-void	draw_rect(SDL_Surface *surface, SDL_Rect rect, t_color color);
-void	draw_filled_rect(SDL_Surface *surface, SDL_Rect rect, t_color color);
+void			draw_rect(t_surface *surface, t_vec2 topleft,
+						  t_vec2 bottomright, t_color color);
+void			draw_filled_rect(t_surface *surface, t_vec2 topleft,
+								 t_vec2 bottomright, t_color color);
 
 
 #endif

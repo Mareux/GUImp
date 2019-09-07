@@ -60,7 +60,23 @@ void set_tools_window_position(t_libui *libui)
 
 void	hook_hooks(t_guimp *guimp)
 {
-	libui_hook_m1_down(guimp->libui, guimp_mouse1_down);
+	libui_hook_m1_down(guimp->libui, guimp_mouseclick);
+	libui_hook_m2_down(guimp->libui, guimp_mouseclick);
+	libui_hook_mwheel_up(guimp->libui, guimp_mwheel_up);
+	libui_hook_mwheel_down(guimp->libui, guimp_mwheel_down);
+	bind_key(guimp->libui, "T", toggle_filled);
+	bind_key(guimp->libui, "P", settool_pencil);
+	bind_key(guimp->libui, "B", settool_brush);
+	bind_key(guimp->libui, "F", settool_bucket);
+	bind_key(guimp->libui, "C", settool_circle);
+	bind_key(guimp->libui, "M", settool_magnifying_glass);
+	bind_key(guimp->libui, "H", settool_hand);
+	bind_key(guimp->libui, "E", settool_eraser);
+	bind_key(guimp->libui, "L", settool_line);
+	bind_key(guimp->libui, "R", settool_rect);
+	bind_key(guimp->libui, "K", settool_square);
+	bind_key(guimp->libui, "G", settool_pipette);
+	bind_key(guimp->libui, "N", settool_sticker);
 }
 
 void	guimp_loop(t_libui *libui)
@@ -68,13 +84,18 @@ void	guimp_loop(t_libui *libui)
 	t_guimp	*guimp;
 
 	guimp = (t_guimp *)libui->data;
+	guimp->preview = SDL_DuplicateSurface(guimp->canvas); // move to libui
 	if (libui->active_window == libui->main_window)
 	{
-		if (guimp->libui->mouse.m1_pressed || guimp->libui->mouse.m2_pressed)
+		if (libui->mouse.m1_pressed || libui->mouse.m2_pressed
+			|| libui->mouse.m1_released || libui->mouse.m2_released)
 			use_tool(guimp);
+		if (guimp->libui->mouse.m3_pressed)
+			guimp_m3(guimp->libui);
 	}
+	fill_surface(guimp->libui->main_window->surface, rgb(0, 0, 0));
 	draw_canvas(guimp);
-
+	SDL_FreeSurface(guimp->preview); // move to libui
 }
 
 int				main(void)
@@ -84,6 +105,7 @@ int				main(void)
 	init(&guimp);
 	if (!init_libui(&(guimp.libui)))
 		ft_putendl_fd("Failed to initialize", 2);
+	guimp.imported_img = IMG_Load("../ananasique.png");
 	guimp.libui->data = (void *)(&guimp);
 	new_window(guimp.libui, vec2(1024, 600), "GUImp");
 	new_window(guimp.libui, vec2(150, 400), "Tools");

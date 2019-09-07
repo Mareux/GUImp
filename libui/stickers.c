@@ -12,37 +12,45 @@
 
 #include "../guimp.h"
 
+void 		put_sticker(t_surface *img, t_surface *canvas, t_vec2 pos)
+{
+	SDL_Rect	target;
+
+	target.x = pos.x - img->w / 2;
+	target.y = pos.y - img->h / 2;
+	SDL_BlitSurface(img, NULL, canvas, &target);
+}
+
 static void	draw_y(t_vec2f *start, t_vec2f *end,
-		t_line *line, SDL_Surface *surface)
+					  t_line *line, t_surface *sticker)
 {
 	while (line->ydiff >= 1 && start->y != end->y)
 	{
 		start->y += ft_fsign(line->dy);
 		line->ydiff -= 1;
 		if (line->ydiff >= 1)
-			put_pixel(surface, (int)start->x, (int)start->y, line->color);
+			put_sticker(sticker, line->target_surface, vec2f_to_vec2(*start));
 	}
 }
 
-void	draw(t_vec2f *start, t_vec2f *end,
-		t_line *line, SDL_Surface *surface)
+static void	draw(t_vec2f *start, t_vec2f *end,
+			 t_line *line, t_surface *sticker)
 {
-	put_pixel(surface, (int)start->x, (int)start->y, line->color);
+	put_sticker(sticker, line->target_surface, vec2f_to_vec2(*start));
 	while (line->i++ <= (int)fabs(line->dx))
 	{
 		line->ydiff += line->coeff;
-		draw_y(start, end, line, surface);
-		put_pixel(surface, (int)start->x, (int)start->y, line->color);
+		draw_y(start, end, line, sticker);
+		put_sticker(sticker, line->target_surface, vec2f_to_vec2(*start));
 		start->x += line->direction_x;
 	}
 }
 
-void	draw_line(SDL_Surface *surface, t_vec2f start,
-		t_vec2f end, t_color color)
+void		draw_line_of_stickers(SDL_Surface *surface, t_vec2f start,
+				  t_vec2f end, t_surface *sticker)
 {
 	t_line	line;
 
-	line.color = color;
 	line.dx = end.x - start.x;
 	line.dy = end.y - start.y;
 	line.ydiff = 0;
@@ -58,5 +66,6 @@ void	draw_line(SDL_Surface *surface, t_vec2f start,
 	if (start.x > end.x)
 		line.direction_x = -1;
 	line.i = 0;
-	draw(&start, &end, &line, surface);
+	line.target_surface = surface;
+	draw(&start, &end, &line, sticker);
 }

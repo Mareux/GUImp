@@ -77,3 +77,13 @@ t_color	add_colors(t_color *c1, t_color *c2)
 	validate_color(&color);
 	return (color);
 }
+
+int		same_color(t_color c1, t_color c2)
+{
+	if (c1.r == c2.r &&
+		c1.g == c2.g &&
+		c1.b == c2.b &&
+		c1.a == c2.a)
+		return (1);
+	return (0);
+}
