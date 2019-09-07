@@ -55,8 +55,10 @@ add_executable(GUImp
         libui/widgets_add_to_lists.c
         libui/widgets_delete.c
         libui/cursor.c
+        libui/menu.c
+        draw.c
         libui/draw_line.c
         libui/keyhooks_init.c
-        libui/keyhooks_mousebuttons.c save.c guimp_draw_canvas.c tool_hand.c tool_magnifying_glass.c libui/scaled_surfaces.c)
+        libui/keyhooks_mousebuttons.c save.c guimp_draw_canvas.c tool_hand.c tool_magnifying_glass.c libui/scaled_surfaces.c libui/menu_add.c load_cursors.c libui/calculate_menu.c)
 
 target_link_libraries(GUImp -lSDL2 -lm -lSDL2_image -lSDL2_ttf)

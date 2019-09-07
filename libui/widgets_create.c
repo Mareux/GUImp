@@ -97,19 +97,3 @@ t_image create_image(SDL_Rect rect, char *file)
 	return (image);
 }
 
-t_menu	create_menu(enum e_menu_type type,
-					int field_count,
-					int column_count,
-					SDL_Rect field_size)
-{
-	t_menu	menu;
-
-	menu.id = 0;
-	menu.menu_surface = NULL;
-	menu.fields = NULL;
-	menu.type = type;
-	menu.lines = field_count;
-	menu.colums = column_count;
-	menu.coords = field_size;
-	return (menu);
-}

@@ -9,7 +9,7 @@ static t_window		create_window(int weight, int height, const char *title)
                                      weight, height, SDL_WINDOW_SHOWN);
     window.id = SDL_GetWindowID(window.window);
     window.surface = SDL_GetWindowSurface(window.window);
-    init_widgets(&window.widgets);
+	init_widgets(&window.widgets);
     window.active = 1;
     window.type = 1; // Unused, delete this
     return (window);

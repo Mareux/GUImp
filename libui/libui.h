@@ -60,39 +60,40 @@ typedef struct					s_scrolling_list
 enum 					e_menu_type
 {
 	CONTEXT,
-	BAR
+	BAR,
+	TABLE,
+	NONE
 };
+
+typedef struct 					s_menu
+{
+	int							id;
+	enum e_menu_type 			type;
+	void						*fields;
+	int 						opened;
+	SDL_Surface					*menu_surface;
+	SDL_Rect					menu_frame;
+}								t_menu;
 
 typedef struct 					s_menu_field
 {
 	int 						id;
-	void						*data;
 	void						(*click)(void *);
-	t_vec2						size;
+	t_menu						*menu;
 	t_color						active_color;
 	t_color						color;
 	SDL_Rect					field_rect;
+	SDL_Surface					*image;
 	char 						*field_text;
 	int 						active;
 	struct s_menu_field			*next;
 	struct s_menu_field			*prew;
 }								t_menu_field;
 
-typedef struct 					s_menu
-{
-	int							id;
-	enum e_menu_type 			type;
-	t_menu_field				*fields;
-	SDL_Surface					*menu_surface;
-	int 						colums;
-	int 						lines;
-	SDL_Rect					coords;
-}								t_menu;
-
 typedef struct 					s_menu_list
 {
 	t_menu						menu;
-	struct t_menu_list			*next;
+	struct s_menu_list			*next;
 }								t_menu_list;
 
 typedef struct					s_textfield
@@ -287,6 +288,8 @@ void							main_event_loop(
 int					new_window(t_libui *libui, t_vec2 size, const char *title);
 void				set_window_resizable(t_libui *libui, const char *title, int resizable);
 void				set_window_position(t_libui *libui, const char *title, t_vec2 position);
+void	change_window_surface(t_libui *libui, const char *title);
+
 
 SDL_Window			*find_window(t_libui *libui, const char *title);
 
@@ -317,6 +320,16 @@ void				draw_line(SDL_Surface *surface, t_vec2f start,
 
 void 				change_cursor(SDL_SystemCursor id);
 
+
+void				add_menu_to_list(t_menu_list **begin, t_menu menu);
+t_menu				create_menu(enum e_menu_type type, SDL_Rect menu_frame, int id);
+void				add_field(t_menu_field **begin, SDL_Rect field_rect, char *field_text,
+				  void (*click)(void *));
+
+void			draw_menu(SDL_Surface *surface, t_menu *menu, TTF_Font *font);
+SDL_Surface		*create_text_surface(char *text, TTF_Font *font, SDL_Rect rect);
+void	draw_rect(SDL_Surface *surface, SDL_Rect rect, t_color color);
+void	draw_filled_rect(SDL_Surface *surface, SDL_Rect rect, t_color color);
 
 
 #endif
