@@ -13,21 +13,21 @@ set(CMAKE_C_STANDARD 11)
 
 # Unit Factory
 
-#set(SDL2_INCLUDE_DIR ~/.brew/include/SDL2/)
-#set(SDL2_LIBRARY ~/.brew/lib/)
-#include_directories(${SDL2_INCLUDE_DIR})
-#link_directories(${SDL2_LIBRARY})
+set(SDL2_INCLUDE_DIR ~/.brew/include/SDL2/)
+set(SDL2_LIBRARY ~/.brew/lib/)
+include_directories(${SDL2_INCLUDE_DIR})
+link_directories(${SDL2_LIBRARY})
 
 # Mac OS VM
 
-set(SDL2_INCLUDE_DIR /usr/local/Cellar/sdl2/2.0.9_1/include/SDL2)
-set(SDL2_LIBRARY /usr/local/Cellar/sdl2/2.0.9_1/lib)
-include_directories(${SDL2_INCLUDE_DIR}
-        /usr/local/Cellar/sdl2_image/2.0.4/include/SDL2
-        /usr/local/Cellar/sdl2_ttf/2.0.15/include/SDL2)
-link_directories(${SDL2_LIBRARY}
-        /usr/local/Cellar/sdl2_image/2.0.4/lib
-        /usr/local/Cellar/sdl2_ttf/2.0.15/lib)
+#set(SDL2_INCLUDE_DIR /usr/local/Cellar/sdl2/2.0.9_1/include/SDL2)
+#set(SDL2_LIBRARY /usr/local/Cellar/sdl2/2.0.9_1/lib)
+#include_directories(${SDL2_INCLUDE_DIR}
+#        /usr/local/Cellar/sdl2_image/2.0.4/include/SDL2
+#        /usr/local/Cellar/sdl2_ttf/2.0.15/include/SDL2)
+#link_directories(${SDL2_LIBRARY}
+#        /usr/local/Cellar/sdl2_image/2.0.4/lib
+#        /usr/local/Cellar/sdl2_ttf/2.0.15/lib)
 
 file(GLOB libft
         "libft/*.c")
