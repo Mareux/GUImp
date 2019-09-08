@@ -6,7 +6,7 @@
 /*   By: mnosko <mnosko@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/29 17:55:33 by ibarabas          #+#    #+#             */
-/*   Updated: 2019/09/07 15:47:21 by mnosko           ###   ########.fr       */
+/*   Updated: 2019/09/07 15:56:19 by mnosko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@
 //	}
 //}
 
-void			eventloop__window(t_libui *unicorn)
+void			eventloop_window(t_libui *unicorn)
 {
 	if (unicorn->event.type == SDL_WINDOWEVENT)
 	{
@@ -99,7 +99,7 @@ void			libui_loop(t_libui *unicorn)
 		while (SDL_PollEvent(&(unicorn->event)))
 		{
 //			eventloop_window_events(unicorn, &quit);
-			eventloop__window(unicorn);
+			eventloop_window(unicorn);
 			eventloop_keydown(unicorn, &quit);
 			eventloop_mousebuttondown(unicorn, point);
 //			eventloop_mousemotion(unicorn, &point);

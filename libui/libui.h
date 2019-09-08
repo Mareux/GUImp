@@ -288,7 +288,7 @@ void							main_event_loop(
 int					new_window(t_libui *libui, t_vec2 size, const char *title);
 void				set_window_resizable(t_libui *libui, const char *title, int resizable);
 void				set_window_position(t_libui *libui, const char *title, t_vec2 position);
-void	change_window_surface(t_libui *libui, const char *title);
+void				change_window_surface(t_libui *libui, const char *title);
 
 
 SDL_Window			*find_window(t_libui *libui, const char *title);
