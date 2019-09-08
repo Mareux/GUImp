@@ -28,6 +28,10 @@ void 	init_mouse_data(t_libui *libui)
 	libui->mouse.last_pos = vec2(0, 0);
 	libui->mouse.m1_pressed = 0;
 	libui->mouse.m2_pressed = 0;
+	libui->mouse.m3_pressed = 0;
+	libui->mouse.m1_released = 0;
+	libui->mouse.m2_released = 0;
+	libui->mouse.m3_released = 0;
 }
 
 int		init_libui(t_libui **data)
@@ -37,7 +41,7 @@ int		init_libui(t_libui **data)
 	success = 1;
 	if (SDL_Init(SDL_INIT_VIDEO) < 0)
 		success = 0;
-	if (IMG_Init(IMG_INIT_JPG) < 0)
+	if (IMG_Init(IMG_INIT_PNG|IMG_INIT_PNG) < 0);
 		success = 0;
 	*data = malloc(sizeof(t_libui));
 	(*data)->main_window = NULL;

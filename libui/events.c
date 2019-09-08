@@ -46,12 +46,22 @@
 //		highlight_buttons(*point, data);
 //	}
 //}
-//
-//void			eventloop_mousewheel(t_sdl_data *data)
-//{
-//	if (data->event.type == SDL_MOUSEWHEEL
-//	&& (int)data->event.window.windowID == data->active_window->id)
-//	{
+
+void			eventloop_mousewheel(t_libui *data)
+{
+	if (data->event.type == SDL_MOUSEWHEEL
+	&& (int)data->event.window.windowID == data->active_window->id)
+	{
+		if (data->event.wheel.y > 0)
+		{
+			if (data->hooks.mwheel_up)
+				data->hooks.mwheel_up(data);
+		}
+		else
+			{
+			if (data->hooks.mwheel_down)
+				data->hooks.mwheel_down(data);
+		}
 //		if (data->active_window->widgets->active_combobox)
 //		{
 //			if (data->event.wheel.y < 0)
@@ -71,8 +81,8 @@
 //				data->active_window->widgets->active_combobox->content);
 //			}
 //		}
-//	}
-//}
+	}
+}
 
 void			eventloop_window(t_libui *unicorn)
 {
@@ -93,6 +103,9 @@ void			libui_loop(t_libui *unicorn)
 	quit = FALSE;
 	while (!quit)
 	{
+		unicorn->mouse.m1_released = 0;
+		unicorn->mouse.m2_released = 0;
+		unicorn->mouse.m3_released = 0;
 		unicorn->mouse.last_pos.x = unicorn->mouse.pos.x;
 		unicorn->mouse.last_pos.y = unicorn->mouse.pos.y;
 		SDL_GetMouseState(&(unicorn->mouse.pos.x), &(unicorn->mouse.pos.y));
@@ -103,7 +116,7 @@ void			libui_loop(t_libui *unicorn)
 			eventloop_keydown(unicorn, &quit);
 			eventloop_mousebuttondown(unicorn, point);
 //			eventloop_mousemotion(unicorn, &point);
-//			eventloop_mousewheel(unicorn);
+			eventloop_mousewheel(unicorn);
 //			if (SDL_IsTextInputActive())
 //				render_text(unicorn, unicorn->event,
 //						unicorn->active_window->widgets);

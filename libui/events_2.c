@@ -31,6 +31,8 @@
 
 void	eventloop_keydown(t_libui *data, int *quit)
 {
+	t_keybind	*keybind;
+
 	if (data->event.type == SDL_KEYUP
 	&& (int)data->event.window.windowID == data->main_window->id)
 	{
@@ -52,29 +54,17 @@ void	eventloop_keydown(t_libui *data, int *quit)
 			guimp = data->data;
 			save_img(guimp->canvas, "test.jpg");
 		}
-		if (data->event.key.keysym.scancode
-			== SDL_SCANCODE_P)
+		keybind = data->hooks.keybinds;
+		while (keybind)
 		{
-			t_guimp *guimp;
-
-			guimp = data->data;
-			guimp->current_tool = PENCIL;
-		}
-		if (data->event.key.keysym.scancode
-			== SDL_SCANCODE_H)
-		{
-			t_guimp *guimp;
-
-			guimp = data->data;
-			guimp->current_tool = HAND;
-		}
-		if (data->event.key.keysym.scancode
-			== SDL_SCANCODE_M)
-		{
-			t_guimp *guimp;
-
-			guimp = data->data;
-			guimp->current_tool = MAGNIFYING_GLASS;
+			// Currently supports only one key at a time
+			// Need to change this code to allow key combinations
+			if (keybind->keys)
+			{
+				if (data->event.key.keysym.scancode == keybind->keys->scancode)
+					keybind->func(data);
+			}
+			keybind = keybind->next;
 		}
 	}
 }
@@ -118,6 +108,14 @@ void	eventloop_mousebuttondown(t_libui *data, SDL_Point point)
 		else if (data->event.button.button == SDL_BUTTON_RIGHT)
 		{
 			data->mouse.m2_pressed = 1;
+			if (data->hooks.mouse2_down)
+				data->hooks.mouse2_down(data);
+		}
+		else if (data->event.button.button == SDL_BUTTON_MIDDLE)
+		{
+			data->mouse.m3_pressed = 1;
+			if (data->hooks.mouse3_down)
+				data->hooks.mouse3_down(data);
 		}
 	}
 	else if (data->event.type == SDL_MOUSEBUTTONUP)
@@ -125,10 +123,17 @@ void	eventloop_mousebuttondown(t_libui *data, SDL_Point point)
 		if (data->event.button.button == SDL_BUTTON_LEFT)
 		{
 			data->mouse.m1_pressed = 0;
+			data->mouse.m1_released = 1;
 		}
 		if (data->event.button.button == SDL_BUTTON_RIGHT)
 		{
 			data->mouse.m2_pressed = 0;
+			data->mouse.m2_released = 1;
+		}
+		if (data->event.button.button == SDL_BUTTON_MIDDLE)
+		{
+			data->mouse.m3_pressed = 0;
+			data->mouse.m3_released = 1;
 		}
 	}
 }

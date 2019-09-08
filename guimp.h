@@ -51,7 +51,14 @@ enum				tools
 	TEXT_LINE,
 	PIPETTE,
 	HAND,
-	MAGNIFYING_GLASS
+	MAGNIFYING_GLASS,
+	STICKER
+};
+
+enum 				BUTTONS
+{
+	MOUSE1,
+	MOUSE2
 };
 
 typedef struct		s_canvas_data
@@ -61,14 +68,26 @@ typedef struct		s_canvas_data
 	t_vec2			topleft;
 }					t_canvas_data;
 
+typedef struct		s_shape_data
+{
+	int				filled;
+	int				radius;
+	int 			thickness;
+	t_vec2			size;
+	int				anchor_set;
+	t_vec2			anchor;
+}					t_shape_data;
+
 typedef struct		s_guimp
 {
 	int 			current_tool;
-	int				line_thickness;
+	t_shape_data	shape_data;
 	t_color			color1;
 	t_color			color2;
 	t_libui			*libui;
-	SDL_Surface		*canvas;
+	t_surface		*canvas;
+	t_surface		*preview;
+	t_surface		*imported_img;
 	t_canvas_data	canvas_data;
 }					t_guimp;
 
@@ -81,15 +100,66 @@ typedef struct 		s_cursor
 
 void				init(t_guimp *guimp);
 
-void 				guimp_mouse1_down(t_libui *libui);
+void 				guimp_mouseclick(t_libui *libui);
+void 				guimp_mwheel_up(t_libui *libui);
+void 				guimp_mwheel_down(t_libui *libui);
+void				guimp_m3(t_libui *libui);
 void				use_tool(t_guimp *guimp);
-void				use_pencil(t_guimp *guimp);
 void				use_hand(t_guimp *guimp);
 void				use_magnifying_glass(t_guimp *guimp);
 t_vec2f				find_canvas_coordinates(t_guimp *guimp, t_vec2f screen_coordinates);
 
+void 				set_anchor_point(t_guimp *guimp);
+
+void 				settool(t_libui *libui, int tool);
+
+void				settool_pencil(t_libui *libui);
+void				use_pencil(t_guimp *guimp);
+
+void				settool_circle(t_libui *libui);
+void				use_circle(t_guimp *guimp);
+
+void				settool_brush(t_libui *libui);
+void				use_brush(t_guimp *guimp);
+
+void				settool_eraser(t_libui *libui);
+void				use_eraser(t_guimp *guimp);
+
+void				settool_line(t_libui *libui);
+void				use_line(t_guimp *guimp);
+
+void				settool_rect(t_libui *libui);
+void				use_rect(t_guimp *guimp);
+void				swap_coordinates(t_vec2_pair *pair);
+
+void				settool_square(t_libui *libui);
+void				use_square(t_guimp *guimp);
+
+void				settool_sticker(t_libui *libui);
+void				use_sticker_brush(t_guimp *guimp);
+
+void				settool_magnifying_glass(t_libui *libui);
+
+void				zoom_in(t_guimp *guimp);
+void				zoom_out(t_guimp *guimp);
+
+void				settool_hand(t_libui *libui);
+
+void				settool_bucket(t_libui *libui);
+void				use_bucket(t_guimp *guimp);
+void				settool_text(t_libui *libui);
+
+void				settool_pipette(t_libui *libui);
+void				use_pipette(t_guimp *guimp);
+
+void				toggle_filled(t_libui *libui);
+
 void				draw_canvas(t_guimp *guimp);
 
 void				save_img(SDL_Surface *canvas, char *filename);
+
+
+void 				flood_fill(t_surface *surface, t_vec2 pos,
+							   t_color affected_color, t_color target_color);
 
 #endif

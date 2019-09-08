@@ -2,7 +2,18 @@
 
 void	use_magnifying_glass(t_guimp *guimp)
 {
-	double change = ((double)guimp->libui->mouse.pos.x -
-					(double)guimp->libui->mouse.last_pos.x) / 1000.0;
-	guimp->canvas_data.scale += change;
+	if (guimp->libui->mouse.m1_pressed)
+		guimp->canvas_data.scale *= 2;
+	else
+		guimp->canvas_data.scale /= 2;
+}
+
+void	zoom_in(t_guimp *guimp)
+{
+	guimp->canvas_data.scale *= 1.1;
+}
+
+void	zoom_out(t_guimp *guimp)
+{
+	guimp->canvas_data.scale *= 0.9;
 }

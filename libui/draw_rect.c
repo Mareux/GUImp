@@ -10,36 +10,53 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "guimp.h"
+#include "../guimp.h"
 
-void	draw_rect(SDL_Surface *surface, SDL_Rect rect, t_color color)
-{
-	draw_line(surface, (t_vec2f){rect.x, rect.y},
-			(t_vec2f){rect.w + rect.x, rect.y}, color);
-	draw_line(surface, (t_vec2f){rect.x, rect.y},
-			(t_vec2f){rect.x, rect.h + rect.y}, color);
-	draw_line(surface, (t_vec2f){rect.x, rect.h + rect.y},
-			(t_vec2f){rect.w + rect.x, rect.h + rect.y}, color);
-	draw_line(surface, (t_vec2f){rect.w + rect.x, rect.y},
-			(t_vec2f){rect.w + rect.x, rect.h + rect.y}, color);
-}
-
-void	draw_filled_rect(SDL_Surface *surface, SDL_Rect rect, t_color color)
+void	draw_rect(t_surface *surface, t_vec2 topleft,
+		t_vec2 bottomright, t_color color)
 {
 	int x;
-	int w;
+	int	y;
 
-	x = rect.x;
-	w = rect.w + rect.x;
-	if (rect.x > (rect.w + rect.x))
+	x = topleft.x;
+	y = topleft.y;
+	while (x < bottomright.x)
 	{
-		w = rect.x;
-		x = rect.w + rect.x;
+		put_pixel(surface, x, y, color);
+		x++;
 	}
-	while (x < w)
+	while (y < bottomright.y)
 	{
-		draw_line(surface, (t_vec2f){x, rect.y},
-				(t_vec2f){x, rect.h + rect.y}, color);
+		put_pixel(surface, x, y, color);
+		y++;
+	}
+	while (x > topleft.x)
+	{
+		put_pixel(surface, x, y, color);
+		x--;
+	}
+	while (y > topleft.y)
+	{
+		put_pixel(surface, x, y, color);
+		y--;
+	}
+}
+
+void	draw_filled_rect(t_surface *surface, t_vec2 topleft,
+						 t_vec2 bottomright, t_color color)
+{
+	int x;
+	int	y;
+
+	x = topleft.x;
+	while (x <= bottomright.x)
+	{
+		y = topleft.y;
+		while (y <= bottomright.y)
+		{
+			put_pixel(surface, x, y, color);
+			y++;
+		}
 		x++;
 	}
 }

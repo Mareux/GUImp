@@ -19,13 +19,12 @@ void	draw_canvas(t_guimp *guimp)
 {
 	SDL_Surface *scaled;
 
-	fill_surface(guimp->libui->main_window->surface, rgb(0, 0, 0));
-	scaled = create_scaled_surface(guimp->canvas, guimp->canvas_data.scale);
+	//fill_surface(guimp->libui->main_window->surface, rgb(0, 0, 0));
+	scaled = create_scaled_surface(guimp->preview, guimp->canvas_data.scale);
 	guimp->canvas_data.topleft.x = guimp->libui->main_window->surface->w / 2
 								   - scaled->w / 2 + guimp->canvas_data.offset.x;
 	guimp->canvas_data.topleft.y = guimp->libui->main_window->surface->h / 2
 								   - scaled->h / 2 + guimp->canvas_data.offset.y;
 	blit_with_offset(scaled, guimp->libui->main_window->surface, guimp->canvas_data.offset);
-
 	SDL_FreeSurface(scaled);
 }
