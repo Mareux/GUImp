@@ -60,5 +60,4 @@ void	use_line(t_guimp *guimp) {
 	else if (guimp->libui->mouse.m2_pressed)
 		draw_thick_line(guimp->preview,
 				pair, guimp->color2, guimp->shape_data.thickness);
-	printf("%f, %f\n", pair.vec_2.x, pair.vec_2.y);
 }

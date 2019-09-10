@@ -12,7 +12,7 @@
 
 #include "../guimp.h"
 
-static void	draw_y(t_vec2f *start, t_vec2f *end,
+static void	draw_y(t_vec2 *start, t_vec2 *end,
 		t_line *line, SDL_Surface *surface)
 {
 	while (line->ydiff >= 1 && start->y != end->y)
@@ -20,19 +20,19 @@ static void	draw_y(t_vec2f *start, t_vec2f *end,
 		start->y += ft_fsign(line->dy);
 		line->ydiff -= 1;
 		if (line->ydiff >= 1)
-			put_pixel(surface, (int)start->x, (int)start->y, line->color);
+			put_pixel(surface, start->x, start->y, line->color);
 	}
 }
 
-void	draw(t_vec2f *start, t_vec2f *end,
+void	draw(t_vec2 *start, t_vec2 *end,
 		t_line *line, SDL_Surface *surface)
 {
-	put_pixel(surface, (int)start->x, (int)start->y, line->color);
+	put_pixel(surface, start->x, start->y, line->color);
 	while (line->i++ <= (int)fabs(line->dx))
 	{
 		line->ydiff += line->coeff;
 		draw_y(start, end, line, surface);
-		put_pixel(surface, (int)start->x, (int)start->y, line->color);
+		put_pixel(surface, start->x, start->y, line->color);
 		start->x += line->direction_x;
 	}
 }
@@ -40,7 +40,8 @@ void	draw(t_vec2f *start, t_vec2f *end,
 void	draw_line(SDL_Surface *surface, t_vec2f start,
 		t_vec2f end, t_color color)
 {
-	t_line	line;
+	t_line		line;
+	t_vec2_pair	pair;
 
 	line.color = color;
 	line.dx = end.x - start.x;
@@ -58,5 +59,7 @@ void	draw_line(SDL_Surface *surface, t_vec2f start,
 	if (start.x > end.x)
 		line.direction_x = -1;
 	line.i = 0;
-	draw(&start, &end, &line, surface);
+	pair.vec_1 = vec2f_to_vec2(start);
+	pair.vec_2 = vec2f_to_vec2(end);
+	draw(&pair.vec_1, &pair.vec_2, &line, surface);
 }

@@ -1,7 +1,7 @@
 #include "libui.h"
 
 static void	draw_y(
-		t_vec2f_pair *v,
+		t_vec2_pair *v,
 		t_line *line,
 		SDL_Surface *surface,
 		int thickness)
@@ -18,7 +18,7 @@ static void	draw_y(
 }
 
 static void	draw(
-		t_vec2f_pair *v,
+		t_vec2_pair *v,
 		t_line *line,
 		SDL_Surface *surface,
 		int thickness)
@@ -42,6 +42,7 @@ void		draw_thick_line(
 		int thickness)
 {
 	t_line	line;
+	t_vec2_pair	pair;
 
 	line.color = color;
 	line.dx = v.vec_2.x - v.vec_1.x;
@@ -59,7 +60,9 @@ void		draw_thick_line(
 	if (v.vec_1.x > v.vec_2.x)
 		line.direction_x = -1;
 	line.i = 0;
-	draw(&v, &line, surface, thickness);
+	pair.vec_1 = vec2f_to_vec2(v.vec_1);
+	pair.vec_2 = vec2f_to_vec2(v.vec_2);
+	draw(&pair, &line, surface, thickness);
 }
 
 
