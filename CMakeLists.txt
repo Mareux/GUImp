@@ -5,11 +5,11 @@ set(CMAKE_C_STANDARD 11)
 
 # Linux
 
-#find_package(SDL2 REQUIRED)
-#find_package(SDL_ttf REQUIRED)
-#find_package(SDL_image REQUIRED)
-#include_directories(${SDL2_INCLUDE_DIRS})
-#link_directories(${SDL2_LIBRARY})
+find_package(SDL2 REQUIRED)
+find_package(SDL_ttf REQUIRED)
+find_package(SDL_image REQUIRED)
+include_directories(${SDL2_INCLUDE_DIRS})
+link_directories(${SDL2_LIBRARY})
 
 # Unit Factory
 
@@ -20,14 +20,14 @@ set(CMAKE_C_STANDARD 11)
 
 # Mac OS VM
 
-set(SDL2_INCLUDE_DIR /usr/local/Cellar/sdl2/2.0.9_1/include/SDL2)
-set(SDL2_LIBRARY /usr/local/Cellar/sdl2/2.0.9_1/lib)
-include_directories(${SDL2_INCLUDE_DIR}
-        /usr/local/Cellar/sdl2_image/2.0.4/include/SDL2
-        /usr/local/Cellar/sdl2_ttf/2.0.15/include/SDL2)
-link_directories(${SDL2_LIBRARY}
-        /usr/local/Cellar/sdl2_image/2.0.4/lib
-        /usr/local/Cellar/sdl2_ttf/2.0.15/lib)
+#set(SDL2_INCLUDE_DIR /usr/local/Cellar/sdl2/2.0.9_1/include/SDL2)
+#set(SDL2_LIBRARY /usr/local/Cellar/sdl2/2.0.9_1/lib)
+#include_directories(${SDL2_INCLUDE_DIR}
+#        /usr/local/Cellar/sdl2_image/2.0.4/include/SDL2
+#        /usr/local/Cellar/sdl2_ttf/2.0.15/include/SDL2)
+#link_directories(${SDL2_LIBRARY}
+#        /usr/local/Cellar/sdl2_image/2.0.4/lib
+#        /usr/local/Cellar/sdl2_ttf/2.0.15/lib)
 
 file(GLOB libft
         "libft/*.c")
@@ -69,8 +69,9 @@ add_executable(GUImp
         libui/flood_fill.c
         libui/draw_circle.c
         tool_circle.c
+        checker.c
         libui/draw_thick_line.c
         libui/keyhooks_bind_key.c
-        settool_1.c guimp_toggle_filled.c tool_brush.c guimp_mousewheel.c tool_eraser.c tool_line.c tool_rect.c tool_square.c tool_pipette.c libui/stickers.c tool_sticker_brush.c tool_text.c libui/draw_text.c)
+        settool_1.c guimp_toggle_filled.c tool_brush.c guimp_mousewheel.c tool_eraser.c tool_line.c tool_rect.c tool_square.c tool_pipette.c libui/stickers.c tool_sticker_brush.c tool_text.c libui/draw_text.c libui/menu_table.c cursor_load.c cursor_set.c)
 
 target_link_libraries(GUImp -lSDL2 -lm -lSDL2_image -lSDL2_ttf)

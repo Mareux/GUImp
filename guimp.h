@@ -99,13 +99,6 @@ typedef struct		s_guimp
 	t_canvas_data	canvas_data;
 }					t_guimp;
 
-typedef struct 		s_cursor
-{
-	SDL_Cursor		*cursor;
-	enum tools		tool;
-	struct s_cursor	*next;
-}					t_cursor;
-
 void				init(t_guimp *guimp);
 
 void 				guimp_mouseclick(t_libui *libui);
