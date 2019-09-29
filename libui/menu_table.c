@@ -1,20 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   save.c                                             :+:      :+:    :+:   */
+/*   menu_table.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mnosko <mnosko@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/09 17:42:44 by mnosko            #+#    #+#             */
-/*   Updated: 2019/07/09 17:55:58 by mnosko           ###   ########.fr       */
+/*   Created: 2019/09/11 17:15:39 by mnosko            #+#    #+#             */
+/*   Updated: 2019/09/13 18:17:34 by mnosko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "guimp.h"
+#include "libui.h"
+#include <dirent.h>
 
 
 
-void save_img(SDL_Surface *canvas, char *filename)
-{
-	IMG_SaveJPG(canvas, filename, 100);
-}
+
