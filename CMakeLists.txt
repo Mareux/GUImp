@@ -69,6 +69,7 @@ add_executable(GUImp
         libui/flood_fill.c
         libui/draw_circle.c
         tool_circle.c
+        checker.c
         libui/draw_thick_line.c
         libui/keyhooks_bind_key.c
         settool_1.c guimp_toggle_filled.c tool_brush.c guimp_mousewheel.c tool_eraser.c tool_line.c tool_rect.c tool_square.c tool_pipette.c libui/stickers.c tool_sticker_brush.c libui/menu_table.c cursor_load.c cursor_set.c)

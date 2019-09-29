@@ -245,7 +245,8 @@ typedef struct 					s_checkbox_list
 typedef struct					s_widget
 {
     t_textfield_list			*textfield;
-    t_label_list				*label;
+	t_textfield					*active_textfield;
+	t_label_list				*label;
     t_buttons_list				*button;
     t_combobox_list				*combobox;
     t_image_list				*image;
@@ -326,7 +327,6 @@ typedef struct                  s_libui
     t_window					*active_window;
     void						*active_window_return_data;
     t_window_list				*windows;
-    SDL_Cursor					*active_cursor;
     TTF_Font					*font;
     t_keyhooks					hooks;
     t_cursor_surface			*cursor_surface;

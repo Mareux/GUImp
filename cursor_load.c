@@ -6,7 +6,7 @@
 /*   By: mnosko <mnosko@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/29 13:25:22 by mnosko            #+#    #+#             */
-/*   Updated: 2019/09/29 15:39:51 by mnosko           ###   ########.fr       */
+/*   Updated: 2019/09/29 16:05:01 by mnosko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void	cursor_picture_add(t_cursor_surface **begin,
 {
 	t_cursor_surface *new;
 
+	if (cursor_image == NULL)
+		return;
 	new = ft_memalloc(sizeof(t_cursor_surface));
 	new->id = ft_atoi(name);
 	new->cursor_image = cursor_image;

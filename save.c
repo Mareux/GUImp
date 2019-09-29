@@ -12,6 +12,8 @@
 
 #include "guimp.h"
 
+
+
 void save_img(SDL_Surface *canvas, char *filename)
 {
 	IMG_SaveJPG(canvas, filename, 100);
