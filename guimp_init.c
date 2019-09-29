@@ -14,6 +14,8 @@ void 	init_shape_data(t_guimp *guimp)
 	guimp->shape_data.size = vec2(40, 40);
 	guimp->shape_data.thickness = 3;
 	guimp->shape_data.anchor_set = 0;
+	guimp->text_tool.active = 0;
+	guimp->text_tool.text = ft_strdup("");
 }
 
 void	init(t_guimp *guimp)

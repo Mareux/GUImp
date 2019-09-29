@@ -77,6 +77,7 @@ void	hook_hooks(t_guimp *guimp)
 	bind_key(guimp->libui, "K", settool_square);
 	bind_key(guimp->libui, "G", settool_pipette);
 	bind_key(guimp->libui, "N", settool_sticker);
+	bind_key(guimp->libui, "J", settool_text);
 }
 
 void	guimp_loop(t_libui *libui)
@@ -92,6 +93,8 @@ void	guimp_loop(t_libui *libui)
 			use_tool(guimp);
 		if (guimp->libui->mouse.m3_pressed)
 			guimp_m3(guimp->libui);
+		if (guimp->current_tool == TEXT_LINE)
+			use_text(guimp);
 	}
 	fill_surface(guimp->libui->main_window->surface, rgb(0, 0, 0));
 	draw_canvas(guimp);

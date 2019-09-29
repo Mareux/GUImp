@@ -302,6 +302,21 @@ typedef struct		s_line
 	t_surface		*target_surface;
 }					t_line;
 
+typedef struct					s_textinput
+{
+	int							active;
+	char 						*text;
+}								t_textinput;
+
+typedef struct 					s_text
+{
+	TTF_Font					*font;
+	t_surface					*surface;
+	t_vec2						position;
+	char						*text;
+	t_color						color;
+}								t_text;
+
 typedef struct                  s_libui
 {
     SDL_Event					event;
@@ -315,6 +330,7 @@ typedef struct                  s_libui
 	void						*data;
 	void 						(*custom_loop)(struct s_libui *);
 	t_mouse_data				mouse;
+	t_textinput					textinput;
 }                               t_libui;
 
 void							main_event_loop(
@@ -403,6 +419,9 @@ void				draw_filled_rect(t_surface *surface, t_vec2 topleft,
 void 				put_sticker(t_surface *img, t_surface *canvas, t_vec2 pos);
 void				draw_line_of_stickers(SDL_Surface *surface, t_vec2f start,
 								  t_vec2f end, t_surface *sticker);
+
+void				init_text(t_libui *libui, t_text *text);
+void				draw_text(t_text *text);
 
 
 void 				change_cursor(SDL_SystemCursor id);

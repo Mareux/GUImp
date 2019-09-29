@@ -76,11 +76,19 @@ typedef struct		s_shape_data
 	t_vec2			size;
 	int				anchor_set;
 	t_vec2			anchor;
+	TTF_Font		*font;
 }					t_shape_data;
+
+typedef struct		s_text_tool
+{
+	int				active;
+	char			*text;
+}					t_text_tool;
 
 typedef struct		s_guimp
 {
 	int 			current_tool;
+	t_text_tool		text_tool;
 	t_shape_data	shape_data;
 	t_color			color1;
 	t_color			color2;
@@ -147,7 +155,10 @@ void				settool_hand(t_libui *libui);
 
 void				settool_bucket(t_libui *libui);
 void				use_bucket(t_guimp *guimp);
+
 void				settool_text(t_libui *libui);
+void				toggle_text_input(t_guimp *guimp);
+void				use_text(t_guimp *guimp);
 
 void				settool_pipette(t_libui *libui);
 void				use_pipette(t_guimp *guimp);
