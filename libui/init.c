@@ -6,7 +6,7 @@
 /*   By: mnosko <mnosko@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/25 21:49:23 by mnosko            #+#    #+#             */
-/*   Updated: 2019/06/25 21:49:23 by mnosko           ###   ########.fr       */
+/*   Updated: 2019/09/29 15:39:51 by mnosko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int		init_libui(t_libui **data)
 	*data = malloc(sizeof(t_libui));
 	(*data)->main_window = NULL;
 	(*data)->windows = NULL;
+	cursor_create((*data));
 	(*data)->active_window = NULL;
 	(*data)->active_window_return_data = NULL;
 	(*data)->data = NULL;

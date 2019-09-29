@@ -27,7 +27,22 @@
 # include <math.h>
 # include "../libft/libft.h"
 
+
 typedef SDL_Surface				t_surface;
+
+typedef struct 		s_cursor_surface
+{
+	int				id;
+	SDL_Surface		*cursor_image;
+	struct s_cursor_surface *next;
+}					t_cursor_surface;
+
+typedef struct 		s_cursor
+{
+	int				id;
+	SDL_Cursor		*cursor;
+	struct s_cursor	*next;
+}					t_cursor;
 
 typedef struct					s_vec2
 {
@@ -278,6 +293,8 @@ typedef struct					s_keyhooks
 	t_keybind					*keybinds;
 }								t_keyhooks;
 
+
+
 typedef struct 					s_mouse_data
 {
 	t_vec2						pos;
@@ -312,6 +329,8 @@ typedef struct                  s_libui
     SDL_Cursor					*active_cursor;
     TTF_Font					*font;
     t_keyhooks					hooks;
+    t_cursor_surface			*cursor_surface;
+    t_cursor					*cursor;
 	void						*data;
 	void 						(*custom_loop)(struct s_libui *);
 	t_mouse_data				mouse;
@@ -420,5 +439,7 @@ void			draw_rect(t_surface *surface, t_vec2 topleft,
 void			draw_filled_rect(t_surface *surface, t_vec2 topleft,
 								 t_vec2 bottomright, t_color color);
 
+void	cursor_create(t_libui *libui);
+void 	set_cursor(t_cursor *cursor, int id);
 
 #endif

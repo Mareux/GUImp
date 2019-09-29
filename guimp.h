@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   editor.h                                           :+:      :+:    :+:   */
+/*   guimp.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mnosko <mnosko@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/29 17:55:25 by ibarabas          #+#    #+#             */
-/*   Updated: 2019/06/29 21:10:33 by mnosko           ###   ########.fr       */
+/*   Updated: 2019/09/29 13:45:15 by mnosko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,23 +36,23 @@
 
 enum				tools
 {
-	PENCIL,
-	BRUSH,
-	ERASER,
-	LINE,
-	RECT,
-	FILLED_RECT,
-	CIRCLE,
-	FILLED_CIRCLE,
-	SQUARE,
-	FILLED_SQUARE,
-	IMAGE_IMPORT,
-	BUCKET,
-	TEXT_LINE,
-	PIPETTE,
-	HAND,
-	MAGNIFYING_GLASS,
-	STICKER
+	PENCIL = 0,
+	BRUSH = 1,
+	ERASER = 2,
+	LINE = 3,
+	RECT = 4,
+	FILLED_RECT = 5,
+	CIRCLE = 6,
+	FILLED_CIRCLE = 7,
+	SQUARE = 8,
+	FILLED_SQUARE = 9,
+	IMAGE_IMPORT = 10,
+	BUCKET = 11,
+	TEXT_LINE = 12,
+	PIPETTE = 13,
+	HAND = 14,
+	MAGNIFYING_GLASS = 15,
+	STICKER = 16
 };
 
 enum 				BUTTONS
@@ -78,6 +78,8 @@ typedef struct		s_shape_data
 	t_vec2			anchor;
 }					t_shape_data;
 
+
+
 typedef struct		s_guimp
 {
 	int 			current_tool;
@@ -91,12 +93,6 @@ typedef struct		s_guimp
 	t_canvas_data	canvas_data;
 }					t_guimp;
 
-typedef struct 		s_cursor
-{
-	SDL_Cursor		*cursor;
-	enum tools		tool;
-	struct s_cursor	*next;
-}					t_cursor;
 
 void				init(t_guimp *guimp);
 

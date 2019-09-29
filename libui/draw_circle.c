@@ -14,7 +14,7 @@ t_circle_draw	new_circle(t_vec2 center, int radius)
 	return (new);
 }
 
-int	fits_equation(t_vec2 point, radius)
+int	fits_equation(t_vec2 point, int radius)
 {
 	int eq;
 
