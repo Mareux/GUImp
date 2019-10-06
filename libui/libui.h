@@ -417,6 +417,13 @@ typedef struct		s_queue
 	struct s_queue	*next;
 }					t_queue;
 
+/*
+**	Managing surfaces
+*/
+
+t_surface			*duplicate_surface(t_surface *src);
+t_surface			*free_surface(t_surface *surface);
+
 void				put_pixel(SDL_Surface *img, int x, int y, t_color color);
 void				fill_surface(SDL_Surface *surface, t_color color);
 void 				flood_fill(t_surface *surface, t_vec2 pos,

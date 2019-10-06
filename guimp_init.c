@@ -26,4 +26,5 @@ void	init(t_guimp *guimp)
 	guimp->libui = NULL;
 	init_canvas_data(guimp);
 	init_shape_data(guimp);
+	guimp->undo_buffer = NULL;
 }

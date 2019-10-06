@@ -85,6 +85,12 @@ typedef struct		s_text_tool
 	char			*text;
 }					t_text_tool;
 
+typedef struct 		s_undo
+{
+	t_surface		*surface;
+	struct s_undo	*next;
+}					t_undo;
+
 typedef struct		s_guimp
 {
 	int 			current_tool;
@@ -97,6 +103,7 @@ typedef struct		s_guimp
 	t_surface		*preview;
 	t_surface		*imported_img;
 	t_canvas_data	canvas_data;
+	t_undo			*undo_buffer;
 }					t_guimp;
 
 void				init(t_guimp *guimp);
