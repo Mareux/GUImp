@@ -106,7 +106,6 @@ typedef struct 					s_menu_field
 {
 	int 						id;
 	void						(*click)(void *);
-	t_menu						*menu;
 	t_color						active_color;
 	t_color						color;
 	SDL_Rect					field_rect;
@@ -326,13 +325,16 @@ typedef struct                  s_libui
     t_window					*main_window;
     t_window					*active_window;
     void						*active_window_return_data;
+    t_menu_list					*menu_list;
     t_window_list				*windows;
     TTF_Font					*font;
     t_keyhooks					hooks;
+    t_widget					*widget;
     t_cursor_surface			*cursor_surface;
     t_cursor					*cursor;
 	void						*data;
 	void 						(*custom_loop)(struct s_libui *);
+	void						(*generic_window_loop)(struct s_libui *);
 	t_mouse_data				mouse;
 }                               t_libui;
 
@@ -343,9 +345,27 @@ int					new_window(t_libui *libui, t_vec2 size, const char *title);
 void				set_window_resizable(t_libui *libui, const char *title, int resizable);
 void				set_window_position(t_libui *libui, const char *title, t_vec2 position);
 void				change_window_surface(t_libui *libui, const char *title);
-
+SDL_Surface			*get_window_surface(t_libui *libui, const char *title);
 
 SDL_Window			*find_window(t_libui *libui, const char *title);
+t_window			*find_t_window(t_libui *libui, const char *title);
+
+void				add_button_to_list(t_buttons_list **buttons,
+						   t_button button, void (*click)(void *));
+void				add_label_to_list(t_label_list **list, t_label label);
+void				add_image_to_list(t_image_list **list, t_image image);
+void				add_textfield_to_list(t_textfield_list **textfield_list,
+							  t_textfield textfield, void (*type_check)(char));
+void				add_combobox_to_list(t_combobox_list **combobox_list,
+							 t_combobox combobox, void (*event)(void *));
+t_textfield			create_textfield(SDL_Surface *text_surface,
+									SDL_Rect rect);
+t_combobox			create_combobox(void *data,
+								  SDL_Rect field_rect, t_color color);
+t_label				create_label(char *text, SDL_Rect rect, TTF_Font *font);
+t_button			create_button(SDL_Surface *text_surface,
+							  SDL_Rect rect, int type, char *name);
+t_image				create_image(SDL_Rect rect, char *file);
 
 void				libui_loop(t_libui *unicorn);
 void				eventloop_keydown(t_libui *data, int *quit);
@@ -429,8 +449,10 @@ void 				change_cursor(SDL_SystemCursor id);
 
 void				add_menu_to_list(t_menu_list **begin, t_menu menu);
 t_menu				create_menu(enum e_menu_type type, SDL_Rect menu_frame, int id);
-void				add_field(t_menu_field **begin, SDL_Rect field_rect, char *field_text,
-				  void (*click)(void *));
+void				add_text_field(t_menu_field **begin, SDL_Rect field_rect, char *field_text,
+								   void (*click)(void *));
+void 				add_image_field(t_menu_field **begin, SDL_Surface *image, char *field_text,
+						void (*click)(void *));
 
 void			draw_menu(SDL_Surface *surface, t_menu *menu, TTF_Font *font);
 SDL_Surface		*create_text_surface(char *text, TTF_Font *font, SDL_Rect rect);
@@ -441,5 +463,14 @@ void			draw_filled_rect(t_surface *surface, t_vec2 topleft,
 
 void	cursor_create(t_libui *libui);
 void 	set_cursor(t_cursor *cursor, int id);
+
+void draw_menu_table(SDL_Surface *surface, t_menu *menu);
+void create_menu_for_tools(t_libui *libui);
+
+void	tools_window_loop(t_libui *libui);
+void		recalculate_table_fields(t_menu_field *field, int difference);
+
+
+t_window	*create_window_with_textfield(t_libui *libui);
 
 #endif

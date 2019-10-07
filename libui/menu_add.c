@@ -6,22 +6,44 @@
 /*   By: mnosko <mnosko@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/16 12:46:42 by mnosko            #+#    #+#             */
-/*   Updated: 2019/09/06 18:23:14 by mnosko           ###   ########.fr       */
+/*   Updated: 2019/10/01 11:46:18 by mnosko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libui.h"
 
-void	add_field(t_menu_field **begin, SDL_Rect field_rect, char *field_text,
-		void (*click)(void *))
+void	add_text_field(t_menu_field **begin, SDL_Rect field_rect, char *field_text,
+					   void (*click)(void *))
 {
 	t_menu_field *new;
 
 	new = ft_memalloc(sizeof(t_menu_field));
 	new->click = click;
+	new->image = NULL;
+	new->field_text = field_text;
 	new->active_color = (t_color){340, 6, 100};
 	new->color = (t_color){350, 25, 100};
 	new->field_rect = field_rect;
+	new->active = TRUE;
+	new->next = *begin;
+	new->prew = NULL;
+	if (*begin != NULL)
+		(*begin)->prew = new;
+	*begin = new;
+}
+
+void 	add_image_field(t_menu_field **begin, SDL_Surface *image, char *field_text,
+						void (*click)(void *))
+{
+	t_menu_field *new;
+
+	new = ft_memalloc(sizeof(t_menu_field));
+	new->click = click;
+	new->image = image;
+	new->field_text = field_text;
+	new->active_color = (t_color){340, 6, 100};
+	new->color = (t_color){350, 25, 100};
+	new->field_rect = image->clip_rect;
 	new->active = TRUE;
 	new->next = *begin;
 	new->prew = NULL;

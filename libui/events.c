@@ -6,7 +6,7 @@
 /*   By: mnosko <mnosko@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/29 17:55:33 by ibarabas          #+#    #+#             */
-/*   Updated: 2019/09/07 15:56:19 by mnosko           ###   ########.fr       */
+/*   Updated: 2019/10/06 20:32:04 by mnosko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,8 @@ void			libui_loop(t_libui *unicorn)
 		}
 		if (unicorn->custom_loop)
 			unicorn->custom_loop(unicorn);
+		tools_window_loop(unicorn);
+		SDL_UpdateWindowSurface(find_window(unicorn, "Tools"));
 		SDL_UpdateWindowSurface(unicorn->main_window->window);
 	}
 }

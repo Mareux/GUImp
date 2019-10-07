@@ -70,8 +70,11 @@ add_executable(GUImp
         libui/draw_circle.c
         tool_circle.c
         checker.c
+        widgets_draw.c
+        libui/menu_add.c
+        libui/calculate_menu.c
         libui/draw_thick_line.c
         libui/keyhooks_bind_key.c
-        settool_1.c guimp_toggle_filled.c tool_brush.c guimp_mousewheel.c tool_eraser.c tool_line.c tool_rect.c tool_square.c tool_pipette.c libui/stickers.c tool_sticker_brush.c libui/menu_table.c cursor_load.c cursor_set.c)
+        settool_1.c guimp_toggle_filled.c tool_brush.c guimp_mousewheel.c tool_eraser.c tool_line.c tool_rect.c tool_square.c tool_pipette.c libui/stickers.c tool_sticker_brush.c libui/menu_table.c cursor_load.c cursor_set.c libui/generic_windows.c)
 
 target_link_libraries(GUImp -lSDL2 -lm -lSDL2_image -lSDL2_ttf)

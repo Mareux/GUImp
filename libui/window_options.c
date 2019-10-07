@@ -16,6 +16,22 @@ SDL_Window	*find_window(t_libui *libui, const char *title)
 	return (NULL);
 }
 
+t_window	*find_t_window(t_libui *libui, const char *title)
+{
+	t_window_list	*w;
+
+	w = libui->windows;
+	while (w)
+	{
+		if (!w->window.window)
+			break ;
+		if (!ft_strcmp(SDL_GetWindowTitle(w->window.window), title))
+			return (&w->window);
+		w = w->next;
+	}
+	return (NULL);
+}
+
 void	change_window_surface(t_libui *libui, const char *title)
 {
 	t_window_list	*w;
@@ -32,6 +48,29 @@ void	change_window_surface(t_libui *libui, const char *title)
 		}
 		w = w->next;
 	}
+}
+
+void	update_window_surface(t_libui *libui, const char *title)
+{
+	t_window_list	*w;
+}
+
+SDL_Surface	*get_window_surface(t_libui *libui, const char *title)
+{
+	t_window_list *w;
+
+	w = libui->windows;
+	while (w)
+	{
+		if (!w->window.window)
+			break ;
+		if (!ft_strcmp(SDL_GetWindowTitle(w->window.window), title))
+		{
+			return (w->window.surface);
+		}
+		w = w->next;
+	}
+	return (NULL);
 }
 
 void	set_window_resizable(t_libui *libui, const char *title, int resizable)

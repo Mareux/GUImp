@@ -22,22 +22,7 @@ void		recalculate_table_fields(t_menu_field *field, int difference)
 
 }
 
-SDL_Rect	calculate_table_field(t_menu_field *begin, SDL_Surface *image,
-		SDL_Rect menu_frame)
-{
-	if (begin->field_rect.h * 2 + begin->field_rect.y
-		> menu_frame.h + menu_frame.y)
-	{
-		recalculate_table_fields(begin,
-				(menu_frame.h + menu_frame.y)
-				- (begin->field_rect.h * 2 + begin->field_rect.y));
-	}
-	if (begin->field_rect.w * 2 + begin->field_rect.x
-		> menu_frame.w + menu_frame.x)
-	{
-
-	}
-}
+//
 
 SDL_Rect	calculate_context()
 {

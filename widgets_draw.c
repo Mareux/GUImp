@@ -6,7 +6,7 @@
 /*   By: mnosko <mnosko@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/29 19:20:12 by mnosko            #+#    #+#             */
-/*   Updated: 2019/06/29 19:20:16 by mnosko           ###   ########.fr       */
+/*   Updated: 2019/10/06 20:14:13 by mnosko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ void	draw_textfield(SDL_Surface *surface, t_textfield *textfield)
 		rect = textfield->rect;
 		SDL_BlitSurface(textfield->text_surface, NULL,
 				surface, &textfield->rect);
-		if (!textfield->active)
-			draw_rect(surface, rect, textfield->color);
-		else
-			draw_rect(surface, rect, textfield->active_color);
+//		if (!textfield->active)
+//			draw_rect(surface, rect, textfield->color);
+//		else
+//			draw_rect(surface, rect, textfield->active_color);
 		textfield->rect = rect;
 	}
 }
@@ -46,9 +46,9 @@ void	draw_button(SDL_Surface *surface, t_button *button)
 	if (button->visible)
 	{
 		rect = button->rect;
-		draw_rect(surface, button->rect, button->color);
+//		draw_rect(surface, button->rect, button->color);
 		if (!button->transparent)
-			draw_filled_rect(surface, button->rect, button->color);
+//			draw_filled_rect(surface, button->rect, button->color);
 		SDL_BlitSurface(button->text_surface,
 				NULL, surface, &button->rect);
 		button->rect = rect;
@@ -79,7 +79,7 @@ void	draw_combobox(SDL_Surface *surface, t_combobox *combobox)
 	SDL_Rect rect;
 
 	rect = combobox->field_rect;
-	draw_rect(surface, combobox->field_rect, combobox->color);
+//	draw_rect(surface, combobox->field_rect, combobox->color);
 	if (combobox->field_text)
 		SDL_BlitSurface(combobox->field_text,
 				NULL, surface, &combobox->field_rect);
@@ -90,8 +90,23 @@ void	draw_combobox(SDL_Surface *surface, t_combobox *combobox)
 		SDL_BlitSurface(combobox->menu_surface,
 				&combobox->menu_surface->clip_rect,
 				surface, &combobox->menu_rect);
-		draw_rect(surface, combobox->menu_rect,
-				combobox->color);
+//		draw_rect(surface, combobox->menu_rect,
+//				combobox->color);
 		combobox->menu_rect = rect;
+	}
+}
+
+void draw_menu_table(SDL_Surface *surface, t_menu *menu)
+{
+	t_menu_field *field;
+	SDL_Rect rect;
+
+	field = menu->fields;
+	while (field)
+	{
+		rect = field->field_rect;
+		SDL_BlitSurface(field->image, NULL, surface, &field->field_rect);
+		field->field_rect = rect;
+		field = field->next;
 	}
 }

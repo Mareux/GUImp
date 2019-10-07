@@ -6,7 +6,7 @@
 /*   By: mnosko <mnosko@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/25 21:50:06 by mnosko            #+#    #+#             */
-/*   Updated: 2019/06/29 20:05:38 by mnosko           ###   ########.fr       */
+/*   Updated: 2019/10/06 20:36:57 by mnosko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,21 @@ void	guimp_loop(t_libui *libui)
 	SDL_FreeSurface(guimp->preview); // move to libui
 }
 
+void	tools_window_loop(t_libui *libui)
+{
+	SDL_Surface *tools_surface;
+
+	tools_surface = get_window_surface(libui, "Tools");
+	fill_surface(tools_surface, rgb(255, 255, 255));
+	if (libui->menu_list)
+		draw_menu_table(tools_surface, &libui->menu_list->menu);
+}
+
+void	generic_window_loop()
+{
+
+}
+
 int				main(void)
 {
 	t_guimp	guimp;
@@ -105,10 +120,12 @@ int				main(void)
 	init(&guimp);
 	if (!init_libui(&(guimp.libui)))
 		ft_putendl_fd("Failed to initialize", 2);
-	guimp.imported_img = IMG_Load("../ananasique.png");
+	guimp.imported_img = IMG_Load("ananasique.png");
 	guimp.libui->data = (void *)(&guimp);
+	set_cursor(guimp.libui->cursor, PENCIL);
 	new_window(guimp.libui, vec2(1024, 600), "GUImp");
-	new_window(guimp.libui, vec2(150, 400), "Tools");
+	new_window(guimp.libui, vec2(128, 400), "Tools");
+	create_menu_for_tools(guimp.libui);
 	guimp.canvas = SDL_CreateRGBSurface(0, 1024, 600, 32, 0, 0, 0, 0);
 	fill_surface(guimp.canvas, rgb(255, 255, 255));
 	set_tools_window_position(guimp.libui);

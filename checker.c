@@ -32,6 +32,11 @@ int		point_in_textfield(SDL_Point point, t_widget *widgets)
 	return (FALSE);
 }
 
+int 	table_menu_button_clicked(SDL_Point point, t_menu *menu, t_libui *data)
+{
+
+}
+
 int		button_clicked(SDL_Point point, t_widget *widgets, t_libui *data)
 {
 	t_buttons_list *tmp;
@@ -57,6 +62,8 @@ int		button_clicked(SDL_Point point, t_widget *widgets, t_libui *data)
 	}
 	return (FALSE);
 }
+
+
 
 //int		combobox_clicked(SDL_Point point,
 //		t_widget *widgets, t_sdl_data *data)
