@@ -53,14 +53,16 @@ int		init_libui(t_libui **data)
 	(*data)->data = NULL;
 	(*data)->widget = NULL;
 	(*data)->custom_loop = NULL;
+	(*data)->textinput.active = 1;
+	(*data)->textinput.text = NULL;
 	if (TTF_Init() < 0)
 		exit(124);
-//	(*data)->font = TTF_OpenFont("Roboto-Regular.ttf", 18);
-//	if (!(*data)->font)
-//	{
-//		ft_putendl_fd("Couldn't load font!", 2);
-//		exit(123);
-//	}
+	(*data)->font = TTF_OpenFont("../libui/font.ttf", 18);
+	if (!(*data)->font)
+	{
+		ft_putendl_fd("Couldn't load font!", 2);
+		exit(123);
+	}
 	init_keyhooks(*data);
 	init_mouse_data(*data);
 	return (success);

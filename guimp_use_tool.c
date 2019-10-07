@@ -22,4 +22,6 @@ void	use_tool(t_guimp *guimp)
 		use_pipette(guimp);
 	else if (guimp->current_tool == STICKER)
 		use_sticker_brush(guimp);
+	else if (guimp->current_tool == TEXT_LINE)
+		toggle_text_input(guimp);
 }

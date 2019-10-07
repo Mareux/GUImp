@@ -95,6 +95,15 @@ void			eventloop_window(t_libui *unicorn)
 	}
 }
 
+void			eventloop_textinput(t_libui *libui)
+{
+//	ft_putendl("test");
+	libui->textinput.active = 1;
+	if (libui->textinput.text)
+		free(libui->textinput.text);
+	libui->textinput.text = ft_strdup(libui->event.text.text);
+}
+
 void			libui_loop(t_libui *unicorn)
 {
 	int			quit;
@@ -108,6 +117,7 @@ void			libui_loop(t_libui *unicorn)
 		unicorn->mouse.m3_released = 0;
 		unicorn->mouse.last_pos.x = unicorn->mouse.pos.x;
 		unicorn->mouse.last_pos.y = unicorn->mouse.pos.y;
+		unicorn->textinput.active = 0;
 		SDL_GetMouseState(&(unicorn->mouse.pos.x), &(unicorn->mouse.pos.y));
 		while (SDL_PollEvent(&(unicorn->event)))
 		{
@@ -117,7 +127,8 @@ void			libui_loop(t_libui *unicorn)
 			eventloop_mousebuttondown(unicorn, point);
 //			eventloop_mousemotion(unicorn, &point);
 			eventloop_mousewheel(unicorn);
-//			if (SDL_IsTextInputActive())
+			if (SDL_IsTextInputActive())
+				eventloop_textinput(unicorn);
 //				render_text(unicorn, unicorn->event,
 //						unicorn->active_window->widgets);
 		}

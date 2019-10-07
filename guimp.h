@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   guimp.h                                            :+:      :+:    :+:   */
+/*   editor.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mnosko <mnosko@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/29 17:55:25 by ibarabas          #+#    #+#             */
-/*   Updated: 2019/09/29 13:45:15 by mnosko           ###   ########.fr       */
+/*   Updated: 2019/06/29 21:10:33 by mnosko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,23 +36,23 @@
 
 enum				tools
 {
-	PENCIL = 0,
-	BRUSH = 1,
-	ERASER = 2,
-	LINE = 3,
-	RECT = 4,
-	FILLED_RECT = 5,
-	CIRCLE = 6,
-	FILLED_CIRCLE = 7,
-	SQUARE = 8,
-	FILLED_SQUARE = 9,
-	IMAGE_IMPORT = 10,
-	BUCKET = 11,
-	TEXT_LINE = 12,
-	PIPETTE = 13,
-	HAND = 14,
-	MAGNIFYING_GLASS = 15,
-	STICKER = 16
+	PENCIL,
+	BRUSH,
+	ERASER,
+	LINE,
+	RECT,
+	FILLED_RECT,
+	CIRCLE,
+	FILLED_CIRCLE,
+	SQUARE,
+	FILLED_SQUARE,
+	IMAGE_IMPORT,
+	BUCKET,
+	TEXT_LINE,
+	PIPETTE,
+	HAND,
+	MAGNIFYING_GLASS,
+	STICKER
 };
 
 enum 				BUTTONS
@@ -76,13 +76,25 @@ typedef struct		s_shape_data
 	t_vec2			size;
 	int				anchor_set;
 	t_vec2			anchor;
+	TTF_Font		*font;
 }					t_shape_data;
 
+typedef struct		s_text_tool
+{
+	int				active;
+	char			*text;
+}					t_text_tool;
 
+typedef struct 		s_undo
+{
+	t_surface		*surface;
+	struct s_undo	*next;
+}					t_undo;
 
 typedef struct		s_guimp
 {
 	int 			current_tool;
+	t_text_tool		text_tool;
 	t_shape_data	shape_data;
 	t_color			color1;
 	t_color			color2;
@@ -91,8 +103,8 @@ typedef struct		s_guimp
 	t_surface		*preview;
 	t_surface		*imported_img;
 	t_canvas_data	canvas_data;
+	t_undo			*undo_buffer;
 }					t_guimp;
-
 
 void				init(t_guimp *guimp);
 
@@ -143,7 +155,10 @@ void				settool_hand(t_libui *libui);
 
 void				settool_bucket(t_libui *libui);
 void				use_bucket(t_guimp *guimp);
+
 void				settool_text(t_libui *libui);
+void				toggle_text_input(t_guimp *guimp);
+void				use_text(t_guimp *guimp);
 
 void				settool_pipette(t_libui *libui);
 void				use_pipette(t_guimp *guimp);
