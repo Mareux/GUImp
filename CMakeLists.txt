@@ -5,18 +5,18 @@ set(CMAKE_C_STANDARD 11)
 
 # Linux
 
-find_package(SDL2 REQUIRED)
-find_package(SDL_ttf REQUIRED)
-find_package(SDL_image REQUIRED)
-include_directories(${SDL2_INCLUDE_DIRS})
-link_directories(${SDL2_LIBRARY})
+#find_package(SDL2 REQUIRED)
+#find_package(SDL_ttf REQUIRED)
+#find_package(SDL_image REQUIRED)
+#include_directories(${SDL2_INCLUDE_DIRS})
+#link_directories(${SDL2_LIBRARY})
 
 # Unit Factory
 
-#set(SDL2_INCLUDE_DIR ~/.brew/include/SDL2/)
-#set(SDL2_LIBRARY ~/.brew/lib/)
-#include_directories(${SDL2_INCLUDE_DIR})
-#link_directories(${SDL2_LIBRARY})
+set(SDL2_INCLUDE_DIR ~/.brew/include/SDL2/)
+set(SDL2_LIBRARY ~/.brew/lib/)
+include_directories(${SDL2_INCLUDE_DIR})
+link_directories(${SDL2_LIBRARY})
 
 # Mac OS VM
 
@@ -75,6 +75,11 @@ add_executable(GUImp
         libui/calculate_menu.c
         libui/draw_thick_line.c
         libui/keyhooks_bind_key.c
+        tool_text.c
+        libui/draw_text.c
+        guimp_undo.c
+        libui/free_surface.c
+        libui/duplicate_surface.c
         settool_1.c guimp_toggle_filled.c tool_brush.c guimp_mousewheel.c tool_eraser.c tool_line.c tool_rect.c tool_square.c tool_pipette.c libui/stickers.c tool_sticker_brush.c libui/menu_table.c cursor_load.c cursor_set.c libui/generic_windows.c)
 
 target_link_libraries(GUImp -lSDL2 -lm -lSDL2_image -lSDL2_ttf)

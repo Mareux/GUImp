@@ -173,4 +173,11 @@ void				save_img(SDL_Surface *canvas, char *filename);
 void 				flood_fill(t_surface *surface, t_vec2 pos,
 							   t_color affected_color, t_color target_color);
 
+t_undo	            *new_buffer_item(void);
+void            	push_to_buffer(t_guimp *guimp);
+void	            pull_from_buffer(t_guimp *guimp);
+
+void                guimp_undo(t_libui *libui);
+
+
 #endif

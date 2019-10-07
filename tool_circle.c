@@ -63,6 +63,7 @@ void	use_circle(t_guimp *guimp)
 	int_pos = find_middle_point(guimp->shape_data.anchor, int_pos, &radius);
 	if (guimp->libui->mouse.m1_released || guimp->libui->mouse.m2_released)
 	{
+        push_to_buffer(guimp);
 		if (guimp->shape_data.filled)
 			use_regular_circle(guimp, int_pos, guimp->canvas, radius);
 		else

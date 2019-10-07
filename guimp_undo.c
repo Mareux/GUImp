@@ -1,6 +1,6 @@
 #include "guimp.h"
 
-t_undo	*new_buffer_item()
+t_undo	*new_buffer_item(void)
 {
 	t_undo	*new;
 
@@ -33,4 +33,25 @@ void	push_to_buffer(t_guimp *guimp)
 **	and removes it from buffer
 */
 
-// void	pull_from_buffer(t_guimp *guimp)
+void	pull_from_buffer(t_guimp *guimp)
+{
+    t_undo  *tmp;
+
+    // Move SDL calls to libui
+    if (guimp->undo_buffer)
+    {
+        SDL_BlitSurface(guimp->undo_buffer->surface, 0, guimp->canvas, 0);
+        tmp = guimp->undo_buffer;
+        guimp->undo_buffer = tmp->next;
+        free_surface(tmp->surface);
+        free(tmp);
+    }
+}
+
+void    guimp_undo(t_libui *libui)
+{
+    t_guimp *guimp;
+
+    guimp = (t_guimp *)libui->data;
+    pull_from_buffer(guimp);
+}

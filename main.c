@@ -58,6 +58,28 @@ void set_tools_window_position(t_libui *libui)
 			main_window_pos.x - 200, main_window_pos.y + 100);
 }
 
+void    remove_char_from_text_input(t_guimp *guimp)
+{
+    
+}
+
+void    guimp_backspace(t_libui *libui)
+{
+    t_guimp *guimp;
+
+    guimp = (t_guimp *)libui->data;
+    if (guimp->text_tool.active)
+        if (ft_strlen(guimp->text_tool.text) > 0)
+            remove_char_from_text_input(guimp);
+}
+
+void    guimp_enter(t_libui *libui)
+{
+    t_guimp *guimp;
+
+    guimp = (t_guimp *)libui->data;
+}
+
 void	hook_hooks(t_guimp *guimp)
 {
 	libui_hook_m1_down(guimp->libui, guimp_mouseclick);
@@ -78,6 +100,9 @@ void	hook_hooks(t_guimp *guimp)
 	bind_key(guimp->libui, "G", settool_pipette);
 	bind_key(guimp->libui, "N", settool_sticker);
 	bind_key(guimp->libui, "J", settool_text);
+    bind_key(guimp->libui, "Backspace", guimp_backspace);
+    bind_key(guimp->libui, "Return", guimp_enter);
+    bind_key(guimp->libui, "Z", guimp_undo);
 }
 
 void	guimp_loop(t_libui *libui)
