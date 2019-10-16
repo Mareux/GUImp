@@ -153,6 +153,7 @@ int				main(void)
 	set_cursor(guimp.libui->cursor, PENCIL);
 	new_window(guimp.libui, vec2(1024, 600), "GUImp");
 	new_window(guimp.libui, vec2(128, 400), "Tools");
+	color_picker_window_create(guimp.libui);
 	create_menu_for_tools(guimp.libui);
 	guimp.canvas = SDL_CreateRGBSurface(0, 1024, 600, 32, 0, 0, 0, 0);
 	fill_surface(guimp.canvas, rgb(255, 255, 255));

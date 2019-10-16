@@ -5,18 +5,18 @@ set(CMAKE_C_STANDARD 11)
 
 # Linux
 
-#find_package(SDL2 REQUIRED)
-#find_package(SDL_ttf REQUIRED)
-#find_package(SDL_image REQUIRED)
-#include_directories(${SDL2_INCLUDE_DIRS})
-#link_directories(${SDL2_LIBRARY})
+find_package(SDL2 REQUIRED)
+find_package(SDL_ttf REQUIRED)
+find_package(SDL_image REQUIRED)
+include_directories(${SDL2_INCLUDE_DIRS})
+link_directories(${SDL2_LIBRARY})
 
 # Unit Factory
 
-set(SDL2_INCLUDE_DIR ~/.brew/include/SDL2/)
-set(SDL2_LIBRARY ~/.brew/lib/)
-include_directories(${SDL2_INCLUDE_DIR})
-link_directories(${SDL2_LIBRARY})
+#set(SDL2_INCLUDE_DIR ~/.brew/include/SDL2/)
+#set(SDL2_LIBRARY ~/.brew/lib/)
+#include_directories(${SDL2_INCLUDE_DIR})
+#link_directories(${SDL2_LIBRARY})
 
 # Mac OS VM
 
@@ -80,6 +80,6 @@ add_executable(GUImp
         guimp_undo.c
         libui/free_surface.c
         libui/duplicate_surface.c
-        settool_1.c guimp_toggle_filled.c tool_brush.c guimp_mousewheel.c tool_eraser.c tool_line.c tool_rect.c tool_square.c tool_pipette.c libui/stickers.c tool_sticker_brush.c libui/menu_table.c cursor_load.c cursor_set.c libui/generic_windows.c)
+        settool_1.c guimp_toggle_filled.c tool_brush.c guimp_mousewheel.c tool_eraser.c tool_line.c tool_rect.c tool_square.c tool_pipette.c libui/stickers.c tool_sticker_brush.c libui/menu_table.c cursor_load.c cursor_set.c libui/generic_windows.c libui/color_picker/convert_colors.c libui/color_picker/color_picker_window.c libui/color_picker/draw_gradients.c libui/color_picker/color_utils.c libui/color_picker/draw_info.c libui/color_picker/color_events.c libui/table_menu_events.c)
 
 target_link_libraries(GUImp -lSDL2 -lm -lSDL2_image -lSDL2_ttf)

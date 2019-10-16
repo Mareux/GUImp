@@ -27,8 +27,35 @@
 # include <math.h>
 # include "../libft/libft.h"
 
+#define COLOR_PICKER_WINDOW_W 280
+#define COLOR_PICKER_WINDOW_H 300
+#define MAIN_GRADIENT_SIZE (COLOR_PICKER_WINDOW_W)
+#define SAMPLE_BOX_SIZE (COLOR_PICKER_WINDOW_H - COLOR_PICKER_WINDOW_W)
+#define HUE_GRADIENT_W (COLOR_PICKER_WINDOW_W - SAMPLE_BOX_SIZE)
+#define HUE_GRADIENT_H (SAMPLE_BOX_SIZE)
 
 typedef SDL_Surface				t_surface;
+
+typedef struct s_hsv_color
+{
+	double h;       // angle in degrees
+	double s;       // a fraction between 0 and 1
+	double v;       // a fraction between 0 and 1
+} t_hsv_color;
+
+enum color_picker_ui_state
+{
+	UI_GRADIENT_CHANGE,
+	UI_SLIDER_CHANGE,
+	UI_NONE
+};
+
+typedef struct s_rgb_color
+{
+	double r;       // a fraction between 0 and 1
+	double g;       // a fraction between 0 and 1
+	double b;       // a fraction between 0 and 1
+} t_rgb_color;
 
 typedef struct 		s_cursor_surface
 {
@@ -88,8 +115,7 @@ enum 					e_menu_type
 {
 	CONTEXT,
 	BAR,
-	TABLE,
-	NONE
+	TABLE
 };
 
 typedef struct 					s_menu
@@ -102,11 +128,22 @@ typedef struct 					s_menu
 	SDL_Rect					menu_frame;
 }								t_menu;
 
+enum e_field_data_type
+{
+	NONE,
+	IMAGE,
+	TEXTFIELD,
+	COMBOBOX,
+	COLOR_PICKER
+};
+
 typedef struct 					s_menu_field
 {
 	int 						id;
 	void						(*click)(void *);
 	t_color						active_color;
+	void						*data;
+	enum e_field_data_type		type;
 	t_color						color;
 	SDL_Rect					field_rect;
 	SDL_Surface					*image;
@@ -352,6 +389,7 @@ typedef struct                  s_libui
 	void						(*generic_window_loop)(struct s_libui *);
 	t_mouse_data				mouse;
 	t_textinput					textinput;
+	t_hsv_color					current_color;
 }                               t_libui;
 
 void							main_event_loop(
@@ -479,6 +517,10 @@ void				add_text_field(t_menu_field **begin, SDL_Rect field_rect, char *field_te
 								   void (*click)(void *));
 void 				add_image_field(t_menu_field **begin, SDL_Surface *image, char *field_text,
 						void (*click)(void *));
+void				add_textfield_field(t_menu_field **begin, t_textfield_list *list, char *field_text,
+							void (*click)(void *));
+void	add_color_field(t_menu_field **begin, char *field_text, t_color color,
+						void (*click)(void *));
 
 void			draw_menu(SDL_Surface *surface, t_menu *menu, TTF_Font *font);
 SDL_Surface		*create_text_surface(char *text, TTF_Font *font, SDL_Rect rect);
@@ -498,5 +540,31 @@ void		recalculate_table_fields(t_menu_field *field, int difference);
 
 
 t_window	*create_window_with_textfield(t_libui *libui);
+
+
+t_hsv_color rgb_to_hsv(t_rgb_color in);
+
+t_rgb_color hsv_to_rgb(t_hsv_color in);
+
+void set_pixel(SDL_Surface *surface, SDL_Color color, int x, int y);
+
+SDL_Color rgb_color_to_sdl_color(t_rgb_color rgb_color);
+
+int clamp(int lower, int higher, int num);
+
+void draw_sample_box(SDL_Surface *surface, SDL_Color color);
+
+void draw_hue_gradient(SDL_Surface *surface);
+
+void draw_main_gradient(SDL_Surface *surface, double hue);
+
+enum color_picker_ui_state get_state(SDL_Point mouse);
+
+void color_picker_window_create(t_libui *libui);
+
+t_hsv_color calculate_current_color(enum color_picker_ui_state ui_state, SDL_Point mouse,
+									t_libui *libui);
+
+void	draw_color_picker_window(t_libui *libui, t_hsv_color current_color);
 
 #endif

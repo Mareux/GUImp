@@ -6,7 +6,7 @@
 /*   By: mnosko <mnosko@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/29 19:20:12 by mnosko            #+#    #+#             */
-/*   Updated: 2019/10/06 20:14:13 by mnosko           ###   ########.fr       */
+/*   Updated: 2019/10/16 10:40:50 by mnosko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,15 @@ void draw_menu_table(SDL_Surface *surface, t_menu *menu)
 	field = menu->fields;
 	while (field)
 	{
+
 		rect = field->field_rect;
+		if (field->type == COLOR_PICKER)
+		{
+			draw_filled_rect(surface, (t_vec2) {rect.x, rect.y},
+							 (t_vec2) {rect.x + rect.w, rect.y + rect.h}, field->color);
+			field = field->next;
+			continue ;
+		}
 		SDL_BlitSurface(field->image, NULL, surface, &field->field_rect);
 		field->field_rect = rect;
 		field = field->next;

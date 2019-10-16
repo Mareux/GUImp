@@ -6,7 +6,7 @@
 /*   By: mnosko <mnosko@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/25 21:49:23 by mnosko            #+#    #+#             */
-/*   Updated: 2019/09/29 16:01:27 by mnosko           ###   ########.fr       */
+/*   Updated: 2019/10/16 09:46:37 by mnosko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,13 @@ int		init_libui(t_libui **data)
 	(*data)->active_window_return_data = NULL;
 	(*data)->data = NULL;
 	(*data)->widget = NULL;
+	(*data)->current_color = (t_hsv_color){180.0, 1.0, 1.0};
 	(*data)->custom_loop = NULL;
 	(*data)->textinput.active = 1;
 	(*data)->textinput.text = NULL;
 	if (TTF_Init() < 0)
 		exit(124);
-	(*data)->font = TTF_OpenFont("../libui/font.ttf", 18);
+	(*data)->font = TTF_OpenFont("libui/font.ttf", 18);
 	if (!(*data)->font)
 	{
 		ft_putendl_fd("Couldn't load font!", 2);
