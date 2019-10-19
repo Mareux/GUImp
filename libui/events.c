@@ -134,8 +134,9 @@ void			libui_loop(t_libui *unicorn)
 		}
 		if (unicorn->custom_loop)
 			unicorn->custom_loop(unicorn);
-//		tools_window_loop(unicorn);
-		draw_color_picker_window(unicorn, unicorn->current_color);
+		draw_all_menus(unicorn->menu_list, unicorn->font);
+		if (find_window(unicorn, "Color picker"))
+			draw_color_picker_window(unicorn);
 		SDL_UpdateWindowSurface(find_window(unicorn, "Tools"));
 		SDL_UpdateWindowSurface(unicorn->main_window->window);
 	}
