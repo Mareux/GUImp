@@ -96,25 +96,3 @@ void	draw_combobox(SDL_Surface *surface, t_combobox *combobox)
 	}
 }
 
-void draw_menu_table(SDL_Surface *surface, t_menu *menu)
-{
-	t_menu_field *field;
-	SDL_Rect rect;
-
-	field = menu->fields;
-	while (field)
-	{
-
-		rect = field->field_rect;
-		if (field->type == COLOR_PICKER)
-		{
-			draw_filled_rect(surface, (t_vec2) {rect.x, rect.y},
-							 (t_vec2) {rect.x + rect.w, rect.y + rect.h}, field->color);
-			field = field->next;
-			continue ;
-		}
-		SDL_BlitSurface(field->image, NULL, surface, &field->field_rect);
-		field->field_rect = rect;
-		field = field->next;
-	}
-}

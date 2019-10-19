@@ -71,8 +71,8 @@ add_executable(GUImp
         tool_circle.c
         checker.c
         widgets_draw.c
-        libui/menu_add.c
-        libui/calculate_menu.c
+        libui/menu/menu_add.c
+        libui/menu/calculate_menu.c
         libui/draw_thick_line.c
         libui/keyhooks_bind_key.c
         tool_text.c
@@ -80,6 +80,7 @@ add_executable(GUImp
         guimp_undo.c
         libui/free_surface.c
         libui/duplicate_surface.c
-        settool_1.c guimp_toggle_filled.c tool_brush.c guimp_mousewheel.c tool_eraser.c tool_line.c tool_rect.c tool_square.c tool_pipette.c libui/stickers.c tool_sticker_brush.c libui/menu_table.c cursor_load.c cursor_set.c libui/generic_windows.c libui/color_picker/convert_colors.c libui/color_picker/color_picker_window.c libui/color_picker/draw_gradients.c libui/color_picker/color_utils.c libui/color_picker/draw_info.c libui/color_picker/color_events.c libui/table_menu_events.c)
+        libui/menu/menu.c
+        settool_1.c guimp_toggle_filled.c tool_brush.c guimp_mousewheel.c tool_eraser.c tool_line.c tool_rect.c tool_square.c tool_pipette.c libui/stickers.c tool_sticker_brush.c libui/menu/menu_table.c cursor_load.c cursor_set.c libui/generic_windows.c libui/color_picker/convert_colors.c libui/color_picker/color_picker_window.c libui/color_picker/draw_gradients.c libui/color_picker/color_utils.c libui/color_picker/draw_info.c libui/color_picker/color_events.c libui/menu/table_menu_events.c libui/menu/convert_menu_data.c)
 
 target_link_libraries(GUImp -lSDL2 -lm -lSDL2_image -lSDL2_ttf)

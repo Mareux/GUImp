@@ -1,30 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   calculate_menu.c                                   :+:      :+:    :+:   */
+/*   table_menu_events.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mnosko <mnosko@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/07 14:54:45 by mnosko            #+#    #+#             */
-/*   Updated: 2019/09/07 16:06:25 by mnosko           ###   ########.fr       */
+/*   Created: 2019/10/16 13:42:18 by mnosko            #+#    #+#             */
+/*   Updated: 2019/10/16 23:41:16 by mnosko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libui.h"
+#include "../libui.h"
 
-SDL_Rect	calculate_bar()
+void	bind_function(t_menu_field *field)
 {
 
 }
 
-void		recalculate_table_fields(t_menu_field *field, int difference)
+void 	set_table_tools_func(t_libui *libui)
 {
 
 }
 
-//
-
-SDL_Rect	calculate_context()
-{
-
-}

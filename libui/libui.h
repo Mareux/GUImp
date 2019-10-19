@@ -124,30 +124,35 @@ typedef struct 					s_menu
 	enum e_menu_type 			type;
 	void						*fields;
 	int 						opened;
+	SDL_Rect					max_field_size;
+	t_color						menu_color;
+	t_color						active_field_color;
 	SDL_Surface					*menu_surface;
+	int							spacing_w;
+	int							spacing_h;
 	SDL_Rect					menu_frame;
 }								t_menu;
 
 enum e_field_data_type
 {
-	NONE,
-	IMAGE,
-	TEXTFIELD,
-	COMBOBOX,
-	COLOR_PICKER
+	FIELD_NONE,
+	FIELD_IMAGE,
+	FIELD_TEXT,
+	FIELD_TEXTFIELD,
+	FIELD_COMBOBOX,
+	FIELD_COLOR_PICKER
 };
+
+#define ELEMENTS_IN_TABLE 3
 
 typedef struct 					s_menu_field
 {
 	int 						id;
 	void						(*click)(void *);
-	t_color						active_color;
 	void						*data;
 	enum e_field_data_type		type;
-	t_color						color;
+	t_menu						*menu;
 	SDL_Rect					field_rect;
-	SDL_Surface					*image;
-	char 						*field_text;
 	int 						active;
 	struct s_menu_field			*next;
 	struct s_menu_field			*prew;
@@ -513,14 +518,7 @@ void 				change_cursor(SDL_SystemCursor id);
 
 void				add_menu_to_list(t_menu_list **begin, t_menu menu);
 t_menu				create_menu(enum e_menu_type type, SDL_Rect menu_frame, int id);
-void				add_text_field(t_menu_field **begin, SDL_Rect field_rect, char *field_text,
-								   void (*click)(void *));
-void 				add_image_field(t_menu_field **begin, SDL_Surface *image, char *field_text,
-						void (*click)(void *));
-void				add_textfield_field(t_menu_field **begin, t_textfield_list *list, char *field_text,
-							void (*click)(void *));
-void	add_color_field(t_menu_field **begin, char *field_text, t_color color,
-						void (*click)(void *));
+void add_field(t_menu_field **begin, void (*click)(void *), void *data, enum e_field_data_type type);
 
 void			draw_menu(SDL_Surface *surface, t_menu *menu, TTF_Font *font);
 SDL_Surface		*create_text_surface(char *text, TTF_Font *font, SDL_Rect rect);
