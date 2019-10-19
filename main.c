@@ -6,7 +6,7 @@
 /*   By: mnosko <mnosko@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/25 21:50:06 by mnosko            #+#    #+#             */
-/*   Updated: 2019/10/06 20:36:57 by mnosko           ###   ########.fr       */
+/*   Updated: 2019/06/29 20:05:38 by mnosko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void set_tools_window_position(t_libui *libui)
 
 void    remove_char_from_text_input(t_guimp *guimp)
 {
-    
+
 }
 
 void    guimp_backspace(t_libui *libui)
@@ -126,15 +126,15 @@ void	guimp_loop(t_libui *libui)
 	SDL_FreeSurface(guimp->preview); // move to libui
 }
 
-void	tools_window_loop(t_libui *libui)
-{
-	SDL_Surface *tools_surface;
-
-	tools_surface = get_window_surface(libui, "Tools");
-	fill_surface(tools_surface, rgb(255, 255, 255));
-	if (libui->menu_list)
-		draw_menu_table(tools_surface, &libui->menu_list->menu);
-}
+//void	tools_window_loop(t_libui *libui)
+//{
+//	SDL_Surface *tools_surface;
+//
+//	tools_surface = get_window_surface(libui, "Tools");
+//	fill_surface(tools_surface, rgb(255, 255, 255));
+//	if (libui->menu_list)
+//		draw_menu_table(tools_surface, &libui->menu_list->menu);
+//}
 
 void	generic_window_loop()
 {
