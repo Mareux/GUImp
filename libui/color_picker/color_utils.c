@@ -31,6 +31,16 @@ SDL_Color rgb_color_to_sdl_color(t_rgb_color rgb_color)
 			};
 }
 
+t_rgb_color sdl_color_color_to_rgb(t_color color)
+{
+	return (t_rgb_color)
+			{
+					color.r / 255,
+					color.g / 255,
+					color.b / 255,
+			};
+}
+
 int clamp(int lower, int higher, int num)
 {
 	if (num < lower)

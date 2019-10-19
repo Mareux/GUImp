@@ -19,6 +19,7 @@ void add_field(t_menu_field **begin, void (*click)(void *), void *data, enum e_f
 	new = ft_memalloc(sizeof(t_menu_field));
 	new->click = click;
 	new->type = type;
+	new->field_color = (t_color){229, 231, 233};
 	new->data = data;
 	new->active = TRUE;
 	new->next = *begin;
@@ -28,7 +29,7 @@ void add_field(t_menu_field **begin, void (*click)(void *), void *data, enum e_f
 	*begin = new;
 }
 
-t_menu	create_menu(enum e_menu_type type, SDL_Rect menu_frame, int id)
+t_menu create_menu(enum e_menu_type type, SDL_Rect menu_frame, int id, SDL_Surface *menu_surface)
 {
 	t_menu menu;
 
@@ -36,9 +37,11 @@ t_menu	create_menu(enum e_menu_type type, SDL_Rect menu_frame, int id)
 	menu.type = type;
 	menu.fields = NULL;
 	menu.opened = FALSE;
-	menu.max_field_size = (SDL_Rect){0, 0, 0, 0};
-	menu.menu_surface = SDL_CreateRGBSurface(0,
-			menu_frame.w, menu_frame.h, 32, 0, 0, 0, 0);
+	menu.spacing_w = 5;
+	menu.spacing_h = 5;
+	menu.menu_color = (t_color){229, 231, 233};
+	menu.active_field_color = (t_color){84, 153, 199};
+	menu.menu_surface = menu_surface;
 	menu.menu_frame = menu_frame;
 	return (menu);
 }

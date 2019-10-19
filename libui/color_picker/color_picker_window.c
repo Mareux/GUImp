@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../libui.h"
+#include "../../guimp.h"
 
 void color_picker_window_create(t_libui *libui)
 {
@@ -21,14 +22,17 @@ void color_picker_window_create(t_libui *libui)
 	SDL_SetSurfaceBlendMode(window->surface, SDL_BLENDMODE_BLEND);
 }
 
-void	draw_color_picker_window(t_libui *libui, t_hsv_color current_color)
+void draw_color_picker_window(t_libui *libui)
 {
 	t_window *window;
+	t_guimp *guimp;
 
+	guimp = libui->data;
+	libui->current_color = rgb_to_hsv(sdl_color_color_to_rgb(guimp->color2));
 	window = find_t_window(libui, "Color picker");
 	fill_surface(window->surface, (t_color){0, 0, 0});
-	draw_main_gradient(window->surface, current_color.h);
+	draw_main_gradient(window->surface, libui->current_color.h);
 	draw_hue_gradient(window->surface);
-	draw_sample_box(window->surface, rgb_color_to_sdl_color(hsv_to_rgb(current_color)));
+	draw_sample_box(window->surface, rgb_color_to_sdl_color(hsv_to_rgb(libui->current_color)));
 	SDL_UpdateWindowSurface(window->window);
 }

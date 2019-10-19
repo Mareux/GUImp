@@ -130,7 +130,6 @@ typedef struct 					s_menu
 	enum e_menu_type 			type;
 	void						*fields;
 	int 						opened;
-	SDL_Rect					max_field_size;
 	t_color						menu_color;
 	t_color						active_field_color;
 	SDL_Surface					*menu_surface;
@@ -160,6 +159,7 @@ typedef struct 					s_menu_field
 	t_menu						*menu;
 	SDL_Rect					field_rect;
 	int 						active;
+	t_color						field_color;
 	struct s_menu_field			*next;
 	struct s_menu_field			*prew;
 }								t_menu_field;
@@ -524,11 +524,16 @@ void 				change_cursor(SDL_SystemCursor id);
 
 
 void				add_menu_to_list(t_menu_list **begin, t_menu menu);
-t_menu				create_menu(enum e_menu_type type, SDL_Rect menu_frame, int id);
+t_menu create_menu(enum e_menu_type type, SDL_Rect menu_frame, int id, SDL_Surface *menu_surface);
 void add_field(t_menu_field **begin, void (*click)(void *), void *data, enum e_field_data_type type);
-
+void	calculate_table_fields_position(SDL_Surface *surface, t_menu *menu, t_menu_field *field);
+void	calculate_context_fields_position(t_menu_field *field, TTF_Font *font, SDL_Rect menu_rect);
+void	calculate_bar_fields_position(t_menu_field *field, TTF_Font *font);
+void	menu_events(t_libui *libui, t_menu_list *list, SDL_Point mouse);
 void			draw_menu(SDL_Surface *surface, t_menu *menu, TTF_Font *font);
-SDL_Surface		*create_text_surface(char *text, TTF_Font *font, SDL_Rect rect);
+void	draw_all_menus(t_menu_list *list, TTF_Font *font);
+
+SDL_Surface *create_text_surface(char *text, TTF_Font *font);
 void			draw_rect(t_surface *surface, t_vec2 topleft,
 						  t_vec2 bottomright, t_color color);
 void			draw_filled_rect(t_surface *surface, t_vec2 topleft,
@@ -555,6 +560,8 @@ void set_pixel(SDL_Surface *surface, SDL_Color color, int x, int y);
 
 SDL_Color rgb_color_to_sdl_color(t_rgb_color rgb_color);
 
+t_rgb_color sdl_color_color_to_rgb(t_color color);
+
 int clamp(int lower, int higher, int num);
 
 void draw_sample_box(SDL_Surface *surface, SDL_Color color);
@@ -570,6 +577,8 @@ void color_picker_window_create(t_libui *libui);
 t_hsv_color calculate_current_color(enum color_picker_ui_state ui_state, SDL_Point mouse,
 									t_libui *libui);
 
-void	draw_color_picker_window(t_libui *libui, t_hsv_color current_color);
+void draw_color_picker_window(t_libui *libui);
+
+
 
 #endif
