@@ -84,14 +84,36 @@ void			eventloop_mousewheel(t_libui *data)
 	}
 }
 
+t_window    *find_window_by_id(t_libui *unicorn, Uint32 id)
+{
+    t_window_list   *konservirovannie_shproti;
+
+    konservirovannie_shproti = unicorn->windows;
+    while (konservirovannie_shproti)
+    {
+        if (konservirovannie_shproti->window.id == id)
+            return(&konservirovannie_shproti->window);
+        konservirovannie_shproti = konservirovannie_shproti->next;
+    }
+    return (NULL);
+}
+
 void			eventloop_window(t_libui *unicorn)
 {
+    t_window    *window;
+
 	if (unicorn->event.type == SDL_WINDOWEVENT)
 	{
 		if (unicorn->event.window.event == SDL_WINDOWEVENT_RESIZED)
 		{
 			change_window_surface(unicorn, "GUImp");
 		}
+        if (unicorn->event.window.event == SDL_WINDOWEVENT_FOCUS_GAINED)
+        {
+            window = find_window_by_id(unicorn, unicorn->event.window.windowID);
+            if (window)
+                unicorn->active_window = window;
+        }
 	}
 }
 

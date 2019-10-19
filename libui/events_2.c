@@ -83,9 +83,23 @@ void	eventloop_keydown(t_libui *data, int *quit)
 
 void	eventloop_mousebuttondown(t_libui *data, SDL_Point point)
 {
-	if (data->event.type == SDL_MOUSEBUTTONDOWN &&
-		(int)data->event.window.windowID == data->active_window->id)
+	if (data->event.type == SDL_MOUSEBUTTONDOWN)
 	{
+
+        t_window_list    *win;
+
+        win = data->windows;
+        while (win)
+        {
+            if (SDL_GetWindowFlags(win->window.window) == SDL_WINDOW_INPUT_FOCUS)
+            {
+                data->active_window = &win->window;
+                printf("%p\n", data->active_window);
+            }
+            win = win->next;
+        }
+
+
 		if (data->event.button.button == SDL_BUTTON_LEFT)
 		{
 			data->mouse.m1_pressed = 1;
