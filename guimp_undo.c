@@ -19,13 +19,24 @@ t_undo	*new_buffer_item(void)
 
 void	push_to_buffer(t_guimp *guimp)
 {
-	// Need some buffer size limit to prevent from crashing
 	t_undo	*new;
 
 	new = new_buffer_item();
 	new->surface = duplicate_surface(guimp->canvas);
 	new->next = guimp->undo_buffer;
 	guimp->undo_buffer = new;
+}
+
+void    backup_buffer(t_guimp *guimp)
+{
+    t_undo	*new;
+
+    if (!guimp->undo_buffer)
+        return ;
+    new = new_buffer_item();
+    new->surface = duplicate_surface(guimp->canvas);
+    new->next = guimp->redo_buffer;
+    guimp->redo_buffer = new;
 }
 
 /*
@@ -53,5 +64,34 @@ void    guimp_undo(t_libui *libui)
     t_guimp *guimp;
 
     guimp = (t_guimp *)libui->data;
+    if (!guimp->undo_buffer)
+        return ;
+    backup_buffer(guimp);
     pull_from_buffer(guimp);
+}
+
+void    pull_from_redo_buffer(t_guimp *guimp)
+{
+    t_undo  *tmp;
+
+    // Move SDL calls to libui
+    if (guimp->redo_buffer)
+    {
+        SDL_BlitSurface(guimp->redo_buffer->surface, 0, guimp->canvas, 0);
+        tmp = guimp->redo_buffer;
+        guimp->redo_buffer = tmp->next;
+        free_surface(tmp->surface);
+        free(tmp);
+    }
+}
+
+void    guimp_redo(t_libui *libui)
+{
+    t_guimp *guimp;
+
+    guimp = (t_guimp *)libui->data;
+    if (!guimp->redo_buffer)
+        return;
+    push_to_buffer(guimp);
+    pull_from_redo_buffer(guimp);
 }

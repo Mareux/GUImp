@@ -95,6 +95,12 @@ typedef struct 					s_vec2f_pair
 	t_vec2f						vec_2;
 }								t_vec2f_pair;
 
+typedef struct                  s_rect
+{
+    t_vec2f                      topleft;
+    t_vec2f                      bottomright;
+}                               t_rect;
+
 typedef struct					s_color
 {
     int							r;
@@ -441,6 +447,7 @@ void				init_widgets(t_widget **widgets);
 void 				init_keyhooks(t_libui *libui);
 
 t_surface			*create_scaled_surface(SDL_Surface *surface, double scale);
+t_surface           *create_scaled_area(t_surface *surface, double scale, t_vec2 topleft, t_vec2 bottomright);
 t_vec2				find_scaled_surface_size(t_surface *surface, double scale);
 
 

@@ -103,6 +103,7 @@ void	hook_hooks(t_guimp *guimp)
     bind_key(guimp->libui, "Backspace", guimp_backspace);
     bind_key(guimp->libui, "Return", guimp_enter);
     bind_key(guimp->libui, "Z", guimp_undo);
+    bind_key(guimp->libui, "Y", guimp_redo);
 }
 
 void	guimp_loop(t_libui *libui)

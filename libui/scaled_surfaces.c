@@ -19,3 +19,24 @@ t_surface	*create_scaled_surface(t_surface *surface, double scale)
 	SDL_BlitScaled(surface, NULL, scaled_surface, NULL);
 	return (scaled_surface);
 }
+
+/*
+**  Takes an area between "topleft" and "bottomright",
+**  and creates a scaled surface out of it
+*/
+
+t_surface   *create_scaled_area(t_surface *surface, double scale, t_vec2 topleft, t_vec2 bottomright)
+{
+    t_surface	*scaled_surface;
+    SDL_Rect    pineapple_pizza;
+
+    scaled_surface = SDL_CreateRGBSurface(0,
+            (bottomright.x - topleft.x) * scale, (bottomright.y - topleft.y) * scale,
+            32, 0, 0, 0, 0);
+    pineapple_pizza.x = topleft.x;
+    pineapple_pizza.y = topleft.y;
+    pineapple_pizza.w = (bottomright.x - topleft.x);
+    pineapple_pizza.h = (bottomright.y - topleft.y);
+    SDL_BlitScaled(surface, &pineapple_pizza, scaled_surface, NULL);
+    return (scaled_surface);
+}

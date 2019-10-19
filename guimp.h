@@ -104,6 +104,7 @@ typedef struct		s_guimp
 	t_surface		*imported_img;
 	t_canvas_data	canvas_data;
 	t_undo			*undo_buffer;
+	t_undo          *redo_buffer;
 }					t_guimp;
 
 void				init(t_guimp *guimp);
@@ -178,6 +179,8 @@ void            	push_to_buffer(t_guimp *guimp);
 void	            pull_from_buffer(t_guimp *guimp);
 
 void                guimp_undo(t_libui *libui);
+void                guimp_redo(t_libui *libui);
 
+void                check_bounds(t_guimp *guimp);
 
 #endif
