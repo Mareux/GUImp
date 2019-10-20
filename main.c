@@ -117,9 +117,11 @@ void	guimp_loop(t_libui *libui)
 		if (libui->mouse.m1_pressed || libui->mouse.m2_pressed
 			|| libui->mouse.m1_released || libui->mouse.m2_released)
 			use_tool(guimp);
-		if (guimp->libui->mouse.m3_pressed)
+		if (guimp->libui->mouse.m3_pressed &&
+		    guimp->libui->active_window == guimp->libui->main_window)
 			guimp_m3(guimp->libui);
-		if (guimp->current_tool == TEXT_LINE)
+		if (guimp->current_tool == TEXT_LINE &&
+		    guimp->libui->active_window == guimp->libui->main_window)
 			use_text(guimp);
 	}
 	fill_surface(guimp->libui->main_window->surface, rgb(0, 0, 0));

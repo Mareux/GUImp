@@ -2,6 +2,8 @@
 
 void	use_tool(t_guimp *guimp)
 {
+    if (guimp->libui->active_window != guimp->libui->main_window)
+        return ;
 	if (guimp->current_tool == PENCIL)
 		use_pencil(guimp);
 	else if (guimp->current_tool == BRUSH)

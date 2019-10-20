@@ -33,7 +33,7 @@ t_cursor_surface*	cursor_picture_load(void)
 	DIR *dr;
 	t_cursor_surface *cursor_surface;
 
-	dr = opendir("../GUImp_icons");
+	dr = opendir("GUImp_icons");
 	if (dr == NULL)
 	{
 		ft_putendl_fd("Could not open current directory", 2);
