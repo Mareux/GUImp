@@ -22,6 +22,9 @@
 # define FALSE 0
 # define CLICK_BUTTON 0
 # define TOGGLE_BUTTON 1
+
+# define UNDO_BUFFER_LIMIT 10
+
 # define WINDOW_W 1920
 # define WINDOW_H 1080
 

@@ -1,5 +1,35 @@
 #include "guimp.h"
 
+/*
+**  Ensures that there are no more than UNDO_BUFFER_LIMIT items
+**  in this buffer
+*/
+
+void    limit_buffer(t_undo *buffer)
+{
+    int     i;
+    t_undo  *tmp;
+
+    i = 1;
+    while (i < UNDO_BUFFER_LIMIT && buffer)
+    {
+        buffer = buffer->next;
+        i++;
+    }
+    if (i < UNDO_BUFFER_LIMIT || !buffer)
+        return ;
+    tmp = buffer;
+    buffer = buffer->next;
+    tmp->next = NULL;
+    while (buffer)
+    {
+        tmp = buffer;
+        buffer = buffer->next;
+        free_surface(tmp->surface);
+        free(tmp);
+    }
+}
+
 t_undo	*new_buffer_item(void)
 {
 	t_undo	*new;
@@ -25,6 +55,7 @@ void	push_to_buffer(t_guimp *guimp)
 	new->surface = duplicate_surface(guimp->canvas);
 	new->next = guimp->undo_buffer;
 	guimp->undo_buffer = new;
+	limit_buffer(guimp->undo_buffer);
 }
 
 void    backup_buffer(t_guimp *guimp)
@@ -37,6 +68,7 @@ void    backup_buffer(t_guimp *guimp)
     new->surface = duplicate_surface(guimp->canvas);
     new->next = guimp->redo_buffer;
     guimp->redo_buffer = new;
+    limit_buffer(guimp->redo_buffer);
 }
 
 /*

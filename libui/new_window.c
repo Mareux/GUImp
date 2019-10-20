@@ -5,8 +5,8 @@ static t_window		create_window(int weight, int height, const char *title)
     t_window window;
 
     window.window = SDL_CreateWindow(title,
-                                     SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
-                                     weight, height, SDL_WINDOW_SHOWN);
+            SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
+            weight, height, SDL_WINDOW_SHOWN);
     window.id = SDL_GetWindowID(window.window);
     window.surface = SDL_GetWindowSurface(window.window);
 	init_widgets(&window.widgets);

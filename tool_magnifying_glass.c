@@ -17,6 +17,6 @@ void	zoom_in(t_guimp *guimp)
 
 void	zoom_out(t_guimp *guimp)
 {
-	guimp->canvas_data.scale *= 0.95;
+	guimp->canvas_data.scale *= 0.9;
     check_bounds(guimp);
 }
