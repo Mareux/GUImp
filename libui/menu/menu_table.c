@@ -30,6 +30,7 @@ void create_menu_for_tools(t_libui *libui)
 	guimp = libui->data;
 	add_field(&menu.fields, (void*)color_picker_window_create, &guimp->color1, FIELD_COLOR_PICKER);
 	add_field(&menu.fields, (void*)color_picker_window_create, &guimp->color2, FIELD_COLOR_PICKER);
+	add_field(&menu.fields, NULL, ft_itoa(guimp->shape_data.thickness), FIELD_TEXT);
 	calculate_table_fields_position(menu.menu_surface, &menu, menu.fields);
 	add_menu_to_list(&libui->menu_list, menu);
 }

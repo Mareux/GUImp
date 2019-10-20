@@ -17,9 +17,12 @@ void color_picker_window_create(t_libui *libui)
 {
 	t_window *window;
 
-	new_window(libui, vec2(COLOR_PICKER_WINDOW_W, COLOR_PICKER_WINDOW_H), "Color picker");
-	window = find_t_window(libui, "Color picker");
-	SDL_SetSurfaceBlendMode(window->surface, SDL_BLENDMODE_BLEND);
+	if (!find_window(libui, "Color picker"))
+	{
+		new_window(libui, vec2(COLOR_PICKER_WINDOW_W, COLOR_PICKER_WINDOW_H), "Color picker");
+		window = find_t_window(libui, "Color picker");
+		SDL_SetSurfaceBlendMode(window->surface, SDL_BLENDMODE_BLEND);
+	}
 }
 
 void draw_color_picker_window(t_libui *libui)

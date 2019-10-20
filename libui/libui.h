@@ -529,7 +529,7 @@ void add_field(t_menu_field **begin, void (*click)(void *), void *data, enum e_f
 void	calculate_table_fields_position(SDL_Surface *surface, t_menu *menu, t_menu_field *field);
 void	calculate_context_fields_position(t_menu_field *field, TTF_Font *font, SDL_Rect menu_rect);
 void	calculate_bar_fields_position(t_menu_field *field, TTF_Font *font);
-void	menu_events(t_libui *libui, t_menu_list *list, SDL_Point mouse);
+void menu_events(t_libui *libui, t_menu_list *list);
 void			draw_menu(SDL_Surface *surface, t_menu *menu, TTF_Font *font);
 void	draw_all_menus(t_menu_list *list, TTF_Font *font);
 
@@ -574,11 +574,11 @@ enum color_picker_ui_state get_state(SDL_Point mouse);
 
 void color_picker_window_create(t_libui *libui);
 
-t_hsv_color calculate_current_color(enum color_picker_ui_state ui_state, SDL_Point mouse,
-									t_libui *libui);
+void calculate_current_color(enum color_picker_ui_state ui_state, t_libui *libui);
 
 void draw_color_picker_window(t_libui *libui);
 
+void color_change_loop(t_libui *libui);
 
 
 #endif

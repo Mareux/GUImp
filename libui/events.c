@@ -149,6 +149,8 @@ void			libui_loop(t_libui *unicorn)
 			eventloop_mousebuttondown(unicorn, point);
 //			eventloop_mousemotion(unicorn, &point);
 			eventloop_mousewheel(unicorn);
+			color_change_loop(unicorn);
+			menu_events(unicorn, unicorn->menu_list);
 			if (SDL_IsTextInputActive())
 				eventloop_textinput(unicorn);
 //				render_text(unicorn, unicorn->event,
