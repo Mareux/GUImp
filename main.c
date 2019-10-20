@@ -6,7 +6,7 @@
 /*   By: mnosko <mnosko@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/25 21:50:06 by mnosko            #+#    #+#             */
-/*   Updated: 2019/06/29 20:05:38 by mnosko           ###   ########.fr       */
+/*   Updated: 2019/10/20 18:24:35 by mnosko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,7 +153,6 @@ int				main(void)
 		ft_putendl_fd("Failed to initialize", 2);
 	guimp.imported_img = IMG_Load("ananasique.png");
 	guimp.libui->data = (void *)(&guimp);
-	set_cursor(guimp.libui->cursor, PENCIL);
 	new_window(guimp.libui, vec2(1024, 600), "GUImp");
 	new_window(guimp.libui, vec2(128, 400), "Tools");
 	create_menu_for_tools(guimp.libui);

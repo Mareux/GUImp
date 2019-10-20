@@ -5,18 +5,18 @@ set(CMAKE_C_STANDARD 11)
 
 # Linux
 
-#find_package(SDL2 REQUIRED)
-#find_package(SDL_ttf REQUIRED)
-#find_package(SDL_image REQUIRED)
-#include_directories(${SDL2_INCLUDE_DIRS})
-#link_directories(${SDL2_LIBRARY})
+find_package(SDL2 REQUIRED)
+find_package(SDL_ttf REQUIRED)
+find_package(SDL_image REQUIRED)
+include_directories(${SDL2_INCLUDE_DIRS})
+link_directories(${SDL2_LIBRARY})
 
 # Unit Factory
-
-set(SDL2_INCLUDE_DIR ~/.brew/include/SDL2/)
-set(SDL2_LIBRARY ~/.brew/lib/)
-include_directories(${SDL2_INCLUDE_DIR})
-link_directories(${SDL2_LIBRARY})
+#
+#set(SDL2_INCLUDE_DIR ~/.brew/include/SDL2/)
+#set(SDL2_LIBRARY ~/.brew/lib/)
+#include_directories(${SDL2_INCLUDE_DIR})
+#link_directories(${SDL2_LIBRARY})
 
 # Mac OS VM
 

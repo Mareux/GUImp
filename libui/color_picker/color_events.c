@@ -6,7 +6,7 @@
 /*   By: mnosko <mnosko@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/15 22:12:55 by mnosko            #+#    #+#             */
-/*   Updated: 2019/10/16 09:32:34 by mnosko           ###   ########.fr       */
+/*   Updated: 2019/10/20 19:43:04 by mnosko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ void calculate_current_color(enum color_picker_ui_state ui_state, t_libui *libui
 	}
 	color = rgb_color_to_sdl_color(hsv_to_rgb(libui->current_color));
 	if (libui->mouse.m1_pressed)
-		guimp->color1 = (t_color){color.r, color.b, color.a};
+		guimp->color1 = (t_color){color.r, color.g, color.b};
 	else if (libui->mouse.m2_pressed)
-		guimp->color2 = (t_color){color.r, color.b, color.a};
+		guimp->color2 = (t_color){color.r, color.g, color.b};
 }
 
 void color_change_loop(t_libui *libui)
@@ -56,6 +56,7 @@ void color_change_loop(t_libui *libui)
 	window = find_t_window(libui, "Color picker");
 	if (libui->active_window && window && libui->active_window->id == window->id)
 	{
-		calculate_current_color(get_state((SDL_Point){libui->mouse.pos.x, libui->mouse.pos.y}), libui);
+		if (libui->mouse.m1_pressed || libui->mouse.m2_pressed)
+			calculate_current_color(get_state((SDL_Point){libui->mouse.pos.x, libui->mouse.pos.y}), libui);
 	}
 }

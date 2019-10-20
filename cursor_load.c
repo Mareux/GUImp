@@ -6,7 +6,7 @@
 /*   By: mnosko <mnosko@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/29 13:25:22 by mnosko            #+#    #+#             */
-/*   Updated: 2019/09/29 16:05:01 by mnosko           ###   ########.fr       */
+/*   Updated: 2019/10/20 18:15:12 by mnosko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ t_cursor_surface*	cursor_picture_load(void)
 	cursor_surface = NULL;
 	while ((de = readdir(dr)) != NULL)
 	{
-		cursor_picture_add(&cursor_surface, IMG_Load(ft_strjoin("../GUImp_icons/", de->d_name)), de->d_name);
+		cursor_picture_add(&cursor_surface, IMG_Load(ft_strjoin("GUImp_icons/", de->d_name)), de->d_name);
 	}
 	closedir(dr);
 	return (cursor_surface);

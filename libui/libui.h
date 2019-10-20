@@ -161,7 +161,6 @@ typedef struct 					s_menu_field
 	int 						active;
 	t_color						field_color;
 	struct s_menu_field			*next;
-	struct s_menu_field			*prew;
 }								t_menu_field;
 
 typedef struct 					s_menu_list
@@ -542,7 +541,7 @@ void			draw_filled_rect(t_surface *surface, t_vec2 topleft,
 								 t_vec2 bottomright, t_color color);
 
 void	cursor_create(t_libui *libui);
-void 	set_cursor(t_cursor *cursor, int id);
+void set_cursor(t_cursor *cursor, t_libui *libui);
 
 void draw_menu_table(SDL_Surface *surface, t_menu *menu);
 void create_menu_for_tools(t_libui *libui);
@@ -567,6 +566,10 @@ t_rgb_color sdl_color_color_to_rgb(t_color color);
 int clamp(int lower, int higher, int num);
 
 void draw_sample_box(SDL_Surface *surface, SDL_Color color);
+
+void	draw_position_indicator(SDL_Surface *surface, t_hsv_color color);
+
+void draw_hue_slider(SDL_Surface *surface, double hue);
 
 void draw_hue_gradient(SDL_Surface *surface);
 

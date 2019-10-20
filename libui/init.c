@@ -58,7 +58,7 @@ int		init_libui(t_libui **data)
 	(*data)->textinput.text = NULL;
 	if (TTF_Init() < 0)
 		exit(124);
-	(*data)->font = TTF_OpenFont("../libui/font.ttf", 18);
+	(*data)->font = TTF_OpenFont("libui/font.ttf", 18);
 	if (!(*data)->font)
 	{
 		ft_putendl_fd("Couldn't load font!", 2);

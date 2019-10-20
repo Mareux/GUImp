@@ -6,7 +6,7 @@
 /*   By: mnosko <mnosko@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/29 17:55:33 by ibarabas          #+#    #+#             */
-/*   Updated: 2019/10/06 20:32:04 by mnosko           ###   ########.fr       */
+/*   Updated: 2019/10/20 18:37:59 by mnosko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,6 +142,7 @@ void			libui_loop(t_libui *unicorn)
 		unicorn->mouse.last_pos.y = unicorn->mouse.pos.y;
 		unicorn->textinput.active = 0;
 		SDL_GetMouseState(&(unicorn->mouse.pos.x), &(unicorn->mouse.pos.y));
+		set_cursor(unicorn->cursor, unicorn);
 		while (SDL_PollEvent(&(unicorn->event)))
 		{
 //			eventloop_window_events(unicorn, &quit);
