@@ -119,7 +119,6 @@ void			eventloop_window(t_libui *unicorn)
 
 void			eventloop_textinput(t_libui *libui)
 {
-//	ft_putendl("test");
 	libui->textinput.active = 1;
 	if (libui->textinput.text)
 		free(libui->textinput.text);
