@@ -349,8 +349,10 @@ typedef struct 					s_mouse_data
 	t_vec2						last_pos;
 	int							m1_pressed;
 	int							m1_released;
+	int                         m1_just_pressed;
 	int							m2_pressed;
 	int 						m2_released;
+	int                         m2_just_pressed;
 	int 						m3_pressed;
 	int 						m3_released;
 }								t_mouse_data;

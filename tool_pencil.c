@@ -23,7 +23,9 @@ void	use_pencil(t_guimp *guimp)
 	t_vec2f	pos2;
 
 	if (guimp->libui->mouse.m1_released || guimp->libui->mouse.m2_released)
-		return ;
+        return;
+    if (guimp->libui->mouse.m1_just_pressed || guimp->libui->mouse.m2_just_pressed)
+        push_to_buffer(guimp);
 	pos1 = find_canvas_coordinates(guimp,
 			vec2f((double)guimp->libui->mouse.last_pos.x, (double)guimp->libui->mouse.last_pos.y));
 	pos2 = find_canvas_coordinates(guimp,

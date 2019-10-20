@@ -69,6 +69,7 @@ void	use_square(t_guimp *guimp)
 	swap_coordinates(&pair);
 	if (guimp->libui->mouse.m1_released || guimp->libui->mouse.m2_released)
 	{
+        push_to_buffer(guimp);
 		if (guimp->shape_data.filled)
 			use_regular_square(guimp, pair, guimp->canvas);
 		else

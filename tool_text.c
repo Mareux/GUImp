@@ -10,11 +10,12 @@ void	toggle_text_input(t_guimp *guimp)
 {
 	if (guimp->libui->mouse.m1_pressed)
 	{
-		guimp->text_tool.active = 1;
+	    guimp->text_tool.active = 1;
 		set_anchor_point(guimp);
 	}
 	else if (guimp->libui->mouse.m2_pressed)
 	{
+        push_to_buffer(guimp);
 		use_text(guimp);
 		guimp->text_tool.active = 0;
 		guimp->shape_data.anchor_set = 0;

@@ -32,8 +32,6 @@ void 	set_anchor_point(t_guimp *guimp)
 	}
 }
 
-#include <stdio.h>
-
 void	use_line(t_guimp *guimp) {
 	t_vec2f_pair	pair;
 
@@ -44,6 +42,7 @@ void	use_line(t_guimp *guimp) {
 	pair.vec_2 = vec2_to_vec2f(guimp->shape_data.anchor);
 	if (guimp->libui->mouse.m1_released)
 	{
+        push_to_buffer(guimp);
 		draw_thick_line(guimp->canvas,
 				pair, guimp->color1, guimp->shape_data.thickness);
 		guimp->shape_data.anchor_set = 0;
@@ -53,6 +52,7 @@ void	use_line(t_guimp *guimp) {
 					  pair, guimp->color1, guimp->shape_data.thickness);
 	else if (guimp->libui->mouse.m2_released)
 	{
+        push_to_buffer(guimp);
 		draw_thick_line(guimp->canvas,
 						pair, guimp->color2, guimp->shape_data.thickness);
 		guimp->shape_data.anchor_set = 0;

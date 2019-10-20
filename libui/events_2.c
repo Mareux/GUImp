@@ -102,6 +102,8 @@ void	eventloop_mousebuttondown(t_libui *data, SDL_Point point)
 
 		if (data->event.button.button == SDL_BUTTON_LEFT)
 		{
+		    if (data->mouse.m1_pressed == 0)
+		        data->mouse.m1_just_pressed = 1;
 			data->mouse.m1_pressed = 1;
 			if (data->hooks.mouse1_down)
 				data->hooks.mouse1_down(data);
@@ -121,6 +123,8 @@ void	eventloop_mousebuttondown(t_libui *data, SDL_Point point)
 		}
 		else if (data->event.button.button == SDL_BUTTON_RIGHT)
 		{
+		    if (data->mouse.m2_pressed == 0)
+		        data->mouse.m2_just_pressed = 1;
 			data->mouse.m2_pressed = 1;
 			if (data->hooks.mouse2_down)
 				data->hooks.mouse2_down(data);

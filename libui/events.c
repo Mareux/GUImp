@@ -137,6 +137,8 @@ void			libui_loop(t_libui *unicorn)
 		unicorn->mouse.m1_released = 0;
 		unicorn->mouse.m2_released = 0;
 		unicorn->mouse.m3_released = 0;
+		unicorn->mouse.m1_just_pressed = 0;
+		unicorn->mouse.m2_just_pressed = 0;
 		unicorn->mouse.last_pos.x = unicorn->mouse.pos.x;
 		unicorn->mouse.last_pos.y = unicorn->mouse.pos.y;
 		unicorn->textinput.active = 0;

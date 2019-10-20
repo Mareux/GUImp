@@ -14,5 +14,6 @@ void	use_bucket(t_guimp *guimp)
 		color = guimp->color1;
 	else if (guimp->libui->mouse.m2_pressed)
 		color = guimp->color2;
+	ppush_to_buffer(guimp);
 	flood_fill(guimp->canvas, int_pos, get_pixel(guimp->canvas, int_pos.x, int_pos.y), color);
 }
