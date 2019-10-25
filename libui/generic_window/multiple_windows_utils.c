@@ -6,11 +6,11 @@
 /*   By: mnosko <mnosko@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/25 21:52:44 by mnosko            #+#    #+#             */
-/*   Updated: 2019/06/25 21:52:44 by mnosko           ###   ########.fr       */
+/*   Updated: 2019/10/21 15:50:10 by mnosko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "guimp.h"
+#include "../../guimp.h"
 
 void	hide_active_window(t_window **active_window,
 		t_window *main_window, t_window_list **window)
@@ -21,11 +21,10 @@ void	hide_active_window(t_window **active_window,
 	SDL_RaiseWindow(main_window->window);
 }
 
-void	show_active_window(t_window *active_window, t_sdl_data *data)
+void	show_active_window(t_window *active_window)
 {
 	SDL_ShowWindow(active_window->window);
 	SDL_RaiseWindow(active_window->window);
-	main_event_loop(active_window, data);
 }
 
 void	exit_event(SDL_Event *event)

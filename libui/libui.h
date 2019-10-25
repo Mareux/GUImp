@@ -301,6 +301,12 @@ typedef struct					s_widget
     t_checkbox_list				*checkbox;
 }								t_widget;
 
+enum e_window_type
+{
+	GENERIC_WINDOW,
+	IMPORTANT_WINDOW,
+};
+
 typedef struct					s_window
 {
     int							id;
@@ -436,6 +442,7 @@ t_image				create_image(SDL_Rect rect, char *file);
 void				libui_loop(t_libui *unicorn);
 void				eventloop_keydown(t_libui *data, int *quit);
 void				eventloop_mousebuttondown(t_libui *data, SDL_Point point);
+void				eventloop_window_events(t_libui *data, int *quit);
 
 void				libui_hook_m1_down(t_libui *libui, void (*func)(t_libui *));
 void				libui_hook_m2_down(t_libui *libui, void (*func)(t_libui *));
@@ -585,5 +592,11 @@ void draw_color_picker_window(t_libui *libui);
 
 void color_change_loop(t_libui *libui);
 
+void	delete_widgets(t_widget **widget);
+
+void	delete_window(t_window_list **window, int id);
+
+void	hide_active_window(t_window **active_window,
+						   t_window *main_window, t_window_list **window);
 
 #endif

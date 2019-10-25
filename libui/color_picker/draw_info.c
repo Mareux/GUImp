@@ -6,7 +6,7 @@
 /*   By: mnosko <mnosko@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/15 21:36:05 by mnosko            #+#    #+#             */
-/*   Updated: 2019/10/20 20:00:42 by mnosko           ###   ########.fr       */
+/*   Updated: 2019/10/20 20:01:06 by mnosko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,10 @@ void draw_sample_box(SDL_Surface *surface, SDL_Color color)
 
 void draw_position_indicator(SDL_Surface *surface, t_hsv_color color)
 {
-	draw_filled_circle(surface, (t_vec2) {color.s * MAIN_GRADIENT_SIZE - 3,
-										  (1.0 - color.v) * MAIN_GRADIENT_SIZE - 3}, 1,
-					   (t_color) {255, 255, 255});
+	draw_filled_circle(surface,
+			(t_vec2) {color.s * MAIN_GRADIENT_SIZE - 3,
+			 (1.0 - color.v) * MAIN_GRADIENT_SIZE - 3}, 1,
+				(t_color) {255, 255, 255});
 }
 
 void draw_hue_slider(SDL_Surface *surface, double hue)

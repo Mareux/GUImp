@@ -6,28 +6,29 @@
 /*   By: mnosko <mnosko@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/29 17:55:47 by ibarabas          #+#    #+#             */
-/*   Updated: 2019/07/09 17:54:21 by mnosko           ###   ########.fr       */
+/*   Updated: 2019/10/21 15:53:32 by mnosko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../guimp.h"
 
-//void	eventloop_window_events(t_libui *data, int *quit)
-//{
-//	if (data->event.type == SDL_WINDOWEVENT
-//	&& (int)data->event.window.windowID == data->active_window->id)
-//	{
-//		if (data->event.window.event == SDL_WINDOWEVENT_CLOSE)
-//		{
-//			if (data->active_window->id != data->main_window->id)
-//			{
-//				hide_active_window(&data->active_window,
-//						data->main_window, &data->windows);
-//			}
-//			*quit = TRUE;
-//		}
-//	}
-//}
+void	eventloop_window_events(t_libui *data, int *quit)
+{
+	if (data->event.type == SDL_WINDOWEVENT
+	&& (int)data->event.window.windowID == data->active_window->id)
+	{
+		if (data->event.window.event == SDL_WINDOWEVENT_CLOSE)
+		{
+			if (data->active_window->id != data->main_window->id)
+			{
+				hide_active_window(&data->active_window,
+						data->main_window, &data->windows);
+				return;
+			}
+			*quit = TRUE;
+		}
+	}
+}
 
 void	eventloop_keydown(t_libui *data, int *quit)
 {
