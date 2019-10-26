@@ -53,8 +53,6 @@ int		button_clicked(SDL_Point point, t_libui *data)
 	return (FALSE);
 }
 
-
-
 //int		combobox_clicked(SDL_Point point,
 //		t_widget *widgets, t_sdl_data *data)
 //{

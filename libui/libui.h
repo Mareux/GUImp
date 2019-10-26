@@ -35,6 +35,7 @@
 #define HUE_GRADIENT_H (SAMPLE_BOX_SIZE)
 
 typedef SDL_Surface				t_surface;
+typedef TTF_Font                t_font;
 
 typedef struct s_hsv_color
 {
@@ -94,6 +95,12 @@ typedef struct 					s_vec2f_pair
 	t_vec2f						vec_1;
 	t_vec2f						vec_2;
 }								t_vec2f_pair;
+
+typedef struct                  s_int_rect
+{
+    t_vec2                      topleft;
+    t_vec2                      bottomright;
+}                               t_int_rect;
 
 typedef struct                  s_rect
 {
@@ -621,5 +628,15 @@ void	backspace_event(char **output_text,
 						const char *input_text);
 
 void			render_text(t_libui *libui, SDL_Event e, t_widget *widgets);
+
+void	blit_with_offset(SDL_Surface *src, SDL_Surface *dst, t_vec2 offset);
+
+void    blit_surface(t_surface *src, t_int_rect src_rect, t_surface *dst, t_vec2 dst_pos);
+
+void    copy_surface(t_surface *src, t_surface *dst);
+
+void    save_jpg(t_surface *surface, const char *file, int quality);
+
+t_surface *create_text_surface(char *text, t_font *font)
 
 #endif

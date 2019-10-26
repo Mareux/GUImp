@@ -12,9 +12,9 @@
 
 #include "guimp.h"
 
-SDL_Surface *create_text_surface(char *text, TTF_Font *font)
+SDL_Surface *create_text_surface(char *text, t_font *font)
 {
-	SDL_Surface		*surface;
+	t_surface		*surface;
 	SDL_Color		text_color;
 
 	text_color = (SDL_Color){0, 0, 0, 0};

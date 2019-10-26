@@ -180,10 +180,14 @@ void 				flood_fill(t_surface *surface, t_vec2 pos,
 t_undo	            *new_buffer_item(void);
 void            	push_to_buffer(t_guimp *guimp);
 void	            pull_from_buffer(t_guimp *guimp);
+void                backup_buffer(t_guimp *guimp);
+void                limit_buffer(t_undo *buffer);
 
 void                guimp_undo(t_libui *libui);
 void                guimp_redo(t_libui *libui);
 
 void                check_bounds(t_guimp *guimp);
+
+
 
 #endif

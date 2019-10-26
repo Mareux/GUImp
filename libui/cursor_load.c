@@ -10,11 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "guimp.h"
+//#include "guimp.h"
+#include "libui.h"
 #include <dirent.h>
 
 void	cursor_picture_add(t_cursor_surface **begin,
-		SDL_Surface *cursor_image, char *name)
+		t_surface *cursor_image, char *name)
 {
 	t_cursor_surface *new;
 
