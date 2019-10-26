@@ -29,7 +29,7 @@ static void	use_filled_circle(t_guimp *guimp, t_vec2 int_pos, t_surface *dst, in
 }
 
 /*
-*	Returns a point between two given points
+**  Returns a point between two given points
 */
 
 t_vec2		find_middle_point(t_vec2 vec1, t_vec2 vec2, double *radius)
@@ -48,6 +48,16 @@ t_vec2		find_middle_point(t_vec2 vec1, t_vec2 vec2, double *radius)
 	return (middle);
 }
 
+void    put_circle(t_guimp *guimp, t_vec2 int_pos, double radius)
+{
+    push_to_buffer(guimp);
+    if (guimp->shape_data.filled)
+        use_regular_circle(guimp, int_pos, guimp->canvas, radius);
+    else
+        use_filled_circle(guimp, int_pos, guimp->canvas, radius);
+    guimp->shape_data.anchor_set = 0;
+}
+
 void	use_circle(t_guimp *guimp)
 {
 	t_vec2f			pos;
@@ -62,14 +72,7 @@ void	use_circle(t_guimp *guimp)
 	int_pos.y = (int)pos.y;
 	int_pos = find_middle_point(guimp->shape_data.anchor, int_pos, &radius);
 	if (guimp->libui->mouse.m1_released || guimp->libui->mouse.m2_released)
-	{
-        push_to_buffer(guimp);
-		if (guimp->shape_data.filled)
-			use_regular_circle(guimp, int_pos, guimp->canvas, radius);
-		else
-			use_filled_circle(guimp, int_pos, guimp->canvas, radius);
-		guimp->shape_data.anchor_set = 0;
-	}
+        put_circle(guimp, int_pos, radius);
 	else
 	{
 		if (guimp->shape_data.filled)

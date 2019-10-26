@@ -40,6 +40,16 @@ void	swap_coordinates(t_vec2_pair *pair)
 	}
 }
 
+void    put_rect(t_guimp *guimp, t_vec2_pair pair)
+{
+    push_to_buffer(guimp);
+    if (guimp->shape_data.filled)
+        use_regular_rect(guimp, pair, guimp->canvas);
+    else
+        use_filled_rect(guimp, pair, guimp->canvas);
+    guimp->shape_data.anchor_set = 0;
+}
+
 void	use_rect(t_guimp *guimp)
 {
 	t_vec2f			tmp;
@@ -47,20 +57,13 @@ void	use_rect(t_guimp *guimp)
 
 	set_anchor_point(guimp);
 	tmp = find_canvas_coordinates(guimp,
-								  vec2f((double)guimp->libui->mouse.pos.x,
-										(double)guimp->libui->mouse.pos.y));
+	        vec2f((double)guimp->libui->mouse.pos.x,
+	                (double)guimp->libui->mouse.pos.y));
 	pair.vec_1 = vec2((int)tmp.x, (int)tmp.y);
 	pair.vec_2 = guimp->shape_data.anchor;
 	swap_coordinates(&pair);
 	if (guimp->libui->mouse.m1_released || guimp->libui->mouse.m2_released)
-	{
-        push_to_buffer(guimp);
-		if (guimp->shape_data.filled)
-			use_regular_rect(guimp, pair, guimp->canvas);
-		else
-			use_filled_rect(guimp, pair, guimp->canvas);
-		guimp->shape_data.anchor_set = 0;
-	}
+	    put_rect(guimp, pair);
 	else
 	{
 		if (guimp->shape_data.filled)

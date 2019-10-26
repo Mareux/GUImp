@@ -47,7 +47,6 @@ void	use_text(t_guimp *guimp)
 	text.surface = guimp->preview;
 	if (guimp->libui->mouse.m2_pressed)
 		text.surface = guimp->canvas;
-//	text.position = guimp->libui->mouse.pos;
 	text.position = guimp->shape_data.anchor;
 	draw_text(&text);
 	free(text.text);

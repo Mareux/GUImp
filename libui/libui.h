@@ -429,6 +429,7 @@ SDL_Surface			*get_window_surface(t_libui *libui, const char *title);
 
 SDL_Window			*find_window(t_libui *libui, const char *title);
 t_window			*find_t_window(t_libui *libui, const char *title);
+t_window            *find_window_by_id(t_libui *unicorn, Uint32 id);
 
 void				add_button_to_list(t_buttons_list **buttons,
 						   t_button button, void (*click)(void *));
@@ -639,5 +640,14 @@ void    save_jpg(t_surface *surface, const char *file, int quality);
 
 t_surface *create_text_surface(char *text, t_font *font);
 t_surface   *create_surface(void);
+
+void	put_filled_circle_pixels(t_surface *surface, t_vec2 *top, t_vec2 center, t_color color);
+
+void	remove_from_queue(t_queue **queue);
+t_queue	*init_queue(t_vec2 pos,
+                       t_color affected_color, t_color target_color);
+int 	in_queue(t_queue *queue, t_vec2 pos);
+
+void			eventloop_mousewheel(t_libui *data);
 
 #endif

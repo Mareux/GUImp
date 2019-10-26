@@ -22,36 +22,14 @@ static void	use_filled_square(t_guimp *guimp, t_vec2_pair pair, t_surface *dst)
 	}
 }
 
-/*
-*	Calculates what needs to be added to src
-*	to make it the same length as dst
-*/
-
-static int length_diff(int src, int dst)
+void    put_square(t_guimp *guimp, t_vec2_pair pair)
 {
-	int diff;
-
-	diff = ft_abs(dst) - ft_abs(src);
-	if (src > 0)
-		return (diff);
-	return (-diff);
-}
-
-t_vec2_pair	convert_rect_to_square(t_vec2_pair pair)
-{
-	t_vec2	diff;
-
-	diff.x = pair.vec_1.x - pair.vec_2.x;
-	diff.y = pair.vec_1.y - pair.vec_2.y;
-	if (ft_abs(diff.x) < ft_abs(diff.y))
-	{
-		pair.vec_1.y += length_diff(diff.y, diff.x);
-	}
-	else
-		{
-		pair.vec_1.x += length_diff(diff.x, diff.y);
-	}
-	return (pair);
+    push_to_buffer(guimp);
+    if (guimp->shape_data.filled)
+        use_regular_square(guimp, pair, guimp->canvas);
+    else
+        use_filled_square(guimp, pair, guimp->canvas);
+    guimp->shape_data.anchor_set = 0;
 }
 
 void	use_square(t_guimp *guimp)
@@ -68,14 +46,7 @@ void	use_square(t_guimp *guimp)
 	pair = convert_rect_to_square(pair);
 	swap_coordinates(&pair);
 	if (guimp->libui->mouse.m1_released || guimp->libui->mouse.m2_released)
-	{
-        push_to_buffer(guimp);
-		if (guimp->shape_data.filled)
-			use_regular_square(guimp, pair, guimp->canvas);
-		else
-			use_filled_square(guimp, pair, guimp->canvas);
-		guimp->shape_data.anchor_set = 0;
-	}
+        put_square(guimp, pair);
 	else
 	{
 		if (guimp->shape_data.filled)

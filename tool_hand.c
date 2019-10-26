@@ -16,10 +16,6 @@ void    check_bounds(t_guimp *guimp)
         guimp->canvas_data.offset.x = 0;
     if (guimp->canvas_data.offset.y > 0)
         guimp->canvas_data.offset.y = 0;
-//    if (guimp->canvas_data.offset.x < -scaled_size.x)
-//        guimp->canvas_data.offset.x = -scaled_size.x;
-//    if (guimp->canvas_data.offset.y < -scaled_size.y)
-//        guimp->canvas_data.offset.y = -scaled_size.y;
 }
 
 void	use_hand(t_guimp *guimp)

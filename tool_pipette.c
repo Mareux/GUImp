@@ -2,7 +2,6 @@
 
 void	use_pipette(t_guimp *guimp)
 {
-	t_color	color;
 	t_vec2f	pos;
 
 	if (guimp->libui->mouse.m1_released || guimp->libui->mouse.m2_released)

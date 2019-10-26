@@ -32,7 +32,26 @@ void 	set_anchor_point(t_guimp *guimp)
 	}
 }
 
-void	use_line(t_guimp *guimp) {
+void    put_line(t_guimp *guimp, t_vec2f_pair pair)
+{
+    if (guimp->libui->mouse.m1_released)
+    {
+        push_to_buffer(guimp);
+        draw_thick_line(guimp->canvas,
+                        pair, guimp->color1, guimp->shape_data.thickness);
+        guimp->shape_data.anchor_set = 0;
+    }
+    else if (guimp->libui->mouse.m2_released)
+    {
+        push_to_buffer(guimp);
+        draw_thick_line(guimp->canvas,
+                        pair, guimp->color2, guimp->shape_data.thickness);
+        guimp->shape_data.anchor_set = 0;
+    }
+}
+
+void	use_line(t_guimp *guimp)
+{
 	t_vec2f_pair	pair;
 
 	set_anchor_point(guimp);
@@ -41,22 +60,12 @@ void	use_line(t_guimp *guimp) {
 					(double) guimp->libui->mouse.pos.y));
 	pair.vec_2 = vec2_to_vec2f(guimp->shape_data.anchor);
 	if (guimp->libui->mouse.m1_released)
-	{
-        push_to_buffer(guimp);
-		draw_thick_line(guimp->canvas,
-				pair, guimp->color1, guimp->shape_data.thickness);
-		guimp->shape_data.anchor_set = 0;
-	}
+	    put_line(guimp, pair);
 	else if (guimp->libui->mouse.m1_pressed)
 			draw_thick_line(guimp->preview,
 					  pair, guimp->color1, guimp->shape_data.thickness);
 	else if (guimp->libui->mouse.m2_released)
-	{
-        push_to_buffer(guimp);
-		draw_thick_line(guimp->canvas,
-						pair, guimp->color2, guimp->shape_data.thickness);
-		guimp->shape_data.anchor_set = 0;
-	}
+	    put_line(guimp, pair);
 	else if (guimp->libui->mouse.m2_pressed)
 		draw_thick_line(guimp->preview,
 				pair, guimp->color2, guimp->shape_data.thickness);

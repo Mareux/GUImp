@@ -70,18 +70,6 @@ void	eventloop_keydown(t_libui *data, int *quit)
 	}
 }
 
-//void	eventloop_mousebuttondown_2(t_libui *data, SDL_Point point)
-//{
-//	if (data->active_window->widgets->active_combobox
-//	&& data->active_window->widgets->active_combobox->active
-//	&& (data->active_window->widgets->active_combobox->field_data =
-//			active_field_clicked(
-//	data->active_window->widgets->active_combobox->menu_rect, point,
-//	data->active_window->widgets->active_combobox->content,
-//	data->active_window->widgets->active_combobox)))
-//		data->active_window->widgets->active_combobox->active = FALSE;
-//}
-
 void	eventloop_mousebuttondown(t_libui *data, SDL_Point point)
 {
 	if (data->event.type == SDL_MOUSEBUTTONDOWN)
@@ -114,13 +102,6 @@ void	eventloop_mousebuttondown(t_libui *data, SDL_Point point)
 			if (button_clicked(point, data))
 				if (SDL_IsTextInputActive())
 					SDL_StopTextInput();
-//			if (combobox_clicked(point,
-//					data->active_window->widgets, data))
-//			{
-//				if (SDL_IsTextInputActive())
-//					SDL_StopTextInput();
-//			}
-//			eventloop_mousebuttondown_2(data, point);
 		}
 		else if (data->event.button.button == SDL_BUTTON_RIGHT)
 		{

@@ -188,6 +188,8 @@ void                guimp_redo(t_libui *libui);
 
 void                check_bounds(t_guimp *guimp);
 
+t_vec2_pair         convert_rect_to_square(t_vec2_pair pair);
+
 
 
 #endif
