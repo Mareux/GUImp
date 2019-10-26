@@ -330,6 +330,8 @@ typedef struct					s_window
     SDL_Window					*window;
     SDL_Surface					*surface;
     t_widget					*widgets;
+	void						(*callback_function)(void*);
+
 }								t_window;
 
 typedef struct					s_window_list
@@ -411,8 +413,8 @@ typedef struct                  s_libui
     t_window					*main_window;
     t_window					*active_window;
     void						*closed_window_return_data;
-    void						(*callback_function)(void*);
-    t_menu_list					*menu_list;
+	void						(*callback_function)(void*);
+	t_menu_list					*menu_list;
     t_window_list				*windows;
     TTF_Font					*font;
     t_keyhooks					hooks;
@@ -569,13 +571,15 @@ void set_cursor(t_cursor *cursor, t_libui *libui);
 
 void draw_menu_table(SDL_Surface *surface, t_menu *menu);
 void create_menu_for_tools(t_libui *libui);
+void create_bar(t_libui *libui);
 
 void	tools_window_loop(t_libui *libui);
 void		recalculate_table_fields(t_menu_field *field, int difference);
 
 
-t_window	*create_window_with_textfield(t_libui *libui);
+t_window *create_window_with_textfield(t_libui *libui,void (*callback_function)(void*));
 
+t_window	*create_window_with_label(t_libui *libui, void (*callback_function)(void*));
 
 t_hsv_color rgb_to_hsv(t_rgb_color in);
 
@@ -615,6 +619,8 @@ void	delete_window(t_window_list **window, int id);
 
 void	hide_active_window(t_window **active_window,
 						   t_window *main_window, t_window_list **window);
+
+void	show_active_window(t_window *active_window);
 
 void	exit_event(SDL_Event *event);
 

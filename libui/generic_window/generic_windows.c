@@ -12,7 +12,7 @@
 
 #include "../libui.h"
 
-t_window	*create_window_with_textfield(t_libui *libui)
+t_window *create_window_with_textfield(t_libui *libui, void (*callback_function)(void*))
 {
 	t_window *curr;
 
@@ -29,10 +29,11 @@ t_window	*create_window_with_textfield(t_libui *libui)
 			create_button(create_text_surface("CANCEL", libui->font),
 			(SDL_Rect) {130, 135, 100, 30},
 			CLICK_BUTTON, "CANCEL"), (void*)cancel_event);
+	curr->callback_function = callback_function;
 	return (curr);
 }
 
-t_window	*create_window_with_label(t_libui *libui)
+t_window	*create_window_with_label(t_libui *libui, void (*callback_function)(void*))
 {
 	t_window *curr;
 
@@ -48,5 +49,7 @@ t_window	*create_window_with_label(t_libui *libui)
 					   create_button(create_text_surface("CANCEL", libui->font),
 									 (SDL_Rect) {130, 135, 100, 30},
 									 CLICK_BUTTON, "CANCEL"), (void*)cancel_event);
+	curr->callback_function = libui->callback_function;
+	libui->callback_function = NULL;
 	return (curr);
 }

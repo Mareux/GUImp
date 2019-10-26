@@ -2,6 +2,6 @@
 
 void    save_jpg(t_surface *surface, const char *file, int quality)
 {
-    IMG_SaveJPG(surface, file, 100);
+    IMG_SaveJPG(surface, file, quality);
 }
 

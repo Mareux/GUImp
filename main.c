@@ -141,6 +141,7 @@ int				main(void)
 	new_window(guimp.libui, vec2(1024, 600), "GUImp");
 	new_window(guimp.libui, vec2(128, 400), "Tools");
 	create_menu_for_tools(guimp.libui);
+	create_bar(guimp.libui);
 	guimp.canvas = create_surface();
 	fill_surface(guimp.canvas, rgb(255, 255, 255));
 	set_tools_window_position(guimp.libui);
