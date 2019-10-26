@@ -47,7 +47,7 @@ add_executable(GUImp
         libui/libui.h
         libui/new_window.c
         libui/events.c
-        libui/events_2.c
+        libui/events_keydown.c
         libui/init.c
         libui/utils.c
         libui/vectors.c

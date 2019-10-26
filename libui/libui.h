@@ -51,6 +51,14 @@ enum color_picker_ui_state
 	UI_NONE
 };
 
+enum kmods
+{
+    LIBUI_NONE,
+    LIBUI_ALT,
+    LIBUI_CTRL,
+    LIBUI_SHIFT
+};
+
 typedef struct s_rgb_color
 {
 	double r;       // a fraction between 0 and 1
@@ -335,6 +343,7 @@ typedef struct					s_window_list
 typedef struct					s_keylist
 {
 	SDL_Scancode				scancode;
+	int                         keymod;
 	struct s_keylist			*next;
 }								t_keylist;
 
@@ -490,9 +499,8 @@ int					same_color(t_color c1, t_color c2);
 **	Key binding
 */
 
-void				bind_key(t_libui *libui, const char *name, void (*func)(t_libui *));
-void				bind_key_combination(t_libui *libui, t_keylist *keys, void (*func)(t_libui *));
-int					add_key_to_list(t_keylist **lst, char *name);
+void				bind_key(t_libui *libui, const char *name, int kmod, void (*func)(t_libui *));
+int                 add_key_to_list(t_keylist **lst, char *name, int kmod);
 
 /*
 **	Drawing functions

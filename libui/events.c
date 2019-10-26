@@ -52,6 +52,17 @@ void            eventloop_init_mouse(t_libui *unicorn)
     set_cursor(unicorn->cursor, unicorn);
 }
 
+static void     handle_events(t_libui *unicorn, int *quit, SDL_Point *point)
+{
+    eventloop_window_events(unicorn, quit);
+    eventloop_window(unicorn);
+    eventloop_keydown(unicorn, quit);
+    eventloop_mousebuttondown(unicorn, *point);
+    eventloop_mousewheel(unicorn);
+    color_change_loop(unicorn);
+    menu_events(unicorn, unicorn->menu_list);
+}
+
 void			libui_loop(t_libui *unicorn)
 {
 	int			quit;
@@ -64,13 +75,7 @@ void			libui_loop(t_libui *unicorn)
 		unicorn->textinput.active = 0;
 		while (SDL_PollEvent(&(unicorn->event)))
 		{
-			eventloop_window_events(unicorn, &quit);
-			eventloop_window(unicorn);
-			eventloop_keydown(unicorn, &quit);
-			eventloop_mousebuttondown(unicorn, point);
-			eventloop_mousewheel(unicorn);
-			color_change_loop(unicorn);
-			menu_events(unicorn, unicorn->menu_list);
+			handle_events(unicorn, &quit, &point);
 			if (SDL_IsTextInputActive())
 			{
 				eventloop_textinput(unicorn);

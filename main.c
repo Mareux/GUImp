@@ -86,24 +86,24 @@ void	hook_hooks(t_guimp *guimp)
 	libui_hook_m2_down(guimp->libui, guimp_mouseclick);
 	libui_hook_mwheel_up(guimp->libui, guimp_mwheel_up);
 	libui_hook_mwheel_down(guimp->libui, guimp_mwheel_down);
-	bind_key(guimp->libui, "T", toggle_filled);
-	bind_key(guimp->libui, "P", settool_pencil);
-	bind_key(guimp->libui, "B", settool_brush);
-	bind_key(guimp->libui, "F", settool_bucket);
-	bind_key(guimp->libui, "C", settool_circle);
-	bind_key(guimp->libui, "M", settool_magnifying_glass);
-	bind_key(guimp->libui, "H", settool_hand);
-	bind_key(guimp->libui, "E", settool_eraser);
-	bind_key(guimp->libui, "L", settool_line);
-	bind_key(guimp->libui, "R", settool_rect);
-	bind_key(guimp->libui, "K", settool_square);
-	bind_key(guimp->libui, "G", settool_pipette);
-	bind_key(guimp->libui, "N", settool_sticker);
-	bind_key(guimp->libui, "J", settool_text);
-    bind_key(guimp->libui, "Backspace", guimp_backspace);
-    bind_key(guimp->libui, "Return", guimp_enter);
-    bind_key(guimp->libui, "Z", guimp_undo);
-    bind_key(guimp->libui, "Y", guimp_redo);
+//	bind_key(guimp->libui, "T", toggle_filled);
+//	bind_key(guimp->libui, "P", settool_pencil);
+//	bind_key(guimp->libui, "B", settool_brush);
+//	bind_key(guimp->libui, "F", settool_bucket);
+//	bind_key(guimp->libui, "C", settool_circle);
+//	bind_key(guimp->libui, "M", settool_magnifying_glass);
+//	bind_key(guimp->libui, "H", settool_hand);
+//	bind_key(guimp->libui, "E", settool_eraser);
+//	bind_key(guimp->libui, "L", settool_line);
+//	bind_key(guimp->libui, "R", settool_rect);
+//	bind_key(guimp->libui, "K", settool_square);
+//	bind_key(guimp->libui, "G", settool_pipette);
+//	bind_key(guimp->libui, "N", settool_sticker);
+//	bind_key(guimp->libui, "J", settool_text);
+//    bind_key(guimp->libui, "Backspace", guimp_backspace);
+//    bind_key(guimp->libui, "Return", guimp_enter);
+    bind_key(guimp->libui, "Z", LIBUI_CTRL, guimp_undo);
+    bind_key(guimp->libui, "Z", LIBUI_SHIFT, guimp_redo);
 }
 
 void	guimp_loop(t_libui *libui)
