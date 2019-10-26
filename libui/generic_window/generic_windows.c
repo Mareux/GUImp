@@ -24,11 +24,11 @@ t_window	*create_window_with_textfield(t_libui *libui)
 	add_button_to_list(&curr->widgets->button,
 			create_button(create_text_surface("OK", libui->font),
 			(SDL_Rect) {20, 135, 100, 30},
-			CLICK_BUTTON, "OK"), NULL);
+			CLICK_BUTTON, "OK"), (void*)ok_event);
 	add_button_to_list(&curr->widgets->button,
 			create_button(create_text_surface("CANCEL", libui->font),
 			(SDL_Rect) {130, 135, 100, 30},
-			CLICK_BUTTON, "CANCEL"), NULL);
+			CLICK_BUTTON, "CANCEL"), (void*)cancel_event);
 	return (curr);
 }
 
@@ -43,10 +43,10 @@ t_window	*create_window_with_label(t_libui *libui)
 	add_button_to_list(&curr->widgets->button,
 					   create_button(create_text_surface("OK", libui->font),
 									 (SDL_Rect) {20, 135, 100, 30},
-									 CLICK_BUTTON, "OK"), NULL);
+									 CLICK_BUTTON, "OK"), (void*)ok_event);
 	add_button_to_list(&curr->widgets->button,
 					   create_button(create_text_surface("CANCEL", libui->font),
 									 (SDL_Rect) {130, 135, 100, 30},
-									 CLICK_BUTTON, "CANCEL"), NULL);
+									 CLICK_BUTTON, "CANCEL"), (void*)cancel_event);
 	return (curr);
 }

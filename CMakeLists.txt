@@ -5,18 +5,18 @@ set(CMAKE_C_STANDARD 11)
 
 # Linux
 
-find_package(SDL2 REQUIRED)
-find_package(SDL_ttf REQUIRED)
-find_package(SDL_image REQUIRED)
-include_directories(${SDL2_INCLUDE_DIRS})
-link_directories(${SDL2_LIBRARY})
+#find_package(SDL2 REQUIRED)
+#find_package(SDL_ttf REQUIRED)
+#find_package(SDL_image REQUIRED)
+#include_directories(${SDL2_INCLUDE_DIRS})
+#link_directories(${SDL2_LIBRARY})
 
 # Unit Factory
-#
-#set(SDL2_INCLUDE_DIR ~/.brew/include/SDL2/)
-#set(SDL2_LIBRARY ~/.brew/lib/)
-#include_directories(${SDL2_INCLUDE_DIR})
-#link_directories(${SDL2_LIBRARY})
+
+set(SDL2_INCLUDE_DIR ~/.brew/include/SDL2/)
+set(SDL2_LIBRARY ~/.brew/lib/)
+include_directories(${SDL2_INCLUDE_DIR})
+link_directories(${SDL2_LIBRARY})
 
 # Mac OS VM
 
@@ -86,6 +86,8 @@ add_executable(GUImp
         libui/color_picker/color_picker_window.c libui/color_picker/draw_gradients.c libui/color_picker/color_utils.c libui/color_picker/draw_info.c libui/color_picker/color_events.c
         libui/menu/menu_events.c libui/menu/menu_bar.c
         libui/generic_window/multiple_window_delete.c
-        libui/generic_window/multiple_windows_utils.c libui/generic_window/generic_window_events.c)
+        libui/generic_window/multiple_windows_utils.c libui/generic_window/generic_window_events.c
+        text_editing_events.c
+        text_render.c)
 
 target_link_libraries(GUImp -lSDL2 -lm -lSDL2_image -lSDL2_ttf)

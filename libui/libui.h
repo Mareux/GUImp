@@ -394,7 +394,8 @@ typedef struct                  s_libui
     SDL_Event					event;
     t_window					*main_window;
     t_window					*active_window;
-    void						*active_window_return_data;
+    void						*closed_window_return_data;
+    void						(*callback_function)(void*);
     t_menu_list					*menu_list;
     t_window_list				*windows;
     TTF_Font					*font;
@@ -598,5 +599,27 @@ void	delete_window(t_window_list **window, int id);
 
 void	hide_active_window(t_window **active_window,
 						   t_window *main_window, t_window_list **window);
+
+void	exit_event(SDL_Event *event);
+
+void cancel_event(t_libui *libui);
+
+void	ok_event(t_libui *libui);
+
+int		button_clicked(SDL_Point point, t_libui *data);
+
+int		point_in_textfield(SDL_Point point, t_widget *widgets);
+
+void	render_text_in_textfield(t_textfield *textfield,
+								 t_libui *libui, char *text,
+								 void (event)(char **, const char *));
+
+void	text_input_event(char **output_text,
+						 const char *input_text);
+
+void	backspace_event(char **output_text,
+						const char *input_text);
+
+void			render_text(t_libui *libui, SDL_Event e, t_widget *widgets);
 
 #endif

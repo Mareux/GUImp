@@ -38,15 +38,15 @@ void	endless_textfield(t_textfield *textfield, TTF_Font *font)
 }
 
 void	render_text_in_textfield(t_textfield *textfield,
-		t_sdl_data *data, char *text,
+		t_libui *libui, char *text,
 		void (event)(char **, const char *))
 {
 	if (!textfield)
 		return ;
-	if (!textfield_type_check(text, (void*)textfield->type_check))
-		return ;
+//	if (!textfield_type_check(text, (void*)textfield->type_check))
+//		return ;
 	event(&textfield->input_text, text);
 	if (textfield->text_surface)
 		SDL_FreeSurface(textfield->text_surface);
-	endless_textfield(textfield, data->font);
+	endless_textfield(textfield, libui->font);
 }

@@ -32,12 +32,7 @@ int		point_in_textfield(SDL_Point point, t_widget *widgets)
 	return (FALSE);
 }
 
-int 	table_menu_button_clicked(SDL_Point point, t_menu *menu, t_libui *data)
-{
-
-}
-
-int		button_clicked(SDL_Point point, t_widget *widgets, t_libui *data)
+int		button_clicked(SDL_Point point, t_libui *data)
 {
 	t_buttons_list *tmp;
 
@@ -48,11 +43,6 @@ int		button_clicked(SDL_Point point, t_widget *widgets, t_libui *data)
 		{
 			if (tmp->button.click)
 			{
-//				if (data->active_window->widgets->active_combobox
-//				&& data->active_window->widgets->active_combobox->active)
-//					return (FALSE);
-//				if (tmp->button.type == TOGGLE_BUTTON)
-//					widgets->active_toggle = &tmp->button;
 				tmp->button.click(data);
 				tmp->button.color = (t_color){120, 80, 120, 0};
 			}

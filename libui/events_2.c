@@ -53,7 +53,7 @@ void	eventloop_keydown(t_libui *data, int *quit)
 			t_guimp *guimp;
 
 			guimp = data->data;
-			save_img(guimp->canvas, "test.jpg");
+			save_img(data);
 		}
 		keybind = data->hooks.keybinds;
 		while (keybind)
@@ -108,12 +108,12 @@ void	eventloop_mousebuttondown(t_libui *data, SDL_Point point)
 			data->mouse.m1_pressed = 1;
 			if (data->hooks.mouse1_down)
 				data->hooks.mouse1_down(data);
-//			if (point_in_textfield(point, data->active_window->widgets))
-//				if (!SDL_IsTextInputActive())
-//					SDL_StartTextInput();
-//			if (button_clicked(point, data->active_window->widgets, data))
-//				if (SDL_IsTextInputActive())
-//					SDL_StopTextInput();
+			if (point_in_textfield(point, data->active_window->widgets))
+				if (!SDL_IsTextInputActive())
+					SDL_StartTextInput();
+			if (button_clicked(point, data))
+				if (SDL_IsTextInputActive())
+					SDL_StopTextInput();
 //			if (combobox_clicked(point,
 //					data->active_window->widgets, data))
 //			{

@@ -13,7 +13,11 @@
 #include "guimp.h"
 
 
-void save_img(SDL_Surface *canvas, char *filename)
+void save_img(t_libui *libui)
 {
-	IMG_SaveJPG(canvas, filename, 100);
+	t_guimp *guimp;
+
+	guimp = libui->data;
+	IMG_SaveJPG(guimp->canvas, libui->closed_window_return_data, 100);
+	libui->closed_window_return_data = NULL;
 }

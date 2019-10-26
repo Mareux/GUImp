@@ -49,16 +49,17 @@ int		init_libui(t_libui **data)
 	cursor_create((*data));
 	(*data)->active_window = NULL;
 	(*data)->menu_list = NULL;
-	(*data)->active_window_return_data = NULL;
+	(*data)->closed_window_return_data = NULL;
 	(*data)->data = NULL;
 	(*data)->widget = NULL;
 	(*data)->current_color = (t_hsv_color){180.0, 1.0, 1.0};
 	(*data)->custom_loop = NULL;
 	(*data)->textinput.active = 1;
 	(*data)->textinput.text = NULL;
+	(*data)->callback_function = NULL;
 	if (TTF_Init() < 0)
 		exit(124);
-	(*data)->font = TTF_OpenFont("libui/font.ttf", 18);
+	(*data)->font = TTF_OpenFont("../libui/font.ttf", 18);
 	if (!(*data)->font)
 	{
 		ft_putendl_fd("Couldn't load font!", 2);

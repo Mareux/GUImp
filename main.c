@@ -22,27 +22,27 @@ SDL_Surface *create_text_surface(char *text, TTF_Font *font)
 	return (surface);
 }
 
-//void			render_text(t_sdl_data *data, SDL_Event e, t_widget *widgets)
-//{
-//	if (e.type == SDL_TEXTINPUT)
-//	{
-//		render_text_in_textfield(widgets->active_textfield,
-//				data, e.text.text, text_input_event);
-//	}
-//	else if (e.type == SDL_KEYDOWN)
-//	{
-//		if (e.key.keysym.sym == SDLK_BACKSPACE)
-//		{
-//			render_text_in_textfield(widgets->active_textfield,
-//					data, NULL, backspace_event);
-//		}
-//		if (e.key.keysym.sym == SDLK_v && SDL_GetModState() & KMOD_CTRL)
-//		{
-//			render_text_in_textfield(widgets->active_textfield,
-//					data, SDL_GetClipboardText(), text_input_event);
-//		}
-//	}
-//}
+void			render_text(t_libui *libui, SDL_Event e, t_widget *widgets)
+{
+	if (e.type == SDL_TEXTINPUT)
+	{
+		render_text_in_textfield(widgets->active_textfield,
+								 libui, e.text.text, text_input_event);
+	}
+	else if (e.type == SDL_KEYDOWN)
+	{
+		if (e.key.keysym.sym == SDLK_BACKSPACE)
+		{
+			render_text_in_textfield(widgets->active_textfield,
+									 libui, NULL, backspace_event);
+		}
+		if (e.key.keysym.sym == SDLK_v && SDL_GetModState() & KMOD_CTRL)
+		{
+			render_text_in_textfield(widgets->active_textfield,
+									 libui, SDL_GetClipboardText(), text_input_event);
+		}
+	}
+}
 
 void set_tools_window_position(t_libui *libui)
 {
@@ -129,21 +129,6 @@ void	guimp_loop(t_libui *libui)
 	SDL_FreeSurface(guimp->preview); // move to libui
 }
 
-//void	tools_window_loop(t_libui *libui)
-//{
-//	SDL_Surface *tools_surface;
-//
-//	tools_surface = get_window_surface(libui, "Tools");
-//	fill_surface(tools_surface, rgb(255, 255, 255));
-//	if (libui->menu_list)
-//		draw_menu_table(tools_surface, &libui->menu_list->menu);
-//}
-
-void	generic_window_loop()
-{
-
-}
-
 int				main(void)
 {
 	t_guimp	guimp;
@@ -151,7 +136,7 @@ int				main(void)
 	init(&guimp);
 	if (!init_libui(&(guimp.libui)))
 		ft_putendl_fd("Failed to initialize", 2);
-	guimp.imported_img = IMG_Load("ananasique.png");
+	guimp.imported_img = IMG_Load("../ananasique.png");
 	guimp.libui->data = (void *)(&guimp);
 	new_window(guimp.libui, vec2(1024, 600), "GUImp");
 	new_window(guimp.libui, vec2(128, 400), "Tools");

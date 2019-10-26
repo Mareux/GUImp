@@ -171,7 +171,7 @@ void				toggle_filled(t_libui *libui);
 
 void				draw_canvas(t_guimp *guimp);
 
-void				save_img(SDL_Surface *canvas, char *filename);
+void save_img(t_libui *libui);
 
 
 void 				flood_fill(t_surface *surface, t_vec2 pos,
