@@ -156,8 +156,8 @@ void			libui_loop(t_libui *unicorn)
 			if (SDL_IsTextInputActive())
 			{
 				eventloop_textinput(unicorn);
-				render_text(unicorn, unicorn->event,
-						unicorn->active_window->widgets);
+//				render_text(unicorn, unicorn->event,
+//						unicorn->active_window->widgets);
 			}
 		}
 		if (unicorn->custom_loop)
