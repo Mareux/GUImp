@@ -18,6 +18,6 @@ void save_img(t_libui *libui)
 	t_guimp *guimp;
 
 	guimp = libui->data;
-	IMG_SaveJPG(guimp->canvas, libui->closed_window_return_data, 100);
+	save_jpg(guimp->canvas, libui->closed_window_return_data, 100);
 	libui->closed_window_return_data = NULL;
 }

@@ -12,7 +12,7 @@
 
 #include "../libui.h"
 
-void cancel_event(t_libui *libui)
+void	cancel_event(t_libui *libui)
 {
 	libui->closed_window_return_data = NULL;
 	exit_event(&libui->event);
@@ -28,9 +28,8 @@ void	ok_event(t_libui *libui)
 				libui->active_window->widgets->textfield->textfield.input_text;
 	}
 	exit_event(&libui->event);
-	if (libui->callback_function)
-		libui->callback_function(libui);
-	libui->callback_function = NULL;
+	if (libui->active_window->callback_function)
+		libui->active_window->callback_function(libui);
 }
 
 
