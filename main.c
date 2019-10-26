@@ -27,19 +27,19 @@ void			render_text(t_libui *libui, SDL_Event e, t_widget *widgets)
 	if (e.type == SDL_TEXTINPUT)
 	{
 		render_text_in_textfield(widgets->active_textfield,
-								 libui, e.text.text, text_input_event);
+		libui, e.text.text, text_input_event);
 	}
 	else if (e.type == SDL_KEYDOWN)
 	{
 		if (e.key.keysym.sym == SDLK_BACKSPACE)
 		{
 			render_text_in_textfield(widgets->active_textfield,
-									 libui, NULL, backspace_event);
+			libui, NULL, backspace_event);
 		}
 		if (e.key.keysym.sym == SDLK_v && SDL_GetModState() & KMOD_CTRL)
 		{
 			render_text_in_textfield(widgets->active_textfield,
-									 libui, SDL_GetClipboardText(), text_input_event);
+			libui, SDL_GetClipboardText(), text_input_event);
 		}
 	}
 }
@@ -141,7 +141,7 @@ int				main(void)
 	new_window(guimp.libui, vec2(1024, 600), "GUImp");
 	new_window(guimp.libui, vec2(128, 400), "Tools");
 	create_menu_for_tools(guimp.libui);
-	guimp.canvas = SDL_CreateRGBSurface(0, 1024, 600, 32, 0, 0, 0, 0);
+	guimp.canvas = create_surface();
 	fill_surface(guimp.canvas, rgb(255, 255, 255));
 	set_tools_window_position(guimp.libui);
 	set_window_resizable(guimp.libui, "GUImp", 1);

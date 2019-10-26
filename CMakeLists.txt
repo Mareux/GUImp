@@ -88,6 +88,6 @@ add_executable(GUImp
         libui/generic_window/multiple_window_delete.c
         libui/generic_window/multiple_windows_utils.c libui/generic_window/generic_window_events.c
         text_editing_events.c
-        text_render.c libui/blit_surface.c guimp_redo.c libui/save_jpg.c libui/create_text_surface.c)
+        text_render.c libui/blit_surface.c guimp_redo.c libui/save_jpg.c libui/create_surface.c)
 
 target_link_libraries(GUImp -lSDL2 -lm -lSDL2_image -lSDL2_ttf)

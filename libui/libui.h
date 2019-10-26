@@ -637,6 +637,7 @@ void    copy_surface(t_surface *src, t_surface *dst);
 
 void    save_jpg(t_surface *surface, const char *file, int quality);
 
-t_surface *create_text_surface(char *text, t_font *font)
+t_surface *create_text_surface(char *text, t_font *font);
+t_surface   *create_surface(void);
 
 #endif
