@@ -6,7 +6,7 @@
 /*   By: mnosko <mnosko@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/21 11:12:02 by mnosko            #+#    #+#             */
-/*   Updated: 2019/10/21 11:12:02 by mnosko           ###   ########.fr       */
+/*   Updated: 2019/10/26 18:44:29 by mnosko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,5 @@ void create_bar(t_libui *libui)
 	*(fields->menu) = create_file_context(libui->main_window->surface);
 	calculate_bar_fields_position(menu.fields, libui->font);
 	calculate_context_fields_position(fields->menu->fields, libui->font, fields->menu->menu_frame);
+	add_menu_to_list(&libui->menu_list, menu);
 }

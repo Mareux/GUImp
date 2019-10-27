@@ -6,7 +6,7 @@
 /*   By: mnosko <mnosko@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/16 12:46:42 by mnosko            #+#    #+#             */
-/*   Updated: 2019/10/20 19:31:04 by mnosko           ###   ########.fr       */
+/*   Updated: 2019/10/27 00:24:14 by mnosko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,35 @@ void	add_menu_to_list(t_menu_list **begin, t_menu menu)
 	new->menu = menu;
 	new->next = *begin;
 	*begin = new;
+}
+
+void	remove_menu_from_list(t_menu_list **begin, t_menu menu)
+{
+
+//	// Store head node
+//	struct Node* temp = *head_ref, *prev;
+//
+//	// If head node itself holds the key to be deleted
+//	if (temp != NULL && temp->data == key)
+//	{
+//		*head_ref = temp->next;   // Changed head
+//		free(temp);               // free old head
+//		return;
+//	}
+//
+//	// Search for the key to be deleted, keep track of the
+//	// previous node as we need to change 'prev->next'
+//	while (temp != NULL && temp->data != key)
+//	{
+//		prev = temp;
+//		temp = temp->next;
+//	}
+//
+//	// If key was not present in linked list
+//	if (temp == NULL) return;
+//
+//	// Unlink the node from linked list
+//	prev->next = temp->next;
+//
+//	free(temp);
 }
