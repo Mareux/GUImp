@@ -100,6 +100,7 @@ void	hook_hooks(t_guimp *guimp)
 	bind_key(guimp->libui, "G", LIBUI_NONE, settool_pipette);
 	bind_key(guimp->libui, "S", LIBUI_NONE, settool_sticker);
 	bind_key(guimp->libui, "T", LIBUI_NONE, settool_text);
+	bind_key(guimp->libui, "O", LIBUI_NONE, settool_picture);
     bind_key(guimp->libui, "Backspace", LIBUI_NONE, guimp_backspace);
     bind_key(guimp->libui, "Return", LIBUI_NONE, guimp_enter);
     bind_key(guimp->libui, "Z", LIBUI_CTRL, guimp_undo);
@@ -129,6 +130,14 @@ void	guimp_loop(t_libui *libui)
 	SDL_FreeSurface(guimp->preview); // move to libui
 }
 
+void			drag_and_drop_image(t_libui *libui)
+{
+	t_guimp	*guimp;
+
+	guimp = (t_guimp *)libui->data;
+	load_dropped_image(libui, &guimp->imported_img);
+}
+
 int				main(void)
 {
 	t_guimp	guimp;
@@ -136,10 +145,12 @@ int				main(void)
 	init(&guimp);
 	if (!init_libui(&(guimp.libui)))
 		ft_putendl_fd("Failed to initialize", 2);
-	guimp.imported_img = IMG_Load("../ananasique.png");
+	guimp.imported_img = IMG_Load("../ananasique.png"); // Illegal use of SDL
 	guimp.libui->data = (void *)(&guimp);
 	new_window(guimp.libui, vec2(1024, 600), "GUImp");
 	new_window(guimp.libui, vec2(128, 400), "Tools");
+	guimp.libui->main_window->drop_func = drag_and_drop_image;
+	guimp.libui->default_drop_func = drag_and_drop_image;
 	create_menu_for_tools(guimp.libui);
 	create_bar(guimp.libui);
 	guimp.canvas = create_surface();

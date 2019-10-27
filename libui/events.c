@@ -52,6 +52,39 @@ void            eventloop_init_mouse(t_libui *unicorn)
     set_cursor(unicorn->cursor, unicorn);
 }
 
+void			load_dropped_image(t_libui *unicorn, t_surface **target)
+{
+	SDL_Surface	*img;
+
+	if (img = IMG_Load(unicorn->event.drop.file))
+	{
+		if (*target)
+			SDL_FreeSurface(*target);
+		(*target) = img;
+	}
+}
+
+void			eventloop_drop(t_libui *unicorn)
+{
+	t_window    *window;
+
+	if (unicorn->event.type == SDL_DROPFILE)
+	{
+		if (unicorn->event.drop.file)
+		{
+			window = find_window_by_id(unicorn, unicorn->event.window.windowID);
+			if (window)
+			{
+				if (window->drop_func)
+					window->drop_func(unicorn);
+			}
+			else if (unicorn->default_drop_func)
+				unicorn->default_drop_func(unicorn);
+			SDL_free(unicorn->event.drop.file);
+		}
+	}
+}
+
 static void     handle_events(t_libui *unicorn, int *quit, SDL_Point *point)
 {
     eventloop_window_events(unicorn, quit);
@@ -59,6 +92,7 @@ static void     handle_events(t_libui *unicorn, int *quit, SDL_Point *point)
     eventloop_keydown(unicorn, quit);
     eventloop_mousebuttondown(unicorn, *point);
     eventloop_mousewheel(unicorn);
+    eventloop_drop(unicorn);
     color_change_loop(unicorn);
     menu_events(unicorn, unicorn->menu_list);
 }

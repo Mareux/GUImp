@@ -48,6 +48,7 @@ void    put_rect(t_guimp *guimp, t_vec2_pair pair)
     else
         use_filled_rect(guimp, pair, guimp->canvas);
     guimp->shape_data.anchor_set = 0;
+	copy_surface(guimp->canvas, guimp->preview);
 }
 
 void	use_rect(t_guimp *guimp)

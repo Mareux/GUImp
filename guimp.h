@@ -55,7 +55,8 @@ enum				tools
 	PIPETTE,
 	HAND,
 	MAGNIFYING_GLASS,
-	STICKER
+	STICKER,
+	PICTURE
 };
 
 enum 				BUTTONS
@@ -166,6 +167,9 @@ void				use_text(t_guimp *guimp);
 
 void				settool_pipette(t_libui *libui);
 void				use_pipette(t_guimp *guimp);
+
+void				settool_picture(t_libui *libui);
+void				use_picture(t_guimp *guimp);
 
 void				toggle_filled(t_libui *libui);
 

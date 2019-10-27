@@ -30,3 +30,8 @@ void settool_eraser(t_libui *libui)
 {
 	settool(libui, ERASER);
 }
+
+void	settool_picture(t_libui *libui)
+{
+	settool(libui, PICTURE);
+}

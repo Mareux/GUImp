@@ -56,6 +56,7 @@ void    put_circle(t_guimp *guimp, t_vec2 int_pos, double radius)
     else
         use_filled_circle(guimp, int_pos, guimp->canvas, radius);
     guimp->shape_data.anchor_set = 0;
+	copy_surface(guimp->canvas, guimp->preview);
 }
 
 void	use_circle(t_guimp *guimp)

@@ -24,6 +24,7 @@ int		new_window(t_libui *libui, t_vec2 size, const char *title)
     new->window = create_window(size.x, size.y, title);
     if (!new->window.window)
     	return (0);
+	new->window.drop_func = NULL;
     new->next = libui->windows;
     libui->windows = new;
     if (!libui->main_window)

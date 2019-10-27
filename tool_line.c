@@ -48,6 +48,7 @@ void    put_line(t_guimp *guimp, t_vec2f_pair pair)
                         pair, guimp->color2, guimp->shape_data.thickness);
         guimp->shape_data.anchor_set = 0;
     }
+	copy_surface(guimp->canvas, guimp->preview);
 }
 
 void	use_line(t_guimp *guimp)

@@ -14,11 +14,14 @@
 
 void 		put_sticker(t_surface *img, t_surface *canvas, t_vec2 pos)
 {
-	SDL_Rect	target;
+	t_int_rect	src;
+	t_vec2	target;
 
+	src.topleft = vec2(0, 0);
+	src.bottomright = vec2(img->w, img->h);
 	target.x = pos.x - img->w / 2;
 	target.y = pos.y - img->h / 2;
-	SDL_BlitSurface(img, NULL, canvas, &target);
+	blit_surface(img, src, canvas, target);
 }
 
 static void	draw_y(t_vec2f *start, t_vec2f *end,

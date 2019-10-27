@@ -330,6 +330,7 @@ typedef struct					s_window
     SDL_Window					*window;
     SDL_Surface					*surface;
     t_widget					*widgets;
+    void						(*drop_func)(struct s_libui *);
 	void						(*callback_function)(void*);
 
 }								t_window;
@@ -427,6 +428,7 @@ typedef struct                  s_libui
 	t_mouse_data				mouse;
 	t_textinput					textinput;
 	t_hsv_color					current_color;
+	void						(*default_drop_func)(struct s_libui *);
 }                               t_libui;
 
 void							main_event_loop(
@@ -648,6 +650,7 @@ void			render_text(t_libui *libui, SDL_Event e, t_widget *widgets);
 void	blit_with_offset(SDL_Surface *src, SDL_Surface *dst, t_vec2 offset);
 
 void    blit_surface(t_surface *src, t_int_rect src_rect, t_surface *dst, t_vec2 dst_pos);
+void    blit_scaled(t_surface *src, t_int_rect src_rect, t_surface *dst, t_int_rect dst_rect);
 
 void    copy_surface(t_surface *src, t_surface *dst);
 
@@ -664,5 +667,7 @@ t_queue	*init_queue(t_vec2 pos,
 int 	in_queue(t_queue *queue, t_vec2 pos);
 
 void			eventloop_mousewheel(t_libui *data);
+
+void			load_dropped_image(t_libui *unicorn, t_surface **target);
 
 #endif

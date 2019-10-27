@@ -30,6 +30,7 @@ void    put_square(t_guimp *guimp, t_vec2_pair pair)
     else
         use_filled_square(guimp, pair, guimp->canvas);
     guimp->shape_data.anchor_set = 0;
+	copy_surface(guimp->canvas, guimp->preview);
 }
 
 void	use_square(t_guimp *guimp)
