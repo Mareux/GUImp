@@ -64,31 +64,23 @@ void	add_menu_to_list(t_menu_list **begin, t_menu menu)
 
 void	remove_menu_from_list(t_menu_list **begin, t_menu menu)
 {
+	t_menu_list *temp;
+	t_menu_list *prev;
 
-//	// Store head node
-//	struct Node* temp = *head_ref, *prev;
-//
-//	// If head node itself holds the key to be deleted
-//	if (temp != NULL && temp->data == key)
-//	{
-//		*head_ref = temp->next;   // Changed head
-//		free(temp);               // free old head
-//		return;
-//	}
-//
-//	// Search for the key to be deleted, keep track of the
-//	// previous node as we need to change 'prev->next'
-//	while (temp != NULL && temp->data != key)
-//	{
-//		prev = temp;
-//		temp = temp->next;
-//	}
-//
-//	// If key was not present in linked list
-//	if (temp == NULL) return;
-//
-//	// Unlink the node from linked list
-//	prev->next = temp->next;
-//
-//	free(temp);
+	temp = *begin;
+	if (temp != NULL && temp->menu.id == menu.id)
+	{
+		*begin = temp->next;
+		free(temp);
+		return ;
+	}
+	while (temp != NULL && temp->menu.id != menu.id)
+	{
+		prev = temp;
+		temp = temp->next;
+	}
+	if (temp == NULL)
+		return ;
+	prev->next = temp->next;
+	free(temp);
 }

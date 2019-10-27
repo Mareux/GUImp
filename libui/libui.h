@@ -551,6 +551,7 @@ void 				change_cursor(SDL_SystemCursor id);
 
 
 void				add_menu_to_list(t_menu_list **begin, t_menu menu);
+void				remove_menu_from_list(t_menu_list **begin, t_menu menu);
 t_menu create_menu(enum e_menu_type type, SDL_Rect menu_frame, int id, SDL_Surface *menu_surface);
 void add_field(t_menu_field **begin, void (*click)(void *), void *data, enum e_field_data_type type);
 void	calculate_table_fields_position(SDL_Surface *surface, t_menu *menu, t_menu_field *field);

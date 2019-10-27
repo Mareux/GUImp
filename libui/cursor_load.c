@@ -33,7 +33,7 @@ t_cursor_surface*	cursor_picture_load(void)
 	DIR *dr;
 	t_cursor_surface *cursor_surface;
 
-	dr = opendir("GUImp_icons");
+	dr = opendir("../GUImp_icons");
 	if (dr == NULL)
 	{
 		ft_putendl_fd("Could not open current directory", 2);
@@ -42,7 +42,7 @@ t_cursor_surface*	cursor_picture_load(void)
 	cursor_surface = NULL;
 	while ((de = readdir(dr)) != NULL)
 	{
-		cursor_picture_add(&cursor_surface, IMG_Load(ft_strjoin("GUImp_icons/", de->d_name)), de->d_name);
+		cursor_picture_add(&cursor_surface, IMG_Load(ft_strjoin("../GUImp_icons/", de->d_name)), de->d_name);
 	}
 	closedir(dr);
 	return (cursor_surface);
