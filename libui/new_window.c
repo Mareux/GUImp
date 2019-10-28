@@ -25,6 +25,8 @@ int		new_window(t_libui *libui, t_vec2 size, const char *title)
     if (!new->window.window)
     	return (0);
 	new->window.drop_func = NULL;
+	init_widgets(&new->window.widgets);
+	new->window.callback_function = NULL;
     new->next = libui->windows;
     libui->windows = new;
     if (!libui->main_window)

@@ -16,7 +16,9 @@ int		point_in_textfield(SDL_Point point, t_widget *widgets)
 {
 	t_textfield_list *tmp;
 
-	tmp = widgets->textfield;
+	if (!widgets)
+        return (FALSE);
+    tmp = widgets->textfield;
 	while (tmp)
 	{
 		if (SDL_PointInRect(&point, &tmp->textfield.rect))
@@ -36,7 +38,9 @@ int		button_clicked(SDL_Point point, t_libui *data)
 {
 	t_buttons_list *tmp;
 
-	tmp = data->active_window->widgets->button;
+	if (!data->active_window->widgets)
+        return (FALSE);
+    tmp = data->active_window->widgets->button;
 	while (tmp)
 	{
 		if (SDL_PointInRect(&point, &tmp->button.rect))

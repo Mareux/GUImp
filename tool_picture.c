@@ -10,7 +10,7 @@ static void	draw_picture(t_guimp *guimp, t_vec2_pair pair, t_surface *dst)
 	src_rect.bottomright.x = guimp->imported_img->w;
 	src_rect.bottomright.y = guimp->imported_img->h;
 	dst_rect.topleft = guimp->shape_data.anchor;
-	dst_rect.bottomright = guimp->libui->mouse.pos;
+	dst_rect.bottomright = vec2f_to_vec2(find_canvas_coordinates(guimp, vec2_to_vec2f(guimp->libui->mouse.pos)));
 	blit_scaled(guimp->imported_img, src_rect, dst, dst_rect);
 }
 

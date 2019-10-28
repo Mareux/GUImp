@@ -16,5 +16,4 @@ void	use_bucket(t_guimp *guimp)
 		color = guimp->color2;
 	push_to_buffer(guimp);
 	flood_fill(guimp->canvas, int_pos, get_pixel(guimp->canvas, int_pos.x, int_pos.y), color);
-	copy_surface(guimp->canvas, guimp->preview);
 }
