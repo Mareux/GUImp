@@ -22,7 +22,7 @@ static	void draw_text_field(SDL_Surface *surface, char *text, SDL_Rect field_rec
 					 color);
 	text_surface = create_text_surface(text, font);
 	SDL_BlitSurface(text_surface, NULL, surface, &field_rect);
-
+    SDL_FreeSurface(text_surface);
 }
 
 static void draw_image_field(SDL_Surface *surface, SDL_Surface *image, SDL_Rect field_size)

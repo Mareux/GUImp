@@ -32,6 +32,7 @@ t_cursor_surface*	cursor_picture_load(void)
 	struct dirent *de;
 	DIR *dr;
 	t_cursor_surface *cursor_surface;
+	char *join;
 
 	dr = opendir("../cursor");
 	if (dr == NULL)
@@ -42,7 +43,8 @@ t_cursor_surface*	cursor_picture_load(void)
 	cursor_surface = NULL;
 	while ((de = readdir(dr)) != NULL)
 	{
-		cursor_picture_add(&cursor_surface, IMG_Load(ft_strjoin("../cursor/", de->d_name)), de->d_name);
+		cursor_picture_add(&cursor_surface, IMG_Load(join = ft_strjoin("../cursor/", de->d_name)), de->d_name);
+		free(join);
 	}
 	closedir(dr);
 	return (cursor_surface);

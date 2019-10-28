@@ -24,7 +24,7 @@ SDL_Surface *create_text_surface(char *text, t_font *font)
 
 void			render_text(t_libui *libui, SDL_Event e, t_widget *widgets)
 {
-	if (!widgets->textfield)
+	if (!widgets->textfield     )
 		return;
 	if (e.type == SDL_TEXTINPUT)
 	{
@@ -162,6 +162,7 @@ int				main(void)
 	hook_hooks(&guimp);
 	guimp.libui->custom_loop = guimp_loop;
 	libui_loop(guimp.libui);
-	close_sdl(guimp.libui);
+//	close_sdl(guimp.libui);
+	system("leaks GUImp");
 	return (0);
 }
