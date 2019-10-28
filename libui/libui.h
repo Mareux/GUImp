@@ -147,7 +147,7 @@ typedef struct 					s_menu
 	int 						opened;
 	t_color						menu_color;
 	t_color						active_field_color;
-	SDL_Surface					*menu_surface;
+	SDL_Window					*menu_window;
 	int							spacing_w;
 	int							spacing_h;
 	SDL_Rect					menu_frame;
@@ -160,10 +160,17 @@ enum e_field_data_type
 	FIELD_TEXT,
 	FIELD_TEXTFIELD,
 	FIELD_COMBOBOX,
-	FIELD_COLOR_PICKER
+	FIELD_COLOR_PICKER,
+	FIELD_TOOL
 };
 
 #define ELEMENTS_IN_TABLE 3
+
+typedef struct 					s_table_tools
+{
+	SDL_Surface					*image;
+	int 						tool;
+}								t_table_tools;
 
 typedef struct 					s_menu_field
 {
@@ -180,7 +187,7 @@ typedef struct 					s_menu_field
 
 typedef struct 					s_menu_list
 {
-	t_menu						menu;
+	t_menu						*menu;
 	struct s_menu_list			*next;
 }								t_menu_list;
 
@@ -552,9 +559,9 @@ void				draw_text(t_text *text);
 void 				change_cursor(SDL_SystemCursor id);
 
 
-void				add_menu_to_list(t_menu_list **begin, t_menu menu);
+void				add_menu_to_list(t_menu_list **begin, t_menu *menu);
 void				remove_menu_from_list(t_menu_list **begin, t_menu menu);
-t_menu create_menu(enum e_menu_type type, SDL_Rect menu_frame, int id, SDL_Surface *menu_surface);
+t_menu * create_menu(enum e_menu_type type, SDL_Rect menu_frame, int id, SDL_Window *menu_window);
 void add_field(t_menu_field **begin, void (*click)(void *), void *data, enum e_field_data_type type);
 void	calculate_table_fields_position(SDL_Surface *surface, t_menu *menu, t_menu_field *field);
 void	calculate_context_fields_position(t_menu_field *field, TTF_Font *font, SDL_Rect menu_rect);
@@ -580,7 +587,7 @@ void	tools_window_loop(t_libui *libui);
 void		recalculate_table_fields(t_menu_field *field, int difference);
 
 
-t_window *create_window_with_textfield(t_libui *libui,void (*callback_function)(void*));
+t_window *create_window_with_textfield(t_libui *libui, void (*callback_function)(void *), const char *name);
 
 t_window	*create_window_with_label(t_libui *libui, void (*callback_function)(void*));
 
@@ -669,5 +676,7 @@ int 	in_queue(t_queue *queue, t_vec2 pos);
 void			eventloop_mousewheel(t_libui *data);
 
 void			load_dropped_image(t_libui *unicorn, t_surface **target);
+
+void update_window_surface(t_window_list *list);
 
 #endif

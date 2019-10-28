@@ -24,6 +24,8 @@ SDL_Surface *create_text_surface(char *text, t_font *font)
 
 void			render_text(t_libui *libui, SDL_Event e, t_widget *widgets)
 {
+	if (!widgets)
+		return;
 	if (e.type == SDL_TEXTINPUT)
 	{
 		render_text_in_textfield(widgets->active_textfield,

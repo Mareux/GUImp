@@ -5,11 +5,11 @@ set(CMAKE_C_STANDARD 11)
 
 # Linux
 
-#find_package(SDL2 REQUIRED)
-#find_package(SDL_ttf REQUIRED)
-#find_package(SDL_image REQUIRED)
-#include_directories(${SDL2_INCLUDE_DIRS})
-#link_directories(${SDL2_LIBRARY})
+find_package(SDL2 REQUIRED)
+find_package(SDL_ttf REQUIRED)
+find_package(SDL_image REQUIRED)
+include_directories(${SDL2_INCLUDE_DIRS})
+link_directories(${SDL2_LIBRARY})
 
 # Unit Factory
 
@@ -20,14 +20,14 @@ set(CMAKE_C_STANDARD 11)
 
 # Mac OS VM
 
-set(SDL2_INCLUDE_DIR /usr/local/Cellar/sdl2/2.0.9_1/include/SDL2)
-set(SDL2_LIBRARY /usr/local/Cellar/sdl2/2.0.9_1/lib)
-include_directories(${SDL2_INCLUDE_DIR}
-        /usr/local/Cellar/sdl2_image/2.0.4/include/SDL2
-        /usr/local/Cellar/sdl2_ttf/2.0.15/include/SDL2)
-link_directories(${SDL2_LIBRARY}
-        /usr/local/Cellar/sdl2_image/2.0.4/lib
-        /usr/local/Cellar/sdl2_ttf/2.0.15/lib)
+#set(SDL2_INCLUDE_DIR /usr/local/Cellar/sdl2/2.0.9_1/include/SDL2)
+#set(SDL2_LIBRARY /usr/local/Cellar/sdl2/2.0.9_1/lib)
+#include_directories(${SDL2_INCLUDE_DIR}
+#        /usr/local/Cellar/sdl2_image/2.0.4/include/SDL2
+#        /usr/local/Cellar/sdl2_ttf/2.0.15/include/SDL2)
+#link_directories(${SDL2_LIBRARY}
+#        /usr/local/Cellar/sdl2_image/2.0.4/lib
+#        /usr/local/Cellar/sdl2_ttf/2.0.15/lib)
 
 file(GLOB libft
         "libft/*.c")
@@ -88,6 +88,7 @@ add_executable(GUImp
         libui/generic_window/multiple_window_delete.c
         libui/generic_window/multiple_windows_utils.c libui/generic_window/generic_window_events.c
         text_editing_events.c
-        text_render.c libui/blit_surface.c guimp_redo.c libui/save_jpg.c libui/create_surface.c settool_2.c settool_3.c convert_rect_to_square.c libui/draw_circle_2.c libui/flood_fill_2.c libui/events_mouse.c libui/find_window_by_id.c tool_picture.c)
+        text_render.c libui/blit_surface.c guimp_redo.c libui/save_jpg.c libui/create_surface.c settool_2.c settool_3.c convert_rect_to_square.c libui/draw_circle_2.c libui/flood_fill_2.c libui/events_mouse.c libui/find_window_by_id.c
+        update_window_surface.c tool_picture.c)
 
 target_link_libraries(GUImp -lSDL2 -lm -lSDL2_image -lSDL2_ttf)

@@ -6,7 +6,7 @@
 /*   By: mnosko <mnosko@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 20:51:06 by mnosko            #+#    #+#             */
-/*   Updated: 2019/10/17 20:48:30 by mnosko           ###   ########.fr       */
+/*   Updated: 2019/10/28 11:18:34 by mnosko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,16 @@ static void draw_color_field(SDL_Surface *surface, void *data, SDL_Rect field_re
 					 color);
 }
 
+static void	draw_tool_field(SDL_Surface *surface, t_table_tools *tool, SDL_Rect field_rect, t_color color)
+{
+	draw_filled_rect(surface,
+					 (t_vec2){field_rect.x, field_rect.y},
+					 (t_vec2){field_rect.x + field_rect.w, field_rect.y + field_rect.h},
+					 color);
+	SDL_BlitScaled(tool->image, &tool->image->clip_rect, surface, &field_rect);
+
+}
+
 void draw_field(SDL_Surface *surface, t_menu_field *field,
 					   TTF_Font *font)
 {
@@ -57,6 +67,10 @@ void draw_field(SDL_Surface *surface, t_menu_field *field,
 	{
 		draw_color_field(surface, field->data, field->field_rect);
 	}
+	else if (field->type == FIELD_TOOL)
+	{
+		draw_tool_field(surface, field->data, field->field_rect, field->field_color);
+	}
 	else if (field->type == FIELD_TEXTFIELD)
 	{
 	}
@@ -68,29 +82,11 @@ void draw_field(SDL_Surface *surface, t_menu_field *field,
 
 static void draw_bar(SDL_Surface *surface, t_menu_field *field, TTF_Font *font)
 {
-	int opened;
-	t_menu *menu;
-
-	opened = FALSE;
-	menu = NULL;
 	while (field)
 	{
-		if (field->active)
-		{
-			draw_field(surface, field, font);
-			if (field->menu->opened)
-			{
-				opened = TRUE;
-				menu = field->menu;
-			}
-		} else
-		{
-			draw_field(surface, field, font);
-		}
+		draw_field(surface, field, font);
 		field = field->next;
 	}
-	if (opened)
-		draw_menu(surface, menu, font);
 }
 
 static void draw_context(SDL_Surface *surface, t_menu_field *field, TTF_Font *font)
@@ -118,7 +114,8 @@ void draw_menu(SDL_Surface *surface, t_menu *menu, TTF_Font *font)
 		draw_bar(surface, menu->fields, font);
 	} else if (menu->type == CONTEXT)
 	{
-		draw_context(surface, menu->fields, font);
+		if (menu->opened == TRUE)
+			draw_context(surface, menu->fields, font);
 	} else if (menu->type == TABLE)
 	{
 		draw_table(surface, menu->fields, font);
@@ -129,7 +126,7 @@ void	draw_all_menus(t_menu_list *list, TTF_Font *font)
 {
 	while (list)
 	{
-		draw_menu(list->menu.menu_surface, &list->menu, font);
+		draw_menu(SDL_GetWindowSurface(list->menu->menu_window), list->menu, font);
 		list = list->next;
 	}
 }

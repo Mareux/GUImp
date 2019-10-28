@@ -71,11 +71,6 @@ void	eventloop_keydown(t_libui *data, int *quit)
 		if (data->event.key.keysym.scancode
 			== SDL_SCANCODE_ESCAPE)
 		{
-//			if (window->id != data->main_window->id)
-//			{
-//				hide_active_window(&data->active_window,
-//						data->main_window, &data->windows);
-//			}
 			*quit = TRUE;
 		}
 		keybind = data->hooks.keybinds;

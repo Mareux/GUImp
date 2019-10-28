@@ -50,8 +50,11 @@ static void     update_active_window(t_libui *data)
     }
 }
 
-static void     left_mouse_button_down(t_libui *data, SDL_Point point)
+static void left_mouse_button_down(t_libui *data)
 {
+	SDL_Point point;
+
+	point = (SDL_Point){data->mouse.pos.x, data->mouse.pos.y};
     if (data->mouse.m1_pressed == 0)
         data->mouse.m1_just_pressed = 1;
     data->mouse.m1_pressed = 1;
@@ -72,7 +75,7 @@ void	        eventloop_mousebuttondown(t_libui *data, SDL_Point point)
     {
         update_active_window(data);
         if (data->event.button.button == SDL_BUTTON_LEFT)
-            left_mouse_button_down(data, point);
+			left_mouse_button_down(data);
         else if (data->event.button.button == SDL_BUTTON_RIGHT)
         {
             if (data->mouse.m2_pressed == 0)

@@ -50,11 +50,6 @@ void	change_window_surface(t_libui *libui, const char *title)
 	}
 }
 
-void	update_window_surface(t_libui *libui, const char *title)
-{
-	t_window_list	*w;
-}
-
 SDL_Surface	*get_window_surface(t_libui *libui, const char *title)
 {
 	t_window_list *w;

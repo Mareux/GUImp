@@ -194,6 +194,11 @@ void                check_bounds(t_guimp *guimp);
 
 t_vec2_pair         convert_rect_to_square(t_vec2_pair pair);
 
+void	draw_textfield(SDL_Surface *surface, t_textfield *textfield);
 
+void	draw_label(SDL_Surface *surface, t_label_list *label);
+void	draw_button(SDL_Surface *surface, t_button *button);
+
+void	draw_widgets(t_window_list *list);
 
 #endif

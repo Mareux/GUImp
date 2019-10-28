@@ -6,7 +6,7 @@
 /*   By: mnosko <mnosko@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/29 17:55:33 by ibarabas          #+#    #+#             */
-/*   Updated: 2019/10/20 19:15:31 by mnosko           ###   ########.fr       */
+/*   Updated: 2019/10/28 11:47:50 by mnosko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,11 +110,11 @@ void			libui_loop(t_libui *unicorn)
 		while (SDL_PollEvent(&(unicorn->event)))
 		{
 			handle_events(unicorn, &quit, &point);
-			if (SDL_IsTextInputActive())
+				if (SDL_IsTextInputActive())
 			{
 				eventloop_textinput(unicorn);
-//				render_text(unicorn, unicorn->event,
-//						unicorn->active_window->widgets);
+				render_text(unicorn, unicorn->event,
+						unicorn->active_window->widgets);
 			}
 		}
 		if (unicorn->custom_loop)
@@ -122,7 +122,7 @@ void			libui_loop(t_libui *unicorn)
 		draw_all_menus(unicorn->menu_list, unicorn->font);
 		if (find_window(unicorn, "Color picker"))
 			draw_color_picker_window(unicorn);
-		SDL_UpdateWindowSurface(find_window(unicorn, "Tools"));
-		SDL_UpdateWindowSurface(unicorn->main_window->window);
+		draw_widgets(unicorn->windows);
+		update_window_surface(unicorn->windows);
 	}
 }
