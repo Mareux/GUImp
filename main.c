@@ -140,6 +140,28 @@ void			drag_and_drop_image(t_libui *libui)
 	load_dropped_image(libui, &guimp->imported_img);
 }
 
+void			init_settings_window(t_guimp *guimp)
+{
+	t_label		label;
+	t_window	*window;
+
+	window = find_t_window(guimp->libui, "Settings");
+	label = create_label("This is a settings menu.", vec2(10, 10), guimp->libui->font);
+	add_label_to_list(&window->widgets->label, label);
+	label = create_label("It is scrollable.", vec2(10, 50), guimp->libui->font);
+	add_label_to_list(&window->widgets->label, label);
+	label = create_label("Scroll down to access the settings.", vec2(10, 100), guimp->libui->font);
+	add_label_to_list(&window->widgets->label, label);
+	label = create_label("Scroll some more, you're almost there.", vec2(10, 600), guimp->libui->font);
+	add_label_to_list(&window->widgets->label, label);
+	label = create_label("You expected a meme picture,", vec2(10, 1200), guimp->libui->font);
+	add_label_to_list(&window->widgets->label, label);
+	label = create_label("But we don't have a picture widget!", vec2(10, 1500), guimp->libui->font);
+	add_label_to_list(&window->widgets->label, label);
+	window->background_color = rgb(200, 200, 200);
+	window->scrollable = 1;
+}
+
 int				main(void)
 {
 	t_guimp	guimp;
@@ -151,6 +173,8 @@ int				main(void)
 	guimp.libui->data = (void *)(&guimp);
 	new_window(guimp.libui, vec2(1024, 600), "GUImp");
 	new_window(guimp.libui, vec2(128, 400), "Tools");
+	new_window(guimp.libui, vec2(400, 400), "Settings");
+	init_settings_window(&guimp);
 	guimp.libui->main_window->drop_func = drag_and_drop_image;
 	guimp.libui->default_drop_func = drag_and_drop_image;
 	create_menu_for_tools(guimp.libui);

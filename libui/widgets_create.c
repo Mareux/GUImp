@@ -54,14 +54,18 @@ t_combobox		create_combobox(void *data,
 	return (combobox);
 }
 
-t_label create_label(char *text, SDL_Rect rect, TTF_Font *font)
+t_label create_label(char *text, t_vec2	pos, t_font *font)
 {
 	t_label	label;
+	SDL_Rect rect;
 
 	label.id = 0;
-//	label.text_surface = create_text_surface(text, font);
+	rect.x = pos.x;
+	rect.y = pos.y;
+	label.text_surface = create_text_surface(text, font);
 	label.text = text;
 	label.font = font;
+	label.pos = pos;
 	label.rect = rect;
 	label.visible = TRUE;
 	return (label);

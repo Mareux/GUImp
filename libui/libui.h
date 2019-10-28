@@ -241,6 +241,7 @@ typedef struct					s_label
     SDL_Surface					*text_surface;
     char 						*text;
     TTF_Font					*font;
+	t_vec2						pos;
     SDL_Rect					rect;
     int							visible;
     t_menu						*menu;
@@ -334,6 +335,9 @@ typedef struct					s_window
     int							id;
     int							active;
     int							type;
+    int							scrollable;
+    t_vec2						scroll_offset;
+    t_color						background_color;
     SDL_Window					*window;
     SDL_Surface					*surface;
     t_widget					*widgets;
@@ -463,7 +467,7 @@ t_textfield			create_textfield(SDL_Surface *text_surface,
 									SDL_Rect rect);
 t_combobox			create_combobox(void *data,
 								  SDL_Rect field_rect, t_color color);
-t_label				create_label(char *text, SDL_Rect rect, TTF_Font *font);
+t_label				create_label(char *text, t_vec2 pos, t_font *font);
 t_button			create_button(SDL_Surface *text_surface,
 							  SDL_Rect rect, int type, char *name);
 t_image				create_image(SDL_Rect rect, char *file);
@@ -547,6 +551,8 @@ void				draw_rect(t_surface *surface, t_vec2 topleft,
 					t_vec2 bottomright, t_color color);
 void				draw_filled_rect(t_surface *surface, t_vec2 topleft,
 					t_vec2 bottomright, t_color color);
+
+void				set_window_color(t_libui *libui, const char *title, t_color color);
 
 void 				put_sticker(t_surface *img, t_surface *canvas, t_vec2 pos);
 void				draw_line_of_stickers(SDL_Surface *surface, t_vec2f start,

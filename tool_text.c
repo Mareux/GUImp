@@ -40,6 +40,7 @@ void	use_text(t_guimp *guimp)
 		}
 	}
 	init_text(guimp->libui, &text);
+	text.color = guimp->color1;
 	if (guimp->libui->mouse.m2_pressed)
 		text.text = ft_strdup(guimp->text_tool.text);
 	else

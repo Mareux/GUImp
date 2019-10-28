@@ -26,6 +26,9 @@ int		new_window(t_libui *libui, t_vec2 size, const char *title)
     	return (0);
 	new->window.drop_func = NULL;
 	new->window.callback_function = NULL;
+	new->window.background_color = rgba(0, 0, 0, 0);
+	new->window.scrollable = 0;
+	new->window.scroll_offset = vec2(0, 0);
     new->next = libui->windows;
     libui->windows = new;
     if (!libui->main_window)

@@ -1,5 +1,35 @@
 #include "libui.h"
 
+void	scroll_widgets(t_window *window, t_vec2 scroll)
+{
+	t_textfield_list *textfield;
+	t_label_list	*label;
+	t_buttons_list *button;
+
+
+
+		if (window->widgets) {
+//			textfield = window->widgets->textfield;
+//			while (textfield) {
+//				textfield->textfield.pos.x += scroll.x;
+//				textfield->textfield.pos.y += scroll.y;
+//				textfield = textfield->next;
+//			}
+//			button = window->widgets->button;
+//			while (button) {
+//				button->button.pos.x += scroll.x;
+//				button->button.pos.y += scroll.y;
+//				button = button->next;
+//			}∑
+			label = window->widgets->label;
+			while (label) {
+				label->label.pos.x += scroll.x;
+				label->label.pos.y += scroll.y;
+				label = label->next;
+			}
+		}
+}
+
 void			eventloop_mousewheel(t_libui *data)
 {
     if (data->event.type == SDL_MOUSEWHEEL
@@ -9,11 +39,13 @@ void			eventloop_mousewheel(t_libui *data)
         {
             if (data->hooks.mwheel_up)
                 data->hooks.mwheel_up(data);
+            scroll_widgets(data->active_window, vec2(0, 30));
         }
         else
         {
             if (data->hooks.mwheel_down)
                 data->hooks.mwheel_down(data);
+			scroll_widgets(data->active_window, vec2(0, -30));
         }
     }
 }

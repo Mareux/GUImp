@@ -68,6 +68,18 @@ SDL_Surface	*get_window_surface(t_libui *libui, const char *title)
 	return (NULL);
 }
 
+void	set_window_color(t_libui *libui, const char *title, t_color color)
+{
+	t_window	*window;
+
+	if (!libui)
+		return ;
+	window = find_t_window(libui, title);
+	if (!window)
+		return ;
+	window->background_color = color;
+}
+
 void	set_window_resizable(t_libui *libui, const char *title, int resizable)
 {
 	SDL_Window	*window;

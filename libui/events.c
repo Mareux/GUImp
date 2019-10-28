@@ -97,6 +97,16 @@ static void     handle_events(t_libui *unicorn, int *quit, SDL_Point *point)
     menu_events(unicorn, unicorn->menu_list);
 }
 
+void draw_window_backgrounds(t_window_list *list)
+{
+	while(list)
+	{
+		fill_surface(list->window.surface, list->window.background_color);
+		list = list->next;
+	}
+}
+
+
 void			libui_loop(t_libui *unicorn)
 {
 	int			quit;
@@ -105,6 +115,7 @@ void			libui_loop(t_libui *unicorn)
 	quit = FALSE;
 	while (!quit)
 	{
+		draw_window_backgrounds(unicorn->windows);
 		eventloop_init_mouse(unicorn);
 		unicorn->textinput.active = 0;
 		while (SDL_PollEvent(&(unicorn->event)))

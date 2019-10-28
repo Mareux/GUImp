@@ -37,6 +37,8 @@ void	draw_label(SDL_Surface *surface, t_label_list *label)
 {
 	if (label->label.visible)
 	{
+		label->label.rect.x = label->label.pos.x;
+		label->label.rect.y = label->label.pos.y;
 		if (label->label.text_surface)
 			SDL_BlitSurface(label->label.text_surface, NULL,
 				surface, &label->label.rect);
