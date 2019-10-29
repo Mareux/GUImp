@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   guimp_undo.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ibarabas <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/10/29 21:43:51 by ibarabas          #+#    #+#             */
+/*   Updated: 2019/10/29 21:43:52 by ibarabas         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "guimp.h"
 
 /*
@@ -5,34 +17,34 @@
 **  in this buffer
 */
 
-void    limit_buffer(t_undo *buffer)
+void	limit_buffer(t_undo *buffer)
 {
-    int     i;
-    t_undo  *tmp;
+	int		i;
+	t_undo	*tmp;
 
-    i = 1;
-    while (i < UNDO_BUFFER_LIMIT && buffer)
-    {
-        buffer = buffer->next;
-        i++;
-    }
-    if (i < UNDO_BUFFER_LIMIT || !buffer)
-        return ;
-    tmp = buffer;
-    buffer = buffer->next;
-    tmp->next = NULL;
-    while (buffer)
-    {
-        tmp = buffer;
-        buffer = buffer->next;
-        free_surface(tmp->surface);
-        free(tmp);
-    }
+	i = 1;
+	while (i < UNDO_BUFFER_LIMIT && buffer)
+	{
+		buffer = buffer->next;
+		i++;
+	}
+	if (i < UNDO_BUFFER_LIMIT || !buffer)
+		return ;
+	tmp = buffer;
+	buffer = buffer->next;
+	tmp->next = NULL;
+	while (buffer)
+	{
+		tmp = buffer;
+		buffer = buffer->next;
+		free_surface(tmp->surface);
+		free(tmp);
+	}
 }
 
 t_undo	*new_buffer_item(void)
 {
-	t_undo	*new;
+	t_undo *new;
 
 	new = (t_undo *)malloc(sizeof(t_undo));
 	if (!new)
@@ -49,7 +61,7 @@ t_undo	*new_buffer_item(void)
 
 void	push_to_buffer(t_guimp *guimp)
 {
-	t_undo	*new;
+	t_undo *new;
 
 	new = new_buffer_item();
 	new->surface = duplicate_surface(guimp->canvas);
@@ -58,7 +70,6 @@ void	push_to_buffer(t_guimp *guimp)
 	limit_buffer(guimp->undo_buffer);
 }
 
-
 /*
 **	Copies the most recent buffered surface to the canvas,
 **	and removes it from buffer
@@ -66,25 +77,25 @@ void	push_to_buffer(t_guimp *guimp)
 
 void	pull_from_buffer(t_guimp *guimp)
 {
-    t_undo  *tmp;
+	t_undo *tmp;
 
-    if (guimp->undo_buffer)
-    {
-        copy_surface(guimp->undo_buffer->surface, guimp->canvas);
-        tmp = guimp->undo_buffer;
-        guimp->undo_buffer = tmp->next;
-        free_surface(tmp->surface);
-        free(tmp);
-    }
+	if (guimp->undo_buffer)
+	{
+		copy_surface(guimp->undo_buffer->surface, guimp->canvas);
+		tmp = guimp->undo_buffer;
+		guimp->undo_buffer = tmp->next;
+		free_surface(tmp->surface);
+		free(tmp);
+	}
 }
 
-void    guimp_undo(t_libui *libui)
+void	guimp_undo(t_libui *libui)
 {
-    t_guimp *guimp;
+	t_guimp *guimp;
 
-    guimp = (t_guimp *)libui->data;
-    if (!guimp->undo_buffer)
-        return ;
-    backup_buffer(guimp);
-    pull_from_buffer(guimp);
+	guimp = (t_guimp *)libui->data;
+	if (!guimp->undo_buffer)
+		return ;
+	backup_buffer(guimp);
+	pull_from_buffer(guimp);
 }

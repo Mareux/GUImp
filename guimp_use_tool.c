@@ -12,10 +12,22 @@
 
 #include "guimp.h"
 
+void	use_tool_2(t_guimp *guimp)
+{
+	if (guimp->current_tool == PIPETTE)
+		use_pipette(guimp);
+	else if (guimp->current_tool == STICKER)
+		use_sticker_brush(guimp);
+	else if (guimp->current_tool == TEXT_LINE)
+		toggle_text_input(guimp);
+	else if (guimp->current_tool == PICTURE)
+		use_picture(guimp);
+}
+
 void	use_tool(t_guimp *guimp)
 {
-    if (guimp->libui->active_window != guimp->libui->main_window)
-        return ;
+	if (guimp->libui->active_window != guimp->libui->main_window)
+		return ;
 	if (guimp->current_tool == PENCIL)
 		use_pencil(guimp);
 	else if (guimp->current_tool == BRUSH)
@@ -32,12 +44,6 @@ void	use_tool(t_guimp *guimp)
 		use_rect(guimp);
 	else if (guimp->current_tool == SQUARE)
 		use_square(guimp);
-	else if (guimp->current_tool == PIPETTE)
-		use_pipette(guimp);
-	else if (guimp->current_tool == STICKER)
-		use_sticker_brush(guimp);
-	else if (guimp->current_tool == TEXT_LINE)
-		toggle_text_input(guimp);
-	else if (guimp->current_tool == PICTURE)
-		use_picture(guimp);
+	else
+		use_tool_2(guimp);
 }

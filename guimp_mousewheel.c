@@ -12,7 +12,7 @@
 
 #include "guimp.h"
 
-void 	guimp_mwheel_up(t_libui *libui)
+void	guimp_mwheel_up(t_libui *libui)
 {
 	t_guimp	*guimp;
 
@@ -22,7 +22,7 @@ void 	guimp_mwheel_up(t_libui *libui)
 	zoom_in(guimp);
 }
 
-void 	guimp_mwheel_down(t_libui *libui)
+void	guimp_mwheel_down(t_libui *libui)
 {
 	t_guimp	*guimp;
 

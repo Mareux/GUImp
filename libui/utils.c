@@ -29,3 +29,8 @@ void			fill_surface(SDL_Surface *surface, t_color color)
 		x++;
 	}
 }
+
+t_surface		*load_image_as_surface(const char *file)
+{
+	return (IMG_Load(file));
+}
