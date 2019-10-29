@@ -169,7 +169,7 @@ int				main(void)
 	init(&guimp);
 	if (!init_libui(&(guimp.libui)))
 		ft_putendl_fd("Failed to initialize", 2);
-	guimp.imported_img = IMG_Load("../ananasique.png"); // Illegal use of SDL
+	guimp.imported_img = load_image_as_surface("../ananasique.png");
 	guimp.libui->data = (void *)(&guimp);
 	new_window(guimp.libui, vec2(1024, 600), "GUImp");
 	new_window(guimp.libui, vec2(128, 400), "Tools");
@@ -186,7 +186,6 @@ int				main(void)
 	hook_hooks(&guimp);
 	guimp.libui->custom_loop = guimp_loop;
 	libui_loop(guimp.libui);
-//	close_sdl(guimp.libui);
 	system("leaks GUImp");
 	return (0);
 }

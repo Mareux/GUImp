@@ -719,5 +719,6 @@ void 				flood_fill(t_surface *surface, t_vec2 pos,
 							   t_color affected_color, t_color target_color);
 t_color rgb_color_to_t_color(t_rgb_color rgb_color);
 void set_system_cursor(t_cursor *cursor, t_libui *libui, int id);
+t_surface			*load_image_as_surface(const char *file);
 
 #endif
