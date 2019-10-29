@@ -30,10 +30,12 @@ t_menu	*create_file_context(SDL_Window *window)
 	t_menu *menu;
 
 	menu = create_menu(CONTEXT, (SDL_Rect){0, 0, 0, 0}, 3, window);
-	add_field(&menu->fields, (void*)on_image_save, "Save Image", FIELD_TEXT);
-	add_field(&menu->fields,
+	add_field((void*)&menu->fields,
+			(void*)on_image_save, "Save Image", FIELD_TEXT);
+	add_field((void*)&menu->fields,
 			(void*)on_load_jpeg, "Upload JPEG/PNG", FIELD_TEXT);
-	add_field(&menu->fields, (void*)on_load_font, "Upload Font", FIELD_TEXT);
+	add_field((void*)&menu->fields,
+			(void*)on_load_font, "Upload Font", FIELD_TEXT);
 	return (menu);
 }
 
@@ -54,10 +56,10 @@ void	create_bar(t_libui *libui)
 		(SDL_Rect){0, 0, libui->main_window->surface->w, 30},
 		2, libui->main_window->window);
 	menu->opened = TRUE;
-	add_field(&menu->fields, NULL, "File", FIELD_TEXT);
+	add_field((void*)(&menu->fields), NULL, "File", FIELD_TEXT);
 	fields = menu->fields;
 	fields->menu = create_file_context(libui->main_window->window);
-	add_field(&menu->fields, (void*)clear_canvas, "Clear Screen", FIELD_TEXT);
+	add_field((void*)&menu->fields, (void*)clear_canvas, "Clear Screen", FIELD_TEXT);
 	calculate_bar_fields_position(menu->fields, libui->font);
 	calculate_context_fields_position(fields->menu->fields,
 			libui->font, fields->menu->menu_frame);

@@ -267,7 +267,7 @@ typedef struct					s_window
 	SDL_Window					*window;
 	SDL_Surface					*surface;
 	t_widget					*widgets;
-	void						(*drop_func)(struct s_libui *);
+	void						(*drop_func)(void*);
 	void						(*callback_function)(void*);
 }								t_window;
 
@@ -287,17 +287,17 @@ typedef struct					s_keylist
 typedef struct					s_keybind
 {
 	t_keylist					*keys;
-	void						(*func)(struct s_libui *);
+	void						(*func)(void*);
 	struct s_keybind			*next;
 }								t_keybind;
 
 typedef struct					s_keyhooks
 {
-	void						(*mouse1_down)(struct s_libui *);
-	void						(*mouse2_down)(struct s_libui *);
-	void						(*mouse3_down)(struct s_libui *);
-	void						(*mwheel_down)(struct s_libui *);
-	void						(*mwheel_up)(struct s_libui *);
+	void						(*mouse1_down)(void*);
+	void						(*mouse2_down)(void*);
+	void						(*mouse3_down)(void*);
+	void						(*mwheel_down)(void*);
+	void						(*mwheel_up)(void*);
 	t_keybind					*keybinds;
 }								t_keyhooks;
 
