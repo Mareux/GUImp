@@ -31,6 +31,17 @@ SDL_Color rgb_color_to_sdl_color(t_rgb_color rgb_color)
 			};
 }
 
+t_color rgb_color_to_t_color(t_rgb_color rgb_color)
+{
+	return (t_color)
+	{
+		rgb_color.r * 255,
+		rgb_color.g * 255,
+		rgb_color.b * 255,
+		0xff
+	};
+}
+
 t_rgb_color sdl_color_color_to_rgb(t_color color)
 {
 	return (t_rgb_color)

@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libui/libui.h"
 #include "guimp.h"
 
 void set_cursor(t_cursor *cursor, t_libui *libui)

@@ -69,7 +69,7 @@ add_executable(GUImp
         libui/flood_fill.c
         libui/draw_circle.c
         tool_circle.c
-        checker.c
+        libui/checker.c
         libui/widgets/widgets_draw.c
         libui/menu/menu_add.c
         libui/menu/calculate_menu.c
@@ -83,7 +83,7 @@ add_executable(GUImp
         libui/menu/menu.c
         settool_1.c guimp_toggle_filled.c tool_brush.c guimp_mousewheel.c tool_eraser.c tool_line.c tool_rect.c
         tool_square.c tool_pipette.c stickers.c tool_sticker_brush.c menu_table.c libui/cursor_load.c cursor_set.c libui/generic_window/generic_windows.c libui/color_picker/convert_colors.c
-        libui/color_picker/color_picker_window.c libui/color_picker/draw_gradients.c libui/color_picker/color_utils.c libui/color_picker/draw_info.c color_events.c
+        libui/color_picker/color_picker_window.c libui/color_picker/draw_gradients.c libui/color_picker/color_utils.c libui/color_picker/draw_info.c libui/color_events.c
         menu_events.c menu_bar.c
         libui/generic_window/multiple_window_delete.c
         libui/generic_window/multiple_windows_utils.c libui/generic_window/generic_window_events.c
