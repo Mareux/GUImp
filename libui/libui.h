@@ -626,4 +626,13 @@ t_surface			*create_text_surface(char *text, t_font *font);
 void				render_text(t_libui *libui, SDL_Event e, t_widget *widgets);
 void				set_window_position(t_libui *libui, char *title, t_vec2 pos);
 
+void			eventloop_window(t_libui *unicorn);
+
+void			eventloop_textinput(t_libui *libui);
+
+void            eventloop_init_mouse(t_libui *unicorn);
+
+void		event_loop_text_input(t_libui *unicorn);
+
+
 #endif

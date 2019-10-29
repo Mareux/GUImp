@@ -16,15 +16,18 @@ static void		draw_text_field(SDL_Surface *surface,
 		t_menu_field *field, TTF_Font *font)
 {
 	SDL_Surface *text_surface;
+	SDL_Rect rect;
 
 	draw_filled_rect(surface,
 				(t_vec2){field->field_rect.x, field->field_rect.y},
 				(t_vec2){field->field_rect.x + field->field_rect.w,
-				field->field_rect.y + field->field_rect.h},
+			 field->field_rect.y + field->field_rect.h},
 				field->field_color);
 	text_surface = create_text_surface(field->data, font);
+	rect = field->field_rect;
 	SDL_BlitSurface(text_surface, NULL, surface, &field->field_rect);
 	SDL_FreeSurface(text_surface);
+	field->field_rect = rect;
 }
 
 static void		draw_number_field(SDL_Surface *surface,
@@ -33,6 +36,7 @@ static void		draw_number_field(SDL_Surface *surface,
 {
 	SDL_Surface		*text_surface;
 	char			*text;
+	SDL_Rect rect;
 
 	draw_filled_rect(surface,
 				(t_vec2){field->field_rect.x, field->field_rect.y},
@@ -42,8 +46,10 @@ static void		draw_number_field(SDL_Surface *surface,
 	text = ft_itoa(*number);
 	text_surface = create_text_surface(text, font);
 	free(text);
+	rect = field->field_rect;
 	SDL_BlitSurface(text_surface, NULL, surface, &field->field_rect);
 	SDL_FreeSurface(text_surface);
+	field->field_rect = rect;
 }
 
 static void		draw_color_field(SDL_Surface *surface,
