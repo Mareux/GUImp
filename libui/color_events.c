@@ -14,8 +14,8 @@
 
 enum e_color_picker_ui_state	get_state(SDL_Point mouse)
 {
-	SDL_Rect main_gradient;
-	SDL_Rect hue_gradient;
+	SDL_Rect	main_gradient;
+	SDL_Rect	hue_gradient;
 
 	main_gradient = (SDL_Rect) {0, 0, MAIN_GRADIENT_SIZE, MAIN_GRADIENT_SIZE};
 	hue_gradient = (SDL_Rect) {0, MAIN_GRADIENT_SIZE,
@@ -27,7 +27,7 @@ enum e_color_picker_ui_state	get_state(SDL_Point mouse)
 	return (UI_NONE);
 }
 
-void						color_change_loop(t_libui *libui)
+void							color_change_loop(t_libui *libui)
 {
 	t_window *window;
 
