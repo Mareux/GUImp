@@ -84,17 +84,22 @@ void	on_load_jpeg(t_libui *libui)
 
 void	load_font(t_libui *libui)
 {
-	t_guimp			*guimp;
 	t_return_data	*data;
 	int				i;
+	TTF_Font		*font;
+	char *tmp;
 
 	i = 0;
-	guimp = libui->data;
 	data = libui->closed_window_return_data;
 	while (data)
 	{
 		if (i == 0)
-			guimp->imported_font = TTF_OpenFont(data->data, ft_atoi(data->next->data));
+		{
+			tmp = data->next->data;
+			font = TTF_OpenFont(data->next->data, ft_atoi(data->data));
+			if (font)
+				libui->imported_font = font;
+		}
 		data = data->next;
 		i++;
 	}

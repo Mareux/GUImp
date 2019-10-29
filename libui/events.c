@@ -115,6 +115,7 @@ void			libui_loop(t_libui *unicorn)
 	quit = FALSE;
 	while (!quit)
 	{
+		SDL_StartTextInput();
 		draw_window_backgrounds(unicorn->windows);
 		eventloop_init_mouse(unicorn);
 		unicorn->textinput.active = 0;
@@ -135,5 +136,6 @@ void			libui_loop(t_libui *unicorn)
 			draw_color_picker_window(unicorn);
 		draw_widgets(unicorn->windows);
 		update_window_surface(unicorn->windows);
+		SDL_StopTextInput();
 	}
 }

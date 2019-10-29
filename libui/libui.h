@@ -439,6 +439,7 @@ typedef struct                  s_libui
 	t_menu_list					*menu_list;
     t_window_list				*windows;
     TTF_Font					*font;
+    TTF_Font					*imported_font;;
     t_keyhooks					hooks;
     t_cursor_surface			*cursor_surface;
     t_cursor					*cursor;
@@ -700,27 +701,20 @@ void	draw_combobox(SDL_Surface *surface, t_combobox *combobox);
 
 void	scroll(t_scrolling_list **list, int step,
 			   int *content_size, int menu_content_size);
-
 void	*active_field_clicked(SDL_Rect menu_rect,
 							  SDL_Point mouse_point, t_scrolling_list *list,
 							  t_combobox *combobox);
-
 void	active_field_select(t_combobox *combobox, SDL_Point mouse_point);
-
 void	combobox_update(t_combobox *combobox, t_scrolling_list *list);
-
 void add_to_scrolling_list(t_scrolling_list **begin,
-						   SDL_Surface *field_text, void *data);
+			SDL_Surface *field_text, void *data);
 void	delete_scrolling_list(t_scrolling_list **list);
 void widgets_get_content_size(t_scrolling_list *point, int *content_size);
-
-
 void add_return_data(t_return_data **begin, void *data);
 void	delete_return_data(t_return_data **begin);
-
 void draw_image_field(SDL_Surface *surface, SDL_Surface *image, SDL_Rect field_size);
-
 void draw_field(SDL_Surface *surface, t_menu_field *field,
 				TTF_Font *font);
+int 		pixel_inside_surface(t_surface *img, int x, int y);
 
 #endif

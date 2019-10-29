@@ -107,6 +107,8 @@ void	        eventloop_mousebuttondown(t_libui *data, SDL_Point point)
 {
     if (data->event.type == SDL_MOUSEBUTTONDOWN)
     {
+    	if (data->event.button.windowID != data->active_window->id)
+			return ;
         update_active_window(data);
         if (data->event.button.button == SDL_BUTTON_LEFT)
 			left_mouse_button_down(data);

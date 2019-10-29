@@ -12,6 +12,13 @@
 
 #include "../guimp.h"
 
+int 		pixel_inside_surface(t_surface *img, int x, int y)
+{
+	if (x < 0 || y < 0 || x >= img->w || y >= img->h)
+		return (0);
+	return (1);
+}
+
 void		put_pixel(SDL_Surface *img, int x, int y, t_color color)
 {
 	unsigned char	*pixel;

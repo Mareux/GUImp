@@ -8,6 +8,8 @@ void	use_bucket(t_guimp *guimp)
 
 	pos = find_canvas_coordinates(guimp,
 			vec2f((double)guimp->libui->mouse.pos.x, (double)guimp->libui->mouse.pos.y));
+	if (!pixel_inside_surface(guimp->canvas, pos.x, pos.y))
+		return ;
 	int_pos.x = (int)pos.x;
 	int_pos.y = (int)pos.y;
 	if (guimp->libui->mouse.m1_pressed)

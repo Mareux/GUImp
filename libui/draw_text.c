@@ -2,7 +2,7 @@
 
 void	init_text(t_libui *libui, t_text *text)
 {
-	text->font = libui->font;
+	text->font = libui->imported_font;
 	text->surface = libui->main_window->surface;
 	text->position = vec2(0, 0);
 	text->text = NULL;

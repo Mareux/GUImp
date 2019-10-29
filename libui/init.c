@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../guimp.h"
+#include "libui.h"
 
 void	init_widgets(t_widget **widgets)
 {
@@ -69,12 +69,14 @@ int		init_libui(t_libui **data)
 	init_libui_2(data);
 	if (TTF_Init() < 0)
 		exit(124);
-	(*data)->font = TTF_OpenFont("../libui/font.ttf", 20); // Полиция!
+	(*data)->font = TTF_OpenFont("../libui/font.ttf", 20);
+
 	if (!(*data)->font)
 	{
 		ft_putendl_fd("Couldn't load font!", 2);
 		exit(123);
 	}
+	(*data)->imported_font = (*data)->font;
 	init_keyhooks(*data);
 	init_mouse_data(*data);
 	return (success);
