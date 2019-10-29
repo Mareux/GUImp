@@ -24,7 +24,7 @@ SDL_Surface *create_text_surface(char *text, t_font *font)
 
 void			render_text(t_libui *libui, SDL_Event e, t_widget *widgets)
 {
-	if (!widgets->textfield     )
+	if (!widgets->textfield)
 		return;
 	if (e.type == SDL_TEXTINPUT)
 	{
@@ -37,11 +37,6 @@ void			render_text(t_libui *libui, SDL_Event e, t_widget *widgets)
 		{
 			render_text_in_textfield(widgets->active_textfield,
 			libui, NULL, backspace_event);
-		}
-		if (e.key.keysym.sym == SDLK_v && SDL_GetModState() & KMOD_CTRL)
-		{
-			render_text_in_textfield(widgets->active_textfield,
-			libui, SDL_GetClipboardText(), text_input_event);
 		}
 	}
 }

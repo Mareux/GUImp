@@ -95,7 +95,7 @@ static void     handle_events(t_libui *unicorn, int *quit, SDL_Point *point)
     eventloop_window_events(unicorn, quit);
     eventloop_window(unicorn);
     eventloop_keydown(unicorn, quit);
-    eventloop_mousebuttondown(unicorn, *point);
+	eventloop_mousebuttondown(unicorn);
     eventloop_mousewheel(unicorn);
     eventloop_drop(unicorn);
     color_change_loop(unicorn);

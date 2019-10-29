@@ -12,18 +12,17 @@
 
 #include "../libui.h"
 
-void set_pixel(SDL_Surface *surface, SDL_Color color, int x, int y)
+void			set_pixel(SDL_Surface *surface, SDL_Color color, int x, int y)
 {
-	((char *) surface->pixels)[(x + y * surface->w) * 4] = color.r;
-	((char *) surface->pixels)[(x + y * surface->w) * 4 + 1] = color.g;
-	((char *) surface->pixels)[(x + y * surface->w) * 4 + 2] = color.b;
-	((char *) surface->pixels)[(x + y * surface->w) * 4 + 3] = color.a;
+	((char *)surface->pixels)[(x + y * surface->w) * 4] = color.r;
+	((char *)surface->pixels)[(x + y * surface->w) * 4 + 1] = color.g;
+	((char *)surface->pixels)[(x + y * surface->w) * 4 + 2] = color.b;
+	((char *)surface->pixels)[(x + y * surface->w) * 4 + 3] = color.a;
 }
 
-SDL_Color rgb_color_to_sdl_color(t_rgb_color rgb_color)
+SDL_Color		rgb_color_to_sdl_color(t_rgb_color rgb_color)
 {
-	return (SDL_Color)
-			{
+	return (SDL_Color) {
 					rgb_color.r * 255,
 					rgb_color.g * 255,
 					rgb_color.b * 255,
@@ -31,28 +30,26 @@ SDL_Color rgb_color_to_sdl_color(t_rgb_color rgb_color)
 			};
 }
 
-t_rgb_color sdl_color_color_to_rgb(t_color color)
+t_rgb_color		sdl_color_color_to_rgb(t_color color)
 {
-	return (t_rgb_color)
-			{
-					color.r / 255,
+	return (t_rgb_color) {color.r / 255,
 					color.g / 255,
-					color.b / 255,
-			};
+					color.b / 255
+	};
 }
 
-int clamp(int lower, int higher, int num)
+int				clamp(int lower, int higher, int num)
 {
 	if (num < lower)
 	{
-		return lower;
+		return (lower);
 	}
 	else if (num > higher)
 	{
-		return higher;
+		return (higher);
 	}
 	else
 	{
-		return num;
+		return (num);
 	}
 }

@@ -19,8 +19,6 @@ void	init_widgets(t_widget **widgets)
 	(*widgets)->active_textfield = NULL;
 	(*widgets)->label = NULL;
 	(*widgets)->button = NULL;
-	(*widgets)->image = NULL;
-	(*widgets)->combobox = NULL;
 }
 
 void 	init_mouse_data(t_libui *libui)

@@ -12,7 +12,7 @@
 
 #include "../libui.h"
 
-void draw_main_gradient(SDL_Surface *surface, double hue)
+void	draw_main_gradient(SDL_Surface *surface, double hue)
 {
 	SDL_Surface		*gradient;
 	int				x;
@@ -29,8 +29,8 @@ void draw_main_gradient(SDL_Surface *surface, double hue)
 		{
 			set_pixel(gradient,
 		rgb_color_to_sdl_color(hsv_to_rgb((t_hsv_color){
-		hue,(double) x / surface->w,
-		1.0 - ((double) y / surface->h)})), x, y);
+		hue, (double)x / surface->w,
+		1.0 - ((double)y / surface->h)})), x, y);
 			x++;
 		}
 		y++;
@@ -40,7 +40,7 @@ void draw_main_gradient(SDL_Surface *surface, double hue)
 	SDL_FreeSurface(gradient);
 }
 
-void draw_hue_gradient(SDL_Surface *surface)
+void	draw_hue_gradient(SDL_Surface *surface)
 {
 	SDL_Surface		*gradient;
 	int				x;
@@ -57,7 +57,7 @@ void draw_hue_gradient(SDL_Surface *surface)
 		{
 			set_pixel(gradient, rgb_color_to_sdl_color(
 					hsv_to_rgb((t_hsv_color){
-				(double) x / gradient->w * 360,1.0, 1.0})),
+				(double)x / gradient->w * 360, 1.0, 1.0})),
 				x, y);
 			x++;
 		}

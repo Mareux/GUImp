@@ -12,22 +12,22 @@
 
 #include "../libui.h"
 
-static	void draw_text_field(SDL_Surface *surface, char *text,
+static void		draw_text_field(SDL_Surface *surface, char *text,
 		SDL_Rect field_rect, TTF_Font *font, t_color color)
 {
 	SDL_Surface *text_surface;
 
 	draw_filled_rect(surface,
-					 (t_vec2){field_rect.x, field_rect.y},
-					 (t_vec2){field_rect.x + field_rect.w,
+				(t_vec2){field_rect.x, field_rect.y},
+				(t_vec2){field_rect.x + field_rect.w,
 			   field_rect.y + field_rect.h},
-					 color);
+					color);
 	text_surface = create_text_surface(text, font);
 	SDL_BlitSurface(text_surface, NULL, surface, &field_rect);
     SDL_FreeSurface(text_surface);
 }
 
-static	void draw_number_field(SDL_Surface *surface,
+static void		draw_number_field(SDL_Surface *surface,
 		int* number, SDL_Rect field_rect,
 		TTF_Font *font, t_color color)
 {
@@ -35,36 +35,37 @@ static	void draw_number_field(SDL_Surface *surface,
 	char *text;
 
 	draw_filled_rect(surface,
-					 (t_vec2){field_rect.x, field_rect.y},
-					 (t_vec2){field_rect.x + field_rect.w,
+				(t_vec2){field_rect.x, field_rect.y},
+				(t_vec2){field_rect.x + field_rect.w,
 			   field_rect.y + field_rect.h},
-					 color);
+				color);
 	text_surface = create_text_surface(text = ft_itoa(*number), font);
 	free(text);
 	SDL_BlitSurface(text_surface, NULL, surface, &field_rect);
 	SDL_FreeSurface(text_surface);
 }
 
-static void draw_color_field(SDL_Surface *surface, void *data, SDL_Rect field_rect)
+static void		draw_color_field(SDL_Surface *surface,
+		void *data, SDL_Rect field_rect)
 {
 	t_color	color;
 
 	color = *((t_color *)data);
 	draw_filled_rect(surface,
-					 (t_vec2){field_rect.x, field_rect.y},
-					 (t_vec2){field_rect.x + field_rect.w,
+				(t_vec2){field_rect.x, field_rect.y},
+				(t_vec2){field_rect.x + field_rect.w,
 			   field_rect.y + field_rect.h},
-					 color);
+				color);
 }
 
-static void	draw_tool_field(SDL_Surface *surface,
+static void		draw_tool_field(SDL_Surface *surface,
 		t_table_tools *tool, SDL_Rect field_rect, t_color color)
 {
 	draw_filled_rect(surface,
-					 (t_vec2){field_rect.x, field_rect.y},
-					 (t_vec2){field_rect.x + field_rect.w,
+				(t_vec2){field_rect.x, field_rect.y},
+				(t_vec2){field_rect.x + field_rect.w,
 			   field_rect.y + field_rect.h},
-					 color);
+				color);
 	SDL_BlitScaled(tool->image,
 			&tool->image->clip_rect,
 			surface,
@@ -72,7 +73,7 @@ static void	draw_tool_field(SDL_Surface *surface,
 
 }
 
-void draw_field(SDL_Surface *surface, t_menu_field *field,
+void			draw_field(SDL_Surface *surface, t_menu_field *field,
 					   TTF_Font *font)
 {
 	if (field->type == FIELD_IMAGE)

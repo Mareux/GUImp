@@ -12,7 +12,7 @@
 
 #include "guimp.h"
 
-enum color_picker_ui_state get_state(SDL_Point mouse)
+enum color_picker_ui_state		get_state(SDL_Point mouse)
 {
 	SDL_Rect main_gradient;
 	SDL_Rect hue_gradient;
