@@ -43,7 +43,7 @@ void	draw_rect(t_surface *surface, t_vec2 topleft,
 }
 
 void	draw_filled_rect(t_surface *surface, t_vec2 topleft,
-						 t_vec2 bottomright, t_color color)
+					t_vec2 bottomright, t_color color)
 {
 	int x;
 	int	y;

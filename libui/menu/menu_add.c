@@ -12,7 +12,7 @@
 
 #include "../libui.h"
 
-void add_field(t_menu_field **begin, void (*click)(void *),
+void	add_field(t_menu_field **begin, void (*click)(void *),
 		void *data, enum e_field_data_type type)
 {
 	t_menu_field *new;
@@ -36,7 +36,7 @@ void add_field(t_menu_field **begin, void (*click)(void *),
 	last->next = new;
 }
 
-t_menu * create_menu(enum e_menu_type type, SDL_Rect menu_frame,
+t_menu	*create_menu(enum e_menu_type type, SDL_Rect menu_frame,
 		int id, SDL_Window *menu_window)
 {
 	t_menu *menu;

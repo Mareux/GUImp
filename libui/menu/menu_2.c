@@ -1,12 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   menu_2.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mnosko <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/10/29 21:39:03 by mnosko            #+#    #+#             */
+/*   Updated: 2019/10/29 21:39:05 by mnosko           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../libui.h"
 
-void draw_image_field(SDL_Surface *surface,
+void	draw_image_field(SDL_Surface *surface,
 		SDL_Surface *image, SDL_Rect field_size)
 {
 	SDL_BlitScaled(image, &image->clip_rect, surface, &field_size);
 }
 
-void draw_menu(SDL_Surface *surface, t_menu *menu, TTF_Font *font)
+void	draw_menu(SDL_Surface *surface, t_menu *menu, TTF_Font *font)
 {
 	t_menu_field *field;
 

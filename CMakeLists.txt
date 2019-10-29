@@ -55,7 +55,6 @@ add_executable(GUImp
         libui/widgets/widgets_create.c
         libui/widgets_add_to_lists.c
         libui/widgets/widgets_delete.c
-        libui/cursor.c
         libui/draw_line.c
         libui/keyhooks_init.c
         libui/draw_rect.c
