@@ -34,3 +34,37 @@ t_surface		*load_image_as_surface(const char *file)
 {
 	return (IMG_Load(file));
 }
+
+t_surface		*create_text_surface(char *text, t_font *font)
+{
+	t_surface		*surface;
+	SDL_Color		text_color;
+
+	text_color = (SDL_Color){0, 0, 0, 0};
+	surface = TTF_RenderUTF8_Blended(font, text, text_color);
+	return (surface);
+}
+
+void			render_text(t_libui *libui, SDL_Event e, t_widget *widgets)
+{
+	if (!widgets->textfield     )
+		return;
+	if (e.type == SDL_TEXTINPUT)
+	{
+		render_text_in_textfield(widgets->active_textfield,
+								 libui, e.text.text, text_input_event);
+	}
+	else if (e.type == SDL_KEYDOWN)
+	{
+		if (e.key.keysym.sym == SDLK_BACKSPACE)
+		{
+			render_text_in_textfield(widgets->active_textfield,
+									 libui, NULL, backspace_event);
+		}
+		if (e.key.keysym.sym == SDLK_v && SDL_GetModState() & KMOD_CTRL)
+		{
+			render_text_in_textfield(widgets->active_textfield,
+									 libui, SDL_GetClipboardText(), text_input_event);
+		}
+	}
+}

@@ -64,3 +64,11 @@ void	set_window_resizable(t_libui *libui, const char *title, int resizable)
 	else
 		SDL_SetWindowResizable(window, SDL_FALSE);
 }
+
+void	set_window_position(t_libui *libui, char *title, t_vec2 pos)
+{
+	SDL_Window	*window;
+
+	window = find_window(libui, title);
+	SDL_SetWindowPosition(window, pos.x, pos.y + 100);
+}

@@ -720,5 +720,8 @@ void 				flood_fill(t_surface *surface, t_vec2 pos,
 t_color rgb_color_to_t_color(t_rgb_color rgb_color);
 void set_system_cursor(t_cursor *cursor, t_libui *libui, int id);
 t_surface			*load_image_as_surface(const char *file);
+t_surface			*create_text_surface(char *text, t_font *font);
+void				render_text(t_libui *libui, SDL_Event e, t_widget *widgets);
+void				set_window_position(t_libui *libui, char *title, t_vec2 pos);
 
 #endif

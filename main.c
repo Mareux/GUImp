@@ -12,76 +12,6 @@
 
 #include "guimp.h"
 
-SDL_Surface *create_text_surface(char *text, t_font *font)
-{
-	t_surface		*surface;
-	SDL_Color		text_color;
-
-	text_color = (SDL_Color){0, 0, 0, 0};
-	surface = TTF_RenderUTF8_Blended(font, text, text_color);
-	return (surface);
-}
-
-void			render_text(t_libui *libui, SDL_Event e, t_widget *widgets)
-{
-	if (!widgets->textfield     )
-		return;
-	if (e.type == SDL_TEXTINPUT)
-	{
-		render_text_in_textfield(widgets->active_textfield,
-		libui, e.text.text, text_input_event);
-	}
-	else if (e.type == SDL_KEYDOWN)
-	{
-		if (e.key.keysym.sym == SDLK_BACKSPACE)
-		{
-			render_text_in_textfield(widgets->active_textfield,
-			libui, NULL, backspace_event);
-		}
-		if (e.key.keysym.sym == SDLK_v && SDL_GetModState() & KMOD_CTRL)
-		{
-			render_text_in_textfield(widgets->active_textfield,
-			libui, SDL_GetClipboardText(), text_input_event);
-		}
-	}
-}
-
-void set_tools_window_position(t_libui *libui)
-{
-	SDL_Window	*main_window;
-	SDL_Window	*tools_window;
-	t_vec2		main_window_pos;
-
-	main_window = find_window(libui, "GUImp");
-	tools_window = find_window(libui, "Tools");
-	SDL_GetWindowPosition(main_window,
-			&main_window_pos.x, &main_window_pos.y);
-	SDL_SetWindowPosition(tools_window,
-			main_window_pos.x - 200, main_window_pos.y + 100);
-}
-
-void    remove_char_from_text_input(t_guimp *guimp)
-{
-
-}
-
-void    guimp_backspace(t_libui *libui)
-{
-    t_guimp *guimp;
-
-    guimp = (t_guimp *)libui->data;
-    if (guimp->text_tool.active)
-        if (ft_strlen(guimp->text_tool.text) > 0)
-            remove_char_from_text_input(guimp);
-}
-
-void    guimp_enter(t_libui *libui)
-{
-    t_guimp *guimp;
-
-    guimp = (t_guimp *)libui->data;
-}
-
 void	hook_hooks(t_guimp *guimp)
 {
 	libui_hook_m1_down(guimp->libui, guimp_mouseclick);
@@ -103,10 +33,8 @@ void	hook_hooks(t_guimp *guimp)
 	bind_key(guimp->libui, "S", LIBUI_NONE, settool_sticker);
 	bind_key(guimp->libui, "T", LIBUI_NONE, settool_text);
 	bind_key(guimp->libui, "O", LIBUI_NONE, settool_picture);
-    bind_key(guimp->libui, "Backspace", LIBUI_NONE, guimp_backspace);
-    bind_key(guimp->libui, "Return", LIBUI_NONE, guimp_enter);
-    bind_key(guimp->libui, "Z", LIBUI_CTRL, guimp_undo);
-    bind_key(guimp->libui, "Z", LIBUI_SHIFT, guimp_redo);
+	bind_key(guimp->libui, "Z", LIBUI_CTRL, guimp_undo);
+	bind_key(guimp->libui, "Z", LIBUI_SHIFT, guimp_redo);
 }
 
 void	guimp_loop(t_libui *libui)
@@ -114,25 +42,25 @@ void	guimp_loop(t_libui *libui)
 	t_guimp	*guimp;
 
 	guimp = (t_guimp *)libui->data;
-	guimp->preview = SDL_DuplicateSurface(guimp->canvas); // move to libui
+	guimp->preview = duplicate_surface(guimp->canvas);
 	if (libui->active_window == libui->main_window)
 	{
 		if (libui->mouse.m1_pressed || libui->mouse.m2_pressed
 			|| libui->mouse.m1_released || libui->mouse.m2_released)
 			use_tool(guimp);
 		if (guimp->libui->mouse.m3_pressed &&
-		    guimp->libui->active_window == guimp->libui->main_window)
+			guimp->libui->active_window == guimp->libui->main_window)
 			guimp_m3(guimp->libui);
 		if (guimp->current_tool == TEXT_LINE &&
-		    guimp->libui->active_window == guimp->libui->main_window)
+			guimp->libui->active_window == guimp->libui->main_window)
 			use_text(guimp);
 	}
 	fill_surface(guimp->libui->main_window->surface, rgb(0, 0, 0));
 	draw_canvas(guimp);
-	SDL_FreeSurface(guimp->preview); // move to libui
+	free_surface(guimp->preview);
 }
 
-void			drag_and_drop_image(t_libui *libui)
+void	drag_and_drop_image(t_libui *libui)
 {
 	t_guimp	*guimp;
 
@@ -140,29 +68,36 @@ void			drag_and_drop_image(t_libui *libui)
 	load_dropped_image(libui, &guimp->imported_img);
 }
 
-void			init_settings_window(t_guimp *guimp)
+void	init_settings_window(t_guimp *guimp)
 {
 	t_label		label;
 	t_window	*window;
 
 	window = find_t_window(guimp->libui, "Settings");
-	label = create_label("This is a settings menu.", vec2(10, 10), guimp->libui->font);
+	label = create_label("This is a settings menu.", vec2(10, 10),
+			guimp->libui->font);
 	add_label_to_list(&window->widgets->label, label);
-	label = create_label("It is scrollable.", vec2(10, 50), guimp->libui->font);
+	label = create_label("It is scrollable.", vec2(10, 50),
+			guimp->libui->font);
 	add_label_to_list(&window->widgets->label, label);
-	label = create_label("Scroll down to access the settings.", vec2(10, 100), guimp->libui->font);
+	label = create_label("Scroll down to access the settings!",
+			vec2(10, 300), guimp->libui->font);
 	add_label_to_list(&window->widgets->label, label);
-	label = create_label("Scroll some more, you're almost there.", vec2(10, 600), guimp->libui->font);
+	label = create_label("Scroll some more, you're almost there.",
+			vec2(10, 600), guimp->libui->font);
 	add_label_to_list(&window->widgets->label, label);
-	label = create_label("You expected a meme picture,", vec2(10, 1200), guimp->libui->font);
+	label = create_label("You expected some settings,",
+			vec2(10, 1200), guimp->libui->font);
 	add_label_to_list(&window->widgets->label, label);
-	label = create_label("But we don't have a picture widget!", vec2(10, 1500), guimp->libui->font);
+	label = create_label("But it was me, Dio!",
+			vec2(10, 1500), guimp->libui->font);
 	add_label_to_list(&window->widgets->label, label);
 	window->background_color = rgb(200, 200, 200);
 	window->scrollable = 1;
+	set_window_position(guimp->libui, "Settings", vec2(1800, 400));
 }
 
-int				main(void)
+int		main(void)
 {
 	t_guimp	guimp;
 
@@ -181,7 +116,8 @@ int				main(void)
 	create_bar(guimp.libui);
 	guimp.canvas = create_surface();
 	fill_surface(guimp.canvas, rgb(255, 255, 255));
-	set_tools_window_position(guimp.libui);
+	set_window_position(guimp.libui, "GUImp", vec2(700, 350));
+	set_window_position(guimp.libui, "Tools", vec2(500, 400));
 	set_window_resizable(guimp.libui, "GUImp", 1);
 	hook_hooks(&guimp);
 	guimp.libui->custom_loop = guimp_loop;
