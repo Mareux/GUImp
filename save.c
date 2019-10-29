@@ -12,8 +12,7 @@
 
 #include "guimp.h"
 
-
-void save_img(t_libui *libui)
+void	save_img(t_libui *libui)
 {
 	t_guimp *guimp;
 

@@ -12,7 +12,7 @@
 
 #include "guimp.h"
 
-void settool(t_libui *libui, int tool)
+void	settool(t_libui *libui, int tool)
 {
 	t_guimp	*guimp;
 
@@ -33,12 +33,12 @@ void	settool_pencil(t_libui *libui)
 	settool(libui, PENCIL);
 }
 
-void settool_brush(t_libui *libui)
+void	settool_brush(t_libui *libui)
 {
 	settool(libui, BRUSH);
 }
 
-void settool_eraser(t_libui *libui)
+void	settool_eraser(t_libui *libui)
 {
 	settool(libui, ERASER);
 }
