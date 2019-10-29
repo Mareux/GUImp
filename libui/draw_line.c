@@ -12,7 +12,7 @@
 
 #include "libui.h"
 
-static void	draw_y(t_vec2 *start, t_vec2 *end,
+static void		draw_y(t_vec2 *start, t_vec2 *end,
 		t_line *line, SDL_Surface *surface)
 {
 	while (line->ydiff >= 1 && start->y != end->y)
@@ -24,7 +24,7 @@ static void	draw_y(t_vec2 *start, t_vec2 *end,
 	}
 }
 
-void	draw(t_vec2 *start, t_vec2 *end,
+void			draw(t_vec2 *start, t_vec2 *end,
 		t_line *line, SDL_Surface *surface)
 {
 	put_pixel(surface, start->x, start->y, line->color);
@@ -37,7 +37,7 @@ void	draw(t_vec2 *start, t_vec2 *end,
 	}
 }
 
-void	draw_line(SDL_Surface *surface, t_vec2f start,
+void			draw_line(SDL_Surface *surface, t_vec2f start,
 		t_vec2f end, t_color color)
 {
 	t_line		line;

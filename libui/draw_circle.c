@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draw_circle.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mnosko <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/10/29 21:45:51 by mnosko            #+#    #+#             */
+/*   Updated: 2019/10/29 21:45:53 by mnosko           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libui.h"
 
-int	fits_equation(t_vec2 point, int radius)
+int		fits_equation(t_vec2 point, int radius)
 {
 	int eq;
 
@@ -23,8 +35,8 @@ void	put_circle_pixels(t_surface *surface, t_vec2 top,
 	put_pixel(surface, -top.y + center.x, -top.x + center.y, color);
 }
 
-void draw_circle(t_surface *surface, t_vec2 center,
-		int	radius, t_color color)
+void	draw_circle(t_surface *surface, t_vec2 center,
+		int radius, t_color color)
 {
 	t_vec2	top;
 
@@ -42,8 +54,7 @@ void draw_circle(t_surface *surface, t_vec2 center,
 	}
 }
 
-
-void draw_filled_circle(t_surface *surface, t_vec2 center,
+void	draw_filled_circle(t_surface *surface, t_vec2 center,
 		int radius, t_color color)
 {
 	t_vec2	top;

@@ -66,33 +66,6 @@ void	draw_button(SDL_Surface *surface, t_button *button)
 	}
 }
 
-void	draw_combobox(SDL_Surface *surface, t_combobox *combobox)
-{
-	SDL_Rect rect;
-
-	rect = combobox->field_rect;
-	draw_rect(surface, (t_vec2){combobox->field_rect.x, combobox->field_rect.y},
-			  (t_vec2){combobox->field_rect.x + combobox->field_rect.w,
-			  combobox->field_rect.y + combobox->field_rect.h},
-			  combobox->color);
-	if (combobox->field_text)
-		SDL_BlitSurface(combobox->field_text,
-				NULL, surface, &combobox->field_rect);
-	combobox->field_rect = rect;
-	if (combobox->active)
-	{
-		rect = combobox->menu_rect;
-		SDL_BlitSurface(combobox->menu_surface,
-				&combobox->menu_surface->clip_rect,
-				surface, &combobox->menu_rect);
-		draw_rect(surface, (t_vec2){combobox->menu_rect.x, combobox->menu_rect.y},
-				  (t_vec2){combobox->menu_rect.x + combobox->menu_rect.w,
-						   combobox->menu_rect.y + combobox->menu_rect.h},
-				  combobox->color);
-		combobox->menu_rect = rect;
-	}
-}
-
 void	draw_widgets(t_window_list *list)
 {
 	t_textfield_list *textfield;

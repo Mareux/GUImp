@@ -222,29 +222,6 @@ typedef struct					s_textfield_list
     struct s_textfield_list		*next;
 }								t_textfield_list;
 
-typedef struct					s_combobox
-{
-    int							id;
-    SDL_Surface					*field_text;
-    t_scrolling_list			*content;
-    int							content_size;
-    void						*field_data;
-    SDL_Rect					field_rect;
-    SDL_Rect					menu_rect;
-    SDL_Rect					menu_active_field_rect;
-    SDL_Surface					*menu_surface;
-    int							active;
-    void						(*event)(void *);
-    t_color						color;
-    t_menu						*menu;
-}								t_combobox;
-
-typedef struct					s_combobox_list
-{
-    t_combobox					combobox;
-    struct s_combobox_list		*next;
-}								t_combobox_list;
-
 typedef struct					s_label
 {
     int							id;
@@ -283,43 +260,6 @@ typedef struct					s_buttons_list
     struct s_buttons_list		*next;
 }								t_buttons_list;
 
-typedef	struct					s_image
-{
-    int							id;
-    SDL_Surface					*image;
-    SDL_Rect					rect;
-    int							visible;
-    t_menu						*menu;
-}								t_image;
-
-typedef struct					s_image_list
-{
-    t_image						image;
-    struct s_image_list			*next;
-}								t_image_list;
-
-typedef struct 					s_textarea
-{
-
-}								t_textarea;
-
-typedef struct					s_textarea_list
-{
-	t_textarea					textarea;
-	struct s_textarea_list		*next;
-}								t_textarea_list;
-
-
-typedef struct 					s_checkbox
-{
-
-}								t_checkbox;
-
-typedef struct 					s_checkbox_list
-{
-	t_checkbox					checkbox;
-	struct s_checkbox_list		*next;
-}								t_checkbox_list;
 
 typedef struct					s_widget
 {
@@ -327,11 +267,7 @@ typedef struct					s_widget
 	t_textfield					*active_textfield;
 	t_label_list				*label;
     t_buttons_list				*button;
-    t_combobox_list				*combobox;
-    t_image_list				*image;
     t_menu_list					*menu;
-    t_textarea_list				*textarea;
-    t_checkbox_list				*checkbox;
 }								t_widget;
 
 enum e_window_type
@@ -466,23 +402,17 @@ t_window            *find_window_by_id(t_libui *unicorn, Uint32 id);
 void				add_button_to_list(t_buttons_list **buttons,
 						   t_button button, void (*click)(void *));
 void				add_label_to_list(t_label_list **list, t_label label);
-void				add_image_to_list(t_image_list **list, t_image image);
 void				add_textfield_to_list(t_textfield_list **textfield_list,
 							  t_textfield textfield, void (*type_check)(char));
-void				add_combobox_to_list(t_combobox_list **combobox_list,
-							 t_combobox combobox, void (*event)(void *));
 t_textfield			create_textfield(SDL_Surface *text_surface,
 									SDL_Rect rect);
-t_combobox			create_combobox(void *data,
-								  SDL_Rect field_rect, t_color color);
 t_label				create_label(char *text, t_vec2 pos, t_font *font);
 t_button			create_button(SDL_Surface *text_surface,
 							  SDL_Rect rect, int type, char *name);
-t_image				create_image(SDL_Rect rect, char *file);
 
 void				libui_loop(t_libui *unicorn);
 void				eventloop_keydown(t_libui *data, int *quit);
-void				eventloop_mousebuttondown(t_libui *data, SDL_Point point);
+void eventloop_mousebuttondown(t_libui *data);
 void				eventloop_window_events(t_libui *data, int *quit);
 
 void				libui_hook_m1_down(t_libui *libui, void (*func)(t_libui *));
@@ -495,7 +425,6 @@ int					init_libui(t_libui **data);
 void				init_widgets(t_widget **widgets);
 void 				init_keyhooks(t_libui *libui);
 
-t_surface			*create_scaled_surface(SDL_Surface *surface, double scale);
 t_surface           *create_scaled_area(t_surface *surface, double scale, t_vec2 topleft, t_vec2 bottomright);
 t_vec2				find_scaled_surface_size(t_surface *surface, double scale);
 
@@ -569,11 +498,7 @@ void				init_text(t_libui *libui, t_text *text);
 void				draw_text(t_text *text);
 
 
-void 				change_cursor(SDL_SystemCursor id);
-
-
 void				add_menu_to_list(t_menu_list **begin, t_menu *menu);
-void				remove_menu_from_list(t_menu_list **begin, t_menu menu);
 t_menu * create_menu(enum e_menu_type type, SDL_Rect menu_frame, int id, SDL_Window *menu_window);
 void add_field(t_menu_field **begin, void (*click)(void *), void *data, enum e_field_data_type type);
 void	calculate_table_fields_position(SDL_Surface *surface, t_menu *menu, t_menu_field *field);
@@ -592,27 +517,19 @@ void			draw_filled_rect(t_surface *surface, t_vec2 topleft,
 void	cursor_create(t_libui *libui);
 void set_cursor(t_cursor *cursor, t_libui *libui);
 
-void draw_menu_table(SDL_Surface *surface, t_menu *menu);
 void create_menu_for_tools(t_libui *libui);
 void create_bar(t_libui *libui);
-
-void	tools_window_loop(t_libui *libui);
-void		recalculate_table_fields(t_menu_field *field, int difference);
 
 
 t_window *create_window_with_textfield(t_libui *libui, void (*callback_function)(void *), const char *name);
 
 t_window *create_font_window(t_libui *libui, void (*callback_function)(void *), const char *name);
 
-t_hsv_color rgb_to_hsv(t_rgb_color in);
-
 t_rgb_color hsv_to_rgb(t_hsv_color in);
 
 void set_pixel(SDL_Surface *surface, SDL_Color color, int x, int y);
 
 SDL_Color rgb_color_to_sdl_color(t_rgb_color rgb_color);
-
-t_rgb_color sdl_color_color_to_rgb(t_color color);
 
 int clamp(int lower, int higher, int num);
 
@@ -644,8 +561,6 @@ void	hide_active_window(t_window **active_window,
 						   t_window *main_window, t_window_list **window);
 
 void	show_active_window(t_window *active_window);
-
-void	exit_event(SDL_Event *event);
 
 void cancel_event(t_libui *libui);
 
@@ -692,19 +607,6 @@ void			load_dropped_image(t_libui *unicorn, t_surface **target);
 
 void update_window_surface(t_window_list *list);
 
-void	draw_combobox(SDL_Surface *surface, t_combobox *combobox);
-
-void	scroll(t_scrolling_list **list, int step,
-			   int *content_size, int menu_content_size);
-void	*active_field_clicked(SDL_Rect menu_rect,
-							  SDL_Point mouse_point, t_scrolling_list *list,
-							  t_combobox *combobox);
-void	active_field_select(t_combobox *combobox, SDL_Point mouse_point);
-void	combobox_update(t_combobox *combobox, t_scrolling_list *list);
-void add_to_scrolling_list(t_scrolling_list **begin,
-			SDL_Surface *field_text, void *data);
-void	delete_scrolling_list(t_scrolling_list **list);
-void widgets_get_content_size(t_scrolling_list *point, int *content_size);
 void add_return_data(t_return_data **begin, void *data);
 void	delete_return_data(t_return_data **begin);
 void draw_image_field(SDL_Surface *surface, SDL_Surface *image, SDL_Rect field_size);

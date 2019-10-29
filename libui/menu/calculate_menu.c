@@ -12,7 +12,7 @@
 
 #include "../libui.h"
 
-SDL_Rect	calculate_max_field_size(t_menu_field *field, TTF_Font *font)
+SDL_Rect		calculate_max_field_size(t_menu_field *field, TTF_Font *font)
 {
 	int max_text_size;
 	int w;
@@ -34,7 +34,8 @@ SDL_Rect	calculate_max_field_size(t_menu_field *field, TTF_Font *font)
 	return ((SDL_Rect){0, 0, max_text_size, h});
 }
 
-void	calculate_bar_fields_position(t_menu_field *field, TTF_Font *font)
+void			calculate_bar_fields_position(t_menu_field *field,
+		TTF_Font *font)
 {
 	int x;
 	int w;
@@ -54,19 +55,18 @@ void	calculate_bar_fields_position(t_menu_field *field, TTF_Font *font)
 	}
 }
 
-void	calculate_context_fields_position(t_menu_field *field,
+void			calculate_context_fields_position(t_menu_field *field,
 		TTF_Font *font, SDL_Rect menu_rect)
 {
 	int			y;
 	SDL_Rect	max_field_size;
 
 	y = menu_rect.y;
-
 	max_field_size = calculate_max_field_size(field, font);
 	while (field)
 	{
 		field->field_rect = (SDL_Rect){menu_rect.x, y,
-								 max_field_size.w, max_field_size.h};
+			max_field_size.w, max_field_size.h};
 		if (field->menu)
 			field->menu->menu_frame = (SDL_Rect)
 					{menu_rect.x + max_field_size.w, y, 0, 0};
@@ -75,7 +75,7 @@ void	calculate_context_fields_position(t_menu_field *field,
 	}
 }
 
-static SDL_Rect calculate_table_elements_size(SDL_Rect surface_size,
+static SDL_Rect	calculate_table_elements_size(SDL_Rect surface_size,
 		int spacing)
 {
 	return ((SDL_Rect){
@@ -86,7 +86,7 @@ static SDL_Rect calculate_table_elements_size(SDL_Rect surface_size,
 	});
 }
 
-void calculate_table_fields_position(SDL_Surface *surface,
+void			calculate_table_fields_position(SDL_Surface *surface,
 		t_menu *menu, t_menu_field *field)
 {
 	SDL_Rect	new_field_size;
@@ -108,10 +108,9 @@ void calculate_table_fields_position(SDL_Surface *surface,
 			y += new_field_size.h + menu->spacing_h;
 		}
 		field->field_rect = (SDL_Rect){x, y,
-								 new_field_size.w, new_field_size.h};
+				new_field_size.w, new_field_size.h};
 		x += new_field_size.w + menu->spacing_w;
 		i++;
 		field = field->next;
 	}
 }
-

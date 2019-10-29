@@ -41,5 +41,3 @@ void	ok_event(t_libui *libui)
 			libui->main_window, &libui->windows);
 	delete_return_data(&libui->closed_window_return_data);
 }
-
-

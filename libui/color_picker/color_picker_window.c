@@ -12,7 +12,7 @@
 
 #include "../libui.h"
 
-void color_picker_window_create(t_libui *libui)
+void		color_picker_window_create(t_libui *libui)
 {
 	t_window *window;
 
@@ -25,7 +25,7 @@ void color_picker_window_create(t_libui *libui)
 	}
 }
 
-void draw_color_picker_window(t_libui *libui)
+void		draw_color_picker_window(t_libui *libui)
 {
 	t_window *window;
 

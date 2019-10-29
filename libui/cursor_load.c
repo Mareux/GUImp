@@ -13,13 +13,13 @@
 #include "libui.h"
 #include <dirent.h>
 
-void	cursor_picture_add(t_cursor_surface **begin,
+void				cursor_picture_add(t_cursor_surface **begin,
 		t_surface *cursor_image, char *name)
 {
 	t_cursor_surface *new;
 
 	if (cursor_image == NULL)
-		return;
+		return ;
 	new = ft_memalloc(sizeof(t_cursor_surface));
 	new->id = ft_atoi(name);
 	new->cursor_image = cursor_image;
@@ -27,7 +27,7 @@ void	cursor_picture_add(t_cursor_surface **begin,
 	*begin = new;
 }
 
-t_cursor_surface*	cursor_picture_load(void)
+t_cursor_surface	*cursor_picture_load(void)
 {
 	struct dirent		*de;
 	DIR					*dr;
@@ -52,7 +52,7 @@ t_cursor_surface*	cursor_picture_load(void)
 	return (cursor_surface);
 }
 
-void	cursor_add(t_cursor **begin,
+void				cursor_add(t_cursor **begin,
 		SDL_Cursor *cursor, int id)
 {
 	t_cursor *new;
@@ -64,7 +64,7 @@ void	cursor_add(t_cursor **begin,
 	*begin = new;
 }
 
-void	cursor_create(t_libui *libui)
+void				cursor_create(t_libui *libui)
 {
 	t_cursor			*cursor;
 	t_cursor_surface	*cursor_surface;
@@ -82,4 +82,3 @@ void	cursor_create(t_libui *libui)
 	}
 	libui->cursor = cursor;
 }
-

@@ -44,22 +44,6 @@ void	delete_label(t_label_list **label)
 	}
 }
 
-void	delete_combobox(t_combobox_list **combobox)
-{
-	t_combobox_list *tmp;
-
-	tmp = *combobox;
-	while (*combobox)
-	{
-		(*combobox) = (*combobox)->next;
-		if (tmp->combobox.menu_surface)
-			SDL_FreeSurface(tmp->combobox.menu_surface);
-//		delete_scrolling_list(&tmp->combobox.content);
-		free(tmp);
-		tmp = *combobox;
-	}
-}
-
 void	delete_button(t_buttons_list **button)
 {
 	t_buttons_list *tmp;
@@ -84,7 +68,5 @@ void	delete_widgets(t_widget **widget)
 		delete_button(&(*widget)->button);
 	if ((*widget)->label)
 		delete_label(&(*widget)->label);
-	if ((*widget)->combobox)
-		delete_combobox(&(*widget)->combobox);
 	free(*widget);
 }

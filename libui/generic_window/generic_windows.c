@@ -12,7 +12,7 @@
 
 #include "../libui.h"
 
-t_window *create_window_with_textfield(t_libui *libui,
+t_window	*create_window_with_textfield(t_libui *libui,
 		void (*callback_function)(void *), const char *name)
 {
 	t_window *curr;
@@ -35,7 +35,7 @@ t_window *create_window_with_textfield(t_libui *libui,
 	return (curr);
 }
 
-t_window *create_font_window(t_libui *libui,
+t_window	*create_font_window(t_libui *libui,
 		void (*callback_function)(void *), const char *name)
 {
 	t_window		*curr;

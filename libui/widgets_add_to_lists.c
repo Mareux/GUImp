@@ -36,17 +36,6 @@ void add_label_to_list(t_label_list **list, t_label label)
 	*list = new;
 }
 
-void add_image_to_list(t_image_list **list, t_image image)
-{
-	t_image_list *new;
-
-	if (!(new = malloc(sizeof(t_image_list))))
-		exit(1);
-	new->image = image;
-	new->next = *list;
-	*list = new;
-}
-
 void	add_textfield_to_list(t_textfield_list **textfield_list,
 		t_textfield textfield, void (*type_check)(char))
 {
@@ -64,19 +53,3 @@ void	add_textfield_to_list(t_textfield_list **textfield_list,
 	*textfield_list = new;
 }
 
-void	add_combobox_to_list(t_combobox_list **combobox_list,
-		t_combobox combobox, void (*event)(void *))
-{
-	t_combobox_list *new;
-
-	if (!(new = malloc(sizeof(t_combobox_list))))
-		exit(1);
-	new->combobox = combobox;
-	if (!*combobox_list)
-		new->combobox.id = 0;
-	else
-		new->combobox.id++;
-	new->combobox.event = event;
-	new->next = *combobox_list;
-	*combobox_list = new;
-}

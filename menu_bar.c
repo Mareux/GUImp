@@ -38,34 +38,12 @@ void	free_array(char **array)
 	free(array);
 }
 
-int check_image_type(char *name)
-{
-	char **split;
-	int length;
-
-	length = 0;
-	split = ft_strsplit(name, '.');
-	while (split[length])
-		length++;
-	if (ft_strcmp(split[length - 1], "jpg")
-	&& ft_strcmp(split[length - 1], "png")
-	&& ft_strcmp(split[length - 1], "jpeg"))
-	{
-		free_array(split);
-		return (FALSE);
-	}
-	free_array(split);
-	return (TRUE);
-}
-
 void	load_image(t_libui *libui)
 {
 	t_guimp *guimp;
 	SDL_Surface *surface;
 
 	guimp = libui->data;
-	if (!check_image_type(libui->closed_window_return_data->data))
-		return;
 	surface = IMG_Load(libui->closed_window_return_data->data);
 	if (surface)
 		guimp->imported_img = surface;
@@ -77,7 +55,7 @@ void	on_load_jpeg(t_libui *libui)
 
 	if (!find_window(libui, "Load JPEG/PNG"))
 	{
-		window = create_window_with_textfield(libui, (void*)load_image, "Load JPEG");
+		window = create_window_with_textfield(libui, (void*)load_image, "Load JPEG/PNG");
 		show_active_window(window);
 	}
 }

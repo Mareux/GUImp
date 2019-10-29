@@ -30,30 +30,6 @@ t_textfield		create_textfield(SDL_Surface *text_surface,
 	return (textfield);
 }
 
-t_combobox		create_combobox(void *data,
-		SDL_Rect field_rect, t_color color)
-{
-	t_combobox	combobox;
-
-	combobox.id = 0;
-	combobox.field_text = NULL;
-	combobox.content = data;
-	combobox.content_size = 0;
-	combobox.field_data = NULL;
-	combobox.active = FALSE;
-	combobox.color = color;
-	combobox.field_rect = field_rect;
-	combobox.menu_rect = (SDL_Rect){field_rect.x,
-	field_rect.y + field_rect.h, field_rect.w, 80};
-	combobox.menu_surface = SDL_CreateRGBSurface(0,
-			combobox.menu_rect.w,
-			combobox.menu_rect.h, 32, 0, 0, 0, 0);
-	combobox.menu_active_field_rect = (SDL_Rect){0, 0,
-	field_rect.w, field_rect.h};
-	combobox.event = NULL;
-	return (combobox);
-}
-
 t_label create_label(char *text, t_vec2	pos, t_font *font)
 {
 	t_label	label;
@@ -88,16 +64,5 @@ t_button		create_button(SDL_Surface *text_surface,
 	button.click = NULL;
 	button.text = name;
 	return (button);
-}
-
-t_image create_image(SDL_Rect rect, char *file)
-{
-	t_image	image;
-
-	image.id = 0;
-	image.rect = rect;
-	image.visible = TRUE;
-	image.image = IMG_Load(file);
-	return (image);
 }
 
