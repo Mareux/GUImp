@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../guimp.h"
+#include "libui.h"
 
 int				pixel_inside_surface(t_surface *img, int x, int y)
 {
