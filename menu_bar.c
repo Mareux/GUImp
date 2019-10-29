@@ -16,9 +16,10 @@ void	on_image_save(t_libui *libui)
 {
 	t_window *window;
 
-	if (!find_window(libui,"Save image"))
+	if (!find_window(libui, "Save image"))
 	{
-		window = create_window_with_textfield(libui, (void *)save_img, "Save image");//refactor
+		window = create_window_with_textfield(libui,
+				(void *)save_img, "Save image");
 		show_active_window(window);
 	}
 	else if ((window = find_t_window(libui, "Save image")))
@@ -42,10 +43,10 @@ void	on_load_jpeg(t_libui *libui)
 
 	if (!find_window(libui, "Load JPEG/PNG"))
 	{
-		window = create_window_with_textfield(libui, (void*)load_image, "Load JPEG/PNG");
+		window = create_window_with_textfield(libui,
+				(void*)load_image, "Load JPEG/PNG");
 		show_active_window(window);
 	}
 	else if ((window = find_t_window(libui, "Load JPEG/PNG")))
 		show_active_window(window);
-
 }

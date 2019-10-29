@@ -12,27 +12,27 @@
 
 #include "guimp.h"
 
-void settool_magnifying_glass(t_libui *libui)
+void	settool_magnifying_glass(t_libui *libui)
 {
-    settool(libui, MAGNIFYING_GLASS);
+	settool(libui, MAGNIFYING_GLASS);
 }
 
-void settool_hand(t_libui *libui)
+void	settool_hand(t_libui *libui)
 {
-    settool(libui, HAND);
+	settool(libui, HAND);
 }
 
-void settool_bucket(t_libui *libui)
+void	settool_bucket(t_libui *libui)
 {
-    settool(libui, BUCKET);
+	settool(libui, BUCKET);
 }
 
-void settool_text(t_libui *libui)
+void	settool_text(t_libui *libui)
 {
-    settool(libui, TEXT_LINE);
+	settool(libui, TEXT_LINE);
 }
 
-void settool_pipette(t_libui *libui)
+void	settool_pipette(t_libui *libui)
 {
-    settool(libui, PIPETTE);
+	settool(libui, PIPETTE);
 }

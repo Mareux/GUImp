@@ -15,7 +15,7 @@
 void		put_sticker(t_surface *img, t_surface *canvas, t_vec2 pos)
 {
 	t_int_rect	src;
-	t_vec2	target;
+	t_vec2		target;
 
 	src.topleft = vec2(0, 0);
 	src.bottomright = vec2(img->w, img->h);
@@ -25,7 +25,7 @@ void		put_sticker(t_surface *img, t_surface *canvas, t_vec2 pos)
 }
 
 static void	draw_y(t_vec2f *start, t_vec2f *end,
-					  t_line *line, t_surface *sticker)
+		t_line *line, t_surface *sticker)
 {
 	while (line->ydiff >= 1 && start->y != end->y)
 	{
@@ -37,7 +37,7 @@ static void	draw_y(t_vec2f *start, t_vec2f *end,
 }
 
 static void	draw(t_vec2f *start, t_vec2f *end,
-			 t_line *line, t_surface *sticker)
+	t_line *line, t_surface *sticker)
 {
 	put_sticker(sticker, line->target_surface, vec2f_to_vec2(*start));
 	while (line->i++ <= (int)fabs(line->dx))
@@ -50,7 +50,7 @@ static void	draw(t_vec2f *start, t_vec2f *end,
 }
 
 void		draw_line_of_stickers(SDL_Surface *surface, t_vec2f start,
-				  t_vec2f end, t_surface *sticker)
+		t_vec2f end, t_surface *sticker)
 {
 	t_line	line;
 
