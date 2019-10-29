@@ -24,6 +24,7 @@
 # include <SDL_image.h>
 # include <math.h>
 # include "../libft/libft.h"
+# include <dirent.h>
 
 # define COLOR_PICKER_WINDOW_W 280
 # define COLOR_PICKER_WINDOW_H 300

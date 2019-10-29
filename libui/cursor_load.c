@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "libui.h"
-#include <dirent.h>
 
 void				cursor_picture_add(t_cursor_surface **begin,
 		t_surface *cursor_image, char *name)
