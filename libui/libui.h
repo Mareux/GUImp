@@ -457,9 +457,7 @@ void							main_event_loop(
 
 int					new_window(t_libui *libui, t_vec2 size, const char *title);
 void				set_window_resizable(t_libui *libui, const char *title, int resizable);
-void				set_window_position(t_libui *libui, const char *title, t_vec2 position);
 void				change_window_surface(t_libui *libui, const char *title);
-SDL_Surface			*get_window_surface(t_libui *libui, const char *title);
 
 SDL_Window			*find_window(t_libui *libui, const char *title);
 t_window			*find_t_window(t_libui *libui, const char *title);
@@ -562,7 +560,6 @@ void				draw_rect(t_surface *surface, t_vec2 topleft,
 void				draw_filled_rect(t_surface *surface, t_vec2 topleft,
 					t_vec2 bottomright, t_color color);
 
-void				set_window_color(t_libui *libui, const char *title, t_color color);
 
 void 				put_sticker(t_surface *img, t_surface *canvas, t_vec2 pos);
 void				draw_line_of_stickers(SDL_Surface *surface, t_vec2f start,
@@ -606,8 +603,6 @@ void		recalculate_table_fields(t_menu_field *field, int difference);
 t_window *create_window_with_textfield(t_libui *libui, void (*callback_function)(void *), const char *name);
 
 t_window *create_font_window(t_libui *libui, void (*callback_function)(void *), const char *name);
-
-t_window	*create_window_with_label(t_libui *libui, void (*callback_function)(void*));
 
 t_hsv_color rgb_to_hsv(t_rgb_color in);
 
@@ -716,5 +711,11 @@ void draw_image_field(SDL_Surface *surface, SDL_Surface *image, SDL_Rect field_s
 void draw_field(SDL_Surface *surface, t_menu_field *field,
 				TTF_Font *font);
 int 		pixel_inside_surface(t_surface *img, int x, int y);
+
+void recalculate_menu(t_menu_list *menu, TTF_Font *font, int w);
+void	draw_widgets(t_window_list *list);
+
+void 				flood_fill(t_surface *surface, t_vec2 pos,
+							   t_color affected_color, t_color target_color);
 
 #endif

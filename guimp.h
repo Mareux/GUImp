@@ -177,10 +177,6 @@ void				draw_canvas(t_guimp *guimp);
 
 void save_img(t_libui *libui);
 
-
-void 				flood_fill(t_surface *surface, t_vec2 pos,
-							   t_color affected_color, t_color target_color);
-
 t_undo	            *new_buffer_item(void);
 void            	push_to_buffer(t_guimp *guimp);
 void	            pull_from_buffer(t_guimp *guimp);
@@ -199,6 +195,5 @@ void	draw_textfield(SDL_Surface *surface, t_textfield *textfield);
 void	draw_label(SDL_Surface *surface, t_label_list *label);
 void	draw_button(SDL_Surface *surface, t_button *button);
 
-void	draw_widgets(t_window_list *list);
 
 #endif

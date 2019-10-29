@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../guimp.h"
+#include "libui.h"
 
 static void		set_color(unsigned char *pixel, t_color *color)
 {

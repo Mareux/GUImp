@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../guimp.h"
+#include "libui.h"
 
 void			eventloop_window(t_libui *unicorn)
 {
@@ -18,13 +18,18 @@ void			eventloop_window(t_libui *unicorn)
 
 	if (unicorn->event.type == SDL_WINDOWEVENT)
 	{
-		if (unicorn->event.window.event == SDL_WINDOWEVENT_RESIZED)
+		if (unicorn->event.window.event
+		== SDL_WINDOWEVENT_RESIZED)
 		{
 			change_window_surface(unicorn, "GUImp");
+			recalculate_menu(unicorn->menu_list, unicorn->font,
+					unicorn->main_window->surface->w);
 		}
-        if (unicorn->event.window.event == SDL_WINDOWEVENT_FOCUS_GAINED)
+        if (unicorn->event.window.event
+        == SDL_WINDOWEVENT_FOCUS_GAINED)
         {
-            window = find_window_by_id(unicorn, unicorn->event.window.windowID);
+            window = find_window_by_id(unicorn,
+            		unicorn->event.window.windowID);
             if (window)
                 unicorn->active_window = window;
         }

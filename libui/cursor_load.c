@@ -29,10 +29,10 @@ void	cursor_picture_add(t_cursor_surface **begin,
 
 t_cursor_surface*	cursor_picture_load(void)
 {
-	struct dirent *de;
-	DIR *dr;
-	t_cursor_surface *cursor_surface;
-	char *join;
+	struct dirent		*de;
+	DIR					*dr;
+	t_cursor_surface	*cursor_surface;
+	char				*join;
 
 	dr = opendir("../cursor");
 	if (dr == NULL)
@@ -43,7 +43,9 @@ t_cursor_surface*	cursor_picture_load(void)
 	cursor_surface = NULL;
 	while ((de = readdir(dr)) != NULL)
 	{
-		cursor_picture_add(&cursor_surface, IMG_Load(join = ft_strjoin("../cursor/", de->d_name)), de->d_name);
+		cursor_picture_add(&cursor_surface,
+				IMG_Load(join = ft_strjoin(
+						"../cursor/", de->d_name)), de->d_name);
 		free(join);
 	}
 	closedir(dr);
@@ -64,8 +66,8 @@ void	cursor_add(t_cursor **begin,
 
 void	cursor_create(t_libui *libui)
 {
-	t_cursor *cursor;
-	t_cursor_surface *cursor_surface;
+	t_cursor			*cursor;
+	t_cursor_surface	*cursor_surface;
 
 	cursor_surface = cursor_picture_load();
 	libui->cursor_surface = cursor_surface;
@@ -73,7 +75,8 @@ void	cursor_create(t_libui *libui)
 	while (cursor_surface)
 	{
 		cursor_add(&cursor,
-				SDL_CreateColorCursor(cursor_surface->cursor_image, 0, 0),
+				SDL_CreateColorCursor(cursor_surface->cursor_image,
+						0, 0),
 				cursor_surface->id);
 		cursor_surface = cursor_surface->next;
 	}

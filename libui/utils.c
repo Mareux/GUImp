@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../guimp.h"
+#include "libui.h"
 
 void			fill_surface(SDL_Surface *surface, t_color color)
 {

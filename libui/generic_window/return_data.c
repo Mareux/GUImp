@@ -1,7 +1,3 @@
-//
-// Created by Mariia NOSKO on 2019-10-29.
-//
-
 #include "../libui.h"
 
 void add_return_data(t_return_data **begin, void *data)

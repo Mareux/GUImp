@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../guimp.h"
+#include "libui.h"
 
 void	draw_rect(t_surface *surface, t_vec2 topleft,
 		t_vec2 bottomright, t_color color)

@@ -15,7 +15,8 @@
 void	cancel_event(t_libui *libui)
 {
 	libui->closed_window_return_data = NULL;
-	hide_active_window(&libui->active_window, libui->main_window, &libui->windows);
+	hide_active_window(&libui->active_window,
+			libui->main_window, &libui->windows);
 }
 
 void	ok_event(t_libui *libui)
@@ -29,13 +30,15 @@ void	ok_event(t_libui *libui)
 	{
 		while (textfield)
 		{
-			add_return_data(&libui->closed_window_return_data, textfield->textfield.input_text);
+			add_return_data(&libui->closed_window_return_data,
+					textfield->textfield.input_text);
 			textfield = textfield->next;
 		}
 	}
 	if (libui->active_window->callback_function)
 		libui->active_window->callback_function(libui);
-	hide_active_window(&libui->active_window, libui->main_window, &libui->windows);
+	hide_active_window(&libui->active_window,
+			libui->main_window, &libui->windows);
 	delete_return_data(&libui->closed_window_return_data);
 }
 

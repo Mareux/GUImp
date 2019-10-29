@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../guimp.h"
+#include "libui.h"
 
 static void	draw_y(t_vec2 *start, t_vec2 *end,
 		t_line *line, SDL_Surface *surface)
