@@ -18,7 +18,8 @@ t_vec2f	find_canvas_coordinates(t_guimp *guimp, t_vec2f screen_coordinates)
 	t_vec2f	point;
 	t_vec2f	ndc;
 
-	canvas_size = find_scaled_surface_size(guimp->canvas, guimp->canvas_data.scale);
+	canvas_size = find_scaled_surface_size(guimp->canvas,
+			guimp->canvas_data.scale);
 	point.x = screen_coordinates.x - guimp->canvas_data.topleft.x;
 	point.y = screen_coordinates.y - guimp->canvas_data.topleft.y;
 	ndc.x = point.x / (double)canvas_size.x;
@@ -35,13 +36,16 @@ void	use_pencil(t_guimp *guimp)
 	t_vec2f	pos2;
 
 	if (guimp->libui->mouse.m1_released || guimp->libui->mouse.m2_released)
-        return;
-    if (guimp->libui->mouse.m1_just_pressed || guimp->libui->mouse.m2_just_pressed)
-        push_to_buffer(guimp);
+		return ;
+	if (guimp->libui->mouse.m1_just_pressed ||
+	guimp->libui->mouse.m2_just_pressed)
+		push_to_buffer(guimp);
 	pos1 = find_canvas_coordinates(guimp,
-			vec2f((double)guimp->libui->mouse.last_pos.x, (double)guimp->libui->mouse.last_pos.y));
+			vec2f((double)guimp->libui->mouse.last_pos.x,
+					(double)guimp->libui->mouse.last_pos.y));
 	pos2 = find_canvas_coordinates(guimp,
-			vec2f((double)guimp->libui->mouse.pos.x, (double)guimp->libui->mouse.pos.y));
+			vec2f((double)guimp->libui->mouse.pos.x,
+					(double)guimp->libui->mouse.pos.y));
 	if (guimp->libui->mouse.m1_pressed)
 		color = guimp->color1;
 	else if (guimp->libui->mouse.m2_pressed)

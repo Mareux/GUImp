@@ -22,12 +22,12 @@ void	toggle_text_input(t_guimp *guimp)
 {
 	if (guimp->libui->mouse.m1_pressed)
 	{
-	    guimp->text_tool.active = 1;
+		guimp->text_tool.active = 1;
 		set_anchor_point(guimp);
 	}
 	else if (guimp->libui->mouse.m2_pressed)
 	{
-        push_to_buffer(guimp);
+		push_to_buffer(guimp);
 		use_text(guimp);
 		guimp->text_tool.active = 0;
 		guimp->shape_data.anchor_set = 0;
@@ -35,9 +35,18 @@ void	toggle_text_input(t_guimp *guimp)
 	}
 }
 
+void	use_text_2(t_guimp *guimp, t_text *text)
+{
+	if (guimp->libui->mouse.m2_pressed)
+		text->surface = guimp->canvas;
+	text->position = guimp->shape_data.anchor;
+	draw_text(text);
+	free(text->text);
+}
+
 void	use_text(t_guimp *guimp)
 {
-	char 	*tmp;
+	char	*tmp;
 	t_text	text;
 
 	if (!guimp->text_tool.active)
@@ -46,7 +55,8 @@ void	use_text(t_guimp *guimp)
 	{
 		if (ft_isprint(*guimp->libui->textinput.text))
 		{
-			tmp = ft_strjoin(guimp->text_tool.text, guimp->libui->textinput.text);
+			tmp = ft_strjoin(guimp->text_tool.text,
+					guimp->libui->textinput.text);
 			free(guimp->text_tool.text);
 			guimp->text_tool.text = tmp;
 		}
@@ -58,10 +68,5 @@ void	use_text(t_guimp *guimp)
 	else
 		text.text = ft_strjoin(guimp->text_tool.text, "|");
 	text.surface = guimp->preview;
-	if (guimp->libui->mouse.m2_pressed)
-		text.surface = guimp->canvas;
-	text.position = guimp->shape_data.anchor;
-	draw_text(&text);
-	free(text.text);
+	use_text_2(guimp, &text);
 }
-

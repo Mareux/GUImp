@@ -169,5 +169,7 @@ void				draw_textfield(SDL_Surface *surface,
 		t_textfield *textfield);
 void				draw_label(SDL_Surface *surface, t_label_list *label);
 void				draw_button(SDL_Surface *surface, t_button *button);
+void				on_image_save(t_libui *libui);
+void				on_load_jpeg(t_libui *libui);
 
 #endif
