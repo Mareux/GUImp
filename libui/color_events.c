@@ -12,7 +12,7 @@
 
 #include "libui.h"
 
-enum color_picker_ui_state	get_state(SDL_Point mouse)
+enum e_color_picker_ui_state	get_state(SDL_Point mouse)
 {
 	SDL_Rect main_gradient;
 	SDL_Rect hue_gradient;

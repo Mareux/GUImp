@@ -45,7 +45,7 @@ t_vec2_pair	convert_rect_to_square(t_vec2_pair pair)
 }
 
 void		calculate_current_color(
-		enum color_picker_ui_state ui_state, t_libui *libui)
+		enum e_color_picker_ui_state ui_state, t_libui *libui)
 {
 	t_guimp *guimp;
 	t_color color;
