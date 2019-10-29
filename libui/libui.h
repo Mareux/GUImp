@@ -36,6 +36,7 @@
 
 typedef SDL_Surface				t_surface;
 typedef TTF_Font				t_font;
+typedef struct s_libui			t_libui;
 
 typedef struct					s_hsv_color
 {
@@ -342,7 +343,7 @@ typedef struct					s_text
 	t_color						color;
 }								t_text;
 
-typedef struct					s_libui
+struct							s_libui
 {
 	SDL_Event					event;
 	t_window					*main_window;
@@ -363,7 +364,7 @@ typedef struct					s_libui
 	t_textinput					textinput;
 	t_hsv_color					current_color;
 	void						(*default_drop_func)(struct s_libui *);
-}								t_libui;
+}								;
 
 void							main_event_loop(
 	t_window *window, t_libui *unicorn);

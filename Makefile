@@ -1,94 +1,44 @@
-LIB = libft/libft.a
-HEADERS = doom_nukem.h serialization/serialization.h
-NAME = doom-nukem
+LIBUI = libui/libui.a
+LIBFT = libft/libft.a
+HEADERS = guimp.h 
+NAME = guimp
 
-SRCS = main.c \
-        collisions_main.c \
-        collisions_init.c \
-        collisions_check_sector.c \
-        collisions_collide_with_wall.c \
-        collisions_slide.c \
-        light_control.c \
-        draw_floor_and_ceiling.c \
-        draw_floor_and_ceiling_2.c \
-        draw_wall.c \
-        draw_wall_2.c \
-        draw_bullet_holes.c \
-        draw_bullet_holes_2.c \
-        init.c \
-        put_pixel.c \
-        get_pixel.c \
-        vectors.c \
-        vectors_2.c \
-        vectors_3.c \
-        color.c \
-        process_input.c \
-        process_game_input.c \
-        utilities.c \
-        map_sectors.c \
-        map_sectors_2.c \
-        connect_sectors.c \
-        connect_sectors_2.c \
-        player_move.c \
-        update_vertical_pos.c \
-        update_vertical_pos_2.c \
-        update_player_height.c \
-        update_player_pos.c \
-        update_enemies.c \
-        render.c \
-        cast_ray.c \
-        cast_ray_2.c \
-        find_closest_wall.c \
-        floor_and_ceiling.c \
-        floor_and_ceiling_2.c \
-        images.c \
-        images_check.c \
-        update.c \
-        sprites.c \
-        sprites_add.c \
-        sprites_prepare_sprites.c \
-        sprites_prepare_bullets.c \
-        sprites_sort_sprites.c \
-        sprites_prepare_to_draw.c \
-        sprites_crate.c \
-        check_sprites.c \
-        bullets.c \
-        player_shoot.c \
-        player_take_damage.c \
-        update_bullets.c \
-        update_bullets_2.c \
-        bullets_sprite_collision.c \
-        bullet_holes.c \
-        draw_decoration.c \
-        change_floor_and_ceiling.c \
-        elevator.c \
-        decorations_interact.c \
-        update_elevator.c \
-        update_light.c \
-        update_doors.c \
-        doors.c \
-        hud.c \
-        init_hud.c \
-        ft_strjoinfree.c \
-        is_inside_sector.c \
-        audio_callback_function.c \
-        serialization/serialization.c \
-        serialization/deserialization_sector.c \
-        serialization/converter_to_bytes.c \
-        serialization/utilities_for_serialization.c \
-        serialization/file.c serialization/serialize_sector.c \
-        serialization/serialize_sector_2.c \
-        serialization/for_deserialization_sector.c \
-        serialization/serialize_texture.c \
-        serialization/serialize_soundtrack.c \
-        soundtraks.c \
-        serialization/serialize_player.c \
-        serialization/push_back.c \
-        sounds_play.c \
-        audio_init.c \
-        audio_utils.c \
-        audio_add.c \
-        audio_play.c
+SRCS =  main.c \
+        guimp_init.c \
+        guimp_mouseclick.c \
+        guimp_use_tool.c \
+        tool_pencil.c \
+        save.c \
+        guimp_draw_canvas.c \
+        tool_hand.c \
+        tool_magnifying_glass.c \
+        tool_bucket.c \
+        tool_circle.c \
+        tool_text.c \
+        guimp_undo.c \
+        settool_1.c \
+        guimp_toggle_filled.c \
+        tool_brush.c \
+        guimp_mousewheel.c \
+        tool_eraser.c \
+        tool_line.c \
+        tool_rect.c \
+        tool_square.c \
+        tool_pipette.c \
+        stickers.c \
+        tool_sticker_brush.c \
+        menu_table.c \
+        cursor_set.c \
+        menu_events.c \
+        menu_bar.c \
+        text_editing_events.c \
+        text_render.c \
+        guimp_redo.c \
+        settool_2.c \
+        settool_3.c \
+        convert_rect_to_square.c \
+        tool_picture.c \
+        menu_bar_23123767.c
 
 
 OBJS = $(SRCS:.c=.o)
@@ -97,31 +47,31 @@ INCLUDES_SDL2 = -I ./SDL/SDL2.framework/Headers
 INCLUDES_SDL2_IMAGE = -I ./SDL/SDL2_image.framework/Headers
 INCLUDES_SDL2_TTF = -I ./SDL/SDL2_ttf.framework/Headers
 INCLUDES_LIBFT = -I ./libft/includes
+INCLUDES_LIBUI = -I ./libui
 FRAMEWORK_SDL2 = -F ./SDL -framework SDL2 \
 	-framework SDL2_image \
 	-framework SDL2_ttf
 
-all: libs $(NAME) level_editor
+all: libs $(NAME)
 
-$(NAME): $(LIB) $(OBJS) 
-	make -C ./libft
-	@echo "\033[0;32mDoom-nukem compiled\033[0;0m"
-	@gcc -o $(NAME) $(FLAGS) $(LIB) $(INCLUDES_SDL2) $(INCLUDES_SDL2_IMAGE) -rpath @loader_path/sdl $(FRAMEWORK_SDL2) $(OBJS) $(INCLUDES_SDL2_TTF)
+$(NAME): $(LIBUI) $(OBJS) 
+	make -C ./libui
+	@echo "\033[0;32mGUImp compiled\033[0;0m"
+	gcc -o $(NAME) $(OBJS) $(LIBFT) $(LIBUI) $(INCLUDES_SDL2) $(INCLUDES_SDL2_IMAGE) -rpath @loader_path/sdl $(FRAMEWORK_SDL2)  $(INCLUDES_SDL2_TTF)
+
+# $(FLAGS)
 
 %.o: %.c $(HEADERS)
-	@gcc -g $(FLAGS) -o $@ -c $< -I ./ $(INCLUDES_SDL2) $(INCLUDES_LIBFT) \
+	@gcc -g -c $< -o $@ -I ./ $(INCLUDES_SDL2) $(INCLUDES_LIBFT) $(INCLUDES_LIBUI) \
 $(INCLUDES_SDL2_IMAGE) $(INCLUDES_SDL2_TTF)
 
-level_editor:
-	make -C editor/
-
 libs:
-	make -C libft/
+	make -C libui/
 
 clean:
-	-rm $(OBJS) && make -C libft/ clean && make -C editor/ clean
+	-rm $(OBJS) && make -C libui/ clean
 
 fclean: clean
-	-rm $(NAME) && rm editor/editor && make -C libft/ fclean && make -C editor/ fclean
+	-rm $(NAME) && make -C libui/ fclean
 
 re: fclean all
