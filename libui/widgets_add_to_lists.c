@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   widgets_add_to_lists.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mnosko <mnosko@42.fr>                      +#+  +:+       +#+        */
+/*   By: mnosko <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/25 22:02:05 by mnosko            #+#    #+#             */
-/*   Updated: 2019/06/25 22:02:05 by mnosko           ###   ########.fr       */
+/*   Created: 2019/10/29 23:42:02 by mnosko            #+#    #+#             */
+/*   Updated: 2019/10/29 23:42:04 by mnosko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,12 @@ void	add_button_to_list(t_buttons_list **buttons,
 	*buttons = new;
 }
 
-void add_label_to_list(t_label_list **list, t_label label)
+void	add_label_to_list(t_label_list **list, t_label label)
 {
 	t_label_list *new;
 
 	if (!(new = malloc(sizeof(t_label_list))))
-		exit (1);
+		exit(1);
 	new->label = label;
 	new->next = *list;
 	*list = new;
@@ -52,4 +52,3 @@ void	add_textfield_to_list(t_textfield_list **textfield_list,
 	new->next = *textfield_list;
 	*textfield_list = new;
 }
-

@@ -13,7 +13,7 @@
 #include "../libui.h"
 
 t_textfield		create_textfield(SDL_Surface *text_surface,
-		SDL_Rect rect)
+	SDL_Rect rect)
 {
 	t_textfield	textfield;
 
@@ -30,10 +30,10 @@ t_textfield		create_textfield(SDL_Surface *text_surface,
 	return (textfield);
 }
 
-t_label create_label(char *text, t_vec2	pos, t_font *font)
+t_label			create_label(char *text, t_vec2 pos, t_font *font)
 {
-	t_label	label;
-	SDL_Rect rect;
+	t_label		label;
+	SDL_Rect	rect;
 
 	label.id = 0;
 	rect.x = pos.x;
@@ -65,4 +65,3 @@ t_button		create_button(SDL_Surface *text_surface,
 	button.text = name;
 	return (button);
 }
-

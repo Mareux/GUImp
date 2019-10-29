@@ -637,5 +637,6 @@ void	free_array(char **array);
 void	load_font(t_libui *libui);
 void	on_load_font(t_libui *libui);
 
+void scroll_widgets(t_window *window, t_vec2 scroll);
 
 #endif

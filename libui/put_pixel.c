@@ -12,14 +12,14 @@
 
 #include "../guimp.h"
 
-int 		pixel_inside_surface(t_surface *img, int x, int y)
+int				pixel_inside_surface(t_surface *img, int x, int y)
 {
 	if (x < 0 || y < 0 || x >= img->w || y >= img->h)
 		return (0);
 	return (1);
 }
 
-void		put_pixel(SDL_Surface *img, int x, int y, t_color color)
+void			put_pixel(SDL_Surface *img, int x, int y, t_color color)
 {
 	unsigned char	*pixel;
 
@@ -50,7 +50,7 @@ void		put_pixel(SDL_Surface *img, int x, int y, t_color color)
 **	упрощенный вариант функции get_pixel()
 */
 
-static void	get_color(unsigned char *pixel, t_color *new)
+static void		get_color(unsigned char *pixel, t_color *new)
 {
 	if (SDL_BYTEORDER == SDL_BIG_ENDIAN)
 	{
@@ -71,7 +71,7 @@ static void	get_color(unsigned char *pixel, t_color *new)
 **	прибавляющая цвет src к цвету dest
 */
 
-static void	add_color(t_color *src, t_color *dest, double alpha)
+static void		add_color(t_color *src, t_color *dest, double alpha)
 {
 	dest->r = (dest->r * (1 - alpha)) + (src->r * alpha);
 	dest->g = (dest->g * (1 - alpha)) + (src->g * alpha);
@@ -82,34 +82,4 @@ static void	add_color(t_color *src, t_color *dest, double alpha)
 		dest->g = 255;
 	if (dest->b > 255)
 		dest->b = 255;
-}
-
-void		add_to_pixel(
-	SDL_Surface *img, t_vec2 pos, t_color color, double alpha)
-{
-	unsigned char	*pixel;
-	t_color			new;
-
-	if (!img)
-		return ;
-	if (pos.x < 0 || pos.y < 0 || pos.x >= img->w || pos.y >= img->h
-		|| img->format->BytesPerPixel < 3)
-		return ;
-	pixel = (unsigned char *)img->pixels
-		+ pos.y * img->pitch
-		+ pos.x * img->format->BytesPerPixel;
-	get_color(pixel, &new);
-	add_color(&color, &new, 1.0 - alpha);
-	if (SDL_BYTEORDER == SDL_BIG_ENDIAN)
-	{
-		pixel[0] = new.r;
-		pixel[1] = new.g;
-		pixel[2] = new.b;
-	}
-	else
-	{
-		pixel[0] = new.b;
-		pixel[1] = new.g;
-		pixel[2] = new.r;
-	}
 }

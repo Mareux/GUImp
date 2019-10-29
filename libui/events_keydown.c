@@ -15,58 +15,59 @@
 void	eventloop_window_events(t_libui *data, int *quit)
 {
 	if (data->event.type == SDL_WINDOWEVENT
-	&& (int)data->event.window.windowID == data->active_window->id)
+		&& (int)data->event.window.windowID == data->active_window->id)
 	{
 		if (data->event.window.event == SDL_WINDOWEVENT_CLOSE)
 		{
 			if (data->active_window->id != data->main_window->id)
 			{
 				hide_active_window(&data->active_window,
-						data->main_window, &data->windows);
-				return;
+					data->main_window, &data->windows);
+				return ;
 			}
 			*quit = TRUE;
 		}
 	}
 }
 
-int     guimp_subject_is_bad(t_keylist *key)
+int		guimp_subject_is_bad(t_keylist *key)
 {
-    if (SDL_GetModState() & KMOD_ALT)
-    {
-        if (key->keymod == LIBUI_ALT)
-            return (1);
-        return (0);
-    }
-    if (SDL_GetModState() & KMOD_CTRL)
-    {
-        if (key->keymod == LIBUI_CTRL)
-            return (1);
-        return (0);
-    }
-    if (SDL_GetModState() & KMOD_SHIFT)
-    {
-        if (key->keymod == LIBUI_SHIFT)
-            return (1);
-        return (0);
-    }
-    if (key->keymod == LIBUI_NONE)
-        return (1);
-    return (0);
+	if (SDL_GetModState() & KMOD_ALT)
+	{
+		if (key->keymod == LIBUI_ALT)
+			return (1);
+		return (0);
+	}
+	if (SDL_GetModState() & KMOD_CTRL)
+	{
+		if (key->keymod == LIBUI_CTRL)
+			return (1);
+		return (0);
+	}
+	if (SDL_GetModState() & KMOD_SHIFT)
+	{
+		if (key->keymod == LIBUI_SHIFT)
+			return (1);
+		return (0);
+	}
+	if (key->keymod == LIBUI_NONE)
+		return (1);
+	return (0);
 }
 
-void    divinity_original_sin_2_is_a_good_game(t_libui *data, t_keybind *keybind)
+void	divinity_original_sin_2_is_a_good_game(t_libui *data,
+		t_keybind *keybind)
 {
-    if (guimp_subject_is_bad(keybind->keys))
-        keybind->func(data);
+	if (guimp_subject_is_bad(keybind->keys))
+		keybind->func(data);
 }
 
 void	eventloop_keydown(t_libui *data, int *quit)
 {
-	t_keybind	*keybind;
+	t_keybind *keybind;
 
 	if (data->event.type == SDL_KEYUP
-	&& (int)data->event.window.windowID == data->main_window->id)
+		&& (int)data->event.window.windowID == data->main_window->id)
 	{
 		if (data->event.key.keysym.scancode
 			== SDL_SCANCODE_ESCAPE)

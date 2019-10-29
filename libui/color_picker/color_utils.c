@@ -30,7 +30,7 @@ SDL_Color		rgb_color_to_sdl_color(t_rgb_color rgb_color)
 			};
 }
 
-t_color rgb_color_to_t_color(t_rgb_color rgb_color)
+t_color			rgb_color_to_t_color(t_rgb_color rgb_color)
 {
 	return (t_color)
 	{
@@ -41,7 +41,7 @@ t_color rgb_color_to_t_color(t_rgb_color rgb_color)
 	};
 }
 
-t_rgb_color sdl_color_color_to_rgb(t_color color)
+t_rgb_color		sdl_color_color_to_rgb(t_color color)
 {
 	return (t_rgb_color) {color.r / 255,
 					color.g / 255,
