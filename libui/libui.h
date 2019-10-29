@@ -633,6 +633,9 @@ void			eventloop_textinput(t_libui *libui);
 void            eventloop_init_mouse(t_libui *unicorn);
 
 void		event_loop_text_input(t_libui *unicorn);
+void	free_array(char **array);
+void	load_font(t_libui *libui);
+void	on_load_font(t_libui *libui);
 
 
 #endif

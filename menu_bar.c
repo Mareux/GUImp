@@ -18,35 +18,20 @@ void	on_image_save(t_libui *libui)
 
 	if (!find_window(libui,"Save image"))
 	{
-		window = create_window_with_textfield(libui, (void *) save_img, "Save image");//refactor
+		window = create_window_with_textfield(libui, (void *)save_img, "Save image");//refactor
 		show_active_window(window);
 	}
 	else if ((window = find_t_window(libui, "Save image")))
 		show_active_window(window);
 }
 
-void	free_array(char **array)
-{
-	int i;
-	char *tmp;
-
-	i = 0;
-	while (array[i])
-	{
-		tmp = array[i];
-		free(tmp);
-		i++;
-	}
-	free(array);
-}
-
 void	load_image(t_libui *libui)
 {
-	t_guimp *guimp;
-	SDL_Surface *surface;
+	t_guimp		*guimp;
+	t_surface	*surface;
 
 	guimp = libui->data;
-	surface = IMG_Load(libui->closed_window_return_data->data);
+	surface = load_image_as_surface(libui->closed_window_return_data->data);
 	if (surface)
 		guimp->imported_img = surface;
 }
@@ -63,76 +48,4 @@ void	on_load_jpeg(t_libui *libui)
 	else if ((window = find_t_window(libui, "Load JPEG/PNG")))
 		show_active_window(window);
 
-}
-
-void	load_font(t_libui *libui)
-{
-	t_return_data	*data;
-	int				i;
-	TTF_Font		*font;
-
-	i = 0;
-	data = libui->closed_window_return_data;
-	while (data)
-	{
-		if (i == 0)
-		{
-			font = TTF_OpenFont(data->next->data, ft_atoi(data->data));
-			if (font)
-				libui->imported_font = font;
-		}
-		data = data->next;
-		i++;
-	}
-}
-
-void	on_load_font(t_libui *libui)
-{
-	t_window *window;
-
-	if (!find_window(libui, "Load Font"))
-	{
-		window = create_font_window(libui, (void*)load_font, "Load Font");
-		show_active_window(window);
-	}
-	else if ((window = find_t_window(libui, "Load Font")))
-		show_active_window(window);
-}
-
-t_menu* create_file_context(SDL_Window *window)
-{
-	t_menu *menu;
-
-	menu = create_menu(CONTEXT, (SDL_Rect){0, 0, 0, 0}, 3, window);
-	add_field(&menu->fields, (void*)on_image_save, "Save Image", FIELD_TEXT);
-	add_field(&menu->fields, (void*)on_load_jpeg, "Upload JPEG/PNG", FIELD_TEXT);
-	add_field(&menu->fields, (void*)on_load_font, "Upload Font", FIELD_TEXT);
-	return (menu);
-}
-
-void	clear_canvas(t_libui *libui)
-{
-	t_guimp *guimp;
-
-	guimp = libui->data;
-	fill_surface(guimp->canvas, rgb(255, 255, 255));
-}
-
-void create_bar(t_libui *libui)
-{
-	t_menu *menu;
-	t_menu_field *fields;
-
-	menu = create_menu(BAR,
-			(SDL_Rect){0, 0, libui->main_window->surface->w, 30},
-			2, libui->main_window->window);
-	menu->opened = TRUE;
-	add_field(&menu->fields, NULL, "File", FIELD_TEXT);
-	fields = menu->fields;
-	fields->menu = create_file_context(libui->main_window->window);
-	add_field(&menu->fields, (void*)clear_canvas, "Clear Screen", FIELD_TEXT);
-	calculate_bar_fields_position(menu->fields, libui->font);
-	calculate_context_fields_position(fields->menu->fields, libui->font, fields->menu->menu_frame);
-	add_menu_to_list(&libui->menu_list, menu);
-	add_menu_to_list(&libui->menu_list, fields->menu);
 }
