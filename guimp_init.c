@@ -19,7 +19,7 @@ void	init_canvas_data(t_guimp *guimp)
 	guimp->canvas_data.scale = 1;
 }
 
-void 	init_shape_data(t_guimp *guimp)
+void	init_shape_data(t_guimp *guimp)
 {
 	guimp->shape_data.filled = 0;
 	guimp->shape_data.radius = 40;

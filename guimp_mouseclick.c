@@ -12,7 +12,7 @@
 
 #include "guimp.h"
 
-void 	guimp_mouseclick(t_libui *libui)
+void	guimp_mouseclick(t_libui *libui)
 {
 	t_guimp	*guimp;
 
