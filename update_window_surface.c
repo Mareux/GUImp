@@ -16,7 +16,8 @@ void update_window_surface(t_window_list *list)
 {
 	while(list)
 	{
-		SDL_UpdateWindowSurface(list->window.window);
+	    if (list->window.window)
+		    SDL_UpdateWindowSurface(list->window.window);
 		list = list->next;
 	}
 }

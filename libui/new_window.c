@@ -20,7 +20,7 @@ int		new_window(t_libui *libui, t_vec2 size, const char *title)
     t_window_list *new;
 
     if (!(new = malloc((sizeof(t_window_list)))))
-        return (0);
+        exit(123);
     new->window = create_window(size.x, size.y, title);
     if (!new->window.window)
     	return (0);
