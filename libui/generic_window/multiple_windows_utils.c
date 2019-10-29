@@ -16,7 +16,7 @@ void	hide_active_window(t_window **active_window,
 		t_window *main_window, t_window_list **window)
 {
 	SDL_HideWindow((*active_window)->window);
-	delete_window(window, (*active_window)->id);
+	SDL_HideWindow((*active_window)->window);
 	*active_window = main_window;
 	SDL_RaiseWindow(main_window->window);
 }

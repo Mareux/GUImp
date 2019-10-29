@@ -33,6 +33,8 @@ void	on_thickness_clicked(t_libui *libui)
 		window = create_window_with_textfield(libui, (void*)change_thickness, "Thickness");
 		show_active_window(window);
 	}
+	else if ((window = find_t_window(libui, "Thickness")))
+		show_active_window(window);
 }
 
 void create_menu_for_tools(t_libui *libui)

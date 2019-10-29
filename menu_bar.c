@@ -21,6 +21,8 @@ void	on_image_save(t_libui *libui)
 		window = create_window_with_textfield(libui, (void *) save_img, "Save image");//refactor
 		show_active_window(window);
 	}
+	else if ((window = find_t_window(libui, "Save image")))
+		show_active_window(window);
 }
 
 void	free_array(char **array)
@@ -58,6 +60,9 @@ void	on_load_jpeg(t_libui *libui)
 		window = create_window_with_textfield(libui, (void*)load_image, "Load JPEG/PNG");
 		show_active_window(window);
 	}
+	else if ((window = find_t_window(libui, "Load JPEG/PNG")))
+		show_active_window(window);
+
 }
 
 void	load_font(t_libui *libui)
@@ -90,6 +95,8 @@ void	on_load_font(t_libui *libui)
 		window = create_font_window(libui, (void*)load_font, "Load Font");
 		show_active_window(window);
 	}
+	else if ((window = find_t_window(libui, "Load Font")))
+		show_active_window(window);
 }
 
 t_menu* create_file_context(SDL_Window *window)
