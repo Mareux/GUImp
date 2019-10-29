@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   window_options.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mnosko <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/10/29 23:42:33 by mnosko            #+#    #+#             */
+/*   Updated: 2019/10/29 23:42:35 by mnosko           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libui.h"
 
-SDL_Window	*find_window(t_libui *libui, const char *title)
+SDL_Window			*find_window(t_libui *libui, const char *title)
 {
 	t_window_list	*w;
 
@@ -16,7 +28,7 @@ SDL_Window	*find_window(t_libui *libui, const char *title)
 	return (NULL);
 }
 
-t_window	*find_t_window(t_libui *libui, const char *title)
+t_window			*find_t_window(t_libui *libui, const char *title)
 {
 	t_window_list	*w;
 
@@ -32,7 +44,7 @@ t_window	*find_t_window(t_libui *libui, const char *title)
 	return (NULL);
 }
 
-void	change_window_surface(t_libui *libui, const char *title)
+void				change_window_surface(t_libui *libui, const char *title)
 {
 	t_window_list	*w;
 
@@ -50,7 +62,8 @@ void	change_window_surface(t_libui *libui, const char *title)
 	}
 }
 
-void	set_window_resizable(t_libui *libui, const char *title, int resizable)
+void				set_window_resizable(t_libui *libui,
+		const char *title, int resizable)
 {
 	SDL_Window	*window;
 
@@ -65,7 +78,7 @@ void	set_window_resizable(t_libui *libui, const char *title, int resizable)
 		SDL_SetWindowResizable(window, SDL_FALSE);
 }
 
-void	set_window_position(t_libui *libui, char *title, t_vec2 pos)
+void				set_window_position(t_libui *libui, char *title, t_vec2 pos)
 {
 	SDL_Window	*window;
 

@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   flood_fill.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mnosko <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/10/29 23:23:36 by mnosko            #+#    #+#             */
+/*   Updated: 2019/10/29 23:24:16 by mnosko           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libui.h"
 
-static void	check_left(t_surface *surface, t_queue *queue)
+static void		check_left(t_surface *surface, t_queue *queue)
 {
 	t_color	color;
 	t_queue	*new;
@@ -15,15 +27,15 @@ static void	check_left(t_surface *surface, t_queue *queue)
 	if (same_color(color, queue->affected_color))
 	{
 		new = init_queue(queue->pos, queue->affected_color,
-						 queue->target_color);
+			queue->target_color);
 		while (queue->next)
 			queue = queue->next;
 		queue->next = new;
 		new->pos.x -= 1;
-	};
+	}
 }
 
-static void	check_right(t_surface *surface, t_queue *queue)
+static void		check_right(t_surface *surface, t_queue *queue)
 {
 	t_color	color;
 	t_queue	*new;
@@ -38,7 +50,7 @@ static void	check_right(t_surface *surface, t_queue *queue)
 	if (same_color(color, queue->affected_color))
 	{
 		new = init_queue(queue->pos, queue->affected_color,
-						 queue->target_color);
+			queue->target_color);
 		while (queue->next)
 			queue = queue->next;
 		queue->next = new;
@@ -46,7 +58,7 @@ static void	check_right(t_surface *surface, t_queue *queue)
 	}
 }
 
-static void	check_up(t_surface *surface, t_queue *queue)
+static void		check_up(t_surface *surface, t_queue *queue)
 {
 	t_color	color;
 	t_queue	*new;
@@ -61,15 +73,15 @@ static void	check_up(t_surface *surface, t_queue *queue)
 	if (same_color(color, queue->affected_color))
 	{
 		new = init_queue(queue->pos, queue->affected_color,
-						 queue->target_color);
+			queue->target_color);
 		while (queue->next)
 			queue = queue->next;
 		queue->next = new;
 		new->pos.y -= 1;
-	};
+	}
 }
 
-static void	check_down(t_surface *surface, t_queue *queue)
+static void		check_down(t_surface *surface, t_queue *queue)
 {
 	t_color	color;
 	t_queue	*new;
@@ -84,16 +96,16 @@ static void	check_down(t_surface *surface, t_queue *queue)
 	if (same_color(color, queue->affected_color))
 	{
 		new = init_queue(queue->pos, queue->affected_color,
-						 queue->target_color);
+			queue->target_color);
 		while (queue->next)
 			queue = queue->next;
 		queue->next = new;
 		new->pos.y += 1;
-	};
+	}
 }
 
-void 	flood_fill(t_surface *surface, t_vec2 pos,
-				   t_color affected_color, t_color target_color)
+void			flood_fill(t_surface *surface, t_vec2 pos,
+	t_color affected_color, t_color target_color)
 {
 	t_queue	*queue;
 

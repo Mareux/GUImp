@@ -12,7 +12,7 @@
 
 #include "libui.h"
 
-void		load_dropped_image(t_libui *unicorn, t_surface **target)
+void				load_dropped_image(t_libui *unicorn, t_surface **target)
 {
 	SDL_Surface *img;
 
@@ -24,7 +24,7 @@ void		load_dropped_image(t_libui *unicorn, t_surface **target)
 	}
 }
 
-void		eventloop_drop(t_libui *unicorn)
+void				eventloop_drop(t_libui *unicorn)
 {
 	t_window *window;
 
@@ -33,19 +33,20 @@ void		eventloop_drop(t_libui *unicorn)
 		if (unicorn->event.drop.file)
 		{
 			window = find_window_by_id(unicorn,
-									   unicorn->event.window.windowID);
+				unicorn->event.window.windowID);
 			if (window)
 			{
 				if (window->drop_func)
 					window->drop_func(unicorn);
-			} else if (unicorn->default_drop_func)
+			}
+			else if (unicorn->default_drop_func)
 				unicorn->default_drop_func(unicorn);
 			SDL_free(unicorn->event.drop.file);
 		}
 	}
 }
 
-static void	handle_events(t_libui *unicorn, int *quit, SDL_Point *point)
+static void			handle_events(t_libui *unicorn, int *quit, SDL_Point *point)
 {
 	eventloop_window_events(unicorn, quit);
 	eventloop_window(unicorn);
@@ -57,7 +58,7 @@ static void	handle_events(t_libui *unicorn, int *quit, SDL_Point *point)
 	menu_events(unicorn, unicorn->menu_list);
 }
 
-void		draw_window_backgrounds(t_window_list *list)
+void				draw_window_backgrounds(t_window_list *list)
 {
 	while (list)
 	{
@@ -66,11 +67,10 @@ void		draw_window_backgrounds(t_window_list *list)
 	}
 }
 
-
-void		libui_loop(t_libui *unicorn)
+void				libui_loop(t_libui *unicorn)
 {
-	int quit;
-	SDL_Point point;
+	int			quit;
+	SDL_Point	point;
 
 	quit = FALSE;
 	while (!quit)

@@ -634,5 +634,6 @@ void            eventloop_init_mouse(t_libui *unicorn);
 
 void		event_loop_text_input(t_libui *unicorn);
 
+void scroll_widgets(t_window *window, t_vec2 scroll);
 
 #endif

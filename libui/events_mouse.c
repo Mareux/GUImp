@@ -1,29 +1,29 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   events_mouse.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mnosko <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/10/29 23:20:51 by mnosko            #+#    #+#             */
+/*   Updated: 2019/10/29 23:20:53 by mnosko           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libui.h"
 
-void scroll_widgets(t_window *window, t_vec2 scroll)
-{
-	t_label_list *label;
-
-	label = window->widgets->label;
-	while (label)
-	{
-		label->label.pos.x += scroll.x;
-		label->label.pos.y += scroll.y;
-		label = label->next;
-	}
-}
-
-void eventloop_mousewheel(t_libui *data)
+void			eventloop_mousewheel(t_libui *data)
 {
 	if (data->event.type == SDL_MOUSEWHEEL
-		&& (int) data->event.window.windowID == data->active_window->id)
+		&& (int)data->event.window.windowID == data->active_window->id)
 	{
 		if (data->event.wheel.y > 0)
 		{
 			if (data->hooks.mwheel_up)
 				data->hooks.mwheel_up(data);
 			scroll_widgets(data->active_window, vec2(0, 30));
-		} else
+		}
+		else
 		{
 			if (data->hooks.mwheel_down)
 				data->hooks.mwheel_down(data);
@@ -32,12 +32,11 @@ void eventloop_mousewheel(t_libui *data)
 	}
 }
 
-static void mouse_up(t_libui *data)
+static void		mouse_up(t_libui *data)
 {
 	SDL_Point point;
 
-	point = (SDL_Point) {data->mouse.pos.x, data->mouse.pos.y};
-
+	point = (SDL_Point){data->mouse.pos.x, data->mouse.pos.y};
 	if (data->event.button.button == SDL_BUTTON_LEFT)
 	{
 		data->mouse.m1_pressed = 0;
@@ -61,7 +60,7 @@ static void mouse_up(t_libui *data)
 	}
 }
 
-static void update_active_window(t_libui *data)
+static void		update_active_window(t_libui *data)
 {
 	t_window_list *win;
 
@@ -74,9 +73,8 @@ static void update_active_window(t_libui *data)
 	}
 }
 
-static void left_mouse_button_down(t_libui *data)
+static void		left_mouse_button_down(t_libui *data)
 {
-
 	if (data->mouse.m1_pressed == 0)
 		data->mouse.m1_just_pressed = 1;
 	data->mouse.m1_pressed = 1;
@@ -84,13 +82,12 @@ static void left_mouse_button_down(t_libui *data)
 		data->hooks.mouse1_down(data);
 }
 
-
-void eventloop_mousebuttondown(t_libui *data)
+void			eventloop_mousebuttondown(t_libui *data)
 {
 	if (data->event.type == SDL_MOUSEBUTTONDOWN)
 	{
 		if (data->event.button.windowID != data->active_window->id)
-			return;
+			return ;
 		update_active_window(data);
 		if (data->event.button.button == SDL_BUTTON_LEFT)
 			left_mouse_button_down(data);
@@ -101,12 +98,14 @@ void eventloop_mousebuttondown(t_libui *data)
 			data->mouse.m2_pressed = 1;
 			if (data->hooks.mouse2_down)
 				data->hooks.mouse2_down(data);
-		} else if (data->event.button.button == SDL_BUTTON_MIDDLE)
+		}
+		else if (data->event.button.button == SDL_BUTTON_MIDDLE)
 		{
 			data->mouse.m3_pressed = 1;
 			if (data->hooks.mouse3_down)
 				data->hooks.mouse3_down(data);
 		}
-	} else if (data->event.type == SDL_MOUSEBUTTONUP)
+	}
+	else if (data->event.type == SDL_MOUSEBUTTONUP)
 		mouse_up(data);
 }
