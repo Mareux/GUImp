@@ -619,5 +619,6 @@ void	draw_widgets(t_window_list *list);
 
 void 				flood_fill(t_surface *surface, t_vec2 pos,
 							   t_color affected_color, t_color target_color);
+t_color rgb_color_to_t_color(t_rgb_color rgb_color);
 
 #endif
