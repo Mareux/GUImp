@@ -12,31 +12,35 @@
 
 #include "guimp.h"
 
-static void	use_regular_circle(t_guimp *guimp, t_vec2 int_pos, t_surface *dst, int radius)
+static void	use_regular_circle(t_guimp *guimp,
+		t_vec2 int_pos, t_surface *dst, int radius)
 {
-	if (guimp->libui->mouse.m1_pressed || guimp->libui->mouse.m1_released)
+	if (guimp->libui->mouse.m1_pressed ||
+	guimp->libui->mouse.m1_released)
 		draw_circle(dst, int_pos,
-			radius, guimp->color1);
+					radius, guimp->color1);
 	else
 		draw_circle(dst, int_pos,
-				radius, guimp->color2);
+					radius, guimp->color2);
 }
 
-static void	use_filled_circle(t_guimp *guimp, t_vec2 int_pos, t_surface *dst, int radius)
+static void	use_filled_circle(t_guimp *guimp,
+		t_vec2 int_pos, t_surface *dst, int radius)
 {
-	if (guimp->libui->mouse.m2_pressed || guimp->libui->mouse.m2_released)
+	if (guimp->libui->mouse.m2_pressed ||
+	guimp->libui->mouse.m2_released)
 	{
 		draw_filled_circle(dst, int_pos,
-				radius, guimp->color1);
+			radius, guimp->color1);
 		draw_circle(dst, int_pos,
-				radius, guimp->color2);
+					radius, guimp->color2);
 	}
 	else
 	{
 		draw_filled_circle(dst, int_pos,
 				radius, guimp->color2);
 		draw_circle(dst, int_pos,
-				radius, guimp->color1);
+					radius, guimp->color1);
 	}
 }
 
@@ -60,22 +64,22 @@ t_vec2		find_middle_point(t_vec2 vec1, t_vec2 vec2, double *radius)
 	return (middle);
 }
 
-void    put_circle(t_guimp *guimp, t_vec2 int_pos, double radius)
+void		put_circle(t_guimp *guimp, t_vec2 int_pos, double radius)
 {
-    push_to_buffer(guimp);
-    if (guimp->shape_data.filled)
-        use_regular_circle(guimp, int_pos, guimp->canvas, radius);
-    else
-        use_filled_circle(guimp, int_pos, guimp->canvas, radius);
-    guimp->shape_data.anchor_set = 0;
+	push_to_buffer(guimp);
+	if (guimp->shape_data.filled)
+		use_regular_circle(guimp, int_pos, guimp->canvas, radius);
+	else
+		use_filled_circle(guimp, int_pos, guimp->canvas, radius);
+	guimp->shape_data.anchor_set = 0;
 	copy_surface(guimp->canvas, guimp->preview);
 }
 
-void	use_circle(t_guimp *guimp)
+void		use_circle(t_guimp *guimp)
 {
-	t_vec2f			pos;
-	t_vec2			int_pos;
-	double 			radius;
+	t_vec2f	pos;
+	t_vec2	int_pos;
+	double	radius;
 
 	set_anchor_point(guimp);
 	pos = find_canvas_coordinates(guimp,
@@ -85,7 +89,7 @@ void	use_circle(t_guimp *guimp)
 	int_pos.y = (int)pos.y;
 	int_pos = find_middle_point(guimp->shape_data.anchor, int_pos, &radius);
 	if (guimp->libui->mouse.m1_released || guimp->libui->mouse.m2_released)
-        put_circle(guimp, int_pos, radius);
+		put_circle(guimp, int_pos, radius);
 	else
 	{
 		if (guimp->shape_data.filled)
@@ -94,4 +98,3 @@ void	use_circle(t_guimp *guimp)
 			use_filled_circle(guimp, int_pos, guimp->preview, radius);
 	}
 }
-

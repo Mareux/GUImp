@@ -18,9 +18,10 @@ void	use_brush(t_guimp *guimp)
 	t_vec2f_pair	pair;
 
 	if (guimp->libui->mouse.m1_released || guimp->libui->mouse.m2_released)
-        return;
-    if (guimp->libui->mouse.m1_just_pressed || guimp->libui->mouse.m2_just_pressed)
-        push_to_buffer(guimp);
+		return ;
+	if (guimp->libui->mouse.m1_just_pressed
+		|| guimp->libui->mouse.m2_just_pressed)
+		push_to_buffer(guimp);
 	pair.vec_1 = find_canvas_coordinates(guimp,
 			vec2f((double)guimp->libui->mouse.last_pos.x,
 					(double)guimp->libui->mouse.last_pos.y));
@@ -32,6 +33,5 @@ void	use_brush(t_guimp *guimp)
 	else if (guimp->libui->mouse.m2_pressed)
 		color = guimp->color2;
 	draw_thick_line(guimp->canvas, pair,
-			  color, guimp->shape_data.thickness);
+					color, guimp->shape_data.thickness);
 }
-

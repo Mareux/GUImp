@@ -14,7 +14,7 @@
 
 void	endless_textfield(t_textfield *textfield, TTF_Font *font)
 {
-	SDL_Surface		*tmp;
+	t_surface		*tmp;
 	int				offset;
 	char			*text;
 
@@ -31,7 +31,7 @@ void	endless_textfield(t_textfield *textfield, TTF_Font *font)
 	}
 	else
 	{
-		SDL_FreeSurface(tmp);
+		free_surface(tmp);
 		offset /= 10 - 1;
 		text = textfield->input_text;
 		text = (text + offset);
@@ -45,10 +45,8 @@ void	render_text_in_textfield(t_textfield *textfield,
 {
 	if (!textfield)
 		return ;
-//	if (!textfield_type_check(text, (void*)textfield->type_check))
-//		return ;
 	event(&textfield->input_text, text);
 	if (textfield->text_surface)
-		SDL_FreeSurface(textfield->text_surface);
+		free_surface(textfield->text_surface);
 	endless_textfield(textfield, libui->font);
 }
