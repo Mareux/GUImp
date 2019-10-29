@@ -59,12 +59,15 @@ enum kmods
     LIBUI_SHIFT
 };
 
+
 typedef struct s_rgb_color
 {
 	double r;       // a fraction between 0 and 1
 	double g;       // a fraction between 0 and 1
 	double b;       // a fraction between 0 and 1
 } t_rgb_color;
+
+
 
 typedef struct 		s_cursor_surface
 {
@@ -132,6 +135,12 @@ typedef struct					s_scrolling_list
     struct s_scrolling_list		*prew;
 }								t_scrolling_list;
 
+typedef struct	s_return_data
+{
+	void					*data;
+	struct s_return_data	*next;
+}				t_return_data;
+
 enum 					e_menu_type
 {
 	CONTEXT,
@@ -161,7 +170,8 @@ enum e_field_data_type
 	FIELD_TEXTFIELD,
 	FIELD_COMBOBOX,
 	FIELD_COLOR_PICKER,
-	FIELD_TOOL
+	FIELD_TOOL,
+	FIELD_NUMBER
 };
 
 #define ELEMENTS_IN_TABLE 3
@@ -424,13 +434,12 @@ typedef struct                  s_libui
     SDL_Event					event;
     t_window					*main_window;
     t_window					*active_window;
-    void						*closed_window_return_data;
+    t_return_data				*closed_window_return_data;
 	void						(*callback_function)(void*);
 	t_menu_list					*menu_list;
     t_window_list				*windows;
     TTF_Font					*font;
     t_keyhooks					hooks;
-    t_widget					*widget;
     t_cursor_surface			*cursor_surface;
     t_cursor					*cursor;
 	void						*data;
@@ -595,6 +604,8 @@ void		recalculate_table_fields(t_menu_field *field, int difference);
 
 t_window *create_window_with_textfield(t_libui *libui, void (*callback_function)(void *), const char *name);
 
+t_window *create_font_window(t_libui *libui, void (*callback_function)(void *), const char *name);
+
 t_window	*create_window_with_label(t_libui *libui, void (*callback_function)(void*));
 
 t_hsv_color rgb_to_hsv(t_rgb_color in);
@@ -684,5 +695,32 @@ void			eventloop_mousewheel(t_libui *data);
 void			load_dropped_image(t_libui *unicorn, t_surface **target);
 
 void update_window_surface(t_window_list *list);
+
+void	draw_combobox(SDL_Surface *surface, t_combobox *combobox);
+
+void	scroll(t_scrolling_list **list, int step,
+			   int *content_size, int menu_content_size);
+
+void	*active_field_clicked(SDL_Rect menu_rect,
+							  SDL_Point mouse_point, t_scrolling_list *list,
+							  t_combobox *combobox);
+
+void	active_field_select(t_combobox *combobox, SDL_Point mouse_point);
+
+void	combobox_update(t_combobox *combobox, t_scrolling_list *list);
+
+void add_to_scrolling_list(t_scrolling_list **begin,
+						   SDL_Surface *field_text, void *data);
+void	delete_scrolling_list(t_scrolling_list **list);
+void widgets_get_content_size(t_scrolling_list *point, int *content_size);
+
+
+void add_return_data(t_return_data **begin, void *data);
+void	delete_return_data(t_return_data **begin);
+
+void draw_image_field(SDL_Surface *surface, SDL_Surface *image, SDL_Rect field_size);
+
+void draw_field(SDL_Surface *surface, t_menu_field *field,
+				TTF_Font *font);
 
 #endif

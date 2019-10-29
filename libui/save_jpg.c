@@ -2,6 +2,10 @@
 
 void    save_jpg(t_surface *surface, const char *file, int quality)
 {
-    IMG_SaveJPG(surface, file, quality);
+	char *tmp;
+
+	tmp = ft_strjoin(file, ".jpeg");
+    IMG_SaveJPG(surface, tmp, quality);
+    free(tmp);
 }
 

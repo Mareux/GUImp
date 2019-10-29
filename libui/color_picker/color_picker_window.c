@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../libui.h"
-#include "../../guimp.h"
 
 void color_picker_window_create(t_libui *libui)
 {
@@ -28,7 +27,6 @@ void color_picker_window_create(t_libui *libui)
 void draw_color_picker_window(t_libui *libui)
 {
 	t_window *window;
-	t_guimp *guimp;
 
 	window = find_t_window(libui, "Color picker");
 	fill_surface(window->surface, (t_color){0, 0, 0});

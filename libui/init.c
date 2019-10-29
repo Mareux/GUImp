@@ -16,6 +16,7 @@ void	init_widgets(t_widget **widgets)
 {
 	*widgets = malloc(sizeof(t_widget));
 	(*widgets)->textfield = NULL;
+	(*widgets)->active_textfield = NULL;
 	(*widgets)->label = NULL;
 	(*widgets)->button = NULL;
 	(*widgets)->image = NULL;
@@ -49,7 +50,6 @@ void     init_libui_2(t_libui **data)
     (*data)->menu_list = NULL;
     (*data)->closed_window_return_data = NULL;
     (*data)->data = NULL;
-    (*data)->widget = NULL;
     (*data)->current_color = (t_hsv_color){180.0, 1.0, 1.0};
     (*data)->custom_loop = NULL;
     (*data)->textinput.active = 1;

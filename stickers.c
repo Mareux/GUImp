@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../guimp.h"
+#include "guimp.h"
 
 void 		put_sticker(t_surface *img, t_surface *canvas, t_vec2 pos)
 {

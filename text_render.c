@@ -26,7 +26,9 @@ void	endless_textfield(t_textfield *textfield, TTF_Font *font)
 	}
 	offset = tmp->w - textfield->rect.w;
 	if (offset <= 0)
+	{
 		textfield->text_surface = tmp;
+	}
 	else
 	{
 		SDL_FreeSurface(tmp);

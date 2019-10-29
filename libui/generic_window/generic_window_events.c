@@ -20,16 +20,23 @@ void	cancel_event(t_libui *libui)
 
 void	ok_event(t_libui *libui)
 {
+	t_textfield_list *textfield;
+
+	textfield = libui->active_window->widgets->textfield;
 	if (libui->active_window
 	&& libui->active_window->widgets
-	&& libui->active_window->widgets->textfield)
+	&& textfield)
 	{
-		libui->closed_window_return_data =
-				libui->active_window->widgets->textfield->textfield.input_text;
+		while (textfield)
+		{
+			add_return_data(&libui->closed_window_return_data, textfield->textfield.input_text);
+			textfield = textfield->next;
+		}
 	}
 	if (libui->active_window->callback_function)
 		libui->active_window->callback_function(libui);
 	hide_active_window(&libui->active_window, libui->main_window, &libui->windows);
+	delete_return_data(&libui->closed_window_return_data);
 }
 
 

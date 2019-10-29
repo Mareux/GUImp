@@ -25,9 +25,19 @@ static	void draw_text_field(SDL_Surface *surface, char *text, SDL_Rect field_rec
     SDL_FreeSurface(text_surface);
 }
 
-static void draw_image_field(SDL_Surface *surface, SDL_Surface *image, SDL_Rect field_size)
+static	void draw_number_field(SDL_Surface *surface, int* number, SDL_Rect field_rect, TTF_Font *font, t_color color)
 {
-	SDL_BlitScaled(image, &image->clip_rect, surface, &field_size);
+	SDL_Surface *text_surface;
+	char *text;
+
+	draw_filled_rect(surface,
+					 (t_vec2){field_rect.x, field_rect.y},
+					 (t_vec2){field_rect.x + field_rect.w, field_rect.y + field_rect.h},
+					 color);
+	text_surface = create_text_surface(text = ft_itoa(*number), font);
+	free(text);
+	SDL_BlitSurface(text_surface, NULL, surface, &field_rect);
+	SDL_FreeSurface(text_surface);
 }
 
 static void draw_color_field(SDL_Surface *surface, void *data, SDL_Rect field_rect)
@@ -71,62 +81,9 @@ void draw_field(SDL_Surface *surface, t_menu_field *field,
 	{
 		draw_tool_field(surface, field->data, field->field_rect, field->field_color);
 	}
-	else if (field->type == FIELD_TEXTFIELD)
+	else if (field->type == FIELD_NUMBER)
 	{
-	}
-	else if (field->type == FIELD_COMBOBOX)
-	{
-
+		draw_number_field(surface, (field->data), field->field_rect, font, field->field_color);
 	}
 }
 
-static void draw_bar(SDL_Surface *surface, t_menu_field *field, TTF_Font *font)
-{
-	while (field)
-	{
-		draw_field(surface, field, font);
-		field = field->next;
-	}
-}
-
-static void draw_context(SDL_Surface *surface, t_menu_field *field, TTF_Font *font)
-{
-	while (field)
-	{
-		draw_field(surface, field, font);
-		field = field->next;
-	}
-}
-
-static void draw_table(SDL_Surface *surface, t_menu_field *field, TTF_Font *font)
-{
-	while (field)
-	{
-		draw_field(surface, field, font);
-		field = field->next;
-	}
-}
-
-void draw_menu(SDL_Surface *surface, t_menu *menu, TTF_Font *font)
-{
-	if (menu->type == BAR)
-	{
-		draw_bar(surface, menu->fields, font);
-	} else if (menu->type == CONTEXT)
-	{
-		if (menu->opened == TRUE)
-			draw_context(surface, menu->fields, font);
-	} else if (menu->type == TABLE)
-	{
-		draw_table(surface, menu->fields, font);
-	}
-}
-
-void	draw_all_menus(t_menu_list *list, TTF_Font *font)
-{
-	while (list)
-	{
-		draw_menu(SDL_GetWindowSurface(list->menu->menu_window), list->menu, font);
-		list = list->next;
-	}
-}

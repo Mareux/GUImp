@@ -171,6 +171,7 @@ int				main(void)
 		ft_putendl_fd("Failed to initialize", 2);
 	guimp.imported_img = IMG_Load("../ananasique.png"); // Illegal use of SDL
 	guimp.libui->data = (void *)(&guimp);
+	guimp.imported_font = guimp.libui->font;
 	new_window(guimp.libui, vec2(1024, 600), "GUImp");
 	new_window(guimp.libui, vec2(128, 400), "Tools");
 	new_window(guimp.libui, vec2(400, 400), "Settings");

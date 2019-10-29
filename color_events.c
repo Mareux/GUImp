@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libui.h"
-#include "../../guimp.h"
+#include "guimp.h"
 
 enum color_picker_ui_state get_state(SDL_Point mouse)
 {

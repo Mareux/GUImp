@@ -52,10 +52,20 @@ void			eventloop_mousewheel(t_libui *data)
 
 static void     mouse_up(t_libui *data)
 {
+	SDL_Point point;
+
+	point = (SDL_Point){data->mouse.pos.x, data->mouse.pos.y};
+
     if (data->event.button.button == SDL_BUTTON_LEFT)
     {
         data->mouse.m1_pressed = 0;
         data->mouse.m1_released = 1;
+		if (point_in_textfield(point, data->active_window->widgets))
+			if (!SDL_IsTextInputActive())
+				SDL_StartTextInput();
+		if (button_clicked(point, data))
+			if (SDL_IsTextInputActive())
+				SDL_StopTextInput();
     }
     if (data->event.button.button == SDL_BUTTON_RIGHT)
     {
@@ -84,20 +94,12 @@ static void     update_active_window(t_libui *data)
 
 static void left_mouse_button_down(t_libui *data)
 {
-	SDL_Point point;
 
-	point = (SDL_Point){data->mouse.pos.x, data->mouse.pos.y};
     if (data->mouse.m1_pressed == 0)
         data->mouse.m1_just_pressed = 1;
     data->mouse.m1_pressed = 1;
     if (data->hooks.mouse1_down)
         data->hooks.mouse1_down(data);
-    if (point_in_textfield(point, data->active_window->widgets))
-        if (!SDL_IsTextInputActive())
-            SDL_StartTextInput();
-    if (button_clicked(point, data))
-        if (SDL_IsTextInputActive())
-            SDL_StopTextInput();
 }
 
 

@@ -1,5 +1,5 @@
-#include "../libui.h"
-#include "../../guimp.h"
+#include "libui/libui.h"
+#include "guimp.h"
 
 void bar_on_click(t_menu_field *field)
 {
@@ -8,12 +8,10 @@ void bar_on_click(t_menu_field *field)
 		if (!field->menu->opened)
 		{
 			field->menu->opened = TRUE;
-//			add_menu_to_list(list, *(field->menu));
 		}
 		else
 		{
 			field->menu->opened = FALSE;
-//			remove_menu_from_list(list, *(field->menu));
 		}
 	}
 }
@@ -34,10 +32,10 @@ void menu_events(t_libui *libui, t_menu_list *list)
 		field = list->menu->fields;
 		while (field)
 		{
-			if (libui->active_window->window == list->menu->menu_window
-			&& libui->active_window->window == SDL_GetMouseFocus())
+			if (libui->active_window->window == list->menu->menu_window)
 			{
-				if (libui->mouse.m1_pressed && SDL_PointInRect(&point, &field->field_rect))
+				if (libui->mouse.m1_released && SDL_PointInRect(&point, &field->field_rect)
+				&& list->menu->opened == TRUE && libui->active_window->window == SDL_GetMouseFocus())
 				{
 					if (field->click)
 						field->click(libui);

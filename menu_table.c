@@ -10,8 +10,30 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libui.h"
-#include "../../guimp.h"
+#include "guimp.h"
+
+void	change_thickness(t_libui *libui)
+{
+	t_guimp	*guimp;
+	int thickness;
+
+	thickness = ft_atoi(libui->closed_window_return_data->data);
+	if (thickness <= 0 || thickness > 100)
+		return;
+	guimp = libui->data;
+	guimp->shape_data.thickness = thickness;
+}
+
+void	on_thickness_clicked(t_libui *libui)
+{
+	t_window *window;
+
+	if (!find_window(libui, "Thickness"))
+	{
+		window = create_window_with_textfield(libui, (void*)change_thickness, "Thickness");
+		show_active_window(window);
+	}
+}
 
 void create_menu_for_tools(t_libui *libui)
 {
@@ -22,8 +44,14 @@ void create_menu_for_tools(t_libui *libui)
 
 	iter_cursor_surface = libui->cursor_surface;
 	menu = create_menu(TABLE, (SDL_Rect) {0, 0, 150, 400}, 1, find_window(libui, "Tools"));
+	menu->opened = TRUE;
 	while (iter_cursor_surface)
 	{
+		if (iter_cursor_surface->id == -1)
+		{
+			iter_cursor_surface = iter_cursor_surface->next;
+			continue;
+		}
 		tool = malloc(sizeof(t_table_tools));
 		tool->image = iter_cursor_surface->cursor_image;
 		tool->tool = iter_cursor_surface->id;
@@ -34,7 +62,10 @@ void create_menu_for_tools(t_libui *libui)
 	guimp = libui->data;
 	add_field(&menu->fields, (void*)color_picker_window_create, &guimp->color1, FIELD_COLOR_PICKER);
 	add_field(&menu->fields, (void*)color_picker_window_create, &guimp->color2, FIELD_COLOR_PICKER);
-	add_field(&menu->fields, NULL, ft_itoa(guimp->shape_data.thickness), FIELD_TEXT);
+	int *th;
+
+	th = &guimp->shape_data.thickness;
+	add_field(&menu->fields, (void*)on_thickness_clicked, th, FIELD_NUMBER);
 	calculate_table_fields_position(SDL_GetWindowSurface(menu->menu_window), menu, menu->fields);
 	add_menu_to_list(&libui->menu_list, menu);
 }

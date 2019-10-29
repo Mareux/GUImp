@@ -106,6 +106,7 @@ typedef struct		s_guimp
 	t_surface		*canvas;
 	t_surface		*preview;
 	t_surface		*imported_img;
+	t_font			*imported_font;
 	t_canvas_data	canvas_data;
 	t_undo			*undo_buffer;
 	t_undo          *redo_buffer;

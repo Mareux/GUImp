@@ -19,8 +19,6 @@ void	draw_textfield(SDL_Surface *surface, t_textfield *textfield)
 	if (textfield->visible == TRUE)
 	{
 		rect = textfield->rect;
-		SDL_BlitSurface(textfield->text_surface, NULL,
-				surface, &textfield->rect);
 		if (!textfield->active)
 			draw_rect(surface, (t_vec2){rect.x, rect.y},
 					(t_vec2){rect.x + rect.w, rect.y + rect.h},
@@ -29,6 +27,9 @@ void	draw_textfield(SDL_Surface *surface, t_textfield *textfield)
 			draw_rect(surface, (t_vec2){rect.x, rect.y},
 					  (t_vec2){rect.x + rect.w, rect.y + rect.h},
 					  textfield->active_color);
+		if (textfield->text_surface)
+			SDL_BlitSurface(textfield->text_surface, NULL,
+						surface, &textfield->rect);
 		textfield->rect = rect;
 	}
 }
@@ -65,31 +66,15 @@ void	draw_button(SDL_Surface *surface, t_button *button)
 	}
 }
 
-//void	draw_drawbox(SDL_Surface *surface, t_image *drawbox)
-//{
-//	SDL_Rect rect;
-//
-//	if (drawbox->visible)
-//	{
-//		rect = drawbox->rect;
-//		if (drawbox->full_drawbox)
-//		{
-//			draw_drawbox_menu(drawbox->menu,
-//					drawbox->full_drawbox, drawbox->active_rect);
-//			SDL_BlitSurface(drawbox->menu,
-//					NULL, surface, &drawbox->rect);
-//		}
-//		drawbox->rect = rect;
-//		draw_rect(surface, drawbox->rect, (t_color){60, 70, 90, 0xFF});
-//	}
-//}
-
 void	draw_combobox(SDL_Surface *surface, t_combobox *combobox)
 {
 	SDL_Rect rect;
 
 	rect = combobox->field_rect;
-//	draw_rect(surface, combobox->field_rect, combobox->color);
+	draw_rect(surface, (t_vec2){combobox->field_rect.x, combobox->field_rect.y},
+			  (t_vec2){combobox->field_rect.x + combobox->field_rect.w,
+			  combobox->field_rect.y + combobox->field_rect.h},
+			  combobox->color);
 	if (combobox->field_text)
 		SDL_BlitSurface(combobox->field_text,
 				NULL, surface, &combobox->field_rect);
@@ -100,8 +85,10 @@ void	draw_combobox(SDL_Surface *surface, t_combobox *combobox)
 		SDL_BlitSurface(combobox->menu_surface,
 				&combobox->menu_surface->clip_rect,
 				surface, &combobox->menu_rect);
-//		draw_rect(surface, combobox->menu_rect,
-//				combobox->color);
+		draw_rect(surface, (t_vec2){combobox->menu_rect.x, combobox->menu_rect.y},
+				  (t_vec2){combobox->menu_rect.x + combobox->menu_rect.w,
+						   combobox->menu_rect.y + combobox->menu_rect.h},
+				  combobox->color);
 		combobox->menu_rect = rect;
 	}
 }

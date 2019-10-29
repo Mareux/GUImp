@@ -54,19 +54,22 @@ void	calculate_bar_fields_position(t_menu_field *field, TTF_Font *font)
 	}
 }
 
-void	calculate_context_fields_position(t_menu_field *field, TTF_Font *font, SDL_Rect menu_rect)
+void	calculate_context_fields_position(t_menu_field *field,
+		TTF_Font *font, SDL_Rect menu_rect)
 {
-	int y;
-	SDL_Rect max_field_size;
+	int			y;
+	SDL_Rect	max_field_size;
 
 	y = menu_rect.y;
 
 	max_field_size = calculate_max_field_size(field, font);
 	while (field)
 	{
-		field->field_rect = (SDL_Rect){menu_rect.x, y, max_field_size.w, max_field_size.h};
+		field->field_rect = (SDL_Rect){menu_rect.x, y,
+								 max_field_size.w, max_field_size.h};
 		if (field->menu)
-			field->menu->menu_frame = (SDL_Rect){menu_rect.x + max_field_size.w, y, 0, 0};
+			field->menu->menu_frame = (SDL_Rect)
+					{menu_rect.x + max_field_size.w, y, 0, 0};
 		y += max_field_size.h;
 		field = field->next;
 	}
@@ -83,14 +86,16 @@ static SDL_Rect calculate_table_elements_size(SDL_Rect surface_size,
 	});
 }
 
-void calculate_table_fields_position(SDL_Surface *surface, t_menu *menu, t_menu_field *field)
+void calculate_table_fields_position(SDL_Surface *surface,
+		t_menu *menu, t_menu_field *field)
 {
-	SDL_Rect new_field_size;
-	int i;
-	int y;
-	int x;
+	SDL_Rect	new_field_size;
+	int			i;
+	int			y;
+	int			x;
 
-	new_field_size = calculate_table_elements_size(surface->clip_rect, menu->spacing_w);
+	new_field_size = calculate_table_elements_size(
+			surface->clip_rect, menu->spacing_w);
 	i = 0;
 	y = 0;
 	x = 0;
@@ -102,7 +107,8 @@ void calculate_table_fields_position(SDL_Surface *surface, t_menu *menu, t_menu_
 			i = 0;
 			y += new_field_size.h + menu->spacing_h;
 		}
-		field->field_rect = (SDL_Rect){x, y, new_field_size.w, new_field_size.h};
+		field->field_rect = (SDL_Rect){x, y,
+								 new_field_size.w, new_field_size.h};
 		x += new_field_size.w + menu->spacing_w;
 		i++;
 		field = field->next;

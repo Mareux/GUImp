@@ -62,26 +62,3 @@ void	add_menu_to_list(t_menu_list **begin, t_menu *menu)
 	new->next = *begin;
 	*begin = new;
 }
-
-//void	remove_menu_from_list(t_menu_list **begin, t_menu menu)
-//{
-//	t_menu_list *temp;
-//	t_menu_list *prev;
-//
-//	temp = *begin;
-//	if (temp != NULL && temp->menu.id == menu.id)
-//	{
-//		*begin = temp->next;
-//		free(temp);
-//		return ;
-//	}
-//	while (temp != NULL && temp->menu.id != menu.id)
-//	{
-//		prev = temp;
-//		temp = temp->next;
-//	}
-//	if (temp == NULL)
-//		return ;
-//	prev->next = temp->next;
-//	free(temp);
-//}
