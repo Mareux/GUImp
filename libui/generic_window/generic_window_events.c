@@ -16,7 +16,7 @@ void	cancel_event(t_libui *libui)
 {
 	libui->closed_window_return_data = NULL;
 	hide_active_window(&libui->active_window,
-			libui->main_window, &libui->windows);
+	libui->main_window);
 }
 
 void	ok_event(t_libui *libui)
@@ -38,6 +38,6 @@ void	ok_event(t_libui *libui)
 	if (libui->active_window->callback_function)
 		libui->active_window->callback_function(libui);
 	hide_active_window(&libui->active_window,
-			libui->main_window, &libui->windows);
+		libui->main_window);
 	delete_return_data(&libui->closed_window_return_data);
 }

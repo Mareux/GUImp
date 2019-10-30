@@ -33,8 +33,8 @@ int		add_key_to_list(t_keylist **lst, char *name, int kmod)
 	return (1);
 }
 
-void	bind_key(t_libui *libui, const char *name,
-		int kmod, void (*func)(t_libui *))
+void	bind_key(t_libui *libui, char *name,
+	int kmod, void (*func)(t_libui *))
 {
 	t_keybind	*keybind;
 	t_keylist	*keys;
@@ -48,7 +48,7 @@ void	bind_key(t_libui *libui, const char *name,
 	keys = NULL;
 	add_key_to_list(&keys, name, kmod);
 	keybind->keys = keys;
-	keybind->func = func;
+	keybind->func = (void*)func;
 	keybind->next = libui->hooks.keybinds;
 	libui->hooks.keybinds = keybind;
 }

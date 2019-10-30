@@ -34,7 +34,11 @@ void	load_image(t_libui *libui)
 	guimp = libui->data;
 	surface = load_image_as_surface(libui->closed_window_return_data->data);
 	if (surface)
+	{
+		if (guimp->imported_img)
+			free_surface(guimp->imported_img);
 		guimp->imported_img = surface;
+	}
 }
 
 void	on_load_jpeg(t_libui *libui)

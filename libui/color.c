@@ -62,22 +62,6 @@ t_color	rgb(int r, int g, int b)
 	return (color);
 }
 
-/*
-**	Takes two colors,
-**	returns their sum
-*/
-
-t_color	add_colors(t_color *c1, t_color *c2)
-{
-	t_color	color;
-
-	color.r = c1->r + c2->r;
-	color.g = c1->g + c2->g;
-	color.b = c1->b + c2->b;
-	validate_color(&color);
-	return (color);
-}
-
 int		same_color(t_color c1, t_color c2)
 {
 	if (c1.r == c2.r &&

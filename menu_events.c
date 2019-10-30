@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libui/libui.h"
 #include "guimp.h"
 
 void	bar_on_click(t_menu_field *field)
@@ -34,11 +33,15 @@ void	set_table_tool(t_libui *libui, t_table_tools *tool)
 }
 
 void	please_save_me_from_this_hell(t_libui *libui, t_menu_list *list,
-		t_menu_field *field, SDL_Point *point)
+		t_menu_field *field, t_vec2 *point)
 {
-	if (libui->mouse.m1_released && SDL_PointInRect(point, &field->field_rect)
-		&& list->menu->opened == TRUE &&
-		libui->active_window->window == SDL_GetMouseFocus())
+	t_rect rect;
+
+	rect = (t_rect){(t_vec2f){field->field_rect.x, field->field_rect.y},
+	(t_vec2f){field->field_rect.x + field->field_rect.w,
+	field->field_rect.y + field->field_rect.h}};
+	if (libui->mouse.m1_released && point_in_rect(rect, point->x, point->y)
+		&& list->menu->opened == TRUE)
 	{
 		if (field->click)
 			field->click(libui);
@@ -51,7 +54,7 @@ void	please_save_me_from_this_hell(t_libui *libui, t_menu_list *list,
 			set_table_tool(libui, field->data);
 		}
 	}
-	if (SDL_PointInRect(point, &field->field_rect))
+	if (point_in_rect(rect, point->x, point->y))
 		field->field_color = list->menu->active_field_color;
 	else
 		field->field_color = list->menu->menu_color;
@@ -60,9 +63,9 @@ void	please_save_me_from_this_hell(t_libui *libui, t_menu_list *list,
 void	menu_events(t_libui *libui, t_menu_list *list)
 {
 	t_menu_field	*field;
-	SDL_Point		point;
+	t_vec2			point;
 
-	point = (SDL_Point){libui->mouse.pos.x, libui->mouse.pos.y};
+	point = (t_vec2){libui->mouse.pos.x, libui->mouse.pos.y};
 	while (list)
 	{
 		field = list->menu->fields;

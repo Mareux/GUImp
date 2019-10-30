@@ -68,9 +68,9 @@ void		put_circle(t_guimp *guimp, t_vec2 int_pos, double radius)
 {
 	push_to_buffer(guimp);
 	if (guimp->shape_data.filled)
-		use_regular_circle(guimp, int_pos, guimp->canvas, radius);
+		use_regular_circle(guimp, int_pos, guimp->canvas, (int)radius);
 	else
-		use_filled_circle(guimp, int_pos, guimp->canvas, radius);
+		use_filled_circle(guimp, int_pos, guimp->canvas, (int)radius);
 	guimp->shape_data.anchor_set = 0;
 	copy_surface(guimp->canvas, guimp->preview);
 }
@@ -93,8 +93,8 @@ void		use_circle(t_guimp *guimp)
 	else
 	{
 		if (guimp->shape_data.filled)
-			use_regular_circle(guimp, int_pos, guimp->preview, radius);
+			use_regular_circle(guimp, int_pos, guimp->preview, (int)radius);
 		else
-			use_filled_circle(guimp, int_pos, guimp->preview, radius);
+			use_filled_circle(guimp, int_pos, guimp->preview, (int)radius);
 	}
 }

@@ -23,10 +23,10 @@ static void		draw_q1(t_surface *surface, t_vec2 *top,
 		pos.y = top->y;
 		while (pos.y <= 0)
 		{
-			put_pixel(surface, pos.x + center.x,
-			pos.y + center.y, color);
-			put_pixel(surface, pos.y + center.x,
-			pos.x + center.y, color);
+			put_pixel(surface, (int)pos.x + center.x,
+			(int)pos.y + center.y, color);
+			put_pixel(surface, (int)pos.y + center.x,
+			(int)pos.x + center.y, color);
 			pos.y += 1;
 		}
 		pos.x -= 1;
@@ -44,10 +44,10 @@ static void		draw_q2(t_surface *surface, t_vec2 *top,
 		pos.y = top->y;
 		while (pos.y <= 0)
 		{
-			put_pixel(surface, pos.x + center.x,
-			pos.y + center.y, color);
-			put_pixel(surface, pos.y + center.x,
-			pos.x + center.y, color);
+			put_pixel(surface, (int)pos.x + center.x,
+			(int)pos.y + center.y, color);
+			put_pixel(surface, (int)pos.y + center.x,
+			(int)pos.x + center.y, color);
 			pos.y += 1;
 		}
 		pos.x += 1;
@@ -65,10 +65,10 @@ static void		draw_q3(t_surface *surface, t_vec2 *top,
 		pos.y = -top->y;
 		while (pos.y >= 0)
 		{
-			put_pixel(surface, pos.x + center.x,
-			pos.y + center.y, color);
-			put_pixel(surface, pos.y + center.x,
-			pos.x + center.y, color);
+			put_pixel(surface, (int)pos.x + center.x,
+			(int)pos.y + center.y, color);
+			put_pixel(surface, (int)pos.y + center.x,
+			(int)pos.x + center.y, color);
 			pos.y -= 1;
 		}
 		pos.x -= 1;

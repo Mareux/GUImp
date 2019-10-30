@@ -17,7 +17,7 @@ static void		draw_y(t_vec2 *start, t_vec2 *end,
 {
 	while (line->ydiff >= 1 && start->y != end->y)
 	{
-		start->y += ft_fsign(line->dy);
+		start->y += (int)ft_fsign(line->dy);
 		line->ydiff -= 1;
 		if (line->ydiff >= 1)
 			put_pixel(surface, start->x, start->y, line->color);

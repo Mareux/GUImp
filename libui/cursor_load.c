@@ -33,7 +33,7 @@ t_cursor_surface	*cursor_picture_load(void)
 	t_cursor_surface	*cursor_surface;
 	char				*join;
 
-	dr = opendir("./cursor");
+	dr = opendir("../cursor");
 	if (dr == NULL)
 	{
 		ft_putendl_fd("Could not open current directory", 2);
@@ -44,7 +44,7 @@ t_cursor_surface	*cursor_picture_load(void)
 	{
 		cursor_picture_add(&cursor_surface,
 				IMG_Load(join = ft_strjoin(
-						"./cursor/", de->d_name)), de->d_name);
+						"../cursor/", de->d_name)), de->d_name);
 		free(join);
 	}
 	closedir(dr);

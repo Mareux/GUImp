@@ -12,8 +12,8 @@
 
 #include "../libui.h"
 
-void	add_field(t_menu_field **begin, void (*click)(void *),
-		void *data, enum e_field_data_type type)
+void	add_field(void **begin, void (*click)(void *),
+	void *data, enum e_field_data_type type)
 {
 	t_menu_field *new;
 	t_menu_field *last;

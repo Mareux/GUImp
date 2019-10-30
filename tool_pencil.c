@@ -35,6 +35,7 @@ void	use_pencil(t_guimp *guimp)
 	t_vec2f	pos1;
 	t_vec2f	pos2;
 
+	color = (t_color){0, 0, 0};
 	if (guimp->libui->mouse.m1_released || guimp->libui->mouse.m2_released)
 		return ;
 	if (guimp->libui->mouse.m1_just_pressed ||

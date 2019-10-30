@@ -1,36 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vectors.c                                          :+:      :+:    :+:   */
+/*   menu_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mnosko <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/29 23:37:53 by mnosko            #+#    #+#             */
-/*   Updated: 2019/10/29 23:37:54 by mnosko           ###   ########.fr       */
+/*   Created: 2019/10/30 13:59:54 by mnosko            #+#    #+#             */
+/*   Updated: 2019/10/30 13:59:56 by mnosko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libui.h"
 
-t_vec2	vec2(int x, int y)
+SDL_Rect	return_rect(int x, int y, int w, int h)
 {
-	t_vec2	vec;
-
-	vec.x = x;
-	vec.y = y;
-	return (vec);
+	return (SDL_Rect){x, y, w, h};
 }
 
-t_vec2f	vec2f(double x, double y)
+t_surface	*get_window_surface(SDL_Window *window)
 {
-	t_vec2f	vec;
-
-	vec.x = x;
-	vec.y = y;
-	return (vec);
-}
-
-double	vec2len(t_vec2f *vec)
-{
-	return (sqrt(vec->x * vec->x + vec->y * vec->y));
+	return (SDL_GetWindowSurface(window));
 }

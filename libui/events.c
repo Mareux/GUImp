@@ -16,7 +16,7 @@ void				load_dropped_image(t_libui *unicorn, t_surface **target)
 {
 	SDL_Surface *img;
 
-	if (img = IMG_Load(unicorn->event.drop.file))
+	if ((img = IMG_Load(unicorn->event.drop.file)))
 	{
 		if (*target)
 			SDL_FreeSurface(*target);

@@ -17,6 +17,7 @@ void	use_brush(t_guimp *guimp)
 	t_color			color;
 	t_vec2f_pair	pair;
 
+	color = (t_color){0, 0, 0};
 	if (guimp->libui->mouse.m1_released || guimp->libui->mouse.m2_released)
 		return ;
 	if (guimp->libui->mouse.m1_just_pressed

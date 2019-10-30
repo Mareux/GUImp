@@ -14,7 +14,6 @@
 
 void	use_sticker_brush(t_guimp *guimp)
 {
-	t_color			color;
 	t_vec2f_pair	pair;
 
 	if (guimp->libui->mouse.m1_released ||

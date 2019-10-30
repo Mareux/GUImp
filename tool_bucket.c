@@ -18,10 +18,11 @@ void	use_bucket(t_guimp *guimp)
 	t_vec2f			pos;
 	t_vec2			int_pos;
 
+	color = (t_color){0, 0, 0};
 	pos = find_canvas_coordinates(guimp,
 			vec2f((double)guimp->libui->mouse.pos.x,
 					(double)guimp->libui->mouse.pos.y));
-	if (!pixel_inside_surface(guimp->canvas, pos.x, pos.y))
+	if (!pixel_inside_surface(guimp->canvas, (int)pos.x, (int)pos.y))
 		return ;
 	int_pos.x = (int)pos.x;
 	int_pos.y = (int)pos.y;

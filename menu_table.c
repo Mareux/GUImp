@@ -50,7 +50,7 @@ void	i_dont_even_care_anymore(t_libui *libui, t_menu *menu)
 			&guimp->color2, FIELD_COLOR_PICKER);
 	th = &guimp->shape_data.thickness;
 	add_field(&menu->fields, (void*)on_thickness_clicked, th, FIELD_NUMBER);
-	calculate_table_fields_position(SDL_GetWindowSurface(menu->menu_window),
+	calculate_table_fields_position(get_window_surface(menu->menu_window),
 			menu, menu->fields);
 	add_menu_to_list(&libui->menu_list, menu);
 }
@@ -62,7 +62,7 @@ void	create_menu_for_tools(t_libui *libui)
 	t_table_tools		*tool;
 
 	iter_cursor_surface = libui->cursor_surface;
-	menu = create_menu(TABLE, (SDL_Rect){0, 0, 150, 400},
+	menu = create_menu(TABLE, return_rect(0, 0, 150, 400),
 			1, find_window(libui, "Tools"));
 	menu->opened = TRUE;
 	while (iter_cursor_surface)

@@ -439,8 +439,8 @@ int								same_color(t_color c1, t_color c2);
 **	Key binding
 */
 
-void							bind_key(t_libui *libui, const char *name,
-		int kmod, void (*func)(t_libui *));
+void							bind_key(t_libui *libui, char *name,
+										 int kmod, void (*func)(t_libui *));
 int								add_key_to_list(t_keylist **lst, char *name,
 		int kmod);
 
@@ -504,9 +504,9 @@ void							add_menu_to_list(t_menu_list **begin,
 		t_menu *menu);
 t_menu							*create_menu(enum e_menu_type type,
 		SDL_Rect menu_frame, int id, SDL_Window *menu_window);
-void							add_field(t_menu_field **begin,
-		void (*click)(void *), void *data,
-		enum e_field_data_type type);
+void							add_field(void **begin,
+										  void (*click)(void *), void *data,
+										  enum e_field_data_type type);
 void							calculate_table_fields_position(
 		SDL_Surface *surface,
 		t_menu *menu, t_menu_field *field);
@@ -568,8 +568,7 @@ void							delete_widgets(t_widget **widget);
 
 void							delete_window(t_window_list **window, int id);
 
-void							hide_active_window(t_window **active_window,
-	t_window *main_window, t_window_list **window);
+void hide_active_window(t_window **active_window, t_window *main_window);
 
 void							show_active_window(t_window *active_window);
 
@@ -666,5 +665,11 @@ void							event_loop_text_input(t_libui *unicorn);
 void							scroll_widgets(t_window *window, t_vec2 scroll);
 
 void							load_font(t_libui *libui);
+
+int								point_in_rect(t_rect rect, int x, int y);
+
+SDL_Rect						return_rect(int x, int y, int w, int h);
+
+t_surface						*get_window_surface(SDL_Window *window);
 
 #endif

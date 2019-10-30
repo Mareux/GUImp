@@ -104,13 +104,13 @@ int		main(void)
 	init(&guimp);
 	if (!init_libui(&(guimp.libui)))
 		ft_putendl_fd("Failed to initialize", 2);
-	guimp.imported_img = load_image_as_surface("./ananasique.png");
+	guimp.imported_img = load_image_as_surface("../ananasique.png");
 	guimp.libui->data = (void *)(&guimp);
 	new_window(guimp.libui, vec2(1024, 600), "GUImp");
 	new_window(guimp.libui, vec2(128, 400), "Tools");
 	new_window(guimp.libui, vec2(400, 400), "Settings");
 	init_settings_window(&guimp);
-	guimp.libui->main_window->drop_func = drag_and_drop_image;
+	guimp.libui->main_window->drop_func = (void*)drag_and_drop_image;
 	guimp.libui->default_drop_func = drag_and_drop_image;
 	create_menu_for_tools(guimp.libui);
 	create_bar(guimp.libui);

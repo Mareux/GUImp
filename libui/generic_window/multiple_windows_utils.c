@@ -12,8 +12,7 @@
 
 #include "../libui.h"
 
-void	hide_active_window(t_window **active_window,
-		t_window *main_window, t_window_list **window)
+void	hide_active_window(t_window **active_window, t_window *main_window)
 {
 	SDL_HideWindow((*active_window)->window);
 	SDL_HideWindow((*active_window)->window);
@@ -27,9 +26,9 @@ void	show_active_window(t_window *active_window)
 	SDL_RaiseWindow(active_window->window);
 }
 
-void	exit_event(SDL_Event *event)
+int		point_in_rect(t_rect rect, int x, int y)
 {
-	event->type = SDL_KEYUP;
-	event->key.keysym.scancode = SDL_SCANCODE_ESCAPE;
-	SDL_PushEvent(event);
+	return (
+	x > rect.topleft.x && x < rect.bottomright.x &&
+	y > rect.topleft.y && y < rect.bottomright.y);
 }

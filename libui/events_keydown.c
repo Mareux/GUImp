@@ -22,7 +22,7 @@ void	eventloop_window_events(t_libui *data, int *quit)
 			if (data->active_window->id != data->main_window->id)
 			{
 				hide_active_window(&data->active_window,
-					data->main_window, &data->windows);
+					data->main_window);
 				return ;
 			}
 			*quit = TRUE;

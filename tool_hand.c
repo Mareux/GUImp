@@ -30,22 +30,22 @@ void	check_bounds(t_guimp *guimp)
 		guimp->canvas_data.offset.y = 0;
 	if (guimp->canvas_data.offset.x < -guimp->canvas->w *
 		guimp->canvas_data.scale)
-		guimp->canvas_data.offset.x = -guimp->canvas->w *
-				guimp->canvas_data.scale;
+		guimp->canvas_data.offset.x = (int)(-guimp->canvas->w *
+				guimp->canvas_data.scale);
 	if (guimp->canvas_data.offset.y < -guimp->canvas->h *
 		guimp->canvas_data.scale)
-		guimp->canvas_data.offset.y = -guimp->canvas->h *
-				guimp->canvas_data.scale;
+		guimp->canvas_data.offset.y = (int)(-guimp->canvas->h *
+				guimp->canvas_data.scale);
 }
 
 void	use_hand(t_guimp *guimp)
 {
-	guimp->canvas_data.offset.x +=
+	guimp->canvas_data.offset.x += (int)(
 			(double)guimp->libui->mouse.pos.x -
-			(double)guimp->libui->mouse.last_pos.x;
-	guimp->canvas_data.offset.y +=
+			(double)guimp->libui->mouse.last_pos.x);
+	guimp->canvas_data.offset.y += (int)(
 			(double)guimp->libui->mouse.pos.y -
-			(double)guimp->libui->mouse.last_pos.y;
+			(double)guimp->libui->mouse.last_pos.y);
 	check_bounds(guimp);
 }
 
