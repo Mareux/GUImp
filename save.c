@@ -14,10 +14,13 @@
 
 void	save_img(t_libui *libui)
 {
-	t_guimp *guimp;
+	t_guimp		*guimp;
+	char		*tmp;
 
 	guimp = libui->data;
-	save_jpg(guimp->canvas,
-			libui->closed_window_return_data->data,
+	tmp = libui->closed_window_return_data->data;
+	if (ft_strlen(tmp) > 0)
+		save_jpg(guimp->canvas,
+			tmp,
 			100);
 }
