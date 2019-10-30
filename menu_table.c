@@ -18,7 +18,7 @@ void	change_thickness(t_libui *libui)
 	int		thickness;
 
 	thickness = ft_atoi(libui->closed_window_return_data->data);
-	if (thickness <= 0 || thickness > 100)
+	if (thickness <= 0 || thickness > 40)
 		return ;
 	guimp = libui->data;
 	guimp->shape_data.thickness = thickness;
